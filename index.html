@@ -276,7 +276,8 @@ nav {
 .sub-card[data-entity="swf"]   { --card-accent: #5fa8c0; }
 .sub-card[data-entity="llm"]   { --card-accent: #8b5cf6; }
 .sub-card[data-entity="quant"] { --card-accent: #4ade80; }
-.sub-card[data-entity="ferro"] { --card-accent: #4ade80; }
+.sub-card[data-entity="ferro"]   { --card-accent: #4ade80; }
+.sub-card[data-entity="fintech"] { --card-accent: #8b5cf6; }
 
 .sub-card-bg-num {
   position: absolute; right: 1.5rem; top: 1rem;
@@ -296,7 +297,8 @@ nav {
 .sub-card[data-entity="swf"]    .sub-card-type { color: var(--cold); border-color: rgba(26,107,138,0.35); }
 .sub-card[data-entity="llm"]    .sub-card-type { color: #a78bfa; border-color: rgba(139,92,246,0.35); }
 .sub-card[data-entity="quant"]  .sub-card-type { color: #4ade80; border-color: rgba(74,222,128,0.3); }
-.sub-card[data-entity="ferro"]  .sub-card-type { color: #4ade80; border-color: rgba(74,222,128,0.3); }
+.sub-card[data-entity="ferro"]   .sub-card-type { color: #4ade80; border-color: rgba(74,222,128,0.3); }
+.sub-card[data-entity="fintech"] .sub-card-type { color: #a78bfa; border-color: rgba(139,92,246,0.3); }
 
 .sub-card-name {
   font-family: var(--display); font-size: clamp(1.6rem, 3vw, 2.6rem);
@@ -332,7 +334,8 @@ nav {
 .sub-card[data-entity="swf"]    .sub-card-link { color: var(--cold); }
 .sub-card[data-entity="llm"]    .sub-card-link { color: #a78bfa; }
 .sub-card[data-entity="quant"]  .sub-card-link { color: #4ade80; }
-.sub-card[data-entity="ferro"]  .sub-card-link { color: #4ade80; }
+.sub-card[data-entity="ferro"]   .sub-card-link { color: #4ade80; }
+.sub-card[data-entity="fintech"] .sub-card-link { color: #a78bfa; }
 .sub-card-link:hover { gap: 1rem; }
 
 /* ── PARENT PROFILE SECTION ── */
@@ -1112,7 +1115,7 @@ footer {
         <a class="btn-ghost" href="#" onclick="showPage('about')">Group Profile</a>
       </div>
       <div class="gh-meta">
-        <div class="gh-meta-item"><span class="countup" data-target="6" data-suffix="">0</span><small>Subsidiaries & Divisions</small></div>
+        <div class="gh-meta-item"><span class="countup" data-target="7" data-suffix="">0</span><small>Subsidiaries & Divisions</small></div>
         <div class="gh-meta-item"><span>2025</span><small>National AI FinTech Winner</small></div>
         <div class="gh-meta-item"><span>ADIA · PIF · QIA</span><small>SWF Coverage Universe</small></div>
         <div class="gh-meta-item"><span>PKR · USD · AED</span><small>Markets Served</small></div>
@@ -1141,12 +1144,17 @@ footer {
       <div class="sb-dot"></div>
       <span>FERROQUANT Capital</span>
     </div>
+    <div class="sb-divider"></div>
+    <div class="sb-item child">
+      <div class="sb-dot"></div>
+      <span>Black Iron FinTech</span>
+    </div>
   </div>
 
   <!-- SUBSIDIARIES -->
   <div class="subs-section" id="subsidiaries">
     <p class="sec-eyebrow">Group Structure</p>
-    <h2 class="sec-title">Six <em>Engines</em><br>One Group</h2>
+    <h2 class="sec-title">Seven <em>Engines</em><br>One Group</h2>
     <p class="sec-lead">Each entity operates with distinct focus and market positioning under the Black Iron Quantum AI parent, sharing research infrastructure, talent, and proprietary data assets.</p>
 
     <div class="sub-cards">
@@ -1308,6 +1316,24 @@ footer {
           <span class="stack-chip">PSX · Gulf</span>
         </div>
         <a class="sub-card-link" href="#" onclick="showPage('contact')" style="color:#4ade80;">Enquire About Mandates →</a>
+      </div>
+
+      <!-- Black Iron FinTech -->
+      <div class="sub-card" data-entity="fintech">
+        <span class="sub-card-bg-num">06</span>
+        <div class="sub-card-type">AI FinTech · Accounting &amp; Finance Software</div>
+        <div class="sub-card-name">BLACK IRON FINTECH</div>
+        <div class="sub-card-tagline">AI-powered accounting and finance software for modern enterprises</div>
+        <p class="sub-card-desc">Black Iron FinTech is the Group's B2B software subsidiary developing AI-powered accounting, financial management, and enterprise finance tools. Built for businesses, CFOs, and finance professionals — combining large language models, automated ledger intelligence, and real-time financial analytics into production-ready software products.</p>
+        <div class="sub-card-stack">
+          <span class="stack-chip">AI Accounting</span>
+          <span class="stack-chip">LLM Integration</span>
+          <span class="stack-chip">Ledger Intelligence</span>
+          <span class="stack-chip">Financial Analytics</span>
+          <span class="stack-chip">B2B SaaS</span>
+          <span class="stack-chip">Enterprise Finance</span>
+        </div>
+        <a class="sub-card-link" href="#" onclick="showPage('contact')" style="color:#a78bfa;">Request Early Access →</a>
       </div>
 
     </div>
@@ -1611,6 +1637,7 @@ footer {
             <option>AI Research & LLM Training Division</option>
             <option>Quantitative Finance Division</option>
             <option>FERROQUANT Capital</option>
+            <option>Black Iron FinTech</option>
           </select>
         </div>
         <div class="f-group"><label>Message</label><textarea placeholder="Describe your project or inquiry…"></textarea></div>
@@ -1651,6 +1678,7 @@ footer {
         <li><a>AI Research Division</a></li>
         <li><a>Quantitative Finance</a></li>
         <li><a>FERROQUANT Capital</a></li>
+        <li><a>Black Iron FinTech</a></li>
       </ul>
     </div>
     <div class="footer-col">
