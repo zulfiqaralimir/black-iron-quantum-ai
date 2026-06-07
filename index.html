@@ -276,6 +276,7 @@ nav {
 .sub-card[data-entity="swf"]   { --card-accent: #5fa8c0; }
 .sub-card[data-entity="llm"]   { --card-accent: #8b5cf6; }
 .sub-card[data-entity="quant"] { --card-accent: #4ade80; }
+.sub-card[data-entity="ferro"] { --card-accent: #4ade80; }
 
 .sub-card-bg-num {
   position: absolute; right: 1.5rem; top: 1rem;
@@ -295,6 +296,7 @@ nav {
 .sub-card[data-entity="swf"]    .sub-card-type { color: var(--cold); border-color: rgba(26,107,138,0.35); }
 .sub-card[data-entity="llm"]    .sub-card-type { color: #a78bfa; border-color: rgba(139,92,246,0.35); }
 .sub-card[data-entity="quant"]  .sub-card-type { color: #4ade80; border-color: rgba(74,222,128,0.3); }
+.sub-card[data-entity="ferro"]  .sub-card-type { color: #4ade80; border-color: rgba(74,222,128,0.3); }
 
 .sub-card-name {
   font-family: var(--display); font-size: clamp(1.6rem, 3vw, 2.6rem);
@@ -330,6 +332,7 @@ nav {
 .sub-card[data-entity="swf"]    .sub-card-link { color: var(--cold); }
 .sub-card[data-entity="llm"]    .sub-card-link { color: #a78bfa; }
 .sub-card[data-entity="quant"]  .sub-card-link { color: #4ade80; }
+.sub-card[data-entity="ferro"]  .sub-card-link { color: #4ade80; }
 .sub-card-link:hover { gap: 1rem; }
 
 /* ── PARENT PROFILE SECTION ── */
@@ -1109,7 +1112,7 @@ footer {
         <a class="btn-ghost" href="#" onclick="showPage('about')">Group Profile</a>
       </div>
       <div class="gh-meta">
-        <div class="gh-meta-item"><span class="countup" data-target="5" data-suffix="">0</span><small>Subsidiaries & Divisions</small></div>
+        <div class="gh-meta-item"><span class="countup" data-target="6" data-suffix="">0</span><small>Subsidiaries & Divisions</small></div>
         <div class="gh-meta-item"><span>2025</span><small>National AI FinTech Winner</small></div>
         <div class="gh-meta-item"><span>ADIA · PIF · QIA</span><small>SWF Coverage Universe</small></div>
         <div class="gh-meta-item"><span>PKR · USD · AED</span><small>Markets Served</small></div>
@@ -1133,12 +1136,17 @@ footer {
     <div class="sb-item child"><div class="sb-dot"></div><span>AI Research & LLM Training</span></div>
     <div class="sb-divider"></div>
     <div class="sb-item child"><div class="sb-dot"></div><span>Quantitative Finance Division</span></div>
+    <div class="sb-divider"></div>
+    <div class="sb-item child">
+      <div class="sb-dot"></div>
+      <span>FERROQUANT Capital</span>
+    </div>
   </div>
 
   <!-- SUBSIDIARIES -->
   <div class="subs-section" id="subsidiaries">
     <p class="sec-eyebrow">Group Structure</p>
-    <h2 class="sec-title">Five <em>Engines</em><br>One Group</h2>
+    <h2 class="sec-title">Six <em>Engines</em><br>One Group</h2>
     <p class="sec-lead">Each entity operates with distinct focus and market positioning under the Black Iron Quantum AI parent, sharing research infrastructure, talent, and proprietary data assets.</p>
 
     <div class="sub-cards">
@@ -1282,6 +1290,24 @@ footer {
           <span class="stack-chip">JoDPRP</span>
         </div>
         <a class="sub-card-link" href="#" onclick="showPage('services')">View Capabilities →</a>
+      </div>
+
+      <!-- FERROQUANT Capital -->
+      <div class="sub-card" data-entity="ferro">
+        <span class="sub-card-bg-num">05</span>
+        <div class="sub-card-type">Quantitative Finance · Hedge Fund</div>
+        <div class="sub-card-name">FERROQUANT CAPITAL</div>
+        <div class="sub-card-tagline">Quantitative strategies and hedge fund management at institutional grade</div>
+        <p class="sub-card-desc">FERROQUANT Capital is the Group's dedicated quantitative finance and hedge fund management arm. It develops and deploys systematic trading strategies, volatility arbitrage models, and multi-asset portfolio frameworks targeting PSX, Gulf, and global capital markets — engineered for institutional investors, family offices, and high-net-worth mandates.</p>
+        <div class="sub-card-stack">
+          <span class="stack-chip">Systematic Trading</span>
+          <span class="stack-chip">Volatility Arbitrage</span>
+          <span class="stack-chip">IV–RV Spread</span>
+          <span class="stack-chip">CVXPY</span>
+          <span class="stack-chip">PyPortfolioOpt</span>
+          <span class="stack-chip">PSX · Gulf</span>
+        </div>
+        <a class="sub-card-link" href="#" onclick="showPage('contact')" style="color:#4ade80;">Enquire About Mandates →</a>
       </div>
 
     </div>
@@ -1584,6 +1610,7 @@ footer {
             <option>Gulf SWF Intelligence</option>
             <option>AI Research & LLM Training Division</option>
             <option>Quantitative Finance Division</option>
+            <option>FERROQUANT Capital</option>
           </select>
         </div>
         <div class="f-group"><label>Message</label><textarea placeholder="Describe your project or inquiry…"></textarea></div>
@@ -1623,6 +1650,7 @@ footer {
         <li><a>Gulf SWF Intelligence</a></li>
         <li><a>AI Research Division</a></li>
         <li><a>Quantitative Finance</a></li>
+        <li><a>FERROQUANT Capital</a></li>
       </ul>
     </div>
     <div class="footer-col">
