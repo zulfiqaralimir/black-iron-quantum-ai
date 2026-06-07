@@ -748,9 +748,8 @@ footer {
 
   .client-cards {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: 1fr;
     gap: 1.5px;
-    background: rgba(176,125,16,0.12);
   }
 
   .client-card {
@@ -773,22 +772,25 @@ footer {
   .client-card.featured {
     grid-column: 1 / -1;
     display: grid;
-    grid-template-columns: 280px 1fr;
-    gap: 3rem;
+    grid-template-columns: 220px 1fr;
+    gap: 4rem;
     align-items: center;
     padding: 3rem 2.5rem;
+    background: linear-gradient(135deg, #ffffff 0%, rgba(176,125,16,0.06) 100%);
   }
   .client-card.featured::after { height: 3px; }
 
   .client-logo-box {
-    width: 100%;
-    aspect-ratio: 1;
+    width: 220px;
+    height: 220px;
+    min-width: 220px;
     display: flex;
     align-items: center;
     justify-content: center;
     border: 2px solid rgba(176,125,16,0.3);
-    padding: 1.5rem;
+    padding: 1.2rem;
     background: rgba(176,125,16,0.04);
+    flex-shrink: 0;
     position: relative;
   }
 
@@ -812,7 +814,10 @@ footer {
     padding: 0.18rem 0.5rem;
   }
 
-  .client-info {}
+  .client-info {
+    min-width: 0;
+    flex: 1;
+  }
   .client-type-badge {
     font-family: var(--mono); font-size: 0.55rem;
     letter-spacing: 0.22em; text-transform: uppercase;
