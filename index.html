@@ -1,0 +1,1509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Black Iron Quantum AI Group</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=IBM+Plex+Mono:wght@300;400;500&family=Spectral:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<style>
+:root {
+  --iron: #f5f2ec;
+  --iron-mid: #eae6dc;
+  --iron-card: #ffffff;
+  --iron-light: #ddd8ce;
+  --amber: #b07d10;
+  --amber-dim: #7a5a0a;
+  --amber-glow: rgba(176,125,16,0.08);
+  --cold: #1a6b8a;
+  --cold-dim: #0f4f68;
+  --crimson: #b03030;
+  --white: #1a1714;
+  --white-dim: #5a5550;
+  --mono: 'IBM Plex Mono', monospace;
+  --display: 'Bebas Neue', sans-serif;
+  --serif: 'DM Serif Display', serif;
+  --body: 'Spectral', serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--iron);
+  color: var(--white);
+  font-family: var(--body);
+  font-weight: 300;
+  overflow-x: hidden;
+}
+
+/* NOISE */
+body::after {
+  content: '';
+  position: fixed; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none; z-index: 9999; opacity: 0.15;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 500;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1rem 3.5rem;
+  background: rgba(245,242,236,0.95);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(176,125,16,0.25);
+}
+
+.nav-logo { display: flex; align-items: center; gap: 0.9rem; text-decoration: none; cursor: pointer; }
+
+.logo-mark {
+  width: 34px; height: 34px; position: relative; flex-shrink: 0;
+}
+
+.nav-wordmark { line-height: 1; }
+.nav-wordmark-top {
+  font-family: var(--display);
+  font-size: 0.85rem; letter-spacing: 0.14em; color: var(--white);
+}
+.nav-wordmark-top span { color: var(--amber); }
+.nav-wordmark-sub {
+  font-family: var(--mono); font-size: 0.52rem;
+  letter-spacing: 0.22em; color: var(--white-dim); text-transform: uppercase;
+  margin-top: 1px;
+}
+
+.nav-links { display: flex; gap: 2.2rem; list-style: none; }
+.nav-links a {
+  font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.16em;
+  color: var(--white-dim); text-decoration: none; text-transform: uppercase;
+  transition: color 0.25s; position: relative;
+}
+.nav-links a::after {
+  content: ''; position: absolute; bottom: -3px; left: 0;
+  width: 0; height: 1px; background: var(--amber); transition: width 0.25s;
+}
+.nav-links a:hover { color: var(--amber); }
+.nav-links a:hover::after { width: 100%; }
+
+.nav-pill {
+  font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--iron); background: var(--amber);
+  padding: 0.5rem 1.3rem; text-decoration: none; transition: background 0.25s;
+}
+.nav-pill:hover { background: #e8bb55; }
+
+/* ── PAGES ── */
+.page { display: none; animation: pgIn 0.45s ease both; }
+.page.active { display: block; }
+@keyframes pgIn { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
+
+/* ── TICKER ── */
+.ticker-band {
+  overflow: hidden; background: var(--iron-mid);
+  border-bottom: 1px solid rgba(176,125,16,0.06);
+  padding: 0.6rem 0; margin-top: 64px;
+}
+.ticker-inner { display: flex; white-space: nowrap; animation: tick 36s linear infinite; }
+.tick-item {
+  font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.22em;
+  text-transform: uppercase; color: var(--white-dim); padding: 0 2.5rem;
+  border-right: 1px solid rgba(26,23,20,0.15);
+}
+.tick-item b { color: var(--amber); font-weight: 400; }
+@keyframes tick { from { transform:translateX(0); } to { transform:translateX(-50%); } }
+
+/* ── HERO GROUP ── */
+.group-hero {
+  min-height: 90vh; display: flex; align-items: center;
+  position: relative; overflow: hidden;
+}
+
+.gh-grid {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(176,125,16,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(176,125,16,0.04) 1px, transparent 1px);
+  background-size: 72px 72px;
+  animation: gshift 25s linear infinite;
+}
+@keyframes gshift { to { background-position: 72px 72px; } }
+
+.gh-orb {
+  position: absolute; border-radius: 50%; filter: blur(100px);
+  animation: orb 10s ease-in-out infinite;
+}
+.gh-orb-a {
+  width: 700px; height: 700px;
+  background: radial-gradient(circle, rgba(212,168,67,0.09) 0%, transparent 70%);
+  top: -200px; right: -150px;
+}
+.gh-orb-b {
+  width: 350px; height: 350px;
+  background: radial-gradient(circle, rgba(26,107,138,0.06) 0%, transparent 70%);
+  bottom: 0; left: 100px; animation-delay: -5s;
+}
+@keyframes orb { 0%,100%{opacity:.5;transform:scale(1);} 50%{opacity:1;transform:scale(1.12);} }
+
+.gh-content {
+  position: relative; z-index: 2;
+  max-width: 1200px; margin: 0 auto; padding: 0 3.5rem;
+  width: 100%;
+}
+
+.gh-eyebrow {
+  font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.3em;
+  color: var(--cold); text-transform: uppercase; margin-bottom: 1.2rem;
+}
+.gh-eyebrow::before { content: '◈ '; color: var(--amber); }
+
+.gh-headline {
+  font-family: var(--display);
+  font-size: clamp(3.8rem, 8.5vw, 8.5rem);
+  line-height: 0.9; letter-spacing: 0.01em; color: var(--white);
+}
+.gh-headline .hl-amber { color: var(--amber); }
+.gh-headline .hl-dim { color: rgba(26,23,20,0.35); }
+
+.gh-sub {
+  font-family: var(--serif); font-style: italic;
+  font-size: clamp(1rem,1.5vw,1.35rem); color: var(--white-dim);
+  max-width: 540px; line-height: 1.75; margin-top: 1.8rem;
+}
+
+.gh-meta {
+  display: flex; gap: 3rem; margin-top: 3rem;
+  padding-top: 2rem; border-top: 1px solid rgba(26,23,20,0.08);
+  flex-wrap: wrap;
+}
+.gh-meta-item span {
+  display: block; font-family: var(--display);
+  font-size: 2rem; color: var(--amber); line-height: 1;
+}
+.gh-meta-item small {
+  font-family: var(--mono); font-size: 0.58rem; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--white-dim); margin-top: 0.3rem; display: block;
+}
+
+.gh-actions { display: flex; gap: 1rem; margin-top: 2.5rem; flex-wrap: wrap; }
+.btn-gold {
+  font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--iron); background: var(--amber);
+  border: none; padding: 0.9rem 2rem; cursor: pointer; text-decoration: none;
+  display: inline-block; transition: background 0.25s;
+}
+.btn-gold:hover { background: #e8bb55; }
+.btn-ghost {
+  font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--white-dim);
+  border: 1px solid rgba(26,23,20,0.2); padding: 0.9rem 2rem;
+  cursor: pointer; text-decoration: none; display: inline-block; transition: all 0.25s;
+  background: transparent;
+}
+.btn-ghost:hover { color: var(--amber); border-color: var(--amber); }
+
+/* ── STRUCTURE LABEL ── */
+.structure-bar {
+  background: var(--iron-mid);
+  border-top: 1px solid rgba(176,125,16,0.08);
+  border-bottom: 1px solid rgba(176,125,16,0.08);
+  padding: 1rem 3.5rem;
+  display: flex; align-items: center; justify-content: center; gap: 3rem;
+  flex-wrap: wrap;
+}
+.sb-item {
+  display: flex; align-items: center; gap: 0.6rem;
+  font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--white-dim);
+}
+.sb-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--amber); flex-shrink: 0; }
+.sb-item.parent .sb-dot { background: var(--amber); box-shadow: 0 0 8px var(--amber); }
+.sb-item.child .sb-dot { background: var(--cold); }
+.sb-divider { width: 1px; height: 18px; background: rgba(26,23,20,0.12); }
+
+/* ── SUBSIDIARIES SECTION ── */
+.subs-section {
+  max-width: 1200px; margin: 0 auto; padding: 6rem 3.5rem;
+}
+
+.sec-eyebrow {
+  font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.28em;
+  color: var(--amber); text-transform: uppercase; margin-bottom: 0.8rem;
+}
+.sec-eyebrow::before { content: '// '; color: var(--cold-dim); }
+
+.sec-title {
+  font-family: var(--display); font-size: clamp(2.2rem,4.5vw,4rem);
+  line-height: 1; color: var(--white); margin-bottom: 1rem;
+}
+.sec-title em { font-family: var(--serif); font-style: italic; color: var(--amber); }
+
+.sec-lead {
+  font-size: 1.05rem; color: var(--white-dim); line-height: 1.8;
+  max-width: 600px; margin-bottom: 4rem;
+}
+
+/* SUBSIDIARY CARDS */
+.sub-cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2px;
+  background: rgba(176,125,16,0.06);
+}
+
+.sub-card {
+  background: var(--iron-card);
+  padding: 3rem 2.5rem;
+  position: relative; overflow: hidden;
+  display: flex; flex-direction: column;
+  transition: background 0.35s;
+}
+
+.sub-card::before {
+  content: ''; position: absolute;
+  top: 0; left: 0; right: 0; height: 2px;
+  background: var(--card-accent, var(--amber));
+  transform: scaleX(0); transform-origin: left;
+  transition: transform 0.4s;
+}
+.sub-card:hover { background: #f0ede6; }
+.sub-card:hover::before { transform: scaleX(1); }
+
+.sub-card.full-width { grid-column: 1 / -1; }
+
+/* per-card accent colors */
+.sub-card[data-entity="times"] { --card-accent: #e8a030; }
+.sub-card[data-entity="swf"]   { --card-accent: #5fa8c0; }
+.sub-card[data-entity="llm"]   { --card-accent: #8b5cf6; }
+.sub-card[data-entity="quant"] { --card-accent: #4ade80; }
+
+.sub-card-bg-num {
+  position: absolute; right: 1.5rem; top: 1rem;
+  font-family: var(--display); font-size: 6rem; line-height: 1;
+  color: rgba(26,23,20,0.04); pointer-events: none;
+  transition: color 0.35s;
+}
+.sub-card:hover .sub-card-bg-num { color: rgba(26,23,20,0.07); }
+
+.sub-card-type {
+  font-family: var(--mono); font-size: 0.55rem; letter-spacing: 0.25em;
+  text-transform: uppercase; padding: 0.22rem 0.7rem;
+  border: 1px solid; display: inline-block; margin-bottom: 1.5rem;
+  width: fit-content;
+}
+.sub-card[data-entity="times"]  .sub-card-type { color: #e8a030; border-color: rgba(232,160,48,0.35); }
+.sub-card[data-entity="swf"]    .sub-card-type { color: var(--cold); border-color: rgba(26,107,138,0.35); }
+.sub-card[data-entity="llm"]    .sub-card-type { color: #a78bfa; border-color: rgba(139,92,246,0.35); }
+.sub-card[data-entity="quant"]  .sub-card-type { color: #4ade80; border-color: rgba(74,222,128,0.3); }
+
+.sub-card-name {
+  font-family: var(--display); font-size: clamp(1.6rem, 3vw, 2.6rem);
+  letter-spacing: 0.03em; color: var(--white); line-height: 1; margin-bottom: 0.5rem;
+}
+
+.sub-card-tagline {
+  font-family: var(--serif); font-style: italic;
+  font-size: 0.95rem; color: var(--white-dim); margin-bottom: 1.5rem;
+}
+
+.sub-card-desc {
+  font-size: 0.93rem; color: var(--white-dim); line-height: 1.75;
+  margin-bottom: 2rem; flex-grow: 1;
+}
+
+.sub-card-stack {
+  display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.8rem;
+}
+.stack-chip {
+  font-family: var(--mono); font-size: 0.55rem; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--white-dim);
+  border: 1px solid rgba(26,23,20,0.12); padding: 0.2rem 0.55rem;
+}
+
+.sub-card-link {
+  font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.18em;
+  text-transform: uppercase; color: inherit; text-decoration: none;
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  transition: gap 0.2s;
+}
+.sub-card[data-entity="times"]  .sub-card-link { color: #e8a030; }
+.sub-card[data-entity="swf"]    .sub-card-link { color: var(--cold); }
+.sub-card[data-entity="llm"]    .sub-card-link { color: #a78bfa; }
+.sub-card[data-entity="quant"]  .sub-card-link { color: #4ade80; }
+.sub-card-link:hover { gap: 1rem; }
+
+/* ── PARENT PROFILE SECTION ── */
+.parent-section {
+  background: var(--iron-mid);
+  border-top: 1px solid rgba(176,125,16,0.08);
+  border-bottom: 1px solid rgba(176,125,16,0.08);
+}
+.parent-inner {
+  max-width: 1200px; margin: 0 auto; padding: 5rem 3.5rem;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start;
+}
+
+.parent-left .pl-label {
+  font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.28em;
+  text-transform: uppercase; color: var(--amber); margin-bottom: 1.2rem;
+}
+.parent-left h2 {
+  font-family: var(--display); font-size: clamp(2rem,4vw,3.5rem);
+  line-height: 0.95; color: var(--white); margin-bottom: 1.5rem;
+}
+.parent-left p {
+  font-size: 1rem; color: var(--white-dim); line-height: 1.8; margin-bottom: 1.2rem;
+}
+
+.parent-right {}
+
+.founder-card {
+  border: 1px solid rgba(176,125,16,0.25);
+  background: rgba(176,125,16,0.03); padding: 2rem;
+  position: relative; margin-bottom: 2rem;
+}
+.founder-card::before {
+  content: 'GROUP FOUNDER & CHIEF RESEARCHER';
+  position: absolute; top: -0.55rem; left: 1.2rem;
+  font-family: var(--mono); font-size: 0.52rem; letter-spacing: 0.22em;
+  background: var(--iron-mid); color: var(--amber); padding: 0 0.5rem;
+}
+.founder-name {
+  font-family: var(--display); font-size: 1.8rem; letter-spacing: 0.04em;
+  color: var(--white); margin-bottom: 0.3rem;
+}
+.founder-creds {
+  font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.16em;
+  color: var(--cold); text-transform: uppercase; margin-bottom: 1rem;
+}
+.founder-bio { font-size: 0.92rem; color: var(--white-dim); line-height: 1.7; margin-bottom: 1.2rem; }
+.badge-row { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.badge {
+  font-family: var(--mono); font-size: 0.55rem; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--cold);
+  border: 1px solid rgba(26,107,138,0.25); padding: 0.2rem 0.55rem;
+}
+
+.affiliations {
+  border: 1px solid rgba(26,107,138,0.15);
+  background: rgba(26,107,138,0.03); padding: 1.5rem;
+}
+.affiliations-label {
+  font-family: var(--mono); font-size: 0.58rem; letter-spacing: 0.22em;
+  text-transform: uppercase; color: var(--cold); margin-bottom: 1rem;
+}
+.aff-list { list-style: none; display: flex; flex-direction: column; gap: 0.55rem; }
+.aff-list li { font-size: 0.9rem; color: var(--white-dim); display: flex; gap: 0.6rem; align-items: flex-start; }
+.aff-list li::before { content: '▸'; color: var(--amber); flex-shrink: 0; }
+
+/* ── ABOUT PAGE ── */
+.about-hero {
+  max-width: 1200px; margin: 0 auto;
+  padding: 8rem 3.5rem 4rem;
+}
+.about-hero h1 {
+  font-family: var(--display); font-size: clamp(3rem,7vw,6.5rem);
+  line-height: 0.9; color: var(--white); margin-bottom: 1.5rem;
+}
+.about-hero h1 em { font-family: var(--serif); font-style: italic; color: var(--amber); }
+.about-hero p { font-size: 1.1rem; color: var(--white-dim); line-height: 1.8; max-width: 640px; }
+
+.pillars-grid {
+  max-width: 1200px; margin: 0 auto; padding: 2rem 3.5rem 6rem;
+  display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5px;
+  background: rgba(176,125,16,0.06);
+}
+.pillar-card {
+  background: var(--iron-card); padding: 2.5rem 2rem;
+  border-bottom: 2px solid transparent; transition: border-color 0.3s, background 0.3s;
+}
+.pillar-card:hover { background: #f0ede6; border-color: var(--amber); }
+.pillar-n {
+  font-family: var(--display); font-size: 3.5rem; color: rgba(176,125,16,0.2);
+  line-height: 1; margin-bottom: 1rem; transition: color 0.3s;
+}
+.pillar-card:hover .pillar-n { color: rgba(176,125,16,0.35); }
+.pillar-h { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--white); margin-bottom: 0.7rem; }
+.pillar-p { font-size: 0.92rem; color: var(--white-dim); line-height: 1.7; }
+
+/* ── SERVICES PAGE ── */
+.svcs-hero {
+  max-width: 1200px; margin: 0 auto; padding: 8rem 3.5rem 4rem;
+  text-align: center;
+}
+.svcs-hero h1 {
+  font-family: var(--display); font-size: clamp(3rem,6vw,5.5rem);
+  line-height: 0.95; color: var(--white); margin-bottom: 1rem;
+}
+.svcs-hero h1 em { font-family: var(--serif); font-style: italic; color: var(--amber); }
+.svcs-hero p { font-size: 1.05rem; color: var(--white-dim); line-height: 1.8; max-width: 600px; margin: 0 auto; }
+
+.svcs-grid {
+  max-width: 1200px; margin: 0 auto; padding: 2rem 3.5rem 4rem;
+  display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5px;
+  background: rgba(176,125,16,0.06);
+}
+.svc-card {
+  background: var(--iron-card); padding: 2.5rem 2rem;
+  position: relative; overflow: hidden; transition: background 0.3s;
+}
+.svc-card::after {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
+  background: var(--amber); transform: scaleX(0); transform-origin: left; transition: transform 0.35s;
+}
+.svc-card:hover { background: #f0ede6; }
+.svc-card:hover::after { transform: scaleX(1); }
+.svc-n {
+  position: absolute; right: 1rem; top: 0.8rem;
+  font-family: var(--display); font-size: 5rem; color: rgba(26,23,20,0.04); line-height: 1;
+  transition: color 0.3s;
+}
+.svc-card:hover .svc-n { color: rgba(26,23,20,0.08); }
+.svc-icon { font-size: 1.6rem; margin-bottom: 1.2rem; display: block; }
+.svc-h { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--white); margin-bottom: 0.7rem; }
+.svc-p { font-size: 0.9rem; color: var(--white-dim); line-height: 1.7; margin-bottom: 1.2rem; }
+.svc-chips { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+.chip { font-family: var(--mono); font-size: 0.53rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--amber-dim); border: 1px solid rgba(176,125,16,0.25); padding: 0.18rem 0.5rem; }
+
+.svcs-cta {
+  max-width: 1200px; margin: 0 auto; padding: 0 3.5rem 6rem;
+}
+.cta-strip {
+  background: var(--iron-mid); border: 1px solid rgba(176,125,16,0.2);
+  padding: 3rem; display: flex; align-items: center; justify-content: space-between; gap: 2rem; flex-wrap: wrap;
+}
+.cta-strip h3 { font-family: var(--display); font-size: 2rem; color: var(--white); }
+.cta-strip p { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.15em; color: var(--white-dim); margin-top: 0.4rem; text-transform: uppercase; }
+
+/* ── CONTACT PAGE ── */
+.contact-layout {
+  max-width: 1200px; margin: 0 auto; padding: 8rem 3.5rem 6rem;
+  display: grid; grid-template-columns: 1fr 1.3fr; gap: 6rem; align-items: start;
+}
+.contact-left h1 {
+  font-family: var(--display); font-size: clamp(2.5rem,5vw,4.5rem); line-height: 0.95; margin-bottom: 1.5rem;
+}
+.contact-left h1 em { font-family: var(--serif); font-style: italic; color: var(--amber); }
+.contact-left p { font-size: 1rem; color: var(--white-dim); line-height: 1.8; margin-bottom: 2.5rem; }
+.ci-list { display: flex; flex-direction: column; gap: 1.1rem; }
+.ci {
+  display: flex; gap: 1rem; align-items: flex-start;
+}
+.ci-icon {
+  width: 34px; height: 34px; border: 1px solid rgba(176,125,16,0.35);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.85rem; color: var(--amber); flex-shrink: 0;
+}
+.ci-lbl { font-family: var(--mono); font-size: 0.56rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--white-dim); margin-bottom: 0.2rem; }
+.ci-val { font-size: 0.92rem; color: var(--white); }
+
+.contact-form-box {
+  background: var(--iron-mid); border: 1px solid rgba(26,23,20,0.07);
+  padding: 2.5rem; position: relative;
+}
+.contact-form-box::before {
+  content: 'SECURE INQUIRY FORM'; position: absolute; top: -0.55rem; left: 1.2rem;
+  font-family: var(--mono); font-size: 0.52rem; letter-spacing: 0.22em;
+  background: var(--iron-mid); color: var(--cold); padding: 0 0.5rem;
+}
+.f-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.f-group { margin-bottom: 1.1rem; }
+.f-group label { font-family: var(--mono); font-size: 0.57rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--white-dim); display: block; margin-bottom: 0.45rem; }
+.f-group input, .f-group select, .f-group textarea {
+  width: 100%; background: rgba(255,255,255,0.7); border: 1px solid rgba(26,23,20,0.2);
+  color: var(--white); font-family: var(--mono); font-size: 0.8rem; padding: 0.7rem 0.9rem;
+  outline: none; transition: border-color 0.25s; appearance: none;
+}
+.f-group input:focus, .f-group select:focus, .f-group textarea:focus { border-color: var(--amber); }
+.f-group textarea { resize: vertical; min-height: 100px; }
+.f-group select option { background: var(--iron-card); color: var(--white); }
+.f-submit {
+  width: 100%; font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--iron); background: var(--amber); border: none;
+  padding: 1rem; cursor: pointer; transition: background 0.25s; margin-top: 0.3rem;
+}
+.f-submit:hover { background: #e8bb55; }
+.f-success { display: none; text-align: center; padding: 2.5rem 1rem; }
+.f-success-icon { font-size: 2.5rem; color: var(--amber); margin-bottom: 1rem; }
+.f-success h4 { font-family: var(--display); font-size: 1.8rem; color: var(--white); margin-bottom: 0.5rem; }
+.f-success p { font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.15em; color: var(--white-dim); }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--iron-mid);
+  border-top: 1px solid rgba(176,125,16,0.08);
+  padding: 3.5rem 3.5rem 2rem;
+}
+.footer-grid {
+  max-width: 1200px; margin: 0 auto;
+  display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem;
+  padding-bottom: 2.5rem; border-bottom: 1px solid rgba(26,23,20,0.07);
+}
+.footer-brand {}
+.footer-brand-name { font-family: var(--display); font-size: 1rem; letter-spacing: 0.12em; color: var(--white); margin-bottom: 0.2rem; }
+.footer-brand-name span { color: var(--amber); }
+.footer-brand-sub { font-family: var(--mono); font-size: 0.55rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--white-dim); margin-bottom: 1rem; }
+.footer-desc { font-size: 0.87rem; color: var(--white-dim); line-height: 1.7; }
+.footer-col h5 { font-family: var(--mono); font-size: 0.58rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--amber); margin-bottom: 1.1rem; }
+.footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+.footer-col ul a { font-size: 0.88rem; color: var(--white-dim); text-decoration: none; cursor: pointer; transition: color 0.25s; }
+.footer-col ul a:hover { color: var(--amber); }
+.footer-bottom {
+  max-width: 1200px; margin: 0 auto; padding-top: 1.5rem;
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
+}
+.footer-bottom p, .footer-bottom span {
+  font-family: var(--mono); font-size: 0.56rem; letter-spacing: 0.14em;
+  text-transform: uppercase; color: rgba(90,85,80,0.6);
+}
+
+/* ── MOBILE ── */
+.ham { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+.ham span { display: block; width: 22px; height: 1.5px; background: var(--white); transition: all 0.3s; }
+.mobile-menu {
+  display: none; position: fixed; top: 64px; left: 0; right: 0;
+  background: rgba(245,242,236,0.98); backdrop-filter: blur(16px);
+  padding: 2rem; z-index: 490; border-bottom: 1px solid rgba(176,125,16,0.2);
+  flex-direction: column; gap: 1.5rem;
+}
+.mobile-menu.open { display: flex; }
+.mobile-menu a { font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--white-dim); text-decoration: none; cursor: pointer; }
+.mobile-menu a:hover { color: var(--amber); }
+
+@media(max-width: 900px) {
+  nav { padding: 1rem 1.5rem; }
+  .nav-links, .nav-pill { display: none; }
+  .ham { display: flex; }
+  .structure-bar { padding: 1rem 1.5rem; gap: 1.2rem; }
+  .gh-content { padding: 0 1.5rem; }
+  .subs-section, .parent-inner, .about-hero, .pillars-grid,
+  .svcs-hero, .svcs-grid, .svcs-cta, .contact-layout, .footer-grid { padding-left: 1.5rem; padding-right: 1.5rem; }
+  .sub-cards { grid-template-columns: 1fr; }
+  .sub-card.full-width { grid-column: 1; }
+  .parent-inner { grid-template-columns: 1fr; gap: 3rem; }
+  .pillars-grid, .svcs-grid { grid-template-columns: 1fr; }
+  .contact-layout { grid-template-columns: 1fr; gap: 3rem; }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .f-row { grid-template-columns: 1fr; }
+  .cta-strip { flex-direction: column; }
+}
+
+  /* ── ZULFIQUODE FLAGSHIP ── */
+  .zulf-hero {
+    background: var(--iron);
+    border-top: 3px solid var(--amber);
+    border-bottom: 3px solid var(--amber);
+    position: relative;
+    overflow: hidden;
+  }
+  .zulf-hero-inner {
+    max-width: 1200px; margin: 0 auto;
+    padding: 5rem 3.5rem;
+    display: grid; grid-template-columns: 1.2fr 1fr; gap: 5rem; align-items: center;
+    position: relative; z-index: 2;
+  }
+  .zulf-bg-text {
+    position: absolute;
+    font-family: var(--display);
+    font-size: 18rem; line-height: 1;
+    color: rgba(176,125,16,0.06);
+    right: -2rem; top: 50%; transform: translateY(-50%);
+    pointer-events: none; letter-spacing: -0.02em; white-space: nowrap;
+  }
+  .zulf-flag {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.28em;
+    text-transform: uppercase; color: var(--iron-card);
+    background: var(--amber); padding: 0.3rem 0.9rem;
+    margin-bottom: 1.5rem;
+  }
+  .zulf-flag::before { content: '★'; font-size: 0.7rem; }
+  .zulf-name {
+    font-family: var(--display);
+    font-size: clamp(3rem, 7vw, 6.5rem);
+    line-height: 0.9; letter-spacing: 0.04em;
+    color: var(--white); margin-bottom: 0.8rem;
+  }
+  .zulf-name .z-accent { color: var(--amber); }
+  .zulf-tagline {
+    font-family: var(--serif); font-style: italic;
+    font-size: 1.15rem; color: var(--white-dim);
+    line-height: 1.65; margin-bottom: 2rem;
+    border-left: 3px solid var(--amber); padding-left: 1rem;
+  }
+  .zulf-desc {
+    font-size: 1rem; color: var(--white-dim); line-height: 1.8; margin-bottom: 2rem;
+  }
+  .zulf-pills { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 2rem; }
+  .zulf-pill {
+    font-family: var(--mono); font-size: 0.58rem; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--amber);
+    border: 1px solid rgba(176,125,16,0.4); padding: 0.25rem 0.7rem;
+    background: rgba(176,125,16,0.06);
+  }
+  .zulf-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+  /* gauge panel */
+  .zulf-panel {
+    background: var(--iron-mid);
+    border: 1px solid rgba(176,125,16,0.25);
+    padding: 2rem;
+    position: relative;
+  }
+  .zulf-panel::before {
+    content: 'LIVE DEMO PREVIEW';
+    position: absolute; top: -0.55rem; left: 1.2rem;
+    font-family: var(--mono); font-size: 0.52rem; letter-spacing: 0.22em;
+    background: var(--iron-mid); color: var(--cold); padding: 0 0.5rem;
+  }
+  .gauge-title {
+    font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--white-dim); margin-bottom: 1.5rem;
+    text-align: center;
+  }
+  .gauge-wrap { position: relative; width: 200px; margin: 0 auto 1.5rem; }
+  .gauge-label {
+    text-align: center; margin-bottom: 1.5rem;
+  }
+  .gauge-label .g-num {
+    font-family: var(--display); font-size: 3.5rem; color: var(--amber);
+    line-height: 1; display: block;
+  }
+  .gauge-label .g-sub {
+    font-family: var(--mono); font-size: 0.58rem; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--white-dim);
+  }
+  .gauge-bars { display: flex; flex-direction: column; gap: 0.8rem; }
+  .gb-row { display: flex; align-items: center; gap: 0.8rem; }
+  .gb-label {
+    font-family: var(--mono); font-size: 0.58rem; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--white-dim); width: 80px; flex-shrink: 0;
+  }
+  .gb-track {
+    flex: 1; height: 5px; background: rgba(26,23,20,0.1);
+    border-radius: 2px; overflow: hidden; position: relative;
+  }
+  .gb-fill {
+    height: 100%; border-radius: 2px;
+    animation: barGrow 1.5s ease-out both;
+  }
+  .gb-fill.high { background: #c0392b; }
+  .gb-fill.med  { background: var(--amber); }
+  .gb-fill.low  { background: #27ae60; }
+  .gb-pct {
+    font-family: var(--mono); font-size: 0.58rem; color: var(--white-dim);
+    width: 32px; text-align: right; flex-shrink: 0;
+  }
+  @keyframes barGrow { from { width: 0; } }
+
+  .zulf-features {
+    max-width: 1200px; margin: 0 auto; padding: 4rem 3.5rem 6rem;
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5px;
+    background: rgba(176,125,16,0.12);
+  }
+  .zf-card {
+    background: var(--iron-card); padding: 2rem 1.6rem;
+    border-bottom: 2px solid transparent; transition: all 0.3s;
+  }
+  .zf-card:hover { background: #f0ede6; border-color: var(--amber); }
+  .zf-icon { font-size: 1.8rem; margin-bottom: 1rem; display: block; }
+  .zf-h { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--white); margin-bottom: 0.6rem; }
+  .zf-p { font-size: 0.88rem; color: var(--white-dim); line-height: 1.65; }
+
+  @media(max-width:900px) {
+    .zulf-hero-inner { grid-template-columns: 1fr; gap: 3rem; }
+    .zulf-features { grid-template-columns: 1fr 1fr; }
+    .zulf-bg-text { display: none; }
+  }
+
+
+  /* ── TRUSTED CLIENTS ── */
+  .clients-section {
+    background: var(--iron-mid);
+    border-top: 1px solid rgba(176,125,16,0.18);
+    border-bottom: 1px solid rgba(176,125,16,0.18);
+  }
+  .clients-inner {
+    max-width: 1200px; margin: 0 auto;
+    padding: 5rem 3.5rem;
+  }
+  .clients-header {
+    display: flex; align-items: flex-end; justify-content: space-between;
+    margin-bottom: 3.5rem; flex-wrap: wrap; gap: 1.5rem;
+  }
+  .clients-header-left {}
+  .clients-header-right {
+    font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--white-dim);
+    border-left: 2px solid var(--amber); padding-left: 1rem;
+    max-width: 280px; line-height: 1.7;
+  }
+
+  .client-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5px;
+    background: rgba(176,125,16,0.12);
+  }
+
+  .client-card {
+    background: var(--iron-card);
+    padding: 2.5rem 2rem;
+    position: relative;
+    transition: background 0.3s;
+    display: flex; flex-direction: column;
+  }
+  .client-card:hover { background: #f0ede6; }
+  .client-card::after {
+    content: ''; position: absolute;
+    top: 0; left: 0; right: 0; height: 2px;
+    background: var(--amber);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.35s;
+  }
+  .client-card:hover::after { transform: scaleX(1); }
+
+  .client-card.featured {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 3rem;
+    align-items: center;
+    padding: 3rem 2.5rem;
+    background: linear-gradient(135deg, var(--iron-card) 0%, rgba(176,125,16,0.03) 100%);
+  }
+  .client-card.featured::after { height: 3px; }
+
+  .client-logo-box {
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    padding: 2rem;
+    background: rgba(176,125,16,0.04);
+    border: 1px solid rgba(176,125,16,0.2);
+    aspect-ratio: 4/3;
+    position: relative;
+  }
+
+  .client-logo-monogram {
+    font-family: var(--display);
+    font-size: 4rem; letter-spacing: 0.05em;
+    color: var(--amber); line-height: 1;
+  }
+  .client-logo-sub {
+    font-family: var(--mono); font-size: 0.55rem;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--white-dim); margin-top: 0.4rem;
+  }
+
+  .client-since {
+    position: absolute; top: 0.7rem; right: 0.7rem;
+    font-family: var(--mono); font-size: 0.5rem;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--cold); background: rgba(26,107,138,0.08);
+    border: 1px solid rgba(26,107,138,0.2);
+    padding: 0.18rem 0.5rem;
+  }
+
+  .client-info {}
+  .client-type-badge {
+    font-family: var(--mono); font-size: 0.55rem;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--cold); border: 1px solid rgba(26,107,138,0.3);
+    padding: 0.22rem 0.7rem; display: inline-block; margin-bottom: 1rem;
+  }
+  .client-name {
+    font-family: var(--display);
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    letter-spacing: 0.03em; color: var(--white);
+    line-height: 1; margin-bottom: 0.5rem;
+  }
+  .client-location {
+    font-family: var(--mono); font-size: 0.62rem;
+    letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--white-dim); margin-bottom: 1.2rem;
+    display: flex; align-items: center; gap: 0.4rem;
+  }
+  .client-location::before { content: '📍'; font-size: 0.7rem; }
+  .client-desc {
+    font-size: 0.95rem; color: var(--white-dim);
+    line-height: 1.75; margin-bottom: 1.5rem;
+  }
+  .client-services {
+    display: flex; flex-wrap: wrap; gap: 0.4rem;
+  }
+  .cs-tag {
+    font-family: var(--mono); font-size: 0.55rem;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--amber-dim);
+    border: 1px solid rgba(176,125,16,0.22);
+    padding: 0.2rem 0.55rem;
+  }
+
+  .clients-trust-strip {
+    margin-top: 3rem;
+    padding: 1.5rem 2rem;
+    background: var(--iron-card);
+    border: 1px solid rgba(176,125,16,0.15);
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 1rem;
+  }
+  .trust-item {
+    display: flex; align-items: center; gap: 0.7rem;
+    font-family: var(--mono); font-size: 0.62rem;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--white-dim);
+  }
+  .trust-item::before { content: '✓'; color: var(--amber); font-size: 0.8rem; }
+
+  @media(max-width:900px) {
+    .client-card.featured { grid-template-columns: 1fr; }
+    .client-cards { grid-template-columns: 1fr; }
+    .clients-inner { padding-left: 1.5rem; padding-right: 1.5rem; }
+    .clients-header { flex-direction: column; align-items: flex-start; }
+  }
+
+
+  /* ── BOARD OF DIRECTORS ── */
+  .bod-section {
+    max-width: 1200px; margin: 0 auto;
+    padding: 6rem 3.5rem;
+  }
+  .bod-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5px;
+    background: rgba(176,125,16,0.12);
+    margin-top: 3rem;
+  }
+  .bod-card {
+    background: var(--iron-card);
+    padding: 2.5rem 2rem;
+    position: relative;
+    transition: background 0.3s;
+    overflow: hidden;
+  }
+  .bod-card:hover { background: #f0ede6; }
+  .bod-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: var(--amber);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.35s;
+  }
+  .bod-card:hover::before { transform: scaleX(1); }
+
+  .bod-card.chairman::before { background: var(--amber); transform: scaleX(1); }
+
+  .bod-role {
+    font-family: var(--mono); font-size: 0.55rem;
+    letter-spacing: 0.24em; text-transform: uppercase;
+    margin-bottom: 1.2rem; display: inline-block;
+    padding: 0.22rem 0.75rem;
+  }
+  .bod-card.chairman .bod-role {
+    color: var(--iron-card); background: var(--amber);
+  }
+  .bod-card:not(.chairman) .bod-role {
+    color: var(--cold); border: 1px solid rgba(26,107,138,0.3);
+  }
+
+  .bod-avatar {
+    width: 64px; height: 64px;
+    border: 2px solid rgba(176,125,16,0.3);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--display); font-size: 1.6rem;
+    color: var(--amber); margin-bottom: 1.2rem;
+    background: rgba(176,125,16,0.05);
+    position: relative;
+  }
+  .bod-card.chairman .bod-avatar {
+    border-color: var(--amber);
+    background: rgba(176,125,16,0.08);
+  }
+
+  .bod-name {
+    font-family: var(--display);
+    font-size: 1.5rem; letter-spacing: 0.04em;
+    color: var(--white); line-height: 1.05;
+    margin-bottom: 0.35rem;
+  }
+  .bod-title {
+    font-family: var(--mono); font-size: 0.6rem;
+    letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--white-dim); margin-bottom: 1rem;
+  }
+  .bod-desc {
+    font-size: 0.88rem; color: var(--white-dim);
+    line-height: 1.7;
+  }
+  .bod-divider {
+    width: 32px; height: 1px;
+    background: rgba(176,125,16,0.4);
+    margin: 1rem 0;
+  }
+
+  .bod-strip {
+    background: var(--iron-mid);
+    border-top: 1px solid rgba(176,125,16,0.15);
+    padding: 1.2rem 3.5rem;
+    max-width: 100%;
+  }
+  .bod-strip-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;
+    font-family: var(--mono); font-size: 0.6rem;
+    letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--white-dim);
+  }
+  .bod-strip-inner span { color: var(--amber); }
+
+  @media(max-width:900px) {
+    .bod-grid { grid-template-columns: 1fr; }
+    .bod-section { padding-left: 1.5rem; padding-right: 1.5rem; }
+    .bod-strip { padding-left: 1.5rem; padding-right: 1.5rem; }
+  }
+
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo" onclick="showPage('home')">
+    <div class="logo-mark">
+      <svg viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg" width="34" height="34">
+        <rect x="1" y="1" width="32" height="32" stroke="#d4a843" stroke-width="1"/>
+        <rect x="5" y="5" width="24" height="24" fill="#d4a843" opacity="0.06"/>
+        <line x1="17" y1="3" x2="17" y2="31" stroke="#d4a843" stroke-width="0.7" opacity="0.3"/>
+        <line x1="3" y1="17" x2="31" y2="17" stroke="#d4a843" stroke-width="0.7" opacity="0.3"/>
+        <circle cx="17" cy="17" r="5.5" stroke="#d4a843" stroke-width="1.1"/>
+        <circle cx="17" cy="17" r="2" fill="#d4a843"/>
+        <path d="M9 9 L13 13 M25 9 L21 13 M9 25 L13 21 M25 25 L21 21" stroke="#5fa8c0" stroke-width="0.8"/>
+      </svg>
+    </div>
+    <div class="nav-wordmark">
+      <div class="nav-wordmark-top">BLACK IRON <span>QUANTUM</span> AI</div>
+      <div class="nav-wordmark-sub">Group &nbsp;·&nbsp; Private Limited</div>
+    </div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#" onclick="showPage('home')">Group</a></li>
+    <li><a href="#" onclick="showPage('about')">About</a></li>
+    <li><a href="#" onclick="showPage('services')">Services</a></li>
+    <li><a href="#" onclick="showPage('contact')">Contact</a></li>
+  </ul>
+  <a class="nav-pill" href="#" onclick="showPage('contact')">Engage</a>
+  <div class="ham" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobile-menu">
+  <a onclick="showPage('home');closeMenu()">Group Home</a>
+  <a onclick="showPage('about');closeMenu()">About</a>
+  <a onclick="showPage('services');closeMenu()">Services</a>
+  <a onclick="showPage('contact');closeMenu()">Contact</a>
+</div>
+
+<!-- TICKER -->
+<div class="ticker-band">
+  <div class="ticker-inner">
+    <div class="tick-item">Black Iron Quantum AI &nbsp;<b>GROUP</b></div>
+    <div class="tick-item">BlackIronTimes.com &nbsp;<b>MEDIA</b></div>
+    <div class="tick-item">Gulf SWF Filing Intelligence &nbsp;<b>DATA</b></div>
+    <div class="tick-item">LLM Agent Systems &nbsp;<b>AI</b></div>
+    <div class="tick-item">Quantitative Research &nbsp;<b>QUANT</b></div>
+    <div class="tick-item">Policy Analytics &nbsp;<b>ADVISORY</b></div>
+    <div class="tick-item">Islamabad · Palo Alto · Gulf &nbsp;<b>GLOBAL</b></div>
+    <div class="tick-item">National AI FinTech Winner &nbsp;<b>2025</b></div>
+    <!-- duplicate -->
+    <div class="tick-item">Black Iron Quantum AI &nbsp;<b>GROUP</b></div>
+    <div class="tick-item">BlackIronTimes.com &nbsp;<b>MEDIA</b></div>
+    <div class="tick-item">Gulf SWF Filing Intelligence &nbsp;<b>DATA</b></div>
+    <div class="tick-item">LLM Agent Systems &nbsp;<b>AI</b></div>
+    <div class="tick-item">Quantitative Research &nbsp;<b>QUANT</b></div>
+    <div class="tick-item">Policy Analytics &nbsp;<b>ADVISORY</b></div>
+    <div class="tick-item">Islamabad · Palo Alto · Gulf &nbsp;<b>GLOBAL</b></div>
+    <div class="tick-item">National AI FinTech Winner &nbsp;<b>2025</b></div>
+  </div>
+</div>
+
+<!-- ══════════ HOME / GROUP PAGE ══════════ -->
+<div id="home" class="page active">
+
+  <!-- GROUP HERO -->
+  <div class="group-hero">
+    <div class="gh-grid"></div>
+    <div class="gh-orb gh-orb-a"></div>
+    <div class="gh-orb gh-orb-b"></div>
+    <div class="gh-content">
+      <p class="gh-eyebrow">Parent Company &nbsp;·&nbsp; Islamabad, Pakistan &nbsp;·&nbsp; Est. 2024</p>
+      <h1 class="gh-headline">
+        <span style="display:block;">THE</span>
+        <span class="hl-amber" style="display:block;">BLACK IRON</span>
+        <span class="hl-dim" style="display:block;">QUANTUM</span>
+        <span style="display:block;">GROUP</span>
+      </h1>
+      <p class="gh-sub">A private holding company architecting frontier AI intelligence, quantitative research, and institutional financial infrastructure across Pakistan, the Gulf, and the United States.</p>
+      <div class="gh-actions">
+        <a class="btn-gold" href="#" onclick="document.getElementById('subsidiaries').scrollIntoView({behavior:'smooth'})">View Subsidiaries</a>
+        <a class="btn-ghost" href="#" onclick="showPage('about')">Group Profile</a>
+      </div>
+      <div class="gh-meta">
+        <div class="gh-meta-item"><span>5</span><small>Subsidiaries & Divisions</small></div>
+        <div class="gh-meta-item"><span>2025</span><small>National AI FinTech Winner</small></div>
+        <div class="gh-meta-item"><span>ADIA · PIF · QIA</span><small>SWF Coverage Universe</small></div>
+        <div class="gh-meta-item"><span>PKR · USD · AED</span><small>Markets Served</small></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STRUCTURE BAR -->
+  <div class="structure-bar">
+    <div class="sb-item parent">
+      <div class="sb-dot"></div>
+      <span>Black Iron Quantum AI (Pvt) Ltd &nbsp;—&nbsp; Parent</span>
+    </div>
+    <div class="sb-divider"></div>
+    <div class="sb-item child" style="color:var(--amber);font-weight:500;"><div class="sb-dot" style="background:var(--amber);box-shadow:0 0 8px rgba(176,125,16,0.5);"></div><span>ZULFIQUODE ★</span></div>
+    <div class="sb-divider"></div>
+    <div class="sb-item child"><div class="sb-dot"></div><span>BlackIronTimes.com</span></div>
+    <div class="sb-divider"></div>
+    <div class="sb-item child"><div class="sb-dot"></div><span>Gulf SWF Intelligence</span></div>
+    <div class="sb-divider"></div>
+    <div class="sb-item child"><div class="sb-dot"></div><span>AI Research & LLM Training</span></div>
+    <div class="sb-divider"></div>
+    <div class="sb-item child"><div class="sb-dot"></div><span>Quantitative Finance Division</span></div>
+  </div>
+
+  <!-- SUBSIDIARIES -->
+  <div class="subs-section" id="subsidiaries">
+    <p class="sec-eyebrow">Group Structure</p>
+    <h2 class="sec-title">Five <em>Engines</em><br>One Group</h2>
+    <p class="sec-lead">Each entity operates with distinct focus and market positioning under the Black Iron Quantum AI parent, sharing research infrastructure, talent, and proprietary data assets.</p>
+
+    <div class="sub-cards">
+
+      <!-- ZULFIQUODE FLAGSHIP -->
+      <div class="sub-card full-width" data-entity="zulf" style="--card-accent:#b07d10; background: linear-gradient(135deg, var(--iron-card) 0%, rgba(176,125,16,0.04) 100%); padding: 3.5rem;">
+        <span class="sub-card-bg-num" style="font-size:9rem; opacity:0.05; right:2rem; top:-1rem;">Z</span>
+        <div style="display:grid; grid-template-columns:1.3fr 1fr; gap:4rem; align-items:center;">
+          <div>
+            <div class="sub-card-type" style="color:var(--amber);border-color:rgba(176,125,16,0.4);background:rgba(176,125,16,0.06); margin-bottom:1rem;">★ &nbsp;Flagship Product &nbsp;·&nbsp; Financial Crisis Intelligence</div>
+            <div class="sub-card-name" style="font-size:clamp(2.5rem,5vw,4.5rem); margin-bottom:0.6rem;">ZULFIQUODE</div>
+            <div class="sub-card-tagline" style="font-size:1.1rem; border-left:3px solid var(--amber); padding-left:1rem; margin-bottom:1.5rem;">Predicting financial crises before they arrive — powered by quantitative early-warning models, multi-agent AI, and real-time macro surveillance.</div>
+            <p class="sub-card-desc" style="font-size:0.97rem;">ZULFIQUODE is Black Iron Quantum AI's flagship crisis-prediction engine. It combines PhD-grade econometric early-warning models, multi-agent AI systems monitoring 50+ macro indicators, and a real-time crisis probability dashboard — delivering actionable intelligence to banks, central banks, hedge funds, and regulators before systemic risk materialises.</p>
+            <div class="sub-card-stack" style="margin-bottom:2rem;">
+              <span class="stack-chip">Early-Warning Models</span>
+              <span class="stack-chip">Multi-Agent AI</span>
+              <span class="stack-chip">Macro Surveillance</span>
+              <span class="stack-chip">Crisis Probability</span>
+              <span class="stack-chip">PyTorch</span>
+              <span class="stack-chip">CVXPY</span>
+              <span class="stack-chip">LangGraph</span>
+              <span class="stack-chip">Real-Time Dashboard</span>
+            </div>
+            <a class="sub-card-link" style="color:var(--amber); font-size:0.75rem;" href="#" onclick="showPage('contact')">Request Access &amp; Demo →</a>
+          </div>
+          <div style="background:var(--iron-mid);border:1px solid rgba(176,125,16,0.25);padding:2rem;position:relative;">
+            <div style="position:absolute;top:-0.55rem;left:1.2rem;font-family:var(--mono);font-size:0.52rem;letter-spacing:0.22em;background:var(--iron-mid);color:var(--cold);padding:0 0.5rem;">CRISIS MONITOR</div>
+            <div style="font-family:var(--mono);font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--white-dim);margin-bottom:1.2rem;text-align:center;">Global Crisis Probability Index</div>
+            <div style="text-align:center;margin-bottom:1.5rem;">
+              <span style="font-family:var(--display);font-size:4rem;color:var(--amber);line-height:1;display:block;">68%</span>
+              <span style="font-family:var(--mono);font-size:0.58rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--white-dim);">Elevated Risk · Q2 2026</span>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:0.9rem;">
+              <div style="display:flex;align-items:center;gap:0.8rem;">
+                <span style="font-family:var(--mono);font-size:0.55rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--white-dim);width:90px;flex-shrink:0;">Credit Stress</span>
+                <div style="flex:1;height:5px;background:rgba(26,23,20,0.1);border-radius:2px;overflow:hidden;">
+                  <div style="height:100%;width:78%;background:#c0392b;border-radius:2px;"></div>
+                </div>
+                <span style="font-family:var(--mono);font-size:0.55rem;color:var(--white-dim);width:30px;text-align:right;">78%</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:0.8rem;">
+                <span style="font-family:var(--mono);font-size:0.55rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--white-dim);width:90px;flex-shrink:0;">Liquidity</span>
+                <div style="flex:1;height:5px;background:rgba(26,23,20,0.1);border-radius:2px;overflow:hidden;">
+                  <div style="height:100%;width:62%;background:var(--amber);border-radius:2px;"></div>
+                </div>
+                <span style="font-family:var(--mono);font-size:0.55rem;color:var(--white-dim);width:30px;text-align:right;">62%</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:0.8rem;">
+                <span style="font-family:var(--mono);font-size:0.55rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--white-dim);width:90px;flex-shrink:0;">Contagion</span>
+                <div style="flex:1;height:5px;background:rgba(26,23,20,0.1);border-radius:2px;overflow:hidden;">
+                  <div style="height:100%;width:55%;background:var(--amber);border-radius:2px;"></div>
+                </div>
+                <span style="font-family:var(--mono);font-size:0.55rem;color:var(--white-dim);width:30px;text-align:right;">55%</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:0.8rem;">
+                <span style="font-family:var(--mono);font-size:0.55rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--white-dim);width:90px;flex-shrink:0;">FX Pressure</span>
+                <div style="flex:1;height:5px;background:rgba(26,23,20,0.1);border-radius:2px;overflow:hidden;">
+                  <div style="height:100%;width:41%;background:#27ae60;border-radius:2px;"></div>
+                </div>
+                <span style="font-family:var(--mono);font-size:0.55rem;color:var(--white-dim);width:30px;text-align:right;">41%</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:0.8rem;">
+                <span style="font-family:var(--mono);font-size:0.55rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--white-dim);width:90px;flex-shrink:0;">Sovereign</span>
+                <div style="flex:1;height:5px;background:rgba(26,23,20,0.1);border-radius:2px;overflow:hidden;">
+                  <div style="height:100%;width:71%;background:#c0392b;border-radius:2px;"></div>
+                </div>
+                <span style="font-family:var(--mono);font-size:0.55rem;color:var(--white-dim);width:30px;text-align:right;">71%</span>
+              </div>
+            </div>
+            <div style="margin-top:1.2rem;padding-top:1rem;border-top:1px solid rgba(26,23,20,0.08);font-family:var(--mono);font-size:0.55rem;letter-spacing:0.12em;color:var(--white-dim);text-align:center;">
+              ● MONITORING 50+ MACRO INDICATORS &nbsp;·&nbsp; UPDATED DAILY
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- BlackIronTimes -->
+      <div class="sub-card" data-entity="times">
+        <span class="sub-card-bg-num">01</span>
+        <div class="sub-card-type">Media &amp; Intelligence</div>
+        <div class="sub-card-name">BLACKIRON TIMES</div>
+        <div class="sub-card-tagline">Financial news and intelligence for institutional audiences</div>
+        <p class="sub-card-desc">BlackIronTimes.com is the Group's flagship media platform delivering AI-powered financial news, market intelligence, and geopolitical analysis targeting US and Gulf institutional readers. Built on Next.js with Vercel infrastructure, Cloudflare R2, ISR optimization, and custom SEO/schema implementation.</p>
+        <div class="sub-card-stack">
+          <span class="stack-chip">Next.js</span>
+          <span class="stack-chip">Vercel</span>
+          <span class="stack-chip">Cloudflare R2</span>
+          <span class="stack-chip">ISR</span>
+          <span class="stack-chip">AI Content</span>
+        </div>
+        <a class="sub-card-link" href="https://blackirontimes.com" target="_blank">Visit BlackIronTimes.com →</a>
+      </div>
+
+      <!-- Gulf SWF Intelligence -->
+      <div class="sub-card" data-entity="swf">
+        <span class="sub-card-bg-num">02</span>
+        <div class="sub-card-type">Data Product</div>
+        <div class="sub-card-name">GULF SWF INTELLIGENCE</div>
+        <div class="sub-card-tagline">Sovereign wealth fund filing surveillance at institutional grade</div>
+        <p class="sub-card-desc">Proprietary real-time surveillance of SEC EDGAR 13D/13G filings from ADIA, PIF, QIA, Mubadala, and ADQ. A full-stack pipeline combining Bright Data MCP, Gemini inference, MongoDB Atlas, FastAPI backend, and a Next.js frontend — delivering actionable sovereign capital flow intelligence.</p>
+        <div class="sub-card-stack">
+          <span class="stack-chip">SEC EDGAR</span>
+          <span class="stack-chip">Bright Data MCP</span>
+          <span class="stack-chip">MongoDB Atlas</span>
+          <span class="stack-chip">Gemini</span>
+          <span class="stack-chip">FastAPI</span>
+        </div>
+        <a class="sub-card-link" href="https://github.com/zulfiqaralimir/gulf-swf-agent" target="_blank">View on GitHub →</a>
+      </div>
+
+      <!-- AI Research & LLM Training -->
+      <div class="sub-card" data-entity="llm">
+        <span class="sub-card-bg-num">03</span>
+        <div class="sub-card-type">Research Division</div>
+        <div class="sub-card-name">AI RESEARCH &amp; LLM TRAINING</div>
+        <div class="sub-card-tagline">Frontier model evaluation and STEM-grade training data engineering</div>
+        <p class="sub-card-desc">The Group's research arm designs arXiv-level STEM problem sets, evaluates large language models, and engineers high-quality training data for frontier AI systems. Operational through Turing Inc. (Palo Alto) and in-house research. Published SSRN work on multi-agent AI systemic risk and governance.</p>
+        <div class="sub-card-stack">
+          <span class="stack-chip">arXiv</span>
+          <span class="stack-chip">STEM P&S</span>
+          <span class="stack-chip">Turing Inc.</span>
+          <span class="stack-chip">SSRN</span>
+          <span class="stack-chip">Python</span>
+        </div>
+        <a class="sub-card-link" href="#" onclick="showPage('services')">Explore Research →</a>
+      </div>
+
+      <!-- Quantitative Finance Division -->
+      <div class="sub-card" data-entity="quant">
+        <span class="sub-card-bg-num">04</span>
+        <div class="sub-card-type">Quant Division</div>
+        <div class="sub-card-name">QUANTITATIVE FINANCE</div>
+        <div class="sub-card-tagline">Institutional-grade modeling for PSX, Gulf, and global markets</div>
+        <p class="sub-card-desc">Econometric modeling, stochastic programming, and portfolio optimization targeting Pakistan Stock Exchange and Gulf capital markets. Frameworks include CVXPY, PyTorch, and bespoke MINOS/DECIS solver implementations. Policy research published in JoDPRP and presented at SPRC and ICPAM conferences.</p>
+        <div class="sub-card-stack">
+          <span class="stack-chip">CVXPY</span>
+          <span class="stack-chip">PyTorch</span>
+          <span class="stack-chip">PSX</span>
+          <span class="stack-chip">Stochastic</span>
+          <span class="stack-chip">JoDPRP</span>
+        </div>
+        <a class="sub-card-link" href="#" onclick="showPage('services')">View Capabilities →</a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- PARENT PROFILE -->
+  <div class="parent-section">
+    <div class="parent-inner">
+      <div class="parent-left">
+        <p class="pl-label">// Parent Company Profile</p>
+        <h2>Privately Held.<br>Research Driven.<br><span style="color:var(--amber);font-family:var(--serif);font-style:italic;">Sovereign.</span></h2>
+        <p>Black Iron Quantum AI (Pvt) Ltd is the controlling parent entity of the Group, incorporated in Islamabad, Pakistan. It provides shared research infrastructure, intellectual property, and strategic direction across all subsidiary operations.</p>
+        <p>As a privately held firm with no external venture capital, the Group maintains full alignment with client and research interests — free from short-term investor pressure.</p>
+        <a class="btn-ghost" href="#" onclick="showPage('about')" style="margin-top:1rem;display:inline-block;">Full Group Profile →</a>
+      </div>
+      <div class="parent-right">
+        <div class="founder-card">
+          <div class="founder-name">Dr. Zulfiqar Ali</div>
+          <div class="founder-creds">PhD Econometrics · Founder & Group Chief Researcher</div>
+          <p class="founder-bio">PhD in Econometrics (PIDE). Research Analyst & LLM Trainer at Turing Inc., Palo Alto. National AI FinTech Winner 2025. Policy advisor to Pakistan's Ministry of Commerce on STPF 2025–30. Author of SSRN research on multi-agent AI systemic risk and Gulf SWF portfolio repositioning.</p>
+          <div class="badge-row">
+            <span class="badge">PhD Econometrics</span>
+            
+            <span class="badge">Turing Inc.</span>
+            <span class="badge">LangChain</span>
+            <span class="badge">Claude API</span>
+            <span class="badge">PyTorch</span>
+          </div>
+        </div>
+        <div class="affiliations">
+          <p class="affiliations-label">Group Affiliations</p>
+          <ul class="aff-list">
+            <li>Turing Inc. — Research Analyst & LLM Trainer, Palo Alto</li>
+            <li>PIDE — PhD Econometrics, Islamabad</li>
+            
+            <li>Pakistan Ministry of Commerce — STPF 2025–30 Advisor</li>
+            <li>SPRC · JoDPRP · ICPAM — Research & Publication</li>
+            <li>National AI FinTech Winner 2025</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /home -->
+
+<!-- ══════════ ABOUT PAGE ══════════ -->
+<div id="about" class="page">
+  <div class="about-hero">
+    <p class="sec-eyebrow">Group Identity</p>
+    <h1>Built on <em>Iron</em><br>Logic &amp; Quantum<br>Precision</h1>
+    <p>Black Iron Quantum AI (Pvt) Ltd is a Islamabad-based private holding company and quantitative AI research group operating at the intersection of frontier machine learning, financial econometrics, and institutional intelligence. We engineer research-grade insights and production-ready AI infrastructure for institutional clients, policy bodies, and financial market participants across Pakistan, the Gulf, and the United States.</p>
+  </div>
+  <div class="pillars-grid">
+    <div class="pillar-card">
+      <div class="pillar-n">01</div>
+      <div class="pillar-h">Research Integrity</div>
+      <p class="pillar-p">Every system is grounded in peer-reviewed methodology — from stochastic programming and Bayesian inference to transformer architectures and multi-agent coordination theory.</p>
+    </div>
+    <div class="pillar-card">
+      <div class="pillar-n">02</div>
+      <div class="pillar-h">Institutional Precision</div>
+      <p class="pillar-p">We build for the standards of sovereign wealth funds, central banks, and institutional asset managers — not retail approximations or proof-of-concept demos.</p>
+    </div>
+    <div class="pillar-card">
+      <div class="pillar-n">03</div>
+      <div class="pillar-h">Sovereign Independence</div>
+      <p class="pillar-p">A privately held Group with no external venture capital — ensuring complete alignment with client and research interests above all market pressures.</p>
+    </div>
+    <div class="pillar-card">
+      <div class="pillar-n">04</div>
+      <div class="pillar-h">Cross-Domain Synthesis</div>
+      <p class="pillar-p">The Group's unique edge is the synthesis of econometrics, AI engineering, and policy intelligence — a combination rarely found under one institutional roof.</p>
+    </div>
+    <div class="pillar-card">
+      <div class="pillar-n">05</div>
+      <div class="pillar-h">Pakistan–Gulf–US Nexus</div>
+      <p class="pillar-p">Strategic positioning across three capital markets gives the Group a distinctive vantage point on sovereign capital flows, emerging market dynamics, and frontier AI deployment.</p>
+    </div>
+    <div class="pillar-card">
+      <div class="pillar-n">06</div>
+      <div class="pillar-h">Production Delivery</div>
+      <p class="pillar-p">Research is not an end in itself. Every engagement targets deployable infrastructure: live pipelines, agentic systems, and published findings that move markets and inform policy.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ SERVICES PAGE ══════════ -->
+<div id="services" class="page">
+  <div class="svcs-hero">
+    <p class="sec-eyebrow" style="text-align:center;">Group Capabilities</p>
+    <h1>Intelligence <em>Systems</em><br>for Serious Operators</h1>
+    <p>From sovereign filing surveillance to multi-agent portfolio orchestration — the Group engineers quantitative AI infrastructure that institutional clients depend on.</p>
+  </div>
+  <div class="svcs-grid">
+    <div class="svc-card">
+      <span class="svc-n">01</span>
+      <span class="svc-icon">⚙️</span>
+      <div class="svc-h">LLM Agent Systems</div>
+      <p class="svc-p">Multi-agent AI architecture design and deployment for financial intelligence, document analysis, and workflow automation. Built on LangChain, LangGraph, Claude API, and CrewAI.</p>
+      <div class="svc-chips"><span class="chip">LangChain</span><span class="chip">CrewAI</span><span class="chip">Claude API</span><span class="chip">FastAPI</span></div>
+    </div>
+    <div class="svc-card">
+      <span class="svc-n">02</span>
+      <span class="svc-icon">📊</span>
+      <div class="svc-h">Quantitative Research</div>
+      <p class="svc-p">Institutional-grade econometric modeling, stochastic programming, and portfolio optimization using CVXPY, PyTorch, and bespoke mathematical frameworks.</p>
+      <div class="svc-chips"><span class="chip">CVXPY</span><span class="chip">PyTorch</span><span class="chip">PSX</span><span class="chip">Stochastic</span></div>
+    </div>
+    <div class="svc-card">
+      <span class="svc-n">03</span>
+      <span class="svc-icon">🏛️</span>
+      <div class="svc-h">Gulf SWF Intelligence</div>
+      <p class="svc-p">Real-time SEC EDGAR 13D/13G surveillance from ADIA, PIF, QIA, Mubadala, and ADQ. Live pipelines with MongoDB Atlas, Bright Data MCP, and Gemini inference.</p>
+      <div class="svc-chips"><span class="chip">SEC EDGAR</span><span class="chip">MongoDB</span><span class="chip">Bright Data</span><span class="chip">Gemini</span></div>
+    </div>
+    <div class="svc-card">
+      <span class="svc-n">04</span>
+      <span class="svc-icon">📰</span>
+      <div class="svc-h">Financial Intelligence Media</div>
+      <p class="svc-p">BlackIronTimes.com — AI-powered financial news and intelligence platform targeting US and Gulf institutional audiences with ISR-optimized Next.js infrastructure.</p>
+      <div class="svc-chips"><span class="chip">BlackIronTimes</span><span class="chip">Vercel</span><span class="chip">Cloudflare</span><span class="chip">Next.js</span></div>
+    </div>
+    <div class="svc-card">
+      <span class="svc-n">05</span>
+      <span class="svc-icon">🏛️</span>
+      <div class="svc-h">Policy Analytics &amp; Advisory</div>
+      <p class="svc-p">Evidence-based policy research for government and multilateral bodies. Published advisory work with Pakistan's Ministry of Commerce, SPRC, and peer-reviewed journals.</p>
+      <div class="svc-chips"><span class="chip">STPF 2025–30</span><span class="chip">SPRC</span><span class="chip">JoDPRP</span><span class="chip">SSRN</span></div>
+    </div>
+    <div class="svc-card">
+      <span class="svc-n">06</span>
+      <span class="svc-icon">🔬</span>
+      <div class="svc-h">AI Research &amp; LLM Training</div>
+      <p class="svc-p">STEM-level research question design, model evaluation, and specialized LLM training data engineering. Proven delivery on Probability, Statistics, and advanced mathematical problem sets.</p>
+      <div class="svc-chips"><span class="chip">STEM</span><span class="chip">LLM Training</span><span class="chip">Turing Inc.</span><span class="chip">arXiv</span></div>
+    </div>
+  </div>
+  <div class="svcs-cta">
+    <div class="cta-strip">
+      <div>
+        <h3>Ready to Build Institutional-Grade AI?</h3>
+        <p>Engagements accepted for research, systems development, and advisory mandates</p>
+      </div>
+      <a class="btn-gold" href="#" onclick="showPage('contact')">Start a Conversation</a>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ CONTACT PAGE ══════════ -->
+<div id="contact" class="page">
+  <div class="contact-layout">
+    <div class="contact-left">
+      <p class="sec-eyebrow">Group Inquiries</p>
+      <h1>LET'S BUILD<br><em>Something</em><br>FORMIDABLE</h1>
+      <p>Whether you represent an institutional fund, a policy body, or a technology organization seeking frontier AI capabilities — we are open to selective engagements, research partnerships, and advisory mandates.</p>
+      <div class="ci-list">
+        <div class="ci">
+          <div class="ci-icon">✉</div>
+          <div><div class="ci-lbl">Email</div><div class="ci-val">manager.equity.finance@gmail.com</div></div>
+        </div>
+        <div class="ci">
+          <div class="ci-icon">📍</div>
+          <div><div class="ci-lbl">Headquarters</div><div class="ci-val">Islamabad, Pakistan</div></div>
+        </div>
+        <div class="ci">
+          <div class="ci-icon">⌨</div>
+          <div><div class="ci-lbl">GitHub</div><div class="ci-val">github.com/zulfiqaralimir</div></div>
+        </div>
+        <div class="ci">
+          <div class="ci-icon">🌐</div>
+          <div><div class="ci-lbl">Media Platform</div><div class="ci-val">BlackIronTimes.com</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="contact-form-box">
+      <div id="form-body">
+        <div class="f-row">
+          <div class="f-group"><label>First Name</label><input type="text" placeholder="Amir"></div>
+          <div class="f-group"><label>Last Name</label><input type="text" placeholder="Khan"></div>
+        </div>
+        <div class="f-group"><label>Organization</label><input type="text" placeholder="Institution / Fund / Ministry"></div>
+        <div class="f-group"><label>Email Address</label><input type="email" placeholder="your@institution.com"></div>
+        <div class="f-group">
+          <label>Engagement Type</label>
+          <select>
+            <option value="">Select engagement type…</option>
+            <option>Research Partnership</option>
+            <option>LLM Agent Development</option>
+            <option>Gulf SWF Intelligence Access</option>
+            <option>Policy Advisory</option>
+            <option>Quantitative Modeling</option>
+            <option>Media / BlackIronTimes</option>
+            <option>Speaking / Conference</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="f-group">
+          <label>Which Group Entity?</label>
+          <select>
+            <option value="">Select entity…</option>
+            <option>Black Iron Quantum AI (Parent)</option>
+            <option>ZULFIQUODE — Crisis Prediction</option>
+            <option>BlackIronTimes.com</option>
+            <option>Gulf SWF Intelligence</option>
+            <option>AI Research & LLM Training Division</option>
+            <option>Quantitative Finance Division</option>
+          </select>
+        </div>
+        <div class="f-group"><label>Message</label><textarea placeholder="Describe your project or inquiry…"></textarea></div>
+        <button class="f-submit" onclick="submitForm()">Transmit Inquiry →</button>
+      </div>
+      <div class="f-success" id="form-success">
+        <div class="f-success-icon">◈</div>
+        <h4>Inquiry Received</h4>
+        <p>We will respond within 48 business hours</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="footer-brand-name">BLACK IRON <span>QUANTUM</span> AI</div>
+      <div class="footer-brand-sub">Group · Private Limited · Islamabad, Pakistan</div>
+      <p class="footer-desc">A private holding company architecting frontier AI intelligence, quantitative research, and institutional financial infrastructure across Pakistan, the Gulf, and the United States.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Group</h5>
+      <ul>
+        <li><a onclick="showPage('home')">Group Home</a></li>
+        <li><a onclick="showPage('about')">About</a></li>
+        <li><a onclick="showPage('services')">Services</a></li>
+        <li><a onclick="showPage('contact')">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Subsidiaries</h5>
+      <ul>
+        <li><a onclick="showPage('home')">ZULFIQUODE ★</a></li>
+        <li><a href="https://blackirontimes.com" target="_blank">BlackIronTimes.com</a></li>
+        <li><a>Gulf SWF Intelligence</a></li>
+        <li><a>AI Research Division</a></li>
+        <li><a>Quantitative Finance</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Presence</h5>
+      <ul>
+        <li><a href="https://github.com/zulfiqaralimir" target="_blank">GitHub</a></li>
+        <li><a>SSRN Working Papers</a></li>
+        <li><a>Upwork Profile</a></li>
+        <li><a>Hugging Face Spaces</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Black Iron Quantum AI (Pvt) Ltd · All Rights Reserved</p>
+    <span>Registered · Islamabad, Pakistan · National AI FinTech Winner 2025</span>
+  </div>
+</footer>
+
+<script>
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  const pg = document.getElementById(id);
+  pg.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  closeMenu();
+}
+function submitForm() {
+  document.getElementById('form-body').style.display = 'none';
+  document.getElementById('form-success').style.display = 'block';
+}
+function toggleMenu() {
+  document.getElementById('mobile-menu').classList.toggle('open');
+}
+function closeMenu() {
+  document.getElementById('mobile-menu').classList.remove('open');
+}
+</script>
+</body>
+</html>
