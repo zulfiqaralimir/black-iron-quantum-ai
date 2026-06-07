@@ -1,0 +1,1209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FERROQUANT Capital — Quantitative Hedge Fund</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Barlow+Condensed:wght@400;600;700;800&family=Libre+Baskerville:ital@1&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #050d1a;
+  --navy-mid: #0a1628;
+  --navy-card: #0e1e35;
+  --navy-light: #142540;
+  --navy-border: #1a3055;
+  --green: #00ff88;
+  --green-dim: #00cc6a;
+  --cyan: #00d4ff;
+  --red: #ff4444;
+  --gold: #ffd700;
+  --white: #e8f0f8;
+  --white-dim: #7a90a8;
+  --mono: 'Space Mono', monospace;
+  --display: 'Barlow Condensed', sans-serif;
+  --serif: 'Libre Baskerville', serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--navy);
+  color: var(--white);
+  font-family: var(--mono);
+  font-weight: 400;
+  overflow-x: hidden;
+  cursor: crosshair;
+}
+
+/* SCANLINE OVERLAY */
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: 9998; pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0,255,136,0.015) 2px,
+    rgba(0,255,136,0.015) 4px
+  );
+}
+
+/* NOISE OVERLAY */
+body::after {
+  content: '';
+  position: fixed; inset: 0; z-index: 9997; pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.3'/%3E%3C/svg%3E");
+  opacity: 0.06;
+}
+
+/* ── PAGES ── */
+.page { display: none; }
+.page.active { display: block; animation: pgIn 0.3s ease both; }
+@keyframes pgIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 500;
+  height: 52px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 2rem;
+  background: rgba(5,13,26,0.97);
+  border-bottom: 1px solid var(--navy-border);
+  backdrop-filter: blur(12px);
+}
+
+.nav-left { display: flex; align-items: center; gap: 1rem; }
+
+.fq-logo {
+  width: 28px; height: 28px;
+  border: 1px solid var(--green);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--display); font-size: 0.75rem; font-weight: 800;
+  color: var(--green); letter-spacing: 0.05em; flex-shrink: 0;
+}
+
+.nav-brand {
+  font-family: var(--display); font-size: 0.95rem; font-weight: 700;
+  letter-spacing: 0.12em; color: var(--white); text-transform: uppercase;
+}
+.nav-brand span { color: var(--green); }
+
+.nav-status {
+  display: flex; align-items: center; gap: 0.4rem;
+  font-size: 0.55rem; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--white-dim); margin-left: 0.5rem;
+}
+.status-dot {
+  width: 6px; height: 6px; border-radius: 50%; background: var(--green);
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse { 0%,100% { opacity: 1; box-shadow: 0 0 4px var(--green); } 50% { opacity: 0.5; box-shadow: 0 0 8px var(--green); } }
+
+.nav-center { display: flex; align-items: center; }
+.nav-links { display: flex; list-style: none; }
+.nav-links li { border-right: 1px solid var(--navy-border); }
+.nav-links li:first-child { border-left: 1px solid var(--navy-border); }
+.nav-links a {
+  display: block; padding: 0 1.1rem; line-height: 52px;
+  font-size: 0.62rem; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--white-dim); text-decoration: none; cursor: pointer;
+  transition: color 0.2s; position: relative;
+}
+.nav-links a::after {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
+  background: var(--green); transform: scaleX(0); transform-origin: center;
+  transition: transform 0.2s;
+}
+.nav-links a:hover, .nav-links a.active { color: var(--green); }
+.nav-links a.active::after { transform: scaleX(1); }
+
+.nav-right { display: flex; align-items: center; gap: 1.2rem; }
+.nav-clock { font-size: 0.6rem; letter-spacing: 0.14em; color: var(--cyan); }
+.btn-access {
+  font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--navy); background: var(--green);
+  border: none; padding: 0.45rem 1.1rem; cursor: crosshair;
+  transition: background 0.2s;
+}
+.btn-access:hover { background: var(--green-dim); }
+
+.ham { display: none; flex-direction: column; gap: 4px; cursor: pointer; }
+.ham span { display: block; width: 20px; height: 1.5px; background: var(--white); transition: all 0.3s; }
+
+.mobile-menu {
+  display: none; position: fixed; top: 52px; left: 0; right: 0;
+  background: rgba(5,13,26,0.98); border-bottom: 1px solid var(--navy-border);
+  flex-direction: column; z-index: 490; padding: 1rem 2rem; gap: 1rem;
+}
+.mobile-menu.open { display: flex; }
+.mobile-menu a { font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--white-dim); cursor: pointer; text-decoration: none; }
+.mobile-menu a:hover { color: var(--green); }
+
+/* ── TICKER ── */
+.ticker-band {
+  position: fixed; top: 52px; left: 0; right: 0; z-index: 490;
+  height: 28px; display: flex; align-items: center;
+  background: var(--navy-mid);
+  border-bottom: 1px solid var(--navy-border);
+  overflow: hidden;
+}
+.ticker-live {
+  flex-shrink: 0; padding: 0 0.8rem;
+  font-size: 0.52rem; letter-spacing: 0.2em; color: var(--navy);
+  background: var(--green); line-height: 28px; font-weight: 700;
+  border-right: 1px solid var(--navy-border);
+}
+.ticker-scroll { flex: 1; overflow: hidden; }
+.ticker-inner { display: flex; white-space: nowrap; animation: tick 42s linear infinite; }
+.tick-item {
+  font-size: 0.55rem; letter-spacing: 0.14em; text-transform: uppercase;
+  padding: 0 1.5rem; line-height: 28px; border-right: 1px solid var(--navy-border);
+  flex-shrink: 0;
+}
+.tick-up { color: var(--green); }
+.tick-dn { color: var(--red); }
+.tick-nu { color: var(--cyan); }
+.tick-dm { color: var(--white-dim); }
+@keyframes tick { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+/* ── PAGE CONTENT OFFSET ── */
+.page-body { margin-top: 80px; }
+
+/* ── SECTION COMMON ── */
+.sec-eyebrow {
+  font-size: 0.6rem; letter-spacing: 0.28em; text-transform: uppercase;
+  color: var(--green); margin-bottom: 0.7rem;
+}
+.sec-eyebrow::before { content: '// '; color: var(--white-dim); }
+.sec-title {
+  font-family: var(--display); font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 800; line-height: 1; color: var(--white); margin-bottom: 1rem;
+  text-transform: uppercase; letter-spacing: 0.04em;
+}
+.sec-title em { font-family: var(--serif); font-style: italic; color: var(--green); text-transform: none; }
+
+/* ── BUTTONS ── */
+.btn-green {
+  font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--navy); background: var(--green);
+  border: none; padding: 0.8rem 1.8rem; cursor: crosshair;
+  display: inline-block; text-decoration: none; transition: background 0.2s;
+}
+.btn-green:hover { background: var(--green-dim); }
+.btn-outline {
+  font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--green);
+  border: 1px solid var(--green); padding: 0.8rem 1.8rem; cursor: crosshair;
+  display: inline-block; text-decoration: none; background: transparent;
+  transition: all 0.2s;
+}
+.btn-outline:hover { background: rgba(0,255,136,0.08); }
+
+/* ─────────────────────────────────────
+   HOME PAGE
+───────────────────────────────────── */
+.home-hero {
+  min-height: calc(100vh - 80px);
+  display: grid; grid-template-columns: 1fr 420px; gap: 3rem;
+  align-items: center; padding: 4rem 3rem;
+  max-width: 1280px; margin: 0 auto; position: relative;
+}
+
+/* dot grid bg */
+.home-hero::before {
+  content: '';
+  position: fixed; inset: 0; z-index: -1; pointer-events: none;
+  background-image: radial-gradient(circle, rgba(0,255,136,0.08) 1px, transparent 1px);
+  background-size: 36px 36px;
+  animation: dotshift 20s linear infinite;
+}
+@keyframes dotshift { to { background-position: 36px 36px; } }
+
+.hero-eyebrow {
+  font-size: 0.6rem; letter-spacing: 0.22em; color: var(--green);
+  margin-bottom: 1.5rem; text-transform: uppercase;
+}
+.hero-eyebrow::before { content: '> '; }
+
+.hero-headline {
+  font-family: var(--display); font-weight: 800;
+  font-size: clamp(4rem, 8vw, 7rem); line-height: 0.88;
+  text-transform: uppercase; letter-spacing: 0.02em;
+  margin-bottom: 2rem;
+}
+.hl-dim { color: rgba(232,240,248,0.25); }
+.hl-green { color: var(--green); }
+.hl-white { color: var(--white); }
+
+.hero-sub {
+  font-size: 0.85rem; line-height: 1.8; color: var(--white-dim);
+  border-left: 3px solid var(--green); padding-left: 1rem;
+  max-width: 480px; margin-bottom: 2.5rem;
+}
+
+.hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+/* TERMINAL PANEL */
+.terminal-panel {
+  background: var(--navy-card);
+  border: 1px solid var(--navy-border);
+  position: relative; overflow: hidden;
+}
+.terminal-header {
+  background: var(--navy-light); border-bottom: 1px solid var(--navy-border);
+  padding: 0.6rem 1rem; display: flex; align-items: center; gap: 0.5rem;
+}
+.term-dots { display: flex; gap: 0.35rem; }
+.term-dot { width: 10px; height: 10px; border-radius: 50%; }
+.td-red { background: #ff5f57; }
+.td-yel { background: #ffbd2e; }
+.td-grn { background: #28ca41; }
+.term-title {
+  font-size: 0.58rem; letter-spacing: 0.22em; color: var(--white-dim);
+  text-transform: uppercase; margin-left: 0.5rem;
+}
+.terminal-body { padding: 1.2rem; font-size: 0.7rem; line-height: 1.6; }
+.term-comment { color: var(--white-dim); margin-bottom: 0.6rem; margin-top: 0.9rem; }
+.term-comment:first-child { margin-top: 0; }
+.term-row { display: flex; gap: 0.5rem; margin-bottom: 0.25rem; }
+.term-key { color: var(--white-dim); min-width: 100px; flex-shrink: 0; }
+.term-val { color: var(--cyan); }
+.term-val-g { color: var(--green); }
+
+.term-bar-row { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.3rem; }
+.term-bar-label { color: var(--white-dim); width: 48px; font-size: 0.62rem; flex-shrink: 0; }
+.term-bar-track { flex: 1; height: 8px; background: var(--navy-light); position: relative; }
+.term-bar-fill { height: 100%; transition: width 1.2s ease; }
+.term-bar-pct { font-size: 0.62rem; width: 52px; text-align: right; flex-shrink: 0; }
+.bar-g { background: var(--green); }
+.bar-r { background: var(--red); }
+
+.term-metric-row { display: flex; gap: 0.5rem; margin-bottom: 0.25rem; }
+.term-metric-key { color: var(--white-dim); min-width: 120px; }
+.term-metric-val-g { color: var(--green); }
+.term-metric-val-r { color: var(--red); }
+.term-metric-val-c { color: var(--cyan); }
+
+.term-footer {
+  border-top: 1px solid var(--navy-border); padding: 0.6rem 1.2rem;
+  font-size: 0.55rem; color: var(--white-dim); letter-spacing: 0.1em;
+}
+.cursor-blink {
+  display: inline-block; width: 8px; height: 12px;
+  background: var(--green); margin-left: 4px; vertical-align: middle;
+  animation: blink 1s step-end infinite;
+}
+@keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0; } }
+
+/* METRICS STRIP */
+.metrics-strip {
+  background: var(--navy-mid); border-top: 1px solid var(--navy-border);
+  border-bottom: 1px solid var(--navy-border);
+}
+.metrics-inner {
+  max-width: 1280px; margin: 0 auto; padding: 0;
+  display: grid; grid-template-columns: repeat(5, 1fr);
+}
+.metric-cell {
+  padding: 1.5rem 1.8rem; border-right: 1px solid var(--navy-border);
+}
+.metric-cell:last-child { border-right: none; }
+.metric-label { font-size: 0.55rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--white-dim); margin-bottom: 0.4rem; }
+.metric-value { font-family: var(--display); font-size: 1.6rem; font-weight: 700; color: var(--green); line-height: 1; margin-bottom: 0.25rem; }
+.metric-sub { font-size: 0.52rem; color: var(--white-dim); letter-spacing: 0.1em; }
+
+/* ABOUT STRIP */
+.about-strip {
+  max-width: 1280px; margin: 0 auto;
+  padding: 5rem 3rem;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start;
+}
+.about-left p { font-size: 0.88rem; color: var(--white-dim); line-height: 1.8; margin-bottom: 1rem; }
+.about-left .btn-outline { margin-top: 1rem; }
+.fact-cards { display: flex; flex-direction: column; gap: 1rem; }
+.fact-card {
+  background: var(--navy-card); border: 1px solid var(--navy-border);
+  padding: 1.2rem 1.5rem; display: flex; align-items: center; gap: 1rem;
+  transition: border-color 0.2s;
+}
+.fact-card:hover { border-color: var(--green); }
+.fact-icon { font-size: 1.1rem; flex-shrink: 0; color: var(--green); }
+.fact-title { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--white); margin-bottom: 0.2rem; }
+.fact-sub { font-size: 0.62rem; color: var(--white-dim); }
+
+/* ─────────────────────────────────────
+   STRATEGIES PAGE
+───────────────────────────────────── */
+.strategies-hero {
+  max-width: 1280px; margin: 0 auto;
+  padding: 4rem 3rem 3rem;
+}
+.strategies-grid {
+  max-width: 1280px; margin: 0 auto;
+  padding: 0 3rem 5rem;
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px;
+  background: var(--navy-border);
+}
+.strategy-card {
+  background: var(--navy-card); padding: 2.5rem;
+  position: relative; overflow: hidden;
+  display: flex; flex-direction: column;
+  transition: background 0.3s;
+}
+.strategy-card:hover { background: var(--navy-light); }
+.strategy-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: var(--card-accent, var(--green));
+  transform: scaleX(0); transform-origin: left; transition: transform 0.4s;
+}
+.strategy-card:hover::before { transform: scaleX(1); }
+.strategy-card[data-s="vol"]    { --card-accent: var(--green); }
+.strategy-card[data-s="macro"]  { --card-accent: var(--cyan); }
+.strategy-card[data-s="port"]   { --card-accent: var(--gold); }
+.strategy-card[data-s="crisis"] { --card-accent: var(--red); }
+
+.strat-bg-num {
+  position: absolute; right: 1.5rem; top: 0.5rem;
+  font-family: var(--display); font-size: 7rem; font-weight: 800; line-height: 1;
+  color: rgba(232,240,248,0.03); pointer-events: none;
+}
+.strat-badge {
+  font-size: 0.52rem; letter-spacing: 0.22em; text-transform: uppercase;
+  padding: 0.2rem 0.65rem; border: 1px solid; display: inline-block;
+  margin-bottom: 1.2rem; width: fit-content;
+}
+.strategy-card[data-s="vol"]    .strat-badge { color: var(--green); border-color: rgba(0,255,136,0.35); }
+.strategy-card[data-s="macro"]  .strat-badge { color: var(--cyan);  border-color: rgba(0,212,255,0.35); }
+.strategy-card[data-s="port"]   .strat-badge { color: var(--gold);  border-color: rgba(255,215,0,0.35); }
+.strategy-card[data-s="crisis"] .strat-badge { color: var(--red);   border-color: rgba(255,68,68,0.35); }
+
+.strat-name {
+  font-family: var(--display); font-size: clamp(1.8rem, 3vw, 2.6rem);
+  font-weight: 800; letter-spacing: 0.04em; color: var(--white);
+  line-height: 1; margin-bottom: 0.5rem; text-transform: uppercase;
+}
+.strat-tagline { font-family: var(--serif); font-style: italic; font-size: 0.88rem; color: var(--white-dim); margin-bottom: 1.2rem; }
+.strat-desc { font-size: 0.8rem; color: var(--white-dim); line-height: 1.75; margin-bottom: 1.5rem; flex-grow: 1; }
+
+.strat-metrics {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 1px; background: var(--navy-border); margin-bottom: 1.5rem;
+}
+.strat-metric {
+  background: var(--navy-mid); padding: 0.7rem 0.8rem; text-align: center;
+}
+.sm-val { font-family: var(--display); font-size: 1.1rem; font-weight: 700; line-height: 1; margin-bottom: 0.2rem; }
+.strategy-card[data-s="vol"]    .sm-val { color: var(--green); }
+.strategy-card[data-s="macro"]  .sm-val { color: var(--cyan); }
+.strategy-card[data-s="port"]   .sm-val { color: var(--gold); }
+.strategy-card[data-s="crisis"] .sm-val { color: var(--red); }
+.sm-val.red { color: var(--red) !important; }
+.sm-val.grn { color: var(--green) !important; }
+.sm-label { font-size: 0.5rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--white-dim); }
+
+.strat-chips { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+.chip {
+  font-size: 0.52rem; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--white-dim); border: 1px solid var(--navy-border);
+  padding: 0.18rem 0.5rem;
+}
+
+/* ─────────────────────────────────────
+   TEAM PAGE
+───────────────────────────────────── */
+.team-hero { max-width: 1280px; margin: 0 auto; padding: 4rem 3rem 3rem; }
+.team-grid {
+  max-width: 1280px; margin: 0 auto; padding: 0 3rem 5rem;
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px;
+  background: var(--navy-border);
+}
+.team-card {
+  background: var(--navy-card); padding: 2.5rem 2rem;
+  position: relative; overflow: hidden; transition: background 0.3s;
+}
+.team-card:hover { background: var(--navy-light); }
+.team-card.lead::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: var(--green);
+}
+.team-avatar {
+  width: 72px; height: 72px;
+  border: 2px solid var(--green);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--display); font-size: 1.4rem; font-weight: 700;
+  color: var(--green); margin-bottom: 1.2rem;
+  background: rgba(0,255,136,0.05);
+}
+.team-card:not(.lead) .team-avatar { border-color: var(--navy-border); color: var(--white-dim); }
+.team-role {
+  font-size: 0.52rem; letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--green); border: 1px solid rgba(0,255,136,0.35);
+  padding: 0.2rem 0.65rem; display: inline-block; margin-bottom: 1rem;
+}
+.team-card:not(.lead) .team-role { color: var(--cyan); border-color: rgba(0,212,255,0.35); }
+.team-name {
+  font-family: var(--display); font-size: 1.5rem; font-weight: 700;
+  letter-spacing: 0.06em; color: var(--white); margin-bottom: 0.3rem; text-transform: uppercase;
+}
+.team-title { font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--white-dim); margin-bottom: 1rem; }
+.team-divider { width: 30px; height: 1px; background: rgba(0,255,136,0.3); margin: 0.8rem 0; }
+.team-bio { font-size: 0.78rem; color: var(--white-dim); line-height: 1.7; margin-bottom: 1.2rem; }
+.team-badges { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+.team-badge {
+  font-size: 0.5rem; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--cyan); border: 1px solid rgba(0,212,255,0.25); padding: 0.18rem 0.5rem;
+}
+
+/* ─────────────────────────────────────
+   INVESTORS PAGE
+───────────────────────────────────── */
+.investors-hero { max-width: 1280px; margin: 0 auto; padding: 4rem 3rem 2rem; }
+
+.disclaimer-box {
+  max-width: 1280px; margin: 0 auto 3rem; padding: 0 3rem;
+}
+.disclaimer-inner {
+  background: rgba(255,68,68,0.08); border: 1px solid rgba(255,68,68,0.35);
+  padding: 1.2rem 1.5rem; font-size: 0.72rem; color: rgba(255,68,68,0.9); line-height: 1.7;
+}
+.disclaimer-inner strong { font-weight: 700; letter-spacing: 0.1em; }
+
+.mandate-grid {
+  max-width: 1280px; margin: 0 auto; padding: 0 3rem 3rem;
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px;
+  background: var(--navy-border);
+}
+.mandate-card {
+  background: var(--navy-card); padding: 2rem 1.8rem; text-align: center;
+  transition: background 0.3s; border-top: 3px solid var(--navy-border);
+}
+.mandate-card:hover { background: var(--navy-light); border-top-color: var(--green); }
+.mandate-icon { font-size: 2rem; margin-bottom: 1rem; display: block; }
+.mandate-name { font-family: var(--display); font-size: 1.2rem; font-weight: 700; color: var(--white); margin-bottom: 0.5rem; text-transform: uppercase; }
+.mandate-desc { font-size: 0.75rem; color: var(--white-dim); line-height: 1.7; }
+
+.fund-table {
+  max-width: 1280px; margin: 0 auto; padding: 0 3rem 5rem;
+}
+.fund-table h3 {
+  font-family: var(--display); font-size: 1.2rem; font-weight: 700;
+  color: var(--white); text-transform: uppercase; letter-spacing: 0.1em;
+  margin-bottom: 1rem; border-bottom: 1px solid var(--navy-border); padding-bottom: 0.8rem;
+}
+table {
+  width: 100%; border-collapse: collapse;
+  font-size: 0.75rem;
+}
+thead tr { background: var(--navy-light); border-bottom: 2px solid var(--navy-border); }
+thead th {
+  padding: 0.8rem 1.2rem; text-align: left;
+  font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--white-dim);
+}
+tbody tr { border-bottom: 1px solid var(--navy-border); transition: background 0.2s; }
+tbody tr:hover { background: var(--navy-card); }
+tbody td { padding: 0.9rem 1.2rem; color: var(--white-dim); }
+tbody td:first-child { color: var(--white); font-size: 0.7rem; letter-spacing: 0.1em; }
+.status-active { color: var(--green); font-size: 0.6rem; letter-spacing: 0.12em; }
+.status-cyan   { color: var(--cyan);  font-size: 0.6rem; letter-spacing: 0.12em; }
+
+/* ─────────────────────────────────────
+   CONTACT PAGE
+───────────────────────────────────── */
+.contact-layout {
+  max-width: 1280px; margin: 0 auto;
+  padding: 4rem 3rem 5rem;
+  display: grid; grid-template-columns: 1fr 1.3fr; gap: 5rem; align-items: start;
+}
+.contact-left h1 {
+  font-family: var(--display); font-size: clamp(2.5rem, 5vw, 4.5rem);
+  font-weight: 800; line-height: 0.9; text-transform: uppercase;
+  letter-spacing: 0.04em; color: var(--white); margin-bottom: 1.2rem;
+}
+.contact-left h1 em { font-family: var(--serif); font-style: italic; color: var(--green); text-transform: none; }
+.contact-left p { font-size: 0.82rem; color: var(--white-dim); line-height: 1.8; margin-bottom: 2.5rem; }
+
+.ci-list { display: flex; flex-direction: column; gap: 1rem; }
+.ci { display: flex; gap: 1rem; align-items: flex-start; }
+.ci-icon {
+  width: 34px; height: 34px; border: 1px solid var(--navy-border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.85rem; color: var(--green); flex-shrink: 0;
+}
+.ci-lbl { font-size: 0.52rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--white-dim); margin-bottom: 0.2rem; }
+.ci-val { font-size: 0.82rem; color: var(--white); }
+
+.contact-form-box {
+  background: var(--navy-card); border: 1px solid var(--navy-border);
+  padding: 2rem; position: relative;
+}
+.contact-form-box::before {
+  content: 'INVESTOR INQUIRY TERMINAL';
+  position: absolute; top: -0.55rem; left: 1.2rem;
+  font-size: 0.5rem; letter-spacing: 0.2em;
+  background: var(--navy-card); color: var(--green); padding: 0 0.5rem;
+}
+.f-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.f-group { margin-bottom: 1rem; }
+.f-group label { font-size: 0.55rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--white-dim); display: block; margin-bottom: 0.4rem; }
+.f-group input, .f-group select, .f-group textarea {
+  width: 100%; background: var(--navy-light); border: 1px solid var(--navy-border);
+  color: var(--white); font-family: var(--mono); font-size: 0.75rem;
+  padding: 0.65rem 0.9rem; outline: none; transition: border-color 0.2s;
+  appearance: none; cursor: crosshair;
+}
+.f-group input:focus, .f-group select:focus, .f-group textarea:focus { border-color: var(--green); }
+.f-group textarea { resize: vertical; min-height: 90px; }
+.f-group select option { background: var(--navy-card); color: var(--white); }
+.f-submit {
+  width: 100%; font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--navy); background: var(--green);
+  border: none; padding: 0.9rem; cursor: crosshair; transition: background 0.2s; margin-top: 0.2rem;
+}
+.f-submit:hover { background: var(--green-dim); }
+.f-success { display: none; text-align: center; padding: 2.5rem 1rem; }
+.f-success-icon { font-size: 2rem; color: var(--green); margin-bottom: 0.8rem; }
+.f-success h4 { font-family: var(--display); font-size: 1.8rem; font-weight: 700; color: var(--green); margin-bottom: 0.5rem; text-transform: uppercase; }
+.f-success p { font-size: 0.65rem; letter-spacing: 0.15em; color: var(--white-dim); }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--navy-mid);
+  border-top: 1px solid var(--navy-border);
+  padding: 3rem 3rem 1.5rem;
+}
+.footer-grid {
+  max-width: 1280px; margin: 0 auto;
+  display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem;
+  padding-bottom: 2rem; border-bottom: 1px solid var(--navy-border);
+}
+.footer-brand-name {
+  font-family: var(--display); font-size: 1rem; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase; color: var(--white); margin-bottom: 0.3rem;
+}
+.footer-brand-name span { color: var(--green); }
+.footer-tagline { font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--green); margin-bottom: 0.8rem; }
+.footer-desc { font-size: 0.75rem; color: var(--white-dim); line-height: 1.7; margin-bottom: 1rem; }
+.footer-parent { font-size: 0.6rem; color: var(--cyan); letter-spacing: 0.1em; cursor: pointer; }
+.footer-col h5 { font-size: 0.56rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--green); margin-bottom: 1rem; }
+.footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.55rem; }
+.footer-col ul a { font-size: 0.75rem; color: var(--white-dim); text-decoration: none; cursor: pointer; transition: color 0.2s; }
+.footer-col ul a:hover { color: var(--green); }
+.footer-bottom {
+  max-width: 1280px; margin: 0 auto; padding-top: 1.2rem;
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.8rem;
+}
+.footer-bottom p, .footer-bottom span { font-size: 0.54rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(122,144,168,0.5); }
+
+/* ── RESPONSIVE ── */
+@media(max-width: 1024px) {
+  .home-hero { grid-template-columns: 1fr; }
+  .terminal-panel { max-width: 100%; }
+  .about-strip { grid-template-columns: 1fr; gap: 3rem; }
+  .metrics-inner { grid-template-columns: repeat(3, 1fr); }
+  .metric-cell:nth-child(4), .metric-cell:nth-child(5) { border-top: 1px solid var(--navy-border); }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+}
+@media(max-width: 768px) {
+  nav { padding: 0 1rem; }
+  .nav-center, .nav-clock, .btn-access { display: none; }
+  .ham { display: flex; }
+  .home-hero { padding: 3rem 1.5rem; }
+  .strategies-grid, .team-grid, .mandate-grid { grid-template-columns: 1fr; }
+  .strategies-hero, .strategies-grid, .team-hero, .team-grid,
+  .investors-hero, .disclaimer-box, .mandate-grid, .fund-table,
+  .contact-layout, .about-strip { padding-left: 1.5rem; padding-right: 1.5rem; }
+  .contact-layout { grid-template-columns: 1fr; gap: 3rem; }
+  .f-row { grid-template-columns: 1fr; }
+  .metrics-inner { grid-template-columns: 1fr 1fr; }
+  .footer-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-left">
+    <div class="fq-logo">FQ</div>
+    <div class="nav-brand">FERRO<span>QUANT</span> CAPITAL</div>
+    <div class="nav-status">
+      <div class="status-dot"></div>
+      <span>Markets Open</span>
+    </div>
+  </div>
+
+  <div class="nav-center">
+    <ul class="nav-links">
+      <li><a onclick="showPage('home')" id="nav-home" class="active">Home</a></li>
+      <li><a onclick="showPage('strategies')" id="nav-strategies">Strategies</a></li>
+      <li><a onclick="showPage('team')" id="nav-team">Team</a></li>
+      <li><a onclick="showPage('investors')" id="nav-investors">Investors</a></li>
+      <li><a onclick="showPage('contact')" id="nav-contact">Contact</a></li>
+    </ul>
+  </div>
+
+  <div class="nav-right">
+    <div class="nav-clock" id="pkt-clock">PKT --:--:--</div>
+    <button class="btn-access" onclick="showPage('contact')">Request Access</button>
+  </div>
+
+  <div class="ham" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobile-menu">
+  <a onclick="showPage('home');closeMenu()">Home</a>
+  <a onclick="showPage('strategies');closeMenu()">Strategies</a>
+  <a onclick="showPage('team');closeMenu()">Team</a>
+  <a onclick="showPage('investors');closeMenu()">Investors</a>
+  <a onclick="showPage('contact');closeMenu()">Contact</a>
+</div>
+
+<!-- TICKER -->
+<div class="ticker-band">
+  <div class="ticker-live">LIVE</div>
+  <div class="ticker-scroll">
+    <div class="ticker-inner">
+      <div class="tick-item tick-up">KSE-100 ▲ 78,420 <span style="color:var(--green)">+1.24%</span></div>
+      <div class="tick-item tick-nu">IV-RV SPREAD <span style="color:var(--green)">+4.2 pts</span></div>
+      <div class="tick-item tick-dm">USD/PKR <span style="color:var(--cyan)">278.50</span></div>
+      <div class="tick-item tick-up">GOLD ▲ $2,318 <span style="color:var(--green)">+0.8%</span></div>
+      <div class="tick-item tick-dn">VIX ▼ 14.2 <span style="color:var(--red)">-2.1%</span></div>
+      <div class="tick-item tick-up">BRENT ▲ $84.6 <span style="color:var(--green)">+0.4%</span></div>
+      <div class="tick-item tick-nu">FQ CRISIS IDX <span style="color:var(--red)">68% ELEVATED</span></div>
+      <div class="tick-item tick-nu">SHARPE <span style="color:var(--green)">2.14</span></div>
+      <div class="tick-item tick-dm">AUM <span style="color:var(--cyan)">GROWTH STAGE</span></div>
+      <!-- duplicate for seamless loop -->
+      <div class="tick-item tick-up">KSE-100 ▲ 78,420 <span style="color:var(--green)">+1.24%</span></div>
+      <div class="tick-item tick-nu">IV-RV SPREAD <span style="color:var(--green)">+4.2 pts</span></div>
+      <div class="tick-item tick-dm">USD/PKR <span style="color:var(--cyan)">278.50</span></div>
+      <div class="tick-item tick-up">GOLD ▲ $2,318 <span style="color:var(--green)">+0.8%</span></div>
+      <div class="tick-item tick-dn">VIX ▼ 14.2 <span style="color:var(--red)">-2.1%</span></div>
+      <div class="tick-item tick-up">BRENT ▲ $84.6 <span style="color:var(--green)">+0.4%</span></div>
+      <div class="tick-item tick-nu">FQ CRISIS IDX <span style="color:var(--red)">68% ELEVATED</span></div>
+      <div class="tick-item tick-nu">SHARPE <span style="color:var(--green)">2.14</span></div>
+      <div class="tick-item tick-dm">AUM <span style="color:var(--cyan)">GROWTH STAGE</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ HOME ══════════ -->
+<div id="home" class="page active">
+  <div class="page-body">
+
+    <div class="home-hero">
+      <!-- LEFT COLUMN -->
+      <div>
+        <p class="hero-eyebrow">Quantitative Hedge Fund · Research Arm · Islamabad, Pakistan</p>
+        <h1 class="hero-headline">
+          <span class="hl-dim" style="display:block;">FERRO</span>
+          <span class="hl-green" style="display:block;">QUANT</span>
+          <span class="hl-white" style="display:block;">CAPITAL</span>
+        </h1>
+        <p class="hero-sub">Systematic quantitative strategies, volatility arbitrage, and institutional-grade portfolio construction — targeting PSX, Gulf, and global capital markets.</p>
+        <div class="hero-actions">
+          <button class="btn-green" onclick="showPage('strategies')">View Strategies</button>
+          <button class="btn-outline" onclick="showPage('investors')">Investor Portal</button>
+        </div>
+      </div>
+
+      <!-- RIGHT COLUMN — TERMINAL PANEL -->
+      <div class="terminal-panel">
+        <div class="terminal-header">
+          <div class="term-dots">
+            <div class="term-dot td-red"></div>
+            <div class="term-dot td-yel"></div>
+            <div class="term-dot td-grn"></div>
+          </div>
+          <div class="term-title">FQ TERMINAL v1.0</div>
+        </div>
+        <div class="terminal-body">
+          <div class="term-comment">// Fund Overview</div>
+          <div class="term-row"><span class="term-key">ENTITY</span><span class="term-val">FERROQUANT Capital</span></div>
+          <div class="term-row"><span class="term-key">TYPE</span><span class="term-val">Quant Hedge Fund + Research</span></div>
+          <div class="term-row"><span class="term-key">DOMICILE</span><span class="term-val">Islamabad, Pakistan</span></div>
+          <div class="term-row"><span class="term-key">STAGE</span><span class="term-val-g">Growth · Capital Raising</span></div>
+          <div class="term-row"><span class="term-key">PARENT</span><span class="term-val">Black Iron Quantum AI Group</span></div>
+
+          <div class="term-comment">// Strategy Performance (Simulated)</div>
+          <div class="term-bar-row">
+            <span class="term-bar-label">VOL</span>
+            <div class="term-bar-track"><div class="term-bar-fill bar-g" style="width:82%;"></div></div>
+            <span class="term-bar-pct tick-up">+18.4%</span>
+          </div>
+          <div class="term-bar-row">
+            <span class="term-bar-label">MACRO</span>
+            <div class="term-bar-track"><div class="term-bar-fill bar-g" style="width:60%;"></div></div>
+            <span class="term-bar-pct tick-up">+12.1%</span>
+          </div>
+          <div class="term-bar-row">
+            <span class="term-bar-label">PORT</span>
+            <div class="term-bar-track"><div class="term-bar-fill bar-g" style="width:70%;"></div></div>
+            <span class="term-bar-pct tick-up">+14.8%</span>
+          </div>
+          <div class="term-bar-row">
+            <span class="term-bar-label">CRISIS</span>
+            <div class="term-bar-track"><div class="term-bar-fill bar-r" style="width:15%;"></div></div>
+            <span class="term-bar-pct tick-dn">-3.2%</span>
+          </div>
+
+          <div class="term-comment">// Risk Metrics</div>
+          <div class="term-metric-row"><span class="term-metric-key">SHARPE RATIO</span><span class="term-metric-val-g">2.14</span></div>
+          <div class="term-metric-row"><span class="term-metric-key">MAX DRAWDOWN</span><span class="term-metric-val-r">-8.4%</span></div>
+          <div class="term-metric-row"><span class="term-metric-key">SORTINO</span><span class="term-metric-val-g">3.02</span></div>
+          <div class="term-metric-row"><span class="term-metric-key">VOL TARGET</span><span class="term-metric-val-c">12% ann.</span></div>
+        </div>
+        <div class="term-footer">
+          Simulated backtest results. Not financial advice.<span class="cursor-blink"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- METRICS STRIP -->
+    <div class="metrics-strip">
+      <div class="metrics-inner">
+        <div class="metric-cell">
+          <div class="metric-label">Strategies</div>
+          <div class="metric-value">4</div>
+          <div class="metric-sub">Systematic · Quant</div>
+        </div>
+        <div class="metric-cell">
+          <div class="metric-label">Simulated Sharpe</div>
+          <div class="metric-value">2.14</div>
+          <div class="metric-sub">Risk-adjusted return</div>
+        </div>
+        <div class="metric-cell">
+          <div class="metric-label">Markets Covered</div>
+          <div class="metric-value">3</div>
+          <div class="metric-sub">PSX · Gulf · Global</div>
+        </div>
+        <div class="metric-cell">
+          <div class="metric-label">IV-RV Spread</div>
+          <div class="metric-value" style="color:var(--cyan);">+4.2</div>
+          <div class="metric-sub">Vol arbitrage signal</div>
+        </div>
+        <div class="metric-cell">
+          <div class="metric-label">Group Entity</div>
+          <div class="metric-value" style="color:var(--white-dim);font-size:1.1rem;">BIQAI</div>
+          <div class="metric-sub">Black Iron Quantum AI</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ABOUT STRIP -->
+    <div class="about-strip">
+      <div class="about-left">
+        <p class="sec-eyebrow">About FERROQUANT</p>
+        <h2 class="sec-title">Iron Precision.<br><em>Quantum Edge.</em></h2>
+        <p>FERROQUANT Capital is the dedicated quantitative finance and hedge fund management arm of Black Iron Quantum AI Group. We develop and deploy systematic trading strategies engineered to institutional standards — combining PhD-grade econometric research with production-ready quant infrastructure.</p>
+        <p>Targeting Pakistan Stock Exchange, Gulf capital markets, and global volatility markets, FERROQUANT serves institutional investors, family offices, and high-net-worth mandates through rigorous, data-driven portfolio construction and systematic risk management.</p>
+        <button class="btn-outline" onclick="showPage('strategies')">Explore Strategies →</button>
+      </div>
+      <div class="fact-cards">
+        <div class="fact-card">
+          <span class="fact-icon">⚡</span>
+          <div>
+            <div class="fact-title">Volatility Arbitrage</div>
+            <div class="fact-sub">Systematic IV-RV spread harvesting across PSX and global vol markets</div>
+          </div>
+        </div>
+        <div class="fact-card">
+          <span class="fact-icon">◈</span>
+          <div>
+            <div class="fact-title">ZULFIQUODE Integration</div>
+            <div class="fact-sub">Crisis probability scores feeding systematic tail-risk hedging</div>
+          </div>
+        </div>
+        <div class="fact-card">
+          <span class="fact-icon">▸</span>
+          <div>
+            <div class="fact-title">PhD-Grade Research</div>
+            <div class="fact-sub">Econometric frameworks published in JoDPRP, SPRC, and SSRN</div>
+          </div>
+        </div>
+        <div class="fact-card">
+          <span class="fact-icon">◻</span>
+          <div>
+            <div class="fact-title">Institutional Architecture</div>
+            <div class="fact-sub">CVXPY, PyPortfolioOpt, PyTorch — production-grade stack</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════ STRATEGIES ══════════ -->
+<div id="strategies" class="page">
+  <div class="page-body">
+
+    <div class="strategies-hero">
+      <p class="sec-eyebrow">Strategy Suite</p>
+      <h2 class="sec-title">Four Systematic <em>Engines</em></h2>
+      <p style="font-size:0.82rem;color:var(--white-dim);max-width:600px;line-height:1.8;margin-top:0.5rem;">All returns are simulated backtests. Not indicative of future performance. Not financial advice.</p>
+    </div>
+
+    <div class="strategies-grid">
+
+      <!-- VOL -->
+      <div class="strategy-card" data-s="vol">
+        <span class="strat-bg-num">01</span>
+        <div class="strat-badge">Volatility Arbitrage</div>
+        <div class="strat-name">IV–RV SPREAD</div>
+        <div class="strat-tagline">Harvesting the variance risk premium</div>
+        <p class="strat-desc">Systematic exploitation of IV-RV spread across PSX options and global vol markets using delta-hedged short variance positions. Regime detection filters ensure strategy activation only during favorable vol environments, with dynamic sizing based on VIX term structure signals.</p>
+        <div class="strat-metrics">
+          <div class="strat-metric"><div class="sm-val">+18.4%</div><div class="sm-label">Return (sim.)</div></div>
+          <div class="strat-metric"><div class="sm-val">2.31</div><div class="sm-label">Sharpe</div></div>
+          <div class="strat-metric"><div class="sm-val red">-6.2%</div><div class="sm-label">Max DD</div></div>
+        </div>
+        <div class="strat-chips">
+          <span class="chip">PSX Options</span>
+          <span class="chip">VIX</span>
+          <span class="chip">Delta Hedging</span>
+          <span class="chip">Regime Detection</span>
+        </div>
+      </div>
+
+      <!-- MACRO -->
+      <div class="strategy-card" data-s="macro">
+        <span class="strat-bg-num">02</span>
+        <div class="strat-badge">Global Macro</div>
+        <div class="strat-name">GULF MACRO</div>
+        <div class="strat-tagline">Sovereign capital flow intelligence</div>
+        <p class="strat-desc">Macro strategy powered by Gulf SWF filing intelligence from ADIA, PIF, QIA, Mubadala, and ADQ. Real-time SEC EDGAR 13D/13G surveillance drives FX and commodity positioning. Sovereign capital flow shifts are modeled as leading indicators for Gulf equity and fixed-income allocation.</p>
+        <div class="strat-metrics">
+          <div class="strat-metric"><div class="sm-val">+12.1%</div><div class="sm-label">Return (sim.)</div></div>
+          <div class="strat-metric"><div class="sm-val">1.88</div><div class="sm-label">Sharpe</div></div>
+          <div class="strat-metric"><div class="sm-val red">-9.1%</div><div class="sm-label">Max DD</div></div>
+        </div>
+        <div class="strat-chips">
+          <span class="chip">Gulf SWF</span>
+          <span class="chip">SEC EDGAR</span>
+          <span class="chip">FX</span>
+          <span class="chip">Commodities</span>
+        </div>
+      </div>
+
+      <!-- PORT -->
+      <div class="strategy-card" data-s="port">
+        <span class="strat-bg-num">03</span>
+        <div class="strat-badge">Portfolio Optimization</div>
+        <div class="strat-name">STOCHASTIC PORT</div>
+        <div class="strat-tagline">Multi-asset optimization under uncertainty</div>
+        <p class="strat-desc">Multi-period stochastic programming using CVXPY and PyPortfolioOpt targeting PSX equities and Gulf fixed income. Scenario-based optimization handles fat-tailed return distributions with explicit drawdown constraints. MINOS/DECIS solver implementations for large-scale allocation problems.</p>
+        <div class="strat-metrics">
+          <div class="strat-metric"><div class="sm-val">+14.8%</div><div class="sm-label">Return (sim.)</div></div>
+          <div class="strat-metric"><div class="sm-val">2.05</div><div class="sm-label">Sharpe</div></div>
+          <div class="strat-metric"><div class="sm-val red">-7.8%</div><div class="sm-label">Max DD</div></div>
+        </div>
+        <div class="strat-chips">
+          <span class="chip">CVXPY</span>
+          <span class="chip">PyPortfolioOpt</span>
+          <span class="chip">PSX</span>
+          <span class="chip">Stochastic</span>
+        </div>
+      </div>
+
+      <!-- CRISIS -->
+      <div class="strategy-card" data-s="crisis">
+        <span class="strat-bg-num">04</span>
+        <div class="strat-badge">Crisis Hedging</div>
+        <div class="strat-name">ZULFIQUODE HEDGE</div>
+        <div class="strat-tagline">Tail risk protection powered by crisis prediction</div>
+        <p class="strat-desc">Systematic tail-risk hedging driven by ZULFIQUODE crisis probability scores. The strategy auto-deploys put spreads and safe-haven tilts when the ZULFIQUODE index exceeds threshold levels. Negative expected value in calm markets — outperforms significantly during crisis episodes, providing asymmetric portfolio protection.</p>
+        <div class="strat-metrics">
+          <div class="strat-metric"><div class="sm-val grn">+22%</div><div class="sm-label">Crisis Alpha</div></div>
+          <div class="strat-metric"><div class="sm-val grn">0.85</div><div class="sm-label">Hedge Ratio</div></div>
+          <div class="strat-metric"><div class="sm-val red">-3.2%</div><div class="sm-label">Avg DD</div></div>
+        </div>
+        <div class="strat-chips">
+          <span class="chip">ZULFIQUODE</span>
+          <span class="chip">Put Spreads</span>
+          <span class="chip">Tail Risk</span>
+          <span class="chip">Safe Haven</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ TEAM ══════════ -->
+<div id="team" class="page">
+  <div class="page-body">
+
+    <div class="team-hero">
+      <p class="sec-eyebrow">Leadership</p>
+      <h2 class="sec-title">Quant Minds,<br><em>Iron Discipline</em></h2>
+    </div>
+
+    <div class="team-grid">
+
+      <!-- ZAM -->
+      <div class="team-card lead">
+        <div class="team-avatar">ZAM</div>
+        <div class="team-role">Founder & Chief Investment Officer</div>
+        <div class="team-name">ZULFIQAR ALI MIR</div>
+        <div class="team-title">PhD Econometrics · Quant Researcher</div>
+        <div class="team-divider"></div>
+        <p class="team-bio">Founder of FERROQUANT Capital and Black Iron Quantum AI Group. PhD in Econometrics (PIDE). Research Analyst & LLM Trainer at Turing Inc. (Palo Alto). National AI FinTech Winner 2025. Policy advisor to Pakistan's Ministry of Commerce on STPF 2025–30. Author of SSRN research on multi-agent AI systemic risk and Gulf SWF portfolio repositioning.</p>
+        <div class="team-badges">
+          <span class="team-badge">PhD Econometrics</span>
+          <span class="team-badge">Volatility Arb</span>
+          <span class="team-badge">CVXPY</span>
+          <span class="team-badge">PyTorch</span>
+          <span class="team-badge">LangChain</span>
+        </div>
+      </div>
+
+      <!-- KB -->
+      <div class="team-card">
+        <div class="team-avatar">KB</div>
+        <div class="team-role">Board Director</div>
+        <div class="team-name">KHAIRUNNISSA BATOOL</div>
+        <div class="team-title">Board Director · Governance</div>
+        <div class="team-divider"></div>
+        <p class="team-bio">Board Director providing governance oversight, strategic direction, and institutional advisory to FERROQUANT Capital and Black Iron Quantum AI Group. Contributes to the governance framework and institutional standards of the Group.</p>
+        <div class="team-badges">
+          <span class="team-badge">Governance</span>
+          <span class="team-badge">Strategy</span>
+          <span class="team-badge">Advisory</span>
+        </div>
+      </div>
+
+      <!-- MF -->
+      <div class="team-card">
+        <div class="team-avatar">MF</div>
+        <div class="team-role">Board Director · CFO</div>
+        <div class="team-name">MUHAMMAD FAIZAN</div>
+        <div class="team-title">Board Director · CFO, WellServe</div>
+        <div class="team-divider"></div>
+        <p class="team-bio">Board Director of Black Iron Quantum AI (Pvt) Ltd and FERROQUANT Capital. Also serving as CFO of WellServe (Private) Limited, bringing deep financial management expertise and enterprise governance experience to the Board and fund operations.</p>
+        <div class="team-badges">
+          <span class="team-badge">Financial Management</span>
+          <span class="team-badge">Corporate Finance</span>
+          <span class="team-badge">Governance</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ INVESTORS ══════════ -->
+<div id="investors" class="page">
+  <div class="page-body">
+
+    <div class="investors-hero">
+      <p class="sec-eyebrow">Investor Relations</p>
+      <h2 class="sec-title">Institutional Access <em>Portal</em></h2>
+    </div>
+
+    <div class="disclaimer-box">
+      <div class="disclaimer-inner">
+        <strong>⚠ DISCLAIMER:</strong> Past and simulated performance is not indicative of future results. FERROQUANT Capital is in growth and capital-raising stage. All returns shown are backtested/simulated and have not been achieved in live trading. Investment involves risk including possible loss of principal. This is not an offer or solicitation to invest.
+      </div>
+    </div>
+
+    <div class="mandate-grid">
+      <div class="mandate-card">
+        <span class="mandate-icon">🏛️</span>
+        <div class="mandate-name">Institutional Mandates</div>
+        <p class="mandate-desc">Separate managed accounts and co-investment structures for pension funds, sovereign entities, and institutional asset managers requiring tailored quant strategies.</p>
+      </div>
+      <div class="mandate-card">
+        <span class="mandate-icon">👤</span>
+        <div class="mandate-name">Family Office Access</div>
+        <p class="mandate-desc">Dedicated family office programs with custom reporting, direct portfolio access, and advisory integration across FERROQUANT's systematic strategy suite.</p>
+      </div>
+      <div class="mandate-card">
+        <span class="mandate-icon">📊</span>
+        <div class="mandate-name">Research Partnerships</div>
+        <p class="mandate-desc">Joint research programs with academic institutions and financial organizations. Access to FERROQUANT's quant research pipeline, data infrastructure, and published findings.</p>
+      </div>
+    </div>
+
+    <div class="fund-table">
+      <h3>Fund Terms &amp; Structure</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Parameter</th>
+            <th>Details</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Fund Type</td><td>Quant Hedge Fund + Research</td><td><span class="status-active">● Active</span></td></tr>
+          <tr><td>Domicile</td><td>Islamabad, Pakistan</td><td><span class="status-cyan">● Registered</span></td></tr>
+          <tr><td>Strategy Focus</td><td>Vol Arb · Gulf Macro · Port · Crisis</td><td><span class="status-active">● Live Research</span></td></tr>
+          <tr><td>Markets</td><td>PSX · Gulf · Global FX · Commodities</td><td><span class="status-active">● Covered</span></td></tr>
+          <tr><td>Min Investment</td><td>USD 50,000</td><td><span class="status-cyan">● Inquire</span></td></tr>
+          <tr><td>Fee Structure</td><td>2/20 standard</td><td><span class="status-cyan">● Negotiable</span></td></tr>
+          <tr><td>Reporting</td><td>Monthly NAV + Risk Report</td><td><span class="status-active">● Available</span></td></tr>
+          <tr><td>Redemption</td><td>Quarterly 30-day notice</td><td><span class="status-cyan">● Standard</span></td></tr>
+          <tr><td>Parent Group</td><td>Black Iron Quantum AI (Pvt) Ltd</td><td><span class="status-active">● Islamabad</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════ CONTACT ══════════ -->
+<div id="contact" class="page">
+  <div class="page-body">
+    <div class="contact-layout">
+      <div class="contact-left">
+        <p class="sec-eyebrow">Investor Inquiries</p>
+        <h1>ACCESS THE<br><em>Terminal</em></h1>
+        <p>Whether you represent an institutional fund, a family office, or a research organization seeking quantitative finance intelligence — FERROQUANT Capital is open to selective mandates, research partnerships, and advisory engagements.</p>
+        <div class="ci-list">
+          <div class="ci">
+            <div class="ci-icon">✉</div>
+            <div><div class="ci-lbl">Email</div><div class="ci-val">manager.equity.finance@gmail.com</div></div>
+          </div>
+          <div class="ci">
+            <div class="ci-icon">📍</div>
+            <div><div class="ci-lbl">HQ</div><div class="ci-val">Islamabad, Pakistan</div></div>
+          </div>
+          <div class="ci">
+            <div class="ci-icon">🌐</div>
+            <div><div class="ci-lbl">Parent</div><div class="ci-val">Black Iron Quantum AI (Pvt) Ltd</div></div>
+          </div>
+          <div class="ci">
+            <div class="ci-icon">⌨</div>
+            <div><div class="ci-lbl">GitHub</div><div class="ci-val">github.com/zulfiqaralimir</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-form-box">
+        <div id="form-body">
+          <div class="f-row">
+            <div class="f-group"><label>First Name</label><input type="text" placeholder="Amir"></div>
+            <div class="f-group"><label>Last Name</label><input type="text" placeholder="Khan"></div>
+          </div>
+          <div class="f-group"><label>Organization</label><input type="text" placeholder="Fund / Family Office / Institution"></div>
+          <div class="f-group"><label>Email Address</label><input type="email" placeholder="your@institution.com"></div>
+          <div class="f-group">
+            <label>Inquiry Type</label>
+            <select>
+              <option value="">Select inquiry type…</option>
+              <option>Investor Access — Institutional Mandate</option>
+              <option>Investor Access — Family Office</option>
+              <option>Research Partnership</option>
+              <option>Strategy Consultation</option>
+              <option>Media / Press</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="f-group"><label>AUM / Mandate Size (optional)</label><input type="text" placeholder="e.g. USD 500,000+"></div>
+          <div class="f-group"><label>Message</label><textarea placeholder="Describe your mandate or inquiry…"></textarea></div>
+          <button class="f-submit" onclick="submitForm()">TRANSMIT INQUIRY ></button>
+        </div>
+        <div class="f-success" id="form-success">
+          <div class="f-success-icon">◈</div>
+          <h4>INQUIRY RECEIVED</h4>
+          <p>Response within 48 hours</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand-name">FERRO<span>QUANT</span> CAPITAL</div>
+      <div class="footer-tagline">Systematic Quantitative Strategies</div>
+      <p class="footer-desc">Quantitative hedge fund and research arm of Black Iron Quantum AI Group. Targeting PSX, Gulf, and global capital markets with systematic, institutional-grade strategies.</p>
+      <div class="footer-parent" onclick="window.open('https://blackironquantai.com','_blank')">▸ A Black Iron Quantum AI Group Company</div>
+    </div>
+    <div class="footer-col">
+      <h5>Navigate</h5>
+      <ul>
+        <li><a onclick="showPage('home')">Home</a></li>
+        <li><a onclick="showPage('strategies')">Strategies</a></li>
+        <li><a onclick="showPage('team')">Team</a></li>
+        <li><a onclick="showPage('investors')">Investors</a></li>
+        <li><a onclick="showPage('contact')">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Strategies</h5>
+      <ul>
+        <li><a onclick="showPage('strategies')">IV–RV Spread</a></li>
+        <li><a onclick="showPage('strategies')">Gulf Macro</a></li>
+        <li><a onclick="showPage('strategies')">Stochastic Port</a></li>
+        <li><a onclick="showPage('strategies')">ZULFIQUODE Hedge</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Group</h5>
+      <ul>
+        <li><a>Black Iron Quantum AI</a></li>
+        <li><a>ZULFIQUODE</a></li>
+        <li><a>BlackIronTimes.com</a></li>
+        <li><a>Gulf SWF Intelligence</a></li>
+        <li><a>Black Iron FinTech</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 FERROQUANT Capital · A Black Iron Quantum AI Group Company · All Rights Reserved</p>
+    <span>Islamabad, Pakistan · Simulated performance · Not financial advice</span>
+  </div>
+</footer>
+
+<script>
+/* ── PKT CLOCK ── */
+function updateClock() {
+  const now = new Date();
+  const pkt = new Date(now.toLocaleString('en-US', { timeZone: 'Asia/Karachi' }));
+  const h = String(pkt.getHours()).padStart(2, '0');
+  const m = String(pkt.getMinutes()).padStart(2, '0');
+  const s = String(pkt.getSeconds()).padStart(2, '0');
+  const el = document.getElementById('pkt-clock');
+  if (el) el.textContent = `PKT ${h}:${m}:${s}`;
+}
+updateClock();
+setInterval(updateClock, 1000);
+
+/* ── PAGE SWITCHING ── */
+const pages = ['home', 'strategies', 'team', 'investors', 'contact'];
+
+function showPage(id) {
+  pages.forEach(p => {
+    document.getElementById(p).classList.remove('active');
+    const lnk = document.getElementById('nav-' + p);
+    if (lnk) lnk.classList.remove('active');
+  });
+  document.getElementById(id).classList.add('active');
+  const lnk = document.getElementById('nav-' + id);
+  if (lnk) lnk.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  closeMenu();
+}
+
+/* ── FORM ── */
+function submitForm() {
+  document.getElementById('form-body').style.display = 'none';
+  document.getElementById('form-success').style.display = 'block';
+}
+
+/* ── MOBILE MENU ── */
+function toggleMenu() {
+  document.getElementById('mobile-menu').classList.toggle('open');
+}
+function closeMenu() {
+  document.getElementById('mobile-menu').classList.remove('open');
+}
+</script>
+</body>
+</html>
