@@ -963,6 +963,65 @@ footer {
     .bod-strip { padding-left: 1.5rem; padding-right: 1.5rem; }
   }
 
+
+/* ── ANIMATION SYSTEM ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1);
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+.sec-eyebrow {
+  opacity: 0;
+  transform: translateX(-16px);
+  transition: opacity 0.6s cubic-bezier(0.22,1,0.36,1), transform 0.6s cubic-bezier(0.22,1,0.36,1);
+}
+.sec-eyebrow.visible { opacity: 1; transform: translateX(0); }
+
+.gh-headline span {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s cubic-bezier(0.22,1,0.36,1), transform 0.6s cubic-bezier(0.22,1,0.36,1);
+}
+.gh-headline span.visible { opacity: 1; transform: translateY(0); }
+
+.sec-title { transition: letter-spacing 0.4s ease; }
+.sec-title:hover { letter-spacing: 0.06em; }
+.bod-name { transition: color 0.3s, letter-spacing 0.4s ease; }
+.bod-name:hover { letter-spacing: 0.06em; }
+
+.zulf-glitch { position: relative; }
+.zulf-glitch::before,
+.zulf-glitch::after {
+  content: attr(data-text);
+  position: absolute; top: 0; left: 0;
+  width: 100%; height: 100%;
+  opacity: 0; pointer-events: none;
+  font-family: inherit; font-size: inherit;
+  letter-spacing: inherit; line-height: inherit;
+}
+.zulf-glitch::before { color: #c0392b; }
+.zulf-glitch::after  { color: #5fa8c0; }
+.zulf-glitch.glitch-active::before { animation: glitch-r 0.4s steps(5) forwards; }
+.zulf-glitch.glitch-active::after  { animation: glitch-b 0.4s steps(5) forwards; }
+
+@keyframes glitch-r {
+  0%   { opacity:0; clip-path:polygon(0 5%,100% 5%,100% 30%,0 30%);   transform:translateX(0); }
+  20%  { opacity:1; clip-path:polygon(0 5%,100% 5%,100% 30%,0 30%);   transform:translateX(-5px); }
+  40%  { opacity:1; clip-path:polygon(0 40%,100% 40%,100% 65%,0 65%); transform:translateX(4px); }
+  60%  { opacity:1; clip-path:polygon(0 60%,100% 60%,100% 90%,0 90%); transform:translateX(-3px); }
+  80%  { opacity:1; clip-path:polygon(0 15%,100% 15%,100% 50%,0 50%); transform:translateX(3px); }
+  100% { opacity:0; clip-path:polygon(0 15%,100% 15%,100% 50%,0 50%); transform:translateX(0); }
+}
+@keyframes glitch-b {
+  0%   { opacity:0; clip-path:polygon(0 35%,100% 35%,100% 60%,0 60%); transform:translateX(0); }
+  20%  { opacity:1; clip-path:polygon(0 35%,100% 35%,100% 60%,0 60%); transform:translateX(5px); }
+  40%  { opacity:1; clip-path:polygon(0 10%,100% 10%,100% 40%,0 40%); transform:translateX(-4px); }
+  60%  { opacity:1; clip-path:polygon(0 55%,100% 55%,100% 85%,0 85%); transform:translateX(3px); }
+  80%  { opacity:1; clip-path:polygon(0 20%,100% 20%,100% 55%,0 55%); transform:translateX(-3px); }
+  100% { opacity:0; clip-path:polygon(0 20%,100% 20%,100% 55%,0 55%); transform:translateX(0); }
+}
 </style>
 </head>
 <body>
@@ -1049,7 +1108,7 @@ footer {
         <a class="btn-ghost" href="#" onclick="showPage('about')">Group Profile</a>
       </div>
       <div class="gh-meta">
-        <div class="gh-meta-item"><span>5</span><small>Subsidiaries & Divisions</small></div>
+        <div class="gh-meta-item"><span class="countup" data-target="5" data-suffix="">0</span><small>Subsidiaries & Divisions</small></div>
         <div class="gh-meta-item"><span>2025</span><small>National AI FinTech Winner</small></div>
         <div class="gh-meta-item"><span>ADIA · PIF · QIA</span><small>SWF Coverage Universe</small></div>
         <div class="gh-meta-item"><span>PKR · USD · AED</span><small>Markets Served</small></div>
@@ -1089,7 +1148,7 @@ footer {
         <div style="display:grid; grid-template-columns:1.3fr 1fr; gap:4rem; align-items:center;">
           <div>
             <div class="sub-card-type" style="color:var(--amber);border-color:rgba(176,125,16,0.4);background:rgba(176,125,16,0.06); margin-bottom:1rem;">★ &nbsp;Flagship Product &nbsp;·&nbsp; Financial Crisis Intelligence</div>
-            <div class="sub-card-name" style="font-size:clamp(2.5rem,5vw,4.5rem); margin-bottom:0.6rem;">ZULFIQUODE</div>
+            <div class="sub-card-name zulf-glitch" data-text="ZULFIQUODE" style="font-size:clamp(2.5rem,5vw,4.5rem); margin-bottom:0.6rem;">ZULFIQUODE</div>
             <div class="sub-card-tagline" style="font-size:1.1rem; border-left:3px solid var(--amber); padding-left:1rem; margin-bottom:1.5rem;">Predicting financial crises before they arrive — powered by quantitative early-warning models, multi-agent AI, and real-time macro surveillance.</div>
             <p class="sub-card-desc" style="font-size:0.97rem;">ZULFIQUODE is Black Iron Quantum AI's flagship crisis-prediction engine. It combines PhD-grade econometric early-warning models, multi-agent AI systems monitoring 50+ macro indicators, and a real-time crisis probability dashboard — delivering actionable intelligence to banks, central banks, hedge funds, and regulators before systemic risk materialises.</p>
             <div class="sub-card-stack" style="margin-bottom:2rem;">
@@ -1108,7 +1167,7 @@ footer {
             <div style="position:absolute;top:-0.55rem;left:1.2rem;font-family:var(--mono);font-size:0.52rem;letter-spacing:0.22em;background:var(--iron-mid);color:var(--cold);padding:0 0.5rem;">CRISIS MONITOR</div>
             <div style="font-family:var(--mono);font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--white-dim);margin-bottom:1.2rem;text-align:center;">Global Crisis Probability Index</div>
             <div style="text-align:center;margin-bottom:1.5rem;">
-              <span style="font-family:var(--display);font-size:4rem;color:var(--amber);line-height:1;display:block;">68%</span>
+              <span class="countup" data-target="68" data-suffix="%" style="font-family:var(--display);font-size:4rem;color:var(--amber);line-height:1;display:block;">0%</span>
               <span style="font-family:var(--mono);font-size:0.58rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--white-dim);">Elevated Risk · Q2 2026</span>
             </div>
             <div style="display:flex;flex-direction:column;gap:0.9rem;">
@@ -1117,35 +1176,35 @@ footer {
                 <div style="flex:1;height:5px;background:rgba(26,23,20,0.1);border-radius:2px;overflow:hidden;">
                   <div style="height:100%;width:78%;background:#c0392b;border-radius:2px;"></div>
                 </div>
-                <span style="font-family:var(--mono);font-size:0.55rem;color:var(--white-dim);width:30px;text-align:right;">78%</span>
+                <span class="countup" data-target="78" data-suffix="%" style="font-family:var(--mono);font-size:0.55rem;color:var(--white-dim);width:30px;text-align:right;">0%</span>
               </div>
               <div style="display:flex;align-items:center;gap:0.8rem;">
                 <span style="font-family:var(--mono);font-size:0.55rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--white-dim);width:90px;flex-shrink:0;">Liquidity</span>
                 <div style="flex:1;height:5px;background:rgba(26,23,20,0.1);border-radius:2px;overflow:hidden;">
                   <div style="height:100%;width:62%;background:var(--amber);border-radius:2px;"></div>
                 </div>
-                <span style="font-family:var(--mono);font-size:0.55rem;color:var(--white-dim);width:30px;text-align:right;">62%</span>
+                <span class="countup" data-target="62" data-suffix="%" style="font-family:var(--mono);font-size:0.55rem;color:var(--white-dim);width:30px;text-align:right;">0%</span>
               </div>
               <div style="display:flex;align-items:center;gap:0.8rem;">
                 <span style="font-family:var(--mono);font-size:0.55rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--white-dim);width:90px;flex-shrink:0;">Contagion</span>
                 <div style="flex:1;height:5px;background:rgba(26,23,20,0.1);border-radius:2px;overflow:hidden;">
                   <div style="height:100%;width:55%;background:var(--amber);border-radius:2px;"></div>
                 </div>
-                <span style="font-family:var(--mono);font-size:0.55rem;color:var(--white-dim);width:30px;text-align:right;">55%</span>
+                <span class="countup" data-target="55" data-suffix="%" style="font-family:var(--mono);font-size:0.55rem;color:var(--white-dim);width:30px;text-align:right;">0%</span>
               </div>
               <div style="display:flex;align-items:center;gap:0.8rem;">
                 <span style="font-family:var(--mono);font-size:0.55rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--white-dim);width:90px;flex-shrink:0;">FX Pressure</span>
                 <div style="flex:1;height:5px;background:rgba(26,23,20,0.1);border-radius:2px;overflow:hidden;">
                   <div style="height:100%;width:41%;background:#27ae60;border-radius:2px;"></div>
                 </div>
-                <span style="font-family:var(--mono);font-size:0.55rem;color:var(--white-dim);width:30px;text-align:right;">41%</span>
+                <span class="countup" data-target="41" data-suffix="%" style="font-family:var(--mono);font-size:0.55rem;color:var(--white-dim);width:30px;text-align:right;">0%</span>
               </div>
               <div style="display:flex;align-items:center;gap:0.8rem;">
                 <span style="font-family:var(--mono);font-size:0.55rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--white-dim);width:90px;flex-shrink:0;">Sovereign</span>
                 <div style="flex:1;height:5px;background:rgba(26,23,20,0.1);border-radius:2px;overflow:hidden;">
                   <div style="height:100%;width:71%;background:#c0392b;border-radius:2px;"></div>
                 </div>
-                <span style="font-family:var(--mono);font-size:0.55rem;color:var(--white-dim);width:30px;text-align:right;">71%</span>
+                <span class="countup" data-target="71" data-suffix="%" style="font-family:var(--mono);font-size:0.55rem;color:var(--white-dim);width:30px;text-align:right;">0%</span>
               </div>
             </div>
             <div style="margin-top:1.2rem;padding-top:1rem;border-top:1px solid rgba(26,23,20,0.08);font-family:var(--mono);font-size:0.55rem;letter-spacing:0.12em;color:var(--white-dim);text-align:center;">
@@ -1533,12 +1592,14 @@ footer {
 </footer>
 
 <script>
+/* ── PAGE NAVIGATION ── */
 function showPage(id) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   const pg = document.getElementById(id);
   pg.classList.add('active');
   window.scrollTo({ top: 0, behavior: 'smooth' });
   closeMenu();
+  setTimeout(initAnimations, 50);
 }
 function submitForm() {
   document.getElementById('form-body').style.display = 'none';
@@ -1550,6 +1611,106 @@ function toggleMenu() {
 function closeMenu() {
   document.getElementById('mobile-menu').classList.remove('open');
 }
+
+/* ── 1. HERO HEADLINE ── */
+function animateHeroHeadline() {
+  document.querySelectorAll('.gh-headline span').forEach((span, i) => {
+    setTimeout(() => span.classList.add('visible'), i * 120);
+  });
+}
+
+/* ── 2. GLITCH ── */
+function triggerGlitch() {
+  const el = document.querySelector('.zulf-glitch');
+  if (!el) return;
+  el.classList.remove('glitch-active');
+  void el.offsetWidth;
+  el.classList.add('glitch-active');
+  setTimeout(() => el.classList.remove('glitch-active'), 450);
+}
+
+/* ── 3. SCROLL REVEAL ── */
+function initReveal() {
+  const grids = [
+    ['.sub-cards',    '.sub-card'],
+    ['.bod-grid',     '.bod-card'],
+    ['.client-cards', '.client-card'],
+    ['.svcs-grid',    '.svc-card'],
+    ['.pillars-grid', '.pillar-card'],
+  ];
+  grids.forEach(([container, child]) => {
+    document.querySelectorAll(container).forEach(grid => {
+      grid.querySelectorAll(child).forEach((card, i) => {
+        card.classList.add('reveal');
+        card.style.transitionDelay = (i * 0.1) + 's';
+      });
+    });
+  });
+
+  ['.sec-title', '.sec-lead', '.founder-card', '.affiliations',
+   '.parent-left h2', '.clients-trust-strip', '.bod-section .sec-title'
+  ].forEach(sel => {
+    document.querySelectorAll(sel).forEach(el => el.classList.add('reveal'));
+  });
+
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.reveal:not(.visible)').forEach(el => obs.observe(el));
+}
+
+/* ── 4. EYEBROW SLIDE ── */
+function initEyebrows() {
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+    });
+  }, { threshold: 0.2 });
+  document.querySelectorAll('.sec-eyebrow:not(.visible)').forEach(el => obs.observe(el));
+}
+
+/* ── 5. COUNT-UP ── */
+function easeOutCubic(t) { return 1 - Math.pow(1 - t, 3); }
+
+function runCountUp(el) {
+  const target = +el.dataset.target;
+  const suffix = el.dataset.suffix || '';
+  const duration = 1400;
+  let startTime = null;
+  function tick(now) {
+    if (!startTime) startTime = now;
+    const t = Math.min((now - startTime) / duration, 1);
+    el.textContent = Math.round(easeOutCubic(t) * target) + suffix;
+    if (t < 1) requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
+
+function initCountUp() {
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { runCountUp(e.target); obs.unobserve(e.target); }
+    });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('.countup').forEach(el => obs.observe(el));
+}
+
+/* ── INIT ALL ── */
+function initAnimations() {
+  initReveal();
+  initEyebrows();
+  initCountUp();
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  animateHeroHeadline();
+  initAnimations();
+  setTimeout(triggerGlitch, 800);
+  setTimeout(triggerGlitch, 3000);
+});
 </script>
 </body>
 </html>
