@@ -1584,7 +1584,7 @@ function psxSelectTicker(sym) {
   const frame   = document.getElementById('psx-chart-frame');
   const chartLd = document.getElementById('chart-loading');
   if (chartLd) chartLd.style.display = 'flex';
-  frame.src = `https://raw.githubusercontent.com/zulfiqaralimir/PSX_DATA/main/charts/${sym}_candles.html`;
+  frame.src = `https://zulfiqaralimir.github.io/PSX_DATA/charts/${sym}_candles.html`;
   renderPSXAnn(sym);
   renderPSXInsider(sym);
   if (psxData === null) {
