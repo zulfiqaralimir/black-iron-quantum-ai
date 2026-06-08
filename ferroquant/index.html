@@ -604,6 +604,167 @@ footer {
   .metrics-inner { grid-template-columns: 1fr 1fr; }
   .footer-grid { grid-template-columns: 1fr; }
 }
+
+/* ─────────────────────────────────────
+   PSX MARKETS PAGE
+───────────────────────────────────── */
+.psx-hero { max-width: 1280px; margin: 0 auto; padding: 4rem 3rem 2.5rem; }
+
+.market-status-bar {
+  max-width: 1280px; margin: 0 auto; padding: 0 3rem 2rem;
+  display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap;
+}
+.ms-indicator {
+  display: flex; align-items: center; gap: 0.5rem;
+  background: var(--navy-card); border: 1px solid var(--navy-border);
+  padding: 0.45rem 1rem;
+}
+.ms-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.ms-dot-open  { background: var(--green); animation: pulse 2s ease-in-out infinite; }
+.ms-dot-closed { background: var(--red); }
+.ms-label { font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 700; }
+.ms-label-open  { color: var(--green); }
+.ms-label-closed { color: var(--red); }
+.ms-hours { font-size: 0.58rem; letter-spacing: 0.1em; color: var(--white-dim); }
+.ms-clock { font-size: 0.68rem; letter-spacing: 0.14em; color: var(--cyan); margin-left: auto; }
+
+.psx-selector-wrap { max-width: 1280px; margin: 0 auto; padding: 0 3rem 2.5rem; }
+.psx-selector-label {
+  font-size: 0.55rem; letter-spacing: 0.28em; text-transform: uppercase;
+  color: var(--green); margin-bottom: 0.5rem;
+}
+.psx-selector {
+  width: 100%; background: var(--navy-card); border: 1px solid var(--navy-border);
+  color: var(--white); font-family: var(--mono); font-size: 0.95rem;
+  letter-spacing: 0.08em; padding: 0.9rem 1.2rem;
+  outline: none; appearance: none; cursor: crosshair; transition: border-color 0.2s;
+}
+.psx-selector:focus { border-color: var(--green); }
+.psx-selector option { background: var(--navy-card); color: var(--white); }
+
+.stock-panel {
+  max-width: 1280px; margin: 0 auto; padding: 0 3rem 5rem;
+  display: none;
+}
+.stock-panel.visible { display: block; animation: pgIn 0.4s ease both; }
+
+.price-header {
+  background: var(--navy-card); border: 1px solid var(--navy-border);
+  padding: 1.8rem 2rem; margin-bottom: 2px;
+  display: flex; align-items: flex-start; justify-content: space-between;
+  flex-wrap: wrap; gap: 1rem;
+}
+.ph-symbol {
+  font-family: var(--display); font-size: 2.6rem; font-weight: 800;
+  letter-spacing: 0.06em; color: var(--white); line-height: 1;
+}
+.ph-company {
+  font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--white-dim); margin-top: 0.35rem;
+}
+.ph-right { text-align: right; }
+.ph-price { font-family: var(--display); font-size: 2.8rem; font-weight: 800; line-height: 1; }
+.ph-price-up { color: var(--green); }
+.ph-price-dn { color: var(--red); }
+.ph-change { font-size: 0.88rem; letter-spacing: 0.1em; margin-top: 0.35rem; }
+.ph-change-up { color: var(--green); }
+.ph-change-dn { color: var(--red); }
+.ph-meta { font-size: 0.58rem; letter-spacing: 0.1em; color: var(--white-dim); margin-top: 0.4rem; }
+
+.ohlcv-grid {
+  display: grid; grid-template-columns: repeat(6, 1fr);
+  gap: 2px; background: var(--navy-border); margin-bottom: 2.5rem;
+}
+.ohlcv-cell { background: var(--navy-card); padding: 1.1rem 1.4rem; }
+.ohlcv-label {
+  font-size: 0.5rem; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--white-dim); margin-bottom: 0.4rem;
+}
+.ohlcv-value {
+  font-family: var(--display); font-size: 1.35rem; font-weight: 700;
+  color: var(--white); line-height: 1;
+}
+.ohlcv-value.green { color: var(--green); }
+.ohlcv-value.red   { color: var(--red); }
+.ohlcv-value.cyan  { color: var(--cyan); }
+
+.psx-section { margin-bottom: 2rem; }
+.psx-section-title {
+  font-size: 0.6rem; letter-spacing: 0.24em; text-transform: uppercase;
+  color: var(--green); margin-bottom: 1rem; padding-bottom: 0.7rem;
+  border-bottom: 1px solid var(--navy-border);
+}
+.psx-section-title::before { content: '// '; color: var(--white-dim); }
+
+.chart-frame-wrap {
+  background: var(--navy-card); border: 1px solid var(--navy-border);
+  position: relative; min-height: 60px;
+}
+.chart-loading {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--white-dim); background: var(--navy-card); z-index: 2;
+}
+.chart-frame { width: 100%; height: 500px; border: none; display: block; }
+
+.psx-tbl-wrap {
+  background: var(--navy-card); border: 1px solid var(--navy-border);
+  overflow-x: auto;
+}
+.psx-tbl { width: 100%; border-collapse: collapse; font-size: 0.73rem; }
+.psx-tbl thead tr { background: var(--navy-light); border-bottom: 2px solid var(--navy-border); }
+.psx-tbl thead th {
+  padding: 0.75rem 1.2rem; text-align: left;
+  font-size: 0.56rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--white-dim);
+}
+.psx-tbl tbody tr { border-bottom: 1px solid var(--navy-border); transition: background 0.2s; }
+.psx-tbl tbody tr:hover { background: var(--navy-light); }
+.psx-tbl tbody td { padding: 0.7rem 1.2rem; color: var(--white-dim); vertical-align: middle; }
+.psx-tbl tbody td:first-child { color: var(--white); font-size: 0.65rem; letter-spacing: 0.08em; white-space: nowrap; }
+
+.psx-badge {
+  font-size: 0.5rem; letter-spacing: 0.12em; text-transform: uppercase;
+  padding: 0.18rem 0.6rem; border: 1px solid; display: inline-block; white-space: nowrap;
+}
+.badge-fin  { color: var(--green);  border-color: rgba(0,255,136,0.4); }
+.badge-bm   { color: var(--cyan);   border-color: rgba(64,224,255,0.4); }
+.badge-oth  { color: #ffb347;        border-color: rgba(255,179,71,0.4); }
+.badge-sell { color: var(--red);    border-color: rgba(255,85,85,0.4);  background: rgba(255,85,85,0.07); }
+.badge-buy  { color: var(--green);  border-color: rgba(0,255,136,0.4);  background: rgba(0,255,136,0.07); }
+
+.psx-empty {
+  padding: 2rem 1.5rem; font-size: 0.65rem; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--white-dim);
+  background: var(--navy-card); border: 1px solid var(--navy-border); text-align: center;
+}
+.psx-loading {
+  text-align: center; padding: 3rem 1.5rem;
+  font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--white-dim);
+}
+.psx-spin {
+  width: 18px; height: 18px; border: 2px solid var(--navy-border);
+  border-top-color: var(--green); border-radius: 50%;
+  animation: spin 0.8s linear infinite; margin: 0 auto 0.8rem;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.psx-data-note {
+  font-size: 0.56rem; letter-spacing: 0.1em; color: rgba(122,144,168,0.5);
+  line-height: 1.8; padding: 1.5rem 0; border-top: 1px solid var(--navy-border);
+  text-align: center;
+}
+
+@media(max-width: 768px) {
+  .psx-hero, .market-status-bar, .psx-selector-wrap, .stock-panel { padding-left: 1.5rem; padding-right: 1.5rem; }
+  .ohlcv-grid { grid-template-columns: repeat(3, 1fr); }
+  .price-header { flex-direction: column; }
+  .ph-right { text-align: left; }
+  .ms-clock { margin-left: 0; }
+}
+@media(max-width: 480px) {
+  .ohlcv-grid { grid-template-columns: repeat(2, 1fr); }
+}
 </style>
 </head>
 <body>
@@ -623,6 +784,7 @@ footer {
     <ul class="nav-links">
       <li><a onclick="showPage('home')" id="nav-home" class="active">Home</a></li>
       <li><a onclick="showPage('strategies')" id="nav-strategies">Strategies</a></li>
+      <li><a onclick="showPage('psx')" id="nav-psx">PSX Markets</a></li>
       <li><a onclick="showPage('team')" id="nav-team">Team</a></li>
       <li><a onclick="showPage('investors')" id="nav-investors">Investors</a></li>
       <li><a onclick="showPage('contact')" id="nav-contact">Contact</a></li>
@@ -641,6 +803,7 @@ footer {
 <div class="mobile-menu" id="mobile-menu">
   <a onclick="showPage('home');closeMenu()">Home</a>
   <a onclick="showPage('strategies');closeMenu()">Strategies</a>
+  <a onclick="showPage('psx');closeMenu()">PSX Markets</a>
   <a onclick="showPage('team');closeMenu()">Team</a>
   <a onclick="showPage('investors');closeMenu()">Investors</a>
   <a onclick="showPage('contact');closeMenu()">Contact</a>
@@ -1101,6 +1264,109 @@ footer {
   </div>
 </div>
 
+<!-- ══════════ PSX MARKETS ══════════ -->
+<div id="psx" class="page">
+  <div class="page-body">
+
+    <!-- HERO -->
+    <div class="psx-hero">
+      <p class="hero-eyebrow">&gt; PSX Market Intelligence</p>
+      <h1 class="sec-title">PSX MARKETS</h1>
+      <p style="font-family:var(--serif);font-style:italic;font-size:1rem;color:var(--green);margin-bottom:1.2rem;">Intraday Data &amp; Analytics</p>
+      <p class="hero-sub" style="max-width:640px;margin-bottom:0;">Real-time Pakistan Stock Exchange data for tracked equities — updated 8 times daily during trading hours via proprietary FERROQUANT data pipeline.</p>
+    </div>
+
+    <!-- MARKET STATUS BAR -->
+    <div class="market-status-bar">
+      <div class="ms-indicator">
+        <div class="ms-dot ms-dot-closed" id="ms-dot"></div>
+        <span class="ms-label ms-label-closed" id="ms-label">MARKET CLOSED</span>
+      </div>
+      <span class="ms-hours">MON-THU 09:30–15:30 &nbsp;|&nbsp; FRI 09:15–12:00 &amp; 14:30–16:30 PKT</span>
+      <span class="ms-clock" id="psx-pkt-clock">PKT --:--:--</span>
+    </div>
+
+    <!-- SYMBOL SELECTOR -->
+    <div class="psx-selector-wrap">
+      <div class="psx-selector-label">Select Ticker</div>
+      <select class="psx-selector" id="psx-ticker-select" onchange="psxSelectTicker(this.value)">
+        <option value="">— Select a symbol —</option>
+        <option value="KEL">KEL &nbsp;&nbsp; K-Electric Limited</option>
+        <option value="OGDC">OGDC &nbsp; Oil &amp; Gas Development Company</option>
+        <option value="PPL">PPL &nbsp;&nbsp; Pakistan Petroleum Limited</option>
+        <option value="HBL">HBL &nbsp;&nbsp; Habib Bank Limited</option>
+        <option value="ENGRO">ENGRO &nbsp;Engro Corporation Limited</option>
+        <option value="OBOY">OBOY &nbsp; Oilboy Energy Limited</option>
+        <option value="FCEPL">FCEPL &nbsp;FrieslandCampina Engro Pakistan</option>
+      </select>
+    </div>
+
+    <!-- LOADING / ERROR STATES -->
+    <div id="psx-loading-state" style="display:none;" class="psx-selector-wrap" style="padding-top:0;">
+      <div class="psx-loading"><div class="psx-spin"></div>Loading market data...</div>
+    </div>
+    <div id="psx-error-state" style="display:none;" class="psx-selector-wrap" style="padding-top:0;">
+      <div class="psx-empty">Live data unavailable — please check back during trading hours.</div>
+    </div>
+
+    <!-- STOCK DETAIL PANEL -->
+    <div class="stock-panel" id="psx-stock-panel">
+
+      <!-- A: PRICE HEADER -->
+      <div class="price-header">
+        <div class="ph-left">
+          <div class="ph-symbol" id="ph-symbol">--</div>
+          <div class="ph-company" id="ph-company">--</div>
+        </div>
+        <div class="ph-right">
+          <div class="ph-price ph-price-up" id="ph-price">--</div>
+          <div class="ph-change ph-change-up" id="ph-change">--</div>
+          <div class="ph-meta">Volume: <span id="ph-volume">--</span> &nbsp;|&nbsp; Last Updated: <span id="ph-updated">--</span></div>
+        </div>
+      </div>
+
+      <!-- B: OHLCV GRID -->
+      <div class="ohlcv-grid" style="margin-top:2px;">
+        <div class="ohlcv-cell"><div class="ohlcv-label">Open</div><div class="ohlcv-value" id="ov-open">--</div></div>
+        <div class="ohlcv-cell"><div class="ohlcv-label">High</div><div class="ohlcv-value green" id="ov-high">--</div></div>
+        <div class="ohlcv-cell"><div class="ohlcv-label">Low</div><div class="ohlcv-value red" id="ov-low">--</div></div>
+        <div class="ohlcv-cell"><div class="ohlcv-label">LDCP</div><div class="ohlcv-value cyan" id="ov-ldcp">--</div></div>
+        <div class="ohlcv-cell"><div class="ohlcv-label">1Y Change</div><div class="ohlcv-value" id="ov-1y">--</div></div>
+        <div class="ohlcv-cell"><div class="ohlcv-label">YTD Change</div><div class="ohlcv-value" id="ov-ytd">--</div></div>
+      </div>
+
+      <!-- C: INTRADAY CHART -->
+      <div class="psx-section">
+        <div class="psx-section-title">Intraday Chart</div>
+        <div class="chart-frame-wrap">
+          <div class="chart-loading" id="chart-loading">Chart loading...</div>
+          <iframe class="chart-frame" id="psx-chart-frame" src=""
+            onload="document.getElementById('chart-loading').style.display='none'"></iframe>
+        </div>
+      </div>
+
+      <!-- D: ANNOUNCEMENTS -->
+      <div class="psx-section">
+        <div class="psx-section-title">PSX Announcements</div>
+        <div id="psx-announcements-wrap"></div>
+      </div>
+
+      <!-- E: INSIDER TRANSACTIONS -->
+      <div class="psx-section">
+        <div class="psx-section-title">Insider Transactions</div>
+        <div id="psx-insider-wrap"></div>
+      </div>
+
+      <!-- F: DATA NOTE -->
+      <div class="psx-data-note">
+        Data sourced via FERROQUANT proprietary PSX pipeline &nbsp;·&nbsp; Updated 8x daily during trading hours &nbsp;·&nbsp; Price data from dps.psx.com.pk
+      </div>
+
+    </div><!-- /stock-panel -->
+
+  </div>
+</div>
+
 <!-- FOOTER -->
 <footer>
   <div class="footer-grid">
@@ -1115,6 +1381,7 @@ footer {
       <ul>
         <li><a onclick="showPage('home')">Home</a></li>
         <li><a onclick="showPage('strategies')">Strategies</a></li>
+        <li><a onclick="showPage('psx')">PSX Markets</a></li>
         <li><a onclick="showPage('team')">Team</a></li>
         <li><a onclick="showPage('investors')">Investors</a></li>
         <li><a onclick="showPage('contact')">Contact</a></li>
@@ -1161,7 +1428,7 @@ updateClock();
 setInterval(updateClock, 1000);
 
 /* ── PAGE SWITCHING ── */
-const pages = ['home', 'strategies', 'team', 'investors', 'contact'];
+const pages = ['home', 'strategies', 'psx', 'team', 'investors', 'contact'];
 
 function showPage(id) {
   pages.forEach(p => {
@@ -1175,6 +1442,167 @@ function showPage(id) {
   window.scrollTo({ top: 0, behavior: 'smooth' });
   closeMenu();
 }
+
+/* ── PSX MARKETS ── */
+const PSX_CSV_URL = 'https://docs.google.com/spreadsheets/d/1HI8lEQD9K9XjSVwfOplUN0Nc-Y1XMlE39fkwRpr-voc/export?format=csv&sheet=PSX%20Stock%20Data';
+let psxData = null; // null=loading, false=failed, object=ready
+let psxFetchPromise = null;
+
+function parseCSVLine(line) {
+  const res = []; let cur = '', inQ = false;
+  for (let i = 0; i < line.length; i++) {
+    const c = line[i];
+    if (c === '"') { inQ = !inQ; }
+    else if (c === ',' && !inQ) { res.push(cur.trim()); cur = ''; }
+    else cur += c;
+  }
+  res.push(cur.trim()); return res;
+}
+function parsePSXCSV(csv) {
+  const lines = csv.trim().split(/\r?\n/);
+  const hdrs = parseCSVLine(lines[0]);
+  const out = {};
+  for (let i = 1; i < lines.length; i++) {
+    if (!lines[i].trim()) continue;
+    const vals = parseCSVLine(lines[i]);
+    const row = {}; hdrs.forEach((h, idx) => row[h] = vals[idx] || '');
+    if (row['Symbol']) out[row['Symbol']] = row;
+  }
+  return out;
+}
+function loadPSXData() {
+  if (psxFetchPromise) return psxFetchPromise;
+  psxFetchPromise = fetch(PSX_CSV_URL)
+    .then(r => r.ok ? r.text() : Promise.reject('fetch failed'))
+    .then(txt => { psxData = parsePSXCSV(txt); })
+    .catch(() => { psxData = false; });
+  return psxFetchPromise;
+}
+
+/* Market status + PSX clock */
+function updatePSXStatus() {
+  const now = new Date();
+  const pkt = new Date(now.toLocaleString('en-US', { timeZone: 'Asia/Karachi' }));
+  const day = pkt.getDay(), h = pkt.getHours(), m = pkt.getMinutes(), s = pkt.getSeconds();
+  const mins = h * 60 + m;
+  let open = false;
+  if (day >= 1 && day <= 4) open = mins >= 570 && mins < 930;
+  else if (day === 5) open = (mins >= 555 && mins < 720) || (mins >= 870 && mins < 990);
+  const dot = document.getElementById('ms-dot');
+  const lbl = document.getElementById('ms-label');
+  const clk = document.getElementById('psx-pkt-clock');
+  if (dot) dot.className = 'ms-dot ' + (open ? 'ms-dot-open' : 'ms-dot-closed');
+  if (lbl) { lbl.className = 'ms-label ' + (open ? 'ms-label-open' : 'ms-label-closed'); lbl.textContent = open ? 'MARKET OPEN' : 'MARKET CLOSED'; }
+  if (clk) clk.textContent = `PKT ${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+}
+setInterval(updatePSXStatus, 1000);
+updatePSXStatus();
+
+/* Hardcoded PSX data */
+const PSX_ANN = {
+  OBOY: [
+    ['2026-04-30','Quarterly Report Q3 2026','Financial Results'],
+    ['2026-04-22','Notice of Board Meeting','Board Meetings'],
+    ['2026-03-04','Half Year Financial Results','Financial Results'],
+    ['2026-03-02','Half Year &amp; Quarter Results','Financial Results'],
+    ['2026-02-26','Corporate Briefing Presentation','Others'],
+    ['2026-02-24','Corporate Briefing Session','Others'],
+    ['2026-02-20','Notice of Board Meeting','Board Meetings'],
+    ['2026-01-30','AGM Resolutions Passed','Board Meetings'],
+    ['2026-01-23','Quarterly Report Q2 2026','Financial Results'],
+    ['2026-01-14','Disclosure of Interest','Others'],
+    ['2026-01-09','AGM Notice in Newspapers','Board Meetings'],
+    ['2025-12-29','Material Information','Others'],
+    ['2025-12-10','Disclosure of Interest','Others'],
+  ]
+};
+const PSX_INSIDER = {
+  OBOY: [
+    ['2026-01-14','Mr. Inam Ullah (Company Secretary)','Sell','4,500','Rs. 13.31','Clause 5.6.4'],
+    ['2025-12-29','Mr. Khawaja Usman Arif (Executive)','Sell','207,000','Rs. 11.91','Clause 5.6.4'],
+  ]
+};
+
+function psxCatBadge(cat) {
+  const cls = cat==='Financial Results' ? 'badge-fin' : cat==='Board Meetings' ? 'badge-bm' : 'badge-oth';
+  return `<span class="psx-badge ${cls}">${cat}</span>`;
+}
+function renderPSXAnn(sym) {
+  const w = document.getElementById('psx-announcements-wrap');
+  const rows = PSX_ANN[sym];
+  if (!rows) { w.innerHTML = '<div class="psx-empty">No announcements data available yet.</div>'; return; }
+  w.innerHTML = `<div class="psx-tbl-wrap"><table class="psx-tbl">
+    <thead><tr><th>Date</th><th>Title</th><th>Category</th></tr></thead>
+    <tbody>${rows.map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td><td>${psxCatBadge(r[2])}</td></tr>`).join('')}</tbody>
+    </table></div>`;
+}
+function renderPSXInsider(sym) {
+  const w = document.getElementById('psx-insider-wrap');
+  const rows = PSX_INSIDER[sym];
+  if (!rows) { w.innerHTML = '<div class="psx-empty">No insider transactions data available yet.</div>'; return; }
+  w.innerHTML = `<div class="psx-tbl-wrap"><table class="psx-tbl">
+    <thead><tr><th>Date</th><th>Executive</th><th>Nature</th><th>Shares</th><th>Rate</th><th>Regulation</th></tr></thead>
+    <tbody>${rows.map(r=>`<tr>
+      <td>${r[0]}</td><td>${r[1]}</td>
+      <td><span class="psx-badge ${r[2]==='Sell'?'badge-sell':'badge-buy'}">${r[2]}</span></td>
+      <td>${r[3]}</td><td>${r[4]}</td><td>${r[5]}</td>
+    </tr>`).join('')}</tbody></table></div>`;
+}
+function psxPopulatePrice(sym) {
+  const row = psxData && psxData[sym];
+  const set = (id, v) => { const e = document.getElementById(id); if (e) e.textContent = v || '--'; };
+  if (!row) {
+    ['ph-symbol','ph-company','ph-price','ph-change','ph-volume','ph-updated','ov-open','ov-high','ov-low','ov-ldcp','ov-1y','ov-ytd'].forEach(id => set(id, '--'));
+    set('ph-symbol', sym); return;
+  }
+  const up = parseFloat((row['Change'] || '0').replace(/[^-\d.]/g, '')) >= 0;
+  set('ph-symbol',  row['Symbol']);
+  set('ph-company', row['Company Name']);
+  set('ph-price',   'Rs. ' + (row['Current Price'] || '--'));
+  document.getElementById('ph-price').className  = 'ph-price '  + (up ? 'ph-price-up'  : 'ph-price-dn');
+  set('ph-change', (up ? '▲ ' : '▼ ') + (row['Change'] || '--') + '   ' + (row['Change %'] || '--') + '%');
+  document.getElementById('ph-change').className = 'ph-change ' + (up ? 'ph-change-up' : 'ph-change-dn');
+  set('ph-volume',  row['Volume']);
+  const upd = (row['Last Updated'] || '').split(' ');
+  set('ph-updated', upd[1] ? upd[1] + ' PKT' : '--');
+  set('ov-open',  row['Open']);
+  set('ov-high',  row['High']);
+  set('ov-low',   row['Low']);
+  set('ov-ldcp',  row['LDCP']);
+  const yr  = parseFloat(row['1Y Change']  || '0');
+  const ytd = parseFloat(row['YTD Change'] || '0');
+  set('ov-1y',  row['1Y Change']  ? row['1Y Change']  + '%' : '--');
+  set('ov-ytd', row['YTD Change'] ? row['YTD Change'] + '%' : '--');
+  document.getElementById('ov-1y').className  = 'ohlcv-value ' + (yr  >= 0 ? 'green' : 'red');
+  document.getElementById('ov-ytd').className = 'ohlcv-value ' + (ytd >= 0 ? 'green' : 'red');
+}
+function psxSelectTicker(sym) {
+  const panel  = document.getElementById('psx-stock-panel');
+  const errEl  = document.getElementById('psx-error-state');
+  const ldEl   = document.getElementById('psx-loading-state');
+  if (!sym) { panel.classList.remove('visible'); return; }
+  const frame   = document.getElementById('psx-chart-frame');
+  const chartLd = document.getElementById('chart-loading');
+  if (chartLd) chartLd.style.display = 'flex';
+  frame.src = `https://raw.githubusercontent.com/zulfiqaralimir/PSX_DATA/main/charts/${sym}_candles.html`;
+  renderPSXAnn(sym);
+  renderPSXInsider(sym);
+  if (psxData === null) {
+    ldEl.style.display = 'block'; errEl.style.display = 'none';
+    loadPSXData().then(() => {
+      ldEl.style.display = 'none';
+      if (psxData === false) errEl.style.display = 'block';
+      else { errEl.style.display = 'none'; psxPopulatePrice(sym); }
+    });
+  } else if (psxData === false) {
+    errEl.style.display = 'block'; ldEl.style.display = 'none';
+  } else {
+    errEl.style.display = 'none'; ldEl.style.display = 'none';
+    psxPopulatePrice(sym);
+  }
+  panel.classList.add('visible');
+}
+loadPSXData(); // pre-fetch on load
 
 /* ── FORM ── */
 function submitForm() {
