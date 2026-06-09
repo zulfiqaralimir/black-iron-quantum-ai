@@ -708,6 +708,23 @@ footer {
 }
 .chart-frame { width: 100%; height: 500px; border: none; display: block; }
 
+.chart-mode-toggle {
+  display: flex;
+  border-bottom: 1px solid var(--navy-border);
+  margin-bottom: 0;
+}
+.chart-mode-btn {
+  font-family: var(--mono); font-size: 0.58rem; letter-spacing: 0.14em;
+  text-transform: uppercase; cursor: crosshair;
+  padding: 0.55rem 1.6rem;
+  border: none; border-right: 1px solid var(--navy-border);
+  background: var(--navy-card); color: var(--white-dim);
+  transition: all 0.2s;
+}
+.chart-mode-btn:last-child { border-right: none; }
+.chart-mode-btn:hover { background: var(--navy-light); color: var(--white); }
+.chart-mode-btn.active { background: var(--navy-light); color: var(--green); }
+
 .psx-tbl-wrap {
   background: var(--navy-card); border: 1px solid var(--navy-border);
   overflow-x: auto;
@@ -1338,6 +1355,10 @@ footer {
       <!-- C: INTRADAY CHART -->
       <div class="psx-section">
         <div class="psx-section-title">Intraday Chart</div>
+        <div class="chart-mode-toggle">
+          <button class="chart-mode-btn active" id="btn-today"      onclick="setChartMode('today')">Today</button>
+          <button class="chart-mode-btn"        id="btn-continuous" onclick="setChartMode('continuous')">Continuous</button>
+        </div>
         <div class="chart-frame-wrap">
           <div class="chart-loading" id="chart-loading">Chart loading...</div>
           <iframe class="chart-frame" id="psx-chart-frame" src=""
@@ -1447,6 +1468,21 @@ function showPage(id) {
 const PSX_CSV_URL = 'https://docs.google.com/spreadsheets/d/1HI8lEQD9K9XjSVwfOplUN0Nc-Y1XMlE39fkwRpr-voc/export?format=csv&sheet=PSX%20Stock%20Data';
 let psxData = null; // null=loading, false=failed, object=ready
 let psxFetchPromise = null;
+let currentPsxTicker = null;
+let chartMode = 'today';
+
+function setChartMode(mode) {
+  chartMode = mode;
+  document.getElementById('btn-today').classList.toggle('active', mode === 'today');
+  document.getElementById('btn-continuous').classList.toggle('active', mode === 'continuous');
+  if (currentPsxTicker) {
+    const frame   = document.getElementById('psx-chart-frame');
+    const chartLd = document.getElementById('chart-loading');
+    if (chartLd) chartLd.style.display = 'flex';
+    const suffix = mode === 'continuous' ? '_continuous.html' : '_candles.html';
+    frame.src = `https://zulfiqaralimir.github.io/PSX_DATA/charts/${currentPsxTicker}${suffix}`;
+  }
+}
 
 function parseCSVLine(line) {
   const res = []; let cur = '', inQ = false;
@@ -1581,10 +1617,12 @@ function psxSelectTicker(sym) {
   const errEl  = document.getElementById('psx-error-state');
   const ldEl   = document.getElementById('psx-loading-state');
   if (!sym) { panel.classList.remove('visible'); return; }
+  currentPsxTicker = sym;
   const frame   = document.getElementById('psx-chart-frame');
   const chartLd = document.getElementById('chart-loading');
   if (chartLd) chartLd.style.display = 'flex';
-  frame.src = `https://zulfiqaralimir.github.io/PSX_DATA/charts/${sym}_candles.html`;
+  const suffix = chartMode === 'continuous' ? '_continuous.html' : '_candles.html';
+  frame.src = `https://zulfiqaralimir.github.io/PSX_DATA/charts/${sym}${suffix}`;
   renderPSXAnn(sym);
   renderPSXInsider(sym);
   if (psxData === null) {
