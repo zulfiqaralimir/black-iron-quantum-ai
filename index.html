@@ -1035,8 +1035,9 @@ footer {
    HERO SLIDER
 ═══════════════════════════════════════════ */
 .hs-wrap {
-  position: relative; width: 100%; height: 540px;
-  overflow: hidden; background: #0c0c12;
+  position: relative; width: 100%; height: 640px;
+  overflow: hidden;
+  background: linear-gradient(145deg, #06060e 0%, #0d0d1c 55%, #080810 100%);
 }
 .hs-bg-canvas {
   position: absolute; inset: 0; width: 100%; height: 100%;
@@ -1044,82 +1045,103 @@ footer {
 }
 .hs-bg-canvas.active { opacity: 1; }
 
+/* Left-side vignette so text stays readable over the glow */
+.hs-text-fade {
+  position: absolute; inset: 0;
+  background: linear-gradient(to right, rgba(6,6,14,0.72) 0%, rgba(6,6,14,0.35) 36%, transparent 56%);
+  z-index: 1; pointer-events: none;
+}
+
 .hs-slide {
   position: absolute; inset: 0; display: flex; align-items: center;
-  opacity: 0; transition: opacity 1.1s ease; pointer-events: none; z-index: 1;
+  opacity: 0; transition: opacity 1.1s ease; pointer-events: none; z-index: 2;
 }
 .hs-slide.active { opacity: 1; pointer-events: auto; }
 
-.hs-glow { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
-.hs-glow-fire   { background: radial-gradient(ellipse at 72% 50%, rgba(224,90,0,0.38) 0%, rgba(180,50,0,0.12) 45%, transparent 65%); }
-.hs-glow-matrix { background: radial-gradient(ellipse at 72% 50%, rgba(0,204,68,0.28) 0%, rgba(0,120,40,0.10) 45%, transparent 65%); }
+.hs-glow { position: absolute; inset: 0; pointer-events: none; }
+.hs-glow-fire {
+  background:
+    radial-gradient(ellipse at 66% 44%, rgba(255,100,0,0.46) 0%, rgba(210,55,0,0.20) 34%, transparent 58%),
+    radial-gradient(ellipse at 88% 78%, rgba(180,40,0,0.18) 0%, transparent 38%);
+}
+.hs-glow-matrix {
+  background:
+    radial-gradient(ellipse at 66% 44%, rgba(0,235,72,0.34) 0%, rgba(0,145,42,0.16) 34%, transparent 58%),
+    radial-gradient(ellipse at 88% 78%, rgba(0,165,52,0.14) 0%, transparent 38%);
+}
 
 .hs-col-text {
-  width: 46%; padding-left: 52px; padding-right: 24px;
-  position: relative; z-index: 2; flex-shrink: 0;
+  width: 44%; padding-left: 64px; padding-right: 28px;
+  position: relative; z-index: 3; flex-shrink: 0;
 }
 .hs-col-kb {
-  width: 54%; display: flex; flex-direction: column;
-  align-items: center; justify-content: center; position: relative; z-index: 2;
+  width: 56%; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; position: relative; z-index: 3;
 }
 
 .hs-badge, .hs-headline, .hs-subline, .hs-effect-tag {
-  display: block; opacity: 0; transform: translateY(16px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
+  display: block; opacity: 0; transform: translateY(18px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
 }
 .hs-slide.active .hs-badge      { opacity: 1; transform: translateY(0); transition-delay: 0.10s; }
-.hs-slide.active .hs-headline   { opacity: 1; transform: translateY(0); transition-delay: 0.30s; }
-.hs-slide.active .hs-subline    { opacity: 1; transform: translateY(0); transition-delay: 0.52s; }
-.hs-slide.active .hs-effect-tag { opacity: 1; transform: translateY(0); transition-delay: 0.72s; }
+.hs-slide.active .hs-headline   { opacity: 1; transform: translateY(0); transition-delay: 0.28s; }
+.hs-slide.active .hs-subline    { opacity: 1; transform: translateY(0); transition-delay: 0.50s; }
+.hs-slide.active .hs-effect-tag { opacity: 1; transform: translateY(0); transition-delay: 0.70s; }
 
 .hs-badge {
-  font-family: 'IBM Plex Mono', monospace; font-size: 0.82rem;
-  letter-spacing: 0.26em; font-variant: small-caps; margin-bottom: 1rem;
+  font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem;
+  letter-spacing: 0.26em; font-variant: small-caps;
+  display: inline-block; margin-bottom: 1.2rem;
+  padding: 0.32rem 0.9rem; border-radius: 3px;
 }
 .hs-headline {
-  font-size: 56px; font-weight: 800; text-transform: uppercase;
-  letter-spacing: -1px; line-height: 1.1; color: #fff; margin-bottom: 1rem;
+  font-size: 72px; font-weight: 800; text-transform: uppercase;
+  letter-spacing: -2px; line-height: 1.04; color: #fff; margin-bottom: 1.1rem;
 }
 .hs-subline {
-  font-family: 'IBM Plex Mono', monospace; font-size: 0.82rem;
-  letter-spacing: 0.16em; color: rgba(255,255,255,0.55); text-transform: uppercase;
+  font-family: 'IBM Plex Mono', monospace; font-size: 0.88rem;
+  letter-spacing: 0.14em; color: rgba(255,255,255,0.68); text-transform: uppercase;
+  line-height: 1.85;
 }
 .hs-effect-tag {
-  font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem;
-  letter-spacing: 0.22em; text-transform: uppercase; margin-top: 1.6rem;
+  font-family: 'IBM Plex Mono', monospace; font-size: 0.66rem;
+  letter-spacing: 0.22em; text-transform: uppercase; margin-top: 1.7rem;
 }
 
 /* Keyboard */
 .hs-keyboard-wrap { display: flex; flex-direction: column; align-items: center; }
 .hs-keyboard {
-  transform: perspective(900px) rotateX(26deg) rotateZ(-2deg);
-  background: #14141c; border: 1px solid #28283a; border-radius: 12px; padding: 18px 20px 15px;
+  transform: perspective(1000px) rotateX(20deg) rotateZ(-2deg);
+  background: #171722; border: 1px solid #30304a; border-radius: 14px; padding: 20px 22px 16px;
+  box-shadow: 0 28px 64px rgba(0,0,0,0.75), 0 8px 22px rgba(0,0,0,0.5);
 }
 .hs-kb-row { display: flex; gap: 6px; margin-bottom: 6px; justify-content: center; }
 .hs-key {
   display: inline-flex; align-items: center; justify-content: center;
-  background: #1c1c26; border-top: 2px solid #30303e; border-bottom: 2px solid #06060a;
-  border-left: 1px solid #22222e; border-right: 1px solid #22222e; border-radius: 4px;
-  font-family: 'IBM Plex Mono', monospace; font-size: 9px; color: rgba(255,255,255,0.38);
-  flex-shrink: 0; height: 38px;
+  background: linear-gradient(180deg, #262636 0%, #1e1e2e 100%);
+  border-top: 2px solid #3a3a52; border-bottom: 2px solid #07070e;
+  border-left: 1px solid #28283c; border-right: 1px solid #28283c; border-radius: 5px;
+  font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: rgba(255,255,255,0.48);
+  flex-shrink: 0; height: 44px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.07), 0 2px 5px rgba(0,0,0,0.45);
 }
-.hs-key.w1  { width: 44px; }
-.hs-key.w15 { width: 62px; }
-.hs-key.w2  { width: 86px; }
-.hs-key.w25 { width: 104px; }
-.hs-key.w6  { width: 198px; }
+.hs-key.w1  { width: 50px; }
+.hs-key.w15 { width: 70px; }
+.hs-key.w2  { width: 96px; }
+.hs-key.w25 { width: 118px; }
+.hs-key.w6  { width: 224px; }
 
-.hs-underglow { width: 430px; height: 8px; border-radius: 50%; filter: blur(14px); margin: 4px auto 4px; }
-.hs-trackpad  { width: 134px; height: 80px; background: #121218; border: 1px solid #24243040; border-radius: 6px; margin-top: 7px; }
+.hs-underglow { width: 490px; height: 10px; border-radius: 50%; filter: blur(16px); margin: 5px auto 5px; }
+.hs-trackpad  { width: 150px; height: 90px; background: #13131e; border: 1px solid #282840; border-radius: 8px; margin-top: 8px; box-shadow: inset 0 1px 0 rgba(255,255,255,0.04); }
 
-.hs-progress  { position: absolute; bottom: 0; left: 0; height: 2px; width: 0%; z-index: 10; }
-.hs-dots      { position: absolute; bottom: 14px; left: 0; right: 0; display: flex; justify-content: center; gap: 8px; z-index: 10; }
+.hs-progress  { position: absolute; bottom: 0; left: 0; height: 3px; width: 0%; z-index: 10; }
+.hs-dots      { position: absolute; bottom: 18px; left: 0; right: 0; display: flex; justify-content: center; gap: 8px; z-index: 10; }
 .hs-dot {
-  height: 3px; border-radius: 2px; width: 26px; cursor: pointer;
-  border: none; padding: 0; background: rgba(255,255,255,0.18);
+  height: 4px; border-radius: 2px; width: 28px; cursor: pointer;
+  border: none; padding: 0; background: rgba(255,255,255,0.15);
   transition: width 0.3s ease, background-color 0.3s ease;
 }
-.hs-dot.active { width: 38px; }
+.hs-dot.active { width: 44px; }
 </style>
 </head>
 <body>
@@ -1194,14 +1216,17 @@ footer {
     <canvas id="bgCanvas0" class="hs-bg-canvas active"></canvas>
     <canvas id="bgCanvas1" class="hs-bg-canvas"></canvas>
 
+    <!-- Left text vignette -->
+    <div class="hs-text-fade"></div>
+
     <!-- ── SLIDE 1: FERROQUANT Capital ── -->
     <div class="hs-slide active" data-slide="0">
       <div class="hs-glow hs-glow-fire"></div>
       <div class="hs-col-text">
-        <span class="hs-badge" style="color:#e05a00;">FERROQUANT Capital</span>
-        <span class="hs-headline">QUANTIFY.<br>DOMINATE.<br>OUTPERFORM.</span>
+        <span class="hs-badge" style="color:#e05a00; background:rgba(224,90,0,0.12); border:1px solid rgba(224,90,0,0.35);">FERROQUANT Capital</span>
+        <span class="hs-headline" style="text-shadow:0 0 80px rgba(255,100,0,0.28), 0 2px 6px rgba(0,0,0,0.6);">QUANTIFY.<br>DOMINATE.<br>OUTPERFORM.</span>
         <span class="hs-subline">AI-Driven Alpha &nbsp;·&nbsp; PSX Markets &nbsp;·&nbsp; Institutional Grade</span>
-        <span class="hs-effect-tag" style="color:rgba(224,90,0,0.55);">▸ FIRE BURN MODE ACTIVE</span>
+        <span class="hs-effect-tag" style="color:rgba(224,90,0,0.65);">▸ FIRE BURN MODE ACTIVE</span>
       </div>
       <div class="hs-col-kb">
         <div class="hs-keyboard-wrap">
@@ -1223,10 +1248,10 @@ footer {
     <div class="hs-slide" data-slide="1">
       <div class="hs-glow hs-glow-matrix"></div>
       <div class="hs-col-text">
-        <span class="hs-badge" style="color:#00cc44;">Black Iron Quantum AI</span>
-        <span class="hs-headline">ENGINEER THE EDGE.<br>OWN THE<br>FUTURE.</span>
+        <span class="hs-badge" style="color:#00cc44; background:rgba(0,204,68,0.10); border:1px solid rgba(0,204,68,0.32);">Black Iron Quantum AI</span>
+        <span class="hs-headline" style="text-shadow:0 0 80px rgba(0,220,68,0.24), 0 2px 6px rgba(0,0,0,0.6);">ENGINEER THE EDGE.<br>OWN THE<br>FUTURE.</span>
         <span class="hs-subline">Multi-Agent Systems &nbsp;·&nbsp; Deep Learning Finance &nbsp;·&nbsp; Agentic AI</span>
-        <span class="hs-effect-tag" style="color:rgba(0,204,68,0.55);">▸ MATRIX RAIN MODE ACTIVE</span>
+        <span class="hs-effect-tag" style="color:rgba(0,204,68,0.65);">▸ MATRIX RAIN MODE ACTIVE</span>
       </div>
       <div class="hs-col-kb">
         <div class="hs-keyboard-wrap">
@@ -2109,7 +2134,7 @@ document.addEventListener('DOMContentLoaded', () => {
           var flicker = Math.sin(t + ki * 0.8) * 0.12 + (Math.random() - 0.5) * 0.08;
           var b = Math.min(1, Math.max(0, heat + flicker));
           if (b < 0.06) {
-            key.style.background = '#1c1c26'; key.style.boxShadow = '';
+            key.style.background = 'linear-gradient(180deg,#262636 0%,#1e1e2e 100%)'; key.style.boxShadow = '';
           } else {
             var r  = Math.round(255 * Math.min(1, b * 1.15));
             var gv = Math.round(70 * b * b);
@@ -2138,7 +2163,7 @@ document.addEventListener('DOMContentLoaded', () => {
       t += 0.05;
       rows.forEach(function (row) {
         row.querySelectorAll('.hs-key').forEach(function (k) {
-          k.style.background = '#1c1c26'; k.style.boxShadow = ''; k.style.color = 'rgba(255,255,255,0.38)';
+          k.style.background = 'linear-gradient(180deg,#262636 0%,#1e1e2e 100%)'; k.style.boxShadow = ''; k.style.color = 'rgba(255,255,255,0.48)';
         });
       });
       drops.forEach(function (drop, col) {
@@ -2173,7 +2198,7 @@ document.addEventListener('DOMContentLoaded', () => {
     glowIntervals.forEach(function (iv, i) { if (iv) { clearInterval(iv); glowIntervals[i] = null; } });
     animFrames.forEach(function (af, i)   { if (af) { cancelAnimationFrame(af); animFrames[i] = null; } });
     document.querySelectorAll('.hs-key').forEach(function (k) {
-      k.style.background = '#1c1c26'; k.style.boxShadow = ''; k.style.color = 'rgba(255,255,255,0.38)';
+      k.style.background = 'linear-gradient(180deg,#262636 0%,#1e1e2e 100%)'; k.style.boxShadow = ''; k.style.color = 'rgba(255,255,255,0.48)';
     });
   }
 
