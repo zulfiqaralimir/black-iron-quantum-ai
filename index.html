@@ -1035,8 +1035,8 @@ footer {
    HERO SLIDER
 ═══════════════════════════════════════════ */
 .hs-wrap {
-  position: relative; width: 100%; height: 460px;
-  overflow: hidden; background: #060608;
+  position: relative; width: 100%; height: 540px;
+  overflow: hidden; background: #0c0c12;
 }
 .hs-bg-canvas {
   position: absolute; inset: 0; width: 100%; height: 100%;
@@ -1051,11 +1051,11 @@ footer {
 .hs-slide.active { opacity: 1; pointer-events: auto; }
 
 .hs-glow { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
-.hs-glow-fire   { background: radial-gradient(ellipse at 74% 50%, rgba(224,90,0,0.22) 0%, transparent 60%); }
-.hs-glow-matrix { background: radial-gradient(ellipse at 74% 50%, rgba(0,204,68,0.16) 0%, transparent 60%); }
+.hs-glow-fire   { background: radial-gradient(ellipse at 72% 50%, rgba(224,90,0,0.38) 0%, rgba(180,50,0,0.12) 45%, transparent 65%); }
+.hs-glow-matrix { background: radial-gradient(ellipse at 72% 50%, rgba(0,204,68,0.28) 0%, rgba(0,120,40,0.10) 45%, transparent 65%); }
 
 .hs-col-text {
-  width: 46%; padding-left: 48px; padding-right: 20px;
+  width: 46%; padding-left: 52px; padding-right: 24px;
   position: relative; z-index: 2; flex-shrink: 0;
 }
 .hs-col-kb {
@@ -1073,44 +1073,44 @@ footer {
 .hs-slide.active .hs-effect-tag { opacity: 1; transform: translateY(0); transition-delay: 0.72s; }
 
 .hs-badge {
-  font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem;
-  letter-spacing: 0.28em; font-variant: small-caps; margin-bottom: 0.9rem;
+  font-family: 'IBM Plex Mono', monospace; font-size: 0.82rem;
+  letter-spacing: 0.26em; font-variant: small-caps; margin-bottom: 1rem;
 }
 .hs-headline {
-  font-size: 42px; font-weight: 800; text-transform: uppercase;
-  letter-spacing: -1px; line-height: 1.12; color: #fff; margin-bottom: 0.85rem;
+  font-size: 56px; font-weight: 800; text-transform: uppercase;
+  letter-spacing: -1px; line-height: 1.1; color: #fff; margin-bottom: 1rem;
 }
 .hs-subline {
-  font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem;
-  letter-spacing: 0.16em; color: rgba(255,255,255,0.42); text-transform: uppercase;
+  font-family: 'IBM Plex Mono', monospace; font-size: 0.82rem;
+  letter-spacing: 0.16em; color: rgba(255,255,255,0.55); text-transform: uppercase;
 }
 .hs-effect-tag {
-  font-family: 'IBM Plex Mono', monospace; font-size: 0.54rem;
-  letter-spacing: 0.22em; text-transform: uppercase; margin-top: 1.8rem;
+  font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem;
+  letter-spacing: 0.22em; text-transform: uppercase; margin-top: 1.6rem;
 }
 
 /* Keyboard */
 .hs-keyboard-wrap { display: flex; flex-direction: column; align-items: center; }
 .hs-keyboard {
   transform: perspective(900px) rotateX(26deg) rotateZ(-2deg);
-  background: #0b0b0f; border: 1px solid #181820; border-radius: 10px; padding: 14px 16px 12px;
+  background: #14141c; border: 1px solid #28283a; border-radius: 12px; padding: 18px 20px 15px;
 }
-.hs-kb-row { display: flex; gap: 5px; margin-bottom: 5px; justify-content: center; }
+.hs-kb-row { display: flex; gap: 6px; margin-bottom: 6px; justify-content: center; }
 .hs-key {
   display: inline-flex; align-items: center; justify-content: center;
-  background: #101014; border-top: 2px solid #202028; border-bottom: 2px solid #000;
-  border-left: 1px solid #181820; border-right: 1px solid #181820; border-radius: 4px;
-  font-family: 'IBM Plex Mono', monospace; font-size: 8px; color: rgba(255,255,255,0.27);
-  flex-shrink: 0; height: 32px;
+  background: #1c1c26; border-top: 2px solid #30303e; border-bottom: 2px solid #06060a;
+  border-left: 1px solid #22222e; border-right: 1px solid #22222e; border-radius: 4px;
+  font-family: 'IBM Plex Mono', monospace; font-size: 9px; color: rgba(255,255,255,0.38);
+  flex-shrink: 0; height: 38px;
 }
-.hs-key.w1  { width: 36px; }
-.hs-key.w15 { width: 50px; }
-.hs-key.w2  { width: 70px; }
-.hs-key.w25 { width: 84px; }
-.hs-key.w6  { width: 162px; }
+.hs-key.w1  { width: 44px; }
+.hs-key.w15 { width: 62px; }
+.hs-key.w2  { width: 86px; }
+.hs-key.w25 { width: 104px; }
+.hs-key.w6  { width: 198px; }
 
-.hs-underglow { width: 350px; height: 6px; border-radius: 50%; filter: blur(12px); margin: 3px auto 3px; }
-.hs-trackpad  { width: 110px; height: 66px; background: #0e0e12; border: 1px solid #1c1c24; border-radius: 5px; margin-top: 6px; }
+.hs-underglow { width: 430px; height: 8px; border-radius: 50%; filter: blur(14px); margin: 4px auto 4px; }
+.hs-trackpad  { width: 134px; height: 80px; background: #121218; border: 1px solid #24243040; border-radius: 6px; margin-top: 7px; }
 
 .hs-progress  { position: absolute; bottom: 0; left: 0; height: 2px; width: 0%; z-index: 10; }
 .hs-dots      { position: absolute; bottom: 14px; left: 0; right: 0; display: flex; justify-content: center; gap: 8px; z-index: 10; }
@@ -2109,7 +2109,7 @@ document.addEventListener('DOMContentLoaded', () => {
           var flicker = Math.sin(t + ki * 0.8) * 0.12 + (Math.random() - 0.5) * 0.08;
           var b = Math.min(1, Math.max(0, heat + flicker));
           if (b < 0.06) {
-            key.style.background = '#101014'; key.style.boxShadow = '';
+            key.style.background = '#1c1c26'; key.style.boxShadow = '';
           } else {
             var r  = Math.round(255 * Math.min(1, b * 1.15));
             var gv = Math.round(70 * b * b);
@@ -2138,7 +2138,7 @@ document.addEventListener('DOMContentLoaded', () => {
       t += 0.05;
       rows.forEach(function (row) {
         row.querySelectorAll('.hs-key').forEach(function (k) {
-          k.style.background = '#101014'; k.style.boxShadow = ''; k.style.color = 'rgba(255,255,255,0.27)';
+          k.style.background = '#1c1c26'; k.style.boxShadow = ''; k.style.color = 'rgba(255,255,255,0.38)';
         });
       });
       drops.forEach(function (drop, col) {
@@ -2173,7 +2173,7 @@ document.addEventListener('DOMContentLoaded', () => {
     glowIntervals.forEach(function (iv, i) { if (iv) { clearInterval(iv); glowIntervals[i] = null; } });
     animFrames.forEach(function (af, i)   { if (af) { cancelAnimationFrame(af); animFrames[i] = null; } });
     document.querySelectorAll('.hs-key').forEach(function (k) {
-      k.style.background = '#101014'; k.style.boxShadow = ''; k.style.color = 'rgba(255,255,255,0.27)';
+      k.style.background = '#1c1c26'; k.style.boxShadow = ''; k.style.color = 'rgba(255,255,255,0.38)';
     });
   }
 
