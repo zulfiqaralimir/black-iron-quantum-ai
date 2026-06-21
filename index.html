@@ -2558,6 +2558,77 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  /* Big Dipper + Polaris (North Star) */
+  function drawConstellation(W, H) {
+    /* index 0 = Polaris, 1-7 = Big Dipper (Dubhe→Alkaid) */
+    const ST = [
+      { x: W*0.80, y: H*0.05, r: 5.2, north: true  }, // Polaris
+      { x: W*0.72, y: H*0.11, r: 2.8, north: false }, // Dubhe  (pointer)
+      { x: W*0.70, y: H*0.19, r: 2.5, north: false }, // Merak  (pointer)
+      { x: W*0.61, y: H*0.20, r: 2.2, north: false }, // Phecda
+      { x: W*0.62, y: H*0.12, r: 2.0, north: false }, // Megrez
+      { x: W*0.55, y: H*0.12, r: 2.6, north: false }, // Alioth
+      { x: W*0.49, y: H*0.07, r: 2.4, north: false }, // Mizar
+      { x: W*0.43, y: H*0.11, r: 2.6, north: false }, // Alkaid
+    ];
+    /* bowl + handle edges */
+    const EDGES = [[7,6],[6,5],[5,4],[4,1],[4,3],[3,2],[2,1]];
+
+    bx.save();
+
+    /* Connector lines */
+    bx.strokeStyle = 'rgba(160,190,255,0.30)';
+    bx.lineWidth = 0.9;
+    bx.setLineDash([]);
+    EDGES.forEach(([a,b]) => {
+      bx.beginPath(); bx.moveTo(ST[a].x,ST[a].y); bx.lineTo(ST[b].x,ST[b].y); bx.stroke();
+    });
+
+    /* Dashed pointer: Dubhe → Polaris */
+    bx.strokeStyle = 'rgba(255,215,80,0.40)';
+    bx.lineWidth = 0.8;
+    bx.setLineDash([4,7]);
+    bx.beginPath(); bx.moveTo(ST[1].x,ST[1].y); bx.lineTo(ST[0].x,ST[0].y); bx.stroke();
+    bx.setLineDash([]);
+
+    ST.forEach((s,i) => {
+      const tw = 0.82 + Math.sin(t*0.028 + i*1.4)*0.18;
+      if (s.north) {
+        /* 8-spike cross rays */
+        for (let sp=0; sp<8; sp++) {
+          const ang = sp*Math.PI/4 + Math.sin(t*0.012)*0.04;
+          const slen = sp%2===0 ? 32 : 16;
+          const sa = (sp%2===0 ? 0.75 : 0.42)*tw;
+          const sg = bx.createLinearGradient(s.x,s.y, s.x+Math.cos(ang)*slen, s.y+Math.sin(ang)*slen);
+          sg.addColorStop(0,`rgba(255,240,160,${sa})`); sg.addColorStop(1,'rgba(255,240,160,0)');
+          bx.beginPath(); bx.moveTo(s.x,s.y); bx.lineTo(s.x+Math.cos(ang)*slen, s.y+Math.sin(ang)*slen);
+          bx.strokeStyle=sg; bx.lineWidth=sp%2===0?2.2:1.1; bx.stroke();
+        }
+        /* Glow halo */
+        const hg=bx.createRadialGradient(s.x,s.y,0,s.x,s.y,26);
+        hg.addColorStop(0,`rgba(255,235,140,${0.55*tw})`);
+        hg.addColorStop(0.4,`rgba(255,220,100,${0.18*tw})`);
+        hg.addColorStop(1,'rgba(255,200,80,0)');
+        bx.fillStyle=hg; bx.beginPath(); bx.arc(s.x,s.y,26,0,Math.PI*2); bx.fill();
+        /* Core */
+        bx.beginPath(); bx.arc(s.x,s.y,s.r*tw,0,Math.PI*2);
+        bx.fillStyle=`rgba(255,252,230,${0.97*tw})`; bx.fill();
+        /* Label */
+        bx.fillStyle=`rgba(255,215,80,${0.80*tw})`;
+        bx.font='bold 9px monospace'; bx.textAlign='center';
+        bx.fillText('★ POLARIS', s.x, s.y-15);
+      } else {
+        /* Blue-white dipper star */
+        const gr=bx.createRadialGradient(s.x,s.y,0,s.x,s.y,s.r*3.5);
+        gr.addColorStop(0,`rgba(190,210,255,${0.60*tw})`); gr.addColorStop(1,'rgba(160,190,255,0)');
+        bx.fillStyle=gr; bx.beginPath(); bx.arc(s.x,s.y,s.r*3.5,0,Math.PI*2); bx.fill();
+        bx.beginPath(); bx.arc(s.x,s.y,s.r*tw,0,Math.PI*2);
+        bx.fillStyle=`rgba(220,232,255,${0.90*tw})`; bx.fill();
+      }
+    });
+    bx.restore();
+  }
+
   function drawBg() {
     const W = bc.width, H = bc.height;
     const g = bx.createRadialGradient(W * 0.5, H * 0.35, 40, W * 0.5, H * 0.55, W * 0.8);
@@ -2606,6 +2677,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       }
     }
+
+    drawConstellation(W, H);
   }
 
   /* Orb canvas */
