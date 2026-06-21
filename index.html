@@ -1319,7 +1319,18 @@ footer {
   opacity: 1;
   transform: translateX(-50%) scale(1);
 }
+#moon3d {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 160px;
+  height: 160px;
+  z-index: 7;
+  pointer-events: auto;
+  clip-path: circle(48% at 50% 50%);
+}
 </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
 </head>
 <body>
 
@@ -1390,6 +1401,7 @@ footer {
   <!-- SOLAR SYSTEM HERO ══════════════════════════════════════════════════ -->
   <section id="hero">
     <canvas id="bgc"></canvas>
+  <canvas id="moon3d"></canvas>
     <div class="hi">
       <p class="eye">Black Iron Quantum AI Group</p>
       <h1 class="htitle">Eight Companies.<br><span class="hacc">One Vision.</span></h1>
@@ -2459,6 +2471,51 @@ document.addEventListener('DOMContentLoaded', () => {
 })();
 </script>
 
+<!-- ══ v4.0 THREE.JS MOON — texture + ACES tone mapping + fill light + 128-seg sphere ══ -->
+<script>
+(function(){
+  var el = document.getElementById('moon3d');
+  if (!el || typeof THREE === 'undefined') return;
+  var W = 150, H = 150;
+  var renderer = new THREE.WebGLRenderer({ canvas: el, alpha: true, antialias: true });
+  renderer.setSize(W, H);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 1.35;
+  renderer.setSize(160, 160);
+  var scene = new THREE.Scene();
+  var camera = new THREE.PerspectiveCamera(34, 1, 0.1, 100);
+  camera.position.z = 4.4;
+  /* Ambient — very dark warm */
+  scene.add(new THREE.AmbientLight(0x110c04, 0.35));
+  /* Key light — sun from upper-right */
+  var sun = new THREE.DirectionalLight(0xffe8a0, 3.0);
+  sun.position.set(3, 1.5, 2);
+  scene.add(sun);
+  /* Fill light — faint earthshine from opposite side */
+  var fill = new THREE.DirectionalLight(0x1a2040, 0.18);
+  fill.position.set(-2, -1, 1);
+  scene.add(fill);
+  /* High-res sphere — 128 segments for smooth silhouette */
+  var geo = new THREE.SphereGeometry(1.3, 128, 128);
+  var mat = new THREE.MeshStandardMaterial({ roughness: 0.90, metalness: 0.02, color: 0xd4a844 });
+  var loader = new THREE.TextureLoader();
+  loader.load(
+    'https://raw.githubusercontent.com/mrdoob/three.js/r134/examples/textures/planets/moon_1024.jpg',
+    function(tex){
+      tex.anisotropy = renderer.capabilities.getMaxAnisotropy();
+      mat.map = tex; mat.color.set(0xffffff); mat.needsUpdate = true;
+    },
+    undefined,
+    function(){ /* fallback golden */ }
+  );
+  var moon = new THREE.Mesh(geo, mat);
+  scene.add(moon);
+  /* Slow realistic rotation */
+  (function animate(){ requestAnimationFrame(animate); moon.rotation.y += 0.0022; renderer.render(scene, camera); })();
+})();
+</script>
+
 <!-- ══════════ SOLAR SYSTEM HERO ══════════ -->
 <script>
 (function(){
@@ -2726,6 +2783,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const r = oc.getBoundingClientRect();
     const cx = (e.clientX - r.left) * (CW / r.width);
     const cy = (e.clientY - r.top) * (CH / r.height);
+    /* Planet clicks */
     S.forEach((_, i) => {
       const { x: nx, y: ny } = nodePos(i, t);
       if (Math.hypot(cx - nx, cy - ny) < NR * Math.max(ns[i].s, 1) * 1.4) {
@@ -2989,6 +3047,109 @@ document.addEventListener('DOMContentLoaded', () => {
     ctx.textBaseline = 'middle';
     ctx.fillText(s.short.length > 7 ? s.short.slice(0, 7) : s.short, nx, ny);
     ctx.restore();
+  }
+
+  function getMoonPos() { return { x: CW * 0.13, y: CH * 0.24 }; }
+  function drawMoon() { return; /* Three.js v2 handles moon */
+    const { x: px, y: py } = getMoonPos();
+    const MR = 44;
+    moonHov = Math.hypot(mx - px, my - py) < MR + 20;
+
+    /* Outer ambient glow — wide, very soft */
+    const ambient = ctx.createRadialGradient(px, py, MR * 0.5, px, py, MR * 5.5);
+    ambient.addColorStop(0,   `rgba(255,205,50,${(0.22 + Math.sin(t*0.018)*0.06).toFixed(3)})`);
+    ambient.addColorStop(0.35,'rgba(255,185,30,0.08)');
+    ambient.addColorStop(1,   'transparent');
+    ctx.fillStyle = ambient;
+    ctx.beginPath(); ctx.arc(px, py, MR * 5.5, 0, Math.PI * 2); ctx.fill();
+
+    /* Mid glow — tighter, pulsing */
+    const pulse = 0.90 + Math.sin(t * 0.022) * 0.10;
+    const mid = ctx.createRadialGradient(px, py, MR * 0.8, px, py, MR * 2.4 * pulse);
+    mid.addColorStop(0,   'rgba(255,218,65,0.30)');
+    mid.addColorStop(0.5, 'rgba(255,200,40,0.10)');
+    mid.addColorStop(1,   'transparent');
+    ctx.fillStyle = mid;
+    ctx.beginPath(); ctx.arc(px, py, MR * 2.4 * pulse, 0, Math.PI * 2); ctx.fill();
+
+    /* ── 3D sphere body ── */
+    /* Base sphere — light source from top-left */
+    const sphere = ctx.createRadialGradient(
+      px - MR * 0.32, py - MR * 0.32, MR * 0.04,   /* highlight centre */
+      px + MR * 0.10, py + MR * 0.10, MR             /* shadow centre offset */
+    );
+    sphere.addColorStop(0,    'rgba(255,255,225,1.00)');  /* bright specular */
+    sphere.addColorStop(0.18, 'rgba(255,238,110,0.99)');  /* warm gold */
+    sphere.addColorStop(0.45, 'rgba(245,190,45,0.97)');   /* mid amber */
+    sphere.addColorStop(0.72, 'rgba(205,138,18,0.95)');   /* deep amber */
+    sphere.addColorStop(1,    'rgba(130,72,8,0.92)');     /* dark terminator */
+    ctx.beginPath(); ctx.arc(px, py, MR, 0, Math.PI * 2);
+    ctx.fillStyle = sphere; ctx.fill();                   /* NO stroke */
+
+    /* Terminator shadow — right/bottom edge fades to dark */
+    const term = ctx.createRadialGradient(
+      px + MR * 0.55, py + MR * 0.40, MR * 0.05,
+      px + MR * 0.65, py + MR * 0.50, MR * 1.05
+    );
+    term.addColorStop(0, 'rgba(18,8,2,0.62)');
+    term.addColorStop(1, 'rgba(18,8,2,0)');
+    ctx.beginPath(); ctx.arc(px, py, MR, 0, Math.PI * 2);
+    ctx.fillStyle = term; ctx.fill();
+
+    /* Rim light — faint warm edge glow (depth illusion) */
+    const rim = ctx.createRadialGradient(px, py, MR * 0.78, px, py, MR);
+    rim.addColorStop(0,   'transparent');
+    rim.addColorStop(0.6, 'rgba(255,180,30,0.06)');
+    rim.addColorStop(1,   'rgba(255,160,20,0.18)');
+    ctx.beginPath(); ctx.arc(px, py, MR, 0, Math.PI * 2);
+    ctx.fillStyle = rim; ctx.fill();
+
+    /* Specular highlight — small bright spot top-left */
+    const spec = ctx.createRadialGradient(
+      px - MR*0.30, py - MR*0.30, 0,
+      px - MR*0.28, py - MR*0.28, MR * 0.38
+    );
+    spec.addColorStop(0,   'rgba(255,255,240,0.72)');
+    spec.addColorStop(0.4, 'rgba(255,248,200,0.22)');
+    spec.addColorStop(1,   'transparent');
+    ctx.fillStyle = spec;
+    ctx.beginPath(); ctx.arc(px, py, MR, 0, Math.PI * 2); /* clip to sphere */ ctx.fill();
+
+    /* Craters — softly lit with depth */
+    [[-MR*0.24,-MR*0.18,MR*0.14],[MR*0.20,MR*0.14,MR*0.10],[-MR*0.06,MR*0.28,MR*0.09],[MR*0.26,-MR*0.22,MR*0.07]].forEach(([cx2,cy2,cr])=>{
+      ctx.save();
+      ctx.beginPath(); ctx.arc(px, py, MR, 0, Math.PI*2); ctx.clip();
+      const cg2 = ctx.createRadialGradient(px+cx2-cr*0.2, py+cy2-cr*0.2, 0, px+cx2, py+cy2, cr);
+      cg2.addColorStop(0,   'rgba(255,230,120,0.18)');  /* lit rim */
+      cg2.addColorStop(0.3, 'rgba(120,65,6,0.28)');     /* shadow floor */
+      cg2.addColorStop(1,   'rgba(120,65,6,0)');
+      ctx.fillStyle = cg2;
+      ctx.beginPath(); ctx.arc(px+cx2, py+cy2, cr, 0, Math.PI*2); ctx.fill();
+      ctx.restore();
+    });
+
+    /* Label */
+    const la = moonHov || moonLocked ? 1 : 0.62;
+    ctx.fillStyle = `rgba(255,210,55,${la})`;
+    ctx.font = moonLocked ? 'bold 10px monospace' : '9px monospace';
+    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ctx.fillText('🛰 SATELLITE DATA INTEL', px, py + MR + 18);
+
+    /* Insight card on click */
+    if (moonLocked) {
+      const iw = 248, ih = 62, ix = px - iw / 2, iy = py + MR + 32;
+      ctx.fillStyle = 'rgba(10,6,1,0.95)';
+      ctx.strokeStyle = 'rgba(255,200,50,0.55)';
+      ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.rect(ix, iy, iw, ih); ctx.fill(); ctx.stroke();
+      ctx.fillStyle = 'rgba(255,214,58,0.97)';
+      ctx.font = 'bold 10px monospace'; ctx.textAlign = 'center';
+      ctx.fillText('Gulf SWF Intelligence', px, iy + 16);
+      ctx.fillStyle = 'rgba(255,226,138,0.75)';
+      ctx.font = '9px monospace';
+      ctx.fillText('Real-time sovereign wealth fund data', px, iy + 31);
+      ctx.fillText('& geopolitical orbital surveillance', px, iy + 44);
+    }
   }
 
   function drawOrb() {
