@@ -2611,7 +2611,7 @@ document.addEventListener('DOMContentLoaded', () => {
   /* Orb canvas */
   const oc = document.getElementById('oc'), ctx = oc.getContext('2d');
   let CW, CH, CX, CY, RX, RY;
-  const NR = 28;
+  const NR = 42;
 
   function resizeOrb() {
     CW = oc.offsetWidth || 900;
@@ -2663,84 +2663,96 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* Draw Sun (BIQAI) — radiating energy */
   function drawSun(cr, cg, cb, cc) {
-    /* Corona rays */
-    const rayCount = 24;
+    const SR = 52; /* sun body radius */
+
+    /* Corona rays — 36 rays, long animated beams */
+    const rayCount = 36;
     for (let ri = 0; ri < rayCount; ri++) {
-      const angle = (ri / rayCount) * Math.PI * 2 + t * 0.008;
-      const len = 48 + Math.sin(t * 0.06 + ri * 0.7) * 18;
-      const wid = 2 + Math.sin(t * 0.04 + ri * 1.2) * 1.5;
+      const angle = (ri / rayCount) * Math.PI * 2 + t * 0.007;
+      const len = 72 + Math.sin(t * 0.055 + ri * 0.65) * 34;
+      const wid = 2.8 + Math.sin(t * 0.04 + ri * 1.1) * 2.2;
       ctx.beginPath();
-      ctx.moveTo(CX + Math.cos(angle) * 28, CY + Math.sin(angle) * 28);
-      ctx.lineTo(CX + Math.cos(angle) * (28 + len), CY + Math.sin(angle) * (28 + len));
+      ctx.moveTo(CX + Math.cos(angle) * SR, CY + Math.sin(angle) * SR);
+      ctx.lineTo(CX + Math.cos(angle) * (SR + len), CY + Math.sin(angle) * (SR + len));
       const grad = ctx.createLinearGradient(
-        CX + Math.cos(angle) * 28, CY + Math.sin(angle) * 28,
-        CX + Math.cos(angle) * (28 + len), CY + Math.sin(angle) * (28 + len)
+        CX + Math.cos(angle) * SR, CY + Math.sin(angle) * SR,
+        CX + Math.cos(angle) * (SR + len), CY + Math.sin(angle) * (SR + len)
       );
-      grad.addColorStop(0, `rgba(${cr},${cg},${cb},0.55)`);
+      grad.addColorStop(0, `rgba(${cr},${cg},${cb},0.7)`);
+      grad.addColorStop(0.5, `rgba(${cr},${cg},${cb},0.25)`);
       grad.addColorStop(1, `rgba(${cr},${cg},${cb},0)`);
       ctx.strokeStyle = grad;
       ctx.lineWidth = wid;
       ctx.stroke();
     }
 
-    /* Outer corona glow layers */
-    for (let layer = 6; layer >= 1; layer--) {
-      const rad = 28 + layer * 14 + Math.sin(t * 0.03 + layer) * (layer * 2);
-      const alpha = (0.06 / layer) * (1 + Math.sin(t * 0.04) * 0.3);
+    /* Outer corona glow — 9 pulsing layers */
+    for (let layer = 9; layer >= 1; layer--) {
+      const rad = SR + layer * 20 + Math.sin(t * 0.03 + layer * 0.8) * (layer * 2.5);
+      const alpha = (0.07 / layer) * (1 + Math.sin(t * 0.035) * 0.35);
       ctx.beginPath();
       ctx.arc(CX, CY, rad, 0, Math.PI * 2);
       ctx.fillStyle = `rgba(${cr},${cg},${cb},${alpha.toFixed(3)})`;
       ctx.fill();
     }
 
-    /* Solar flares */
-    for (let fl = 0; fl < 4; fl++) {
-      const fa = t * 0.012 + fl * (Math.PI / 2) + Math.sin(t * 0.02 + fl) * 0.8;
-      const flen = 36 + Math.sin(t * 0.08 + fl * 2.1) * 22;
-      const fa2 = fa + Math.sin(t * 0.05 + fl) * 0.35;
+    /* Solar flares — 6 curved jets */
+    for (let fl = 0; fl < 6; fl++) {
+      const fa = t * 0.011 + fl * (Math.PI / 3) + Math.sin(t * 0.018 + fl) * 0.9;
+      const flen = 58 + Math.sin(t * 0.075 + fl * 2.1) * 38;
+      const fa2 = fa + Math.sin(t * 0.04 + fl) * 0.42;
       ctx.beginPath();
-      ctx.moveTo(CX + Math.cos(fa) * 22, CY + Math.sin(fa) * 22);
+      ctx.moveTo(CX + Math.cos(fa) * (SR * 0.72), CY + Math.sin(fa) * (SR * 0.72));
       ctx.quadraticCurveTo(
-        CX + Math.cos(fa + 0.2) * (22 + flen * 0.6), CY + Math.sin(fa + 0.2) * (22 + flen * 0.6),
-        CX + Math.cos(fa2) * (22 + flen), CY + Math.sin(fa2) * (22 + flen)
+        CX + Math.cos(fa + 0.22) * (SR * 0.72 + flen * 0.55), CY + Math.sin(fa + 0.22) * (SR * 0.72 + flen * 0.55),
+        CX + Math.cos(fa2) * (SR * 0.72 + flen), CY + Math.sin(fa2) * (SR * 0.72 + flen)
       );
-      const flAlpha = 0.2 + Math.sin(t * 0.07 + fl * 1.8) * 0.15;
+      const flAlpha = 0.28 + Math.sin(t * 0.065 + fl * 1.7) * 0.18;
       ctx.strokeStyle = `rgba(${cr},${cg},${cb},${flAlpha.toFixed(3)})`;
-      ctx.lineWidth = 2.5;
+      ctx.lineWidth = 3.5;
       ctx.stroke();
     }
 
-    /* Sun body gradient */
-    const sunG = ctx.createRadialGradient(CX - 6, CY - 6, 2, CX, CY, 28);
-    sunG.addColorStop(0, 'rgba(255,255,220,0.98)');
-    sunG.addColorStop(0.3, `rgba(${cr + 20},${cg + 10},${Math.min(cb + 20, 255)},0.95)`);
-    sunG.addColorStop(0.7, `rgba(${cr},${cg},${cb},0.9)`);
-    sunG.addColorStop(1, `rgba(${Math.round(cr * 0.7)},${Math.round(cg * 0.7)},${Math.round(cb * 0.7)},0.85)`);
+    /* Inner bright ring */
+    const ringG = ctx.createRadialGradient(CX, CY, SR * 0.85, CX, CY, SR * 1.2);
+    ringG.addColorStop(0, `rgba(${cr},${cg},${cb},0.18)`);
+    ringG.addColorStop(1, `rgba(${cr},${cg},${cb},0)`);
     ctx.beginPath();
-    ctx.arc(CX, CY, 28, 0, Math.PI * 2);
+    ctx.arc(CX, CY, SR * 1.2, 0, Math.PI * 2);
+    ctx.fillStyle = ringG;
+    ctx.fill();
+
+    /* Sun body gradient */
+    const sunG = ctx.createRadialGradient(CX - 10, CY - 10, 4, CX, CY, SR);
+    sunG.addColorStop(0, 'rgba(255,255,230,1)');
+    sunG.addColorStop(0.2, `rgba(${Math.min(cr + 40, 255)},${Math.min(cg + 20, 255)},${Math.min(cb + 30, 255)},0.97)`);
+    sunG.addColorStop(0.55, `rgba(${cr},${cg},${cb},0.92)`);
+    sunG.addColorStop(1, `rgba(${Math.round(cr * 0.65)},${Math.round(cg * 0.65)},${Math.round(cb * 0.65)},0.88)`);
+    ctx.beginPath();
+    ctx.arc(CX, CY, SR, 0, Math.PI * 2);
     ctx.fillStyle = sunG;
     ctx.fill();
 
-    /* Surface shimmer */
-    for (let sp = 0; sp < 6; sp++) {
-      const sa = t * 0.02 + sp * (Math.PI / 3);
-      const sr = 8 + Math.sin(t * 0.05 + sp) * 5;
-      const sx = CX + Math.cos(sa) * sr, sy = CY + Math.sin(sa) * sr;
+    /* Surface shimmer — 10 bright spots */
+    for (let sp = 0; sp < 10; sp++) {
+      const sa = t * 0.018 + sp * (Math.PI * 2 / 10);
+      const sr2 = SR * 0.38 + Math.sin(t * 0.05 + sp) * SR * 0.22;
+      const sx = CX + Math.cos(sa) * sr2, sy = CY + Math.sin(sa) * sr2;
       ctx.beginPath();
-      ctx.arc(sx, sy, 3 + Math.sin(t * 0.06 + sp) * 1.5, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(255,255,180,${(0.15 + Math.sin(t * 0.04 + sp) * 0.08).toFixed(3)})`;
+      ctx.arc(sx, sy, 4 + Math.sin(t * 0.055 + sp) * 2.5, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(255,255,200,${(0.22 + Math.sin(t * 0.04 + sp) * 0.12).toFixed(3)})`;
       ctx.fill();
     }
 
     /* Label */
-    ctx.fillStyle = 'rgba(10,8,24,0.85)';
-    ctx.font = 'bold 13px monospace';
+    ctx.fillStyle = 'rgba(6,4,18,0.9)';
+    ctx.font = 'bold 17px monospace';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
-    ctx.fillText('BIQAI', CX, CY - 5);
-    ctx.fillStyle = 'rgba(10,8,24,0.7)';
-    ctx.font = '9px monospace';
-    ctx.fillText('GROUP', CX, CY + 7);
+    ctx.fillText('BIQAI', CX, CY - 7);
+    ctx.fillStyle = 'rgba(6,4,18,0.75)';
+    ctx.font = '11px monospace';
+    ctx.fillText('GROUP', CX, CY + 10);
   }
 
   /* Draw Saturn (planet with rings) */
