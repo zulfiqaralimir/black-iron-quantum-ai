@@ -782,6 +782,42 @@ footer {
 @media(max-width: 480px) {
   .ohlcv-grid { grid-template-columns: repeat(2, 1fr); }
 }
+
+/* ── FERROQUANT HERO SLIDER ── */
+#fq-hero{position:relative;width:100%;height:460px;border-radius:12px;overflow:hidden;margin-bottom:0;background:#030a07;}
+.fq-slide{position:absolute;inset:0;display:grid;grid-template-columns:42% 58%;opacity:0;transition:opacity 1s ease;pointer-events:none;}
+.fq-slide.active{opacity:1;pointer-events:all;}
+.fq-text{display:flex;flex-direction:column;justify-content:center;padding:36px 32px 36px 40px;position:relative;z-index:2;}
+.fq-canvas-col{position:relative;overflow:hidden;}
+.fq-canvas-col canvas{position:absolute;inset:0;width:100%;height:100%;}
+.fq-badge{display:inline-block;font-size:10px;font-family:'Space Mono',monospace;letter-spacing:2px;text-transform:uppercase;color:#00e87a;border:1px solid #00e87a44;border-radius:4px;padding:3px 10px;margin-bottom:14px;opacity:0;transition:opacity .6s ease .3s;}
+.fq-slide.active .fq-badge{opacity:1;}
+.fq-headline{font-size:32px;font-weight:800;font-family:'Barlow Condensed',sans-serif;text-transform:uppercase;letter-spacing:-0.5px;line-height:1.08;color:#fff;margin:0 0 12px;opacity:0;transition:opacity .6s ease .5s;}
+.fq-slide.active .fq-headline{opacity:1;}
+.fq-subline{font-size:13.5px;line-height:1.55;color:#a0b8a8;margin:0 0 22px;opacity:0;transition:opacity .6s ease .7s;}
+.fq-slide.active .fq-subline{opacity:1;}
+.fq-vtag{font-size:11px;font-family:'Space Mono',monospace;color:#00e87a99;letter-spacing:1px;opacity:0;transition:opacity .6s ease .9s;}
+.fq-slide.active .fq-vtag{opacity:1;}
+#fqs0{background:linear-gradient(135deg,#03100a 0%,#041a0e 60%,#050e07 100%);}
+#fqs1{background:linear-gradient(135deg,#030b0f 0%,#041520 60%,#040c10 100%);}
+#fqs2{background:linear-gradient(135deg,#080310 0%,#100520 60%,#05020e 100%);}
+#fqs3{background:linear-gradient(135deg,#0a0903 0%,#1a1504 60%,#0e0b03 100%);}
+#fqs4{background:linear-gradient(135deg,#040a10 0%,#051420 60%,#030d14 100%);}
+#fqs5{background:linear-gradient(135deg,#030c08 0%,#041a10 60%,#030c08 100%);}
+#fqs6{background:linear-gradient(135deg,#0c0305 0%,#1c040a 60%,#0e0305 100%);}
+#fqs7{background:linear-gradient(135deg,#04060d 0%,#060a1c 60%,#030509 100%);}
+#fq-pb-wrap{position:absolute;bottom:0;left:0;right:0;height:3px;background:#ffffff14;z-index:10;}
+#fq-pb{height:100%;width:0;background:#00e87a;transition:width 0s linear;}
+#fq-dots{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:10;}
+.fq-dot{width:7px;height:7px;border-radius:50%;background:#ffffff30;cursor:pointer;transition:background .3s;}
+.fq-dot.on{background:#00e87a;}
+#fq-snum{position:absolute;top:16px;right:20px;font-size:11px;font-family:'Space Mono',monospace;color:#00e87a88;z-index:10;}
+@media(max-width:768px){
+  #fq-hero{height:auto;}
+  .fq-slide{grid-template-columns:1fr;grid-template-rows:auto 260px;}
+  .fq-text{padding:28px 24px 20px;}
+  .fq-headline{font-size:24px;}
+}
 </style>
 </head>
 <body>
@@ -858,73 +894,116 @@ footer {
 <div id="home" class="page active">
   <div class="page-body">
 
-    <div class="home-hero">
-      <!-- LEFT COLUMN -->
-      <div>
-        <p class="hero-eyebrow">Quantitative Hedge Fund · Research Arm · Islamabad, Pakistan</p>
-        <h1 class="hero-headline">
-          <span class="hl-dim" style="display:block;">FERRO</span>
-          <span class="hl-green" style="display:block;">QUANT</span>
-          <span class="hl-white" style="display:block;">CAPITAL</span>
-        </h1>
-        <p class="hero-sub">Systematic quantitative strategies, volatility arbitrage, and institutional-grade portfolio construction — targeting PSX, Gulf, and global capital markets.</p>
-        <div class="hero-actions">
-          <button class="btn-green" onclick="showPage('strategies')">View Strategies</button>
-          <button class="btn-outline" onclick="showPage('investors')">Investor Portal</button>
+    <!-- ── FERROQUANT HERO SLIDER ── -->
+    <section id="fq-hero">
+
+      <!-- Slide 0: Candlestick -->
+      <div id="fqs0" class="fq-slide active">
+        <div class="fq-text">
+          <span class="fq-badge" style="color:#00ff66;border-color:rgba(0,255,102,0.4);background:rgba(0,255,102,0.07);">FERROQUANT · Markets</span>
+          <div class="fq-headline">Capture <span style="color:#00ff66">Alpha.</span><br>Every Tick.</div>
+          <div class="fq-subline">Price Action · OHLC Strategy · PSX Live Intelligence</div>
+          <span class="fq-vtag" style="color:#00ff66;">▸ Candlestick · Live Data</span>
         </div>
+        <div class="fq-canvas-col"><canvas id="cv0"></canvas></div>
       </div>
 
-      <!-- RIGHT COLUMN — TERMINAL PANEL -->
-      <div class="terminal-panel">
-        <div class="terminal-header">
-          <div class="term-dots">
-            <div class="term-dot td-red"></div>
-            <div class="term-dot td-yel"></div>
-            <div class="term-dot td-grn"></div>
-          </div>
-          <div class="term-title">FQ TERMINAL v1.0</div>
+      <!-- Slide 1: Order Book -->
+      <div id="fqs1" class="fq-slide">
+        <div class="fq-text">
+          <span class="fq-badge" style="color:#44aaff;border-color:rgba(68,170,255,0.4);background:rgba(68,170,255,0.07);">HFT · Execution</span>
+          <div class="fq-headline">Execute <span style="color:#44aaff">Faster</span><br>Than Light.</div>
+          <div class="fq-subline">Bid/Ask Ladder · Market Depth · Sub-ms Execution</div>
+          <span class="fq-vtag" style="color:#44aaff;">▸ Order Book · HFT Speed</span>
         </div>
-        <div class="terminal-body">
-          <div class="term-comment">// Fund Overview</div>
-          <div class="term-row"><span class="term-key">ENTITY</span><span class="term-val">FERROQUANT Capital</span></div>
-          <div class="term-row"><span class="term-key">TYPE</span><span class="term-val">Quant Hedge Fund + Research</span></div>
-          <div class="term-row"><span class="term-key">DOMICILE</span><span class="term-val">Islamabad, Pakistan</span></div>
-          <div class="term-row"><span class="term-key">STAGE</span><span class="term-val-g">Growth · Capital Raising</span></div>
-          <div class="term-row"><span class="term-key">PARENT</span><span class="term-val">Black Iron Quantum AI Group</span></div>
-
-          <div class="term-comment">// Strategy Performance (Simulated)</div>
-          <div class="term-bar-row">
-            <span class="term-bar-label">VOL</span>
-            <div class="term-bar-track"><div class="term-bar-fill bar-g" style="width:82%;"></div></div>
-            <span class="term-bar-pct tick-up">+18.4%</span>
-          </div>
-          <div class="term-bar-row">
-            <span class="term-bar-label">MACRO</span>
-            <div class="term-bar-track"><div class="term-bar-fill bar-g" style="width:60%;"></div></div>
-            <span class="term-bar-pct tick-up">+12.1%</span>
-          </div>
-          <div class="term-bar-row">
-            <span class="term-bar-label">PORT</span>
-            <div class="term-bar-track"><div class="term-bar-fill bar-g" style="width:70%;"></div></div>
-            <span class="term-bar-pct tick-up">+14.8%</span>
-          </div>
-          <div class="term-bar-row">
-            <span class="term-bar-label">CRISIS</span>
-            <div class="term-bar-track"><div class="term-bar-fill bar-r" style="width:15%;"></div></div>
-            <span class="term-bar-pct tick-dn">-3.2%</span>
-          </div>
-
-          <div class="term-comment">// Risk Metrics</div>
-          <div class="term-metric-row"><span class="term-metric-key">SHARPE RATIO</span><span class="term-metric-val-g">2.14</span></div>
-          <div class="term-metric-row"><span class="term-metric-key">MAX DRAWDOWN</span><span class="term-metric-val-r">-8.4%</span></div>
-          <div class="term-metric-row"><span class="term-metric-key">SORTINO</span><span class="term-metric-val-g">3.02</span></div>
-          <div class="term-metric-row"><span class="term-metric-key">VOL TARGET</span><span class="term-metric-val-c">12% ann.</span></div>
-        </div>
-        <div class="term-footer">
-          Simulated backtest results. Not financial advice.<span class="cursor-blink"></span>
-        </div>
+        <div class="fq-canvas-col"><canvas id="cv1"></canvas></div>
       </div>
-    </div>
+
+      <!-- Slide 2: Neural Network -->
+      <div id="fqs2" class="fq-slide">
+        <div class="fq-text">
+          <span class="fq-badge" style="color:#cc77ff;border-color:rgba(204,119,255,0.4);background:rgba(204,119,255,0.07);">Deep Learning · AI</span>
+          <div class="fq-headline">AI That <span style="color:#cc77ff">Thinks</span><br>In Markets.</div>
+          <div class="fq-subline">Neural Nets · Signal Propagation · Alpha Generation</div>
+          <span class="fq-vtag" style="color:#cc77ff;">▸ Neural Network · Deep AI</span>
+        </div>
+        <div class="fq-canvas-col"><canvas id="cv2"></canvas></div>
+      </div>
+
+      <!-- Slide 3: PSX Ticker -->
+      <div id="fqs3" class="fq-slide">
+        <div class="fq-text">
+          <span class="fq-badge" style="color:#ffcc44;border-color:rgba(255,204,68,0.4);background:rgba(255,204,68,0.07);">PSX · Pakistan</span>
+          <div class="fq-headline">Own <span style="color:#ffcc44">Pakistan</span><br>Markets.</div>
+          <div class="fq-subline">KSE-100 · Real-Time Intelligence · Equity Alpha</div>
+          <span class="fq-vtag" style="color:#ffcc44;">▸ PSX Ticker · Live Feed</span>
+        </div>
+        <div class="fq-canvas-col"><canvas id="cv3"></canvas></div>
+      </div>
+
+      <!-- Slide 4: Vol Surface -->
+      <div id="fqs4" class="fq-slide">
+        <div class="fq-text">
+          <span class="fq-badge" style="color:#40e0ff;border-color:rgba(64,224,255,0.4);background:rgba(64,224,255,0.07);">Quant · Derivatives</span>
+          <div class="fq-headline">Model <span style="color:#40e0ff">Volatility.</span><br>Price Risk.</div>
+          <div class="fq-subline">Implied Vol · Strike/Expiry Surface · Options Quant</div>
+          <span class="fq-vtag" style="color:#40e0ff;">▸ Vol Surface · 3D Quant</span>
+        </div>
+        <div class="fq-canvas-col"><canvas id="cv4"></canvas></div>
+      </div>
+
+      <!-- Slide 5: P&L Matrix -->
+      <div id="fqs5" class="fq-slide">
+        <div class="fq-text">
+          <span class="fq-badge" style="color:#00ddbb;border-color:rgba(0,221,187,0.4);background:rgba(0,221,187,0.07);">Institutional · Returns</span>
+          <div class="fq-headline">Measure <span style="color:#00ddbb">Every</span><br>Return.</div>
+          <div class="fq-subline">P&amp;L Attribution · Rolling Alpha · Multi-Strategy</div>
+          <span class="fq-vtag" style="color:#00ddbb;">▸ P&amp;L Matrix · Strategy</span>
+        </div>
+        <div class="fq-canvas-col"><canvas id="cv5"></canvas></div>
+      </div>
+
+      <!-- Slide 6: Risk Dashboard -->
+      <div id="fqs6" class="fq-slide">
+        <div class="fq-text">
+          <span class="fq-badge" style="color:#ff6644;border-color:rgba(255,102,68,0.4);background:rgba(255,102,68,0.07);">Risk Management</span>
+          <div class="fq-headline">Control <span style="color:#ff6644">Risk.</span><br>Protect Capital.</div>
+          <div class="fq-subline">VaR · CVaR · Max Drawdown · Sharpe Optimisation</div>
+          <span class="fq-vtag" style="color:#ff6644;">▸ Portfolio Risk · Live VaR</span>
+        </div>
+        <div class="fq-canvas-col"><canvas id="cv6"></canvas></div>
+      </div>
+
+      <!-- Slide 7: Crisis Prediction -->
+      <div id="fqs7" class="fq-slide">
+        <div class="fq-text">
+          <span class="fq-badge" style="color:#7799ff;border-color:rgba(119,153,255,0.4);background:rgba(119,153,255,0.07);">AI · Crisis Prediction</span>
+          <div class="fq-headline">See Crisis <span style="color:#7799ff">Before</span><br>It Hits.</div>
+          <div class="fq-subline">Systemic Risk · Regime Detection · Early Warning AI</div>
+          <span class="fq-vtag" style="color:#7799ff;">▸ Early Warning · AI Model</span>
+        </div>
+        <div class="fq-canvas-col"><canvas id="cv7"></canvas></div>
+      </div>
+
+      <!-- Progress bar -->
+      <div id="fq-pb-wrap"><div id="fq-pb"></div></div>
+
+      <!-- Nav dots -->
+      <div id="fq-dots">
+        <div class="fq-dot on" onclick="fqGoTo(0)"></div>
+        <div class="fq-dot" onclick="fqGoTo(1)"></div>
+        <div class="fq-dot" onclick="fqGoTo(2)"></div>
+        <div class="fq-dot" onclick="fqGoTo(3)"></div>
+        <div class="fq-dot" onclick="fqGoTo(4)"></div>
+        <div class="fq-dot" onclick="fqGoTo(5)"></div>
+        <div class="fq-dot" onclick="fqGoTo(6)"></div>
+        <div class="fq-dot" onclick="fqGoTo(7)"></div>
+      </div>
+
+      <!-- Slide counter -->
+      <div id="fq-snum">01 / 08</div>
+
+    </section>
 
     <!-- METRICS STRIP -->
     <div class="metrics-strip">
@@ -1655,6 +1734,284 @@ function toggleMenu() {
 function closeMenu() {
   document.getElementById('mobile-menu').classList.remove('open');
 }
+
+/* ══ FQ HERO SLIDER ══════════════════════════════════════════════════════ */
+(function(){
+  var rnd=function(a,b){return a+Math.random()*(b-a);};
+  function syncCanvas(id){
+    var cv=document.getElementById(id);if(!cv)return null;
+    var W=cv.offsetWidth,H=cv.offsetHeight;
+    if(W>0&&H>0&&(cv.width!==W||cv.height!==H)){cv.width=W;cv.height=H;}
+    return{cv:cv,W:cv.width,H:cv.height,ctx:cv.getContext('2d')};
+  }
+  var TOTAL=8,DUR=5500;
+  var ACC=['#00ff66','#44aaff','#cc77ff','#ffcc44','#40e0ff','#00ddbb','#ff6644','#7799ff'];
+  var cur=0,timer=null;
+
+  /* CV0: Candlestick */
+  function initCV0(){
+    var candles=[],p=300,t=0;
+    for(var i=0;i<26;i++){var o=p+rnd(-2,2),c=o+rnd(-6,6);candles.push({o:o,c:c,h:Math.max(o,c)+rnd(.5,3),l:Math.min(o,c)-rnd(.5,3)});p=c;}
+    return setInterval(function(){
+      var r=syncCanvas('cv0');if(!r||!r.W)return;
+      var ctx=r.ctx,W=r.W,H=r.H;
+      ctx.fillStyle='#020a02';ctx.fillRect(0,0,W,H);
+      var lows=candles.map(function(c){return c.l;}),highs=candles.map(function(c){return c.h;});
+      var mn=Math.min.apply(null,lows)-1,mx=Math.max.apply(null,highs)+1,rg=mx-mn||1;
+      function py(v){return H-18-(v-mn)/rg*(H-32);}
+      var cw=Math.max(5,Math.floor((W-16)/26*.65)),gp=Math.max(2,Math.floor((W-16)/26*.35)),x=8;
+      candles.forEach(function(cd,i){
+        var bull=cd.c>=cd.o,col=bull?'#00ff66':'#ff4455',last=i===candles.length-1;
+        ctx.shadowColor=bull?'rgba(0,255,80,.7)':'rgba(255,50,60,.7)';ctx.shadowBlur=last?12:4;
+        ctx.strokeStyle=col;ctx.lineWidth=1.2;ctx.beginPath();ctx.moveTo(x+cw/2,py(cd.h));ctx.lineTo(x+cw/2,py(cd.l));ctx.stroke();
+        ctx.fillStyle=col;var y1=py(Math.max(cd.o,cd.c)),y2=py(Math.min(cd.o,cd.c));ctx.fillRect(x,y1,cw,Math.max(2,y2-y1));
+        x+=cw+gp;
+      });
+      ctx.shadowBlur=0;
+      var lv=candles[candles.length-1].c,ly=py(lv);
+      ctx.strokeStyle='rgba(0,255,80,.35)';ctx.lineWidth=.8;ctx.setLineDash([3,4]);ctx.beginPath();ctx.moveTo(0,ly);ctx.lineTo(W,ly);ctx.stroke();ctx.setLineDash([]);
+      ctx.fillStyle='#00ff66';ctx.shadowColor='#00ff66';ctx.shadowBlur=5;ctx.font='bold 9px monospace';ctx.fillText(lv.toFixed(1),W-50,ly-3);ctx.shadowBlur=0;
+      ctx.fillStyle='rgba(0,255,80,.4)';ctx.font='9px monospace';ctx.fillText('KSE-100 ▲ +0.43%  VOL 842M',8,H-4);
+      t++;if(t%16===0){var lc=candles[candles.length-1],no=lc.c+rnd(-2,2),nc=no+rnd(-6,6);candles.push({o:no,c:nc,h:Math.max(no,nc)+rnd(.5,3),l:Math.min(no,nc)-rnd(.5,3)});if(candles.length>26)candles.shift();}
+    },55);
+  }
+
+  /* CV1: Order Book */
+  function initCV1(){
+    var mid=247.35,step=0.05,maxSz=12000,t=0;
+    var bids=[],asks=[];
+    for(var i=0;i<9;i++){bids.push({p:mid-step*(i+1),s:Math.round(rnd(1000,maxSz))});asks.push({p:mid+step*(i+1),s:Math.round(rnd(1000,maxSz))});}
+    return setInterval(function(){
+      var r=syncCanvas('cv1');if(!r||!r.W)return;
+      var ctx=r.ctx,W=r.W,H=r.H,hw=W/2,rh=Math.floor((H-26)/9);
+      ctx.fillStyle='#020406';ctx.fillRect(0,0,W,H);
+      ctx.font='bold 8px monospace';ctx.fillStyle='rgba(255,255,255,.3)';
+      ctx.fillText('BID',hw*.15,13);ctx.fillText('SIZE',hw*.55,13);ctx.fillText('ASK',hw+hw*.15,13);ctx.fillText('SIZE',hw+hw*.55,13);
+      ctx.strokeStyle='rgba(255,255,255,.07)';ctx.lineWidth=.5;ctx.beginPath();ctx.moveTo(0,20);ctx.lineTo(W,20);ctx.stroke();ctx.beginPath();ctx.moveTo(hw,0);ctx.lineTo(hw,H);ctx.stroke();
+      ctx.fillStyle='rgba(255,255,120,.12)';ctx.fillRect(0,20,W,rh);
+      ctx.fillStyle='rgba(255,255,100,.65)';ctx.font='bold 9px monospace';ctx.textAlign='center';ctx.fillText('MID '+mid.toFixed(2),W/2,20+rh/2+3);ctx.textAlign='left';
+      for(var i2=0;i2<9;i2++){
+        var y=20+rh*(i2+1),bw=(bids[i2].s/maxSz)*(hw-6),aw=(asks[i2].s/maxSz)*(hw-6);
+        ctx.fillStyle='rgba(0,200,70,'+(0.07+(9-i2)/9*.16)+')';ctx.fillRect(hw-6-bw,y,bw,rh-1);
+        ctx.fillStyle=i2===0?'#00ff77':i2<=2?'#00dd55':'#00aa44';ctx.shadowColor='#00ff77';ctx.shadowBlur=i2===0?8:i2<=2?3:0;
+        ctx.font=(i2===0?'bold 10px':'9px')+' monospace';ctx.fillText(bids[i2].p.toFixed(2),4,y+rh/2+3);ctx.fillText(bids[i2].s.toLocaleString(),hw*.5,y+rh/2+3);
+        ctx.fillStyle='rgba(50,130,255,'+(0.07+(9-i2)/9*.16)+')';ctx.fillRect(hw+6,y,aw,rh-1);
+        ctx.fillStyle=i2===0?'#66ccff':i2<=2?'#44aaff':'#2288cc';ctx.shadowColor='#66ccff';ctx.shadowBlur=i2===0?8:i2<=2?3:0;
+        ctx.font=(i2===0?'bold 10px':'9px')+' monospace';ctx.fillText(asks[i2].p.toFixed(2),hw+8,y+rh/2+3);ctx.fillText(asks[i2].s.toLocaleString(),hw+hw*.5,y+rh/2+3);ctx.shadowBlur=0;
+      }
+      t++;if(t%5===0){for(var j=0;j<9;j++){bids[j].s=Math.max(300,Math.round(bids[j].s+rnd(-1200,1200)));asks[j].s=Math.max(300,Math.round(asks[j].s+rnd(-1200,1200)));}}
+    },65);
+  }
+
+  /* CV2: Neural Network */
+  function initCV2(){
+    var layers=[4,6,7,6,3],nodes=[],t=0;
+    layers.forEach(function(n,li){nodes.push([]);for(var i=0;i<n;i++){nodes[li].push({phase:((li*5+i)*1.4)%(2*Math.PI)});}});
+    return setInterval(function(){
+      var r=syncCanvas('cv2');if(!r||!r.W)return;
+      var ctx=r.ctx,W=r.W,H=r.H;
+      ctx.fillStyle='#030108';ctx.fillRect(0,0,W,H);
+      function lx(li){return W*.07+li*(W*.86/4);}
+      function ny(li,ii){return H/(layers[li]+1)*(ii+1);}
+      for(var li=0;li<layers.length-1;li++){
+        for(var i=0;i<layers[li];i++){
+          for(var j=0;j<layers[li+1];j++){
+            var sig=Math.sin(t*.03+nodes[li][i].phase+nodes[li+1][j].phase);
+            ctx.strokeStyle='rgba('+(100+Math.round(sig*60))+','+Math.round(Math.max(0,sig*80))+',255,'+(Math.max(0,sig)*.2+.03)+')';
+            ctx.lineWidth=.7;ctx.beginPath();ctx.moveTo(lx(li),ny(li,i));ctx.lineTo(lx(li+1),ny(li+1,j));ctx.stroke();
+            if(sig>.75){var pg=((t*.03+nodes[li][i].phase)%(2*Math.PI))/(2*Math.PI),dx=lx(li)+(lx(li+1)-lx(li))*pg,dy=ny(li,i)+(ny(li+1,j)-ny(li,i))*pg;ctx.beginPath();ctx.arc(dx,dy,2.2,0,Math.PI*2);ctx.fillStyle='#dd99ff';ctx.shadowColor='#dd99ff';ctx.shadowBlur=7;ctx.fill();ctx.shadowBlur=0;}
+          }
+        }
+      }
+      layers.forEach(function(n,li){
+        for(var i=0;i<n;i++){
+          var ph=nodes[li][i].phase,pulse=(Math.sin(t*.04+ph)+1)/2,rad=3.5+pulse*3.5;
+          var col=li===0?'rgba(0,255,110,'+(0.5+pulse*.5)+')':li===layers.length-1?'rgba(255,110,40,'+(0.5+pulse*.5)+')':'rgba('+(110+Math.round(pulse*80))+','+(50+Math.round(pulse*50))+',255,'+(0.6+pulse*.4)+')';
+          ctx.beginPath();ctx.arc(lx(li),ny(li,i),rad,0,Math.PI*2);ctx.fillStyle=col;
+          ctx.shadowColor=li===0?'rgba(0,255,90,.9)':li===layers.length-1?'rgba(255,90,20,.9)':col;ctx.shadowBlur=8;ctx.fill();ctx.shadowBlur=0;
+        }
+      });
+      t++;
+    },36);
+  }
+
+  /* CV3: PSX Ticker */
+  function initCV3(){
+    var tks=[
+      {s:'OGDC',p:185.4,c:2.3},{s:'HBL',p:142.75,c:-1.1},{s:'LUCK',p:892.0,c:4.7},{s:'PSO',p:248.6,c:-0.8},
+      {s:'ENGRO',p:312.15,c:1.9},{s:'MCB',p:198.3,c:0.5},{s:'UBL',p:167.9,c:-2.1},{s:'MARI',p:1840.5,c:8.2},
+      {s:'HUBC',p:89.45,c:-0.3},{s:'EFERT',p:96.2,c:1.4},{s:'TRG',p:132.8,c:3.6},{s:'SYS',p:445.0,c:-1.8}
+    ];
+    var rows=[{x:0,sp:.9,off:0},{x:55,sp:1.2,off:4},{x:110,sp:.75,off:8},{x:20,sp:1.05,off:3}];
+    var iW=108,totW=tks.length*iW,t=0;
+    return setInterval(function(){
+      var r=syncCanvas('cv3');if(!r||!r.W)return;
+      var ctx=r.ctx,W=r.W,H=r.H,rh=Math.floor((H-22)/4);
+      ctx.fillStyle='#060300';ctx.fillRect(0,0,W,H);
+      rows.forEach(function(row,ri){
+        row.x+=row.sp;var ox=-(row.x%totW),y=rh*ri+rh*.62+2;
+        for(var pass=0;pass<3;pass++){
+          var startX=ox+pass*totW;if(startX>W)break;
+          tks.forEach(function(tk,ti){
+            var x=startX+((ti+row.off)%tks.length)*iW;if(x>W+iW||x<-iW)return;
+            var bull=tk.c>=0,col=bull?'#00ff66':'#ff5555';
+            ctx.font='bold 10px monospace';ctx.fillStyle=col;ctx.shadowColor=col;ctx.shadowBlur=4;ctx.fillText(tk.s,x+4,y);ctx.shadowBlur=0;
+            ctx.font='9px monospace';ctx.fillStyle='rgba(255,255,255,.82)';ctx.fillText(tk.p.toFixed(2),x+40,y);
+            ctx.fillStyle=col;ctx.fillText((bull?'▲':'▼')+Math.abs(tk.c).toFixed(1)+'%',x+78,y);
+          });
+        }
+      });
+      ctx.fillStyle='rgba(255,153,0,.1)';ctx.fillRect(0,H-20,W,20);
+      ctx.fillStyle='#ff9900';ctx.font='bold 9px monospace';ctx.shadowColor='#ff9900';ctx.shadowBlur=3;ctx.fillText('PSX KSE-100  47,832  ▲ +203 pts  VOL: 842M  CAP: PKR 9.2T',8,H-6);ctx.shadowBlur=0;
+      t++;if(t%55===0){tks.forEach(function(tk){tk.p=Math.max(1,tk.p+rnd(-2,2));tk.c=parseFloat(rnd(-4,4).toFixed(1));});}
+    },26);
+  }
+
+  /* CV4: Volatility Surface */
+  function initCV4(){
+    var ROWS=14,COLS=18,t=0;
+    function vf(s,e){return .16+.09*(s-1)*(s-1)+.03*e+.025*Math.sin(t*.016+s*2.5+e);}
+    return setInterval(function(){
+      var r=syncCanvas('cv4');if(!r||!r.W)return;
+      var ctx=r.ctx,W=r.W,H=r.H,sx=W/(COLS+3),sy=H*.32/ROWS;
+      ctx.fillStyle='#050400';ctx.fillRect(0,0,W,H);
+      function pjX(xi,yi){return W*.12+(xi-COLS/2)*sx-(yi-ROWS/2)*sx*.5;}
+      function pjY(xi,yi,z){return H*.9-(yi-ROWS/2)*sy-z*H*.65;}
+      for(var yi=ROWS-2;yi>=0;yi--){
+        for(var xi=0;xi<COLS-1;xi++){
+          var v00=vf(xi/(COLS-1)*2,yi/(ROWS-1)*2),v10=vf((xi+1)/(COLS-1)*2,yi/(ROWS-1)*2),v01=vf(xi/(COLS-1)*2,(yi+1)/(ROWS-1)*2),v11=vf((xi+1)/(COLS-1)*2,(yi+1)/(ROWS-1)*2);
+          var n=Math.min(1,Math.max(0,((v00+v10+v01+v11)/4-.14)/.20));
+          var rc=Math.round(30+n*220),gc=Math.round(Math.max(0,175-n*155)),bc=Math.round(Math.max(0,90-n*70));
+          ctx.fillStyle='rgba('+rc+','+gc+','+bc+',.6)';ctx.strokeStyle='rgba('+rc+','+gc+','+bc+',.95)';ctx.lineWidth=.6;
+          ctx.beginPath();ctx.moveTo(pjX(xi,yi),pjY(xi,yi,v00));ctx.lineTo(pjX(xi+1,yi),pjY(xi+1,yi,v10));ctx.lineTo(pjX(xi+1,yi+1),pjY(xi+1,yi+1,v11));ctx.lineTo(pjX(xi,yi+1),pjY(xi,yi+1,v01));ctx.closePath();ctx.fill();ctx.stroke();
+        }
+      }
+      ctx.fillStyle='#40e0ff';ctx.font='bold 9px monospace';ctx.textAlign='right';ctx.shadowColor='#40e0ff';ctx.shadowBlur=4;ctx.fillText('IMPLIED VOL SURFACE',W-8,14);ctx.shadowBlur=0;ctx.textAlign='left';
+      t++;
+    },42);
+  }
+
+  /* CV5: P&L Matrix */
+  function initCV5(){
+    var strats=['FERROQUANT','MOMENTUM','STAT_ARB','MACRO','VOL_ARB','CARRY'];
+    var months=['J','F','M','A','M','J','J','A','S','O','N','D','YTD'];
+    var vals=[],t=0;
+    strats.forEach(function(s,si){var row=[];for(var mi=0;mi<12;mi++){row.push(rnd(-8,14));}row.push(si===0?rnd(10,22):rnd(2,14));vals.push(row);});
+    return setInterval(function(){
+      var r=syncCanvas('cv5');if(!r||!r.W)return;
+      var ctx=r.ctx,W=r.W,H=r.H,lw=75,cw=(W-lw-2)/13,ch=(H-20)/6;
+      ctx.fillStyle='#010806';ctx.fillRect(0,0,W,H);
+      months.forEach(function(m,mi){
+        ctx.textAlign='center';ctx.fillStyle=mi===12?'rgba(0,220,180,.75)':'rgba(255,255,255,.3)';
+        ctx.font=(mi===12?'bold ':'')+'8px monospace';ctx.fillText(m,lw+mi*cw+cw/2,13);
+      });ctx.textAlign='left';
+      ctx.strokeStyle='rgba(0,220,180,.18)';ctx.lineWidth=.8;ctx.beginPath();ctx.moveTo(lw+12*cw,0);ctx.lineTo(lw+12*cw,H);ctx.stroke();
+      strats.forEach(function(strat,si){
+        var y=20+si*ch;
+        ctx.font=(si===0?'bold 8px':'7.5px')+' monospace';ctx.fillStyle=si===0?'#00ddbb':'rgba(255,255,255,.45)';ctx.fillText(strat,3,y+ch*.62);
+        vals[si].forEach(function(v,mi){
+          var cx=lw+mi*cw,n=Math.min(1,Math.max(-1,v/12)),an=Math.abs(n);
+          ctx.fillStyle=n>=0?'rgba('+(Math.round(n*35))+','+(Math.round(130+n*120))+','+Math.round(n*50)+','+(0.14+n*.58)+')':'rgba('+(Math.round(170+an*80))+','+Math.round(an*25)+','+Math.round(an*15)+','+(0.14+an*.58)+')';
+          ctx.fillRect(cx+1,y+1,cw-2,ch-2);
+          ctx.textAlign='center';ctx.fillStyle=Math.abs(v)<0.4?'rgba(255,255,255,.18)':v>=0?'rgba(170,255,185,.95)':'rgba(255,150,120,.95)';
+          ctx.font=(si===0&&mi===12?'bold 8px':'7.5px')+' monospace';
+          ctx.fillText((v>=0?'+':'')+v.toFixed(1),cx+cw/2,y+ch*.65);ctx.textAlign='left';
+        });
+      });
+      t++;if(t%20===0){vals.forEach(function(row,si){for(var mi=0;mi<12;mi++){row[mi]=Math.min(18,Math.max(-12,row[mi]+rnd(-.9,.9)));}row[12]=si===0?Math.min(24,Math.max(5,row[12]+rnd(-.4,.4))):Math.min(16,Math.max(-3,row[12]+rnd(-.4,.4)));});}
+    },72);
+  }
+
+  /* CV6: Risk Dashboard */
+  function initCV6(){
+    var equity=[],pv=100,t=0;for(var i=0;i<80;i++){pv=Math.max(60,pv+rnd(-1.8,2.2));equity.push(pv);}
+    var metrics=[{l:'VaR (95%)',v:'-2.34%',c:'#ff8866',b:.28},{l:'CVaR',v:'-3.81%',c:'#ff5533',b:.42},{l:'Max DD',v:'-8.92%',c:'#ff3311',b:.58},{l:'Sharpe',v:'2.14',c:'#00cc88',b:.68},{l:'Beta',v:'0.67',c:'#44aaff',b:.45}];
+    return setInterval(function(){
+      var r=syncCanvas('cv6');if(!r||!r.W)return;
+      var ctx=r.ctx,W=r.W,H=r.H,lW=W*.58,rX=lW+10,rW=W-rX;
+      ctx.fillStyle='#060103';ctx.fillRect(0,0,W,H);
+      var mn=Math.min.apply(null,equity)*.87-1,mx=Math.max.apply(null,equity)+1,rg=mx-mn||1;
+      function py(v){return H-8-(v-mn)/rg*(H-20);}
+      var dx=lW/equity.length;
+      ctx.beginPath();ctx.moveTo(0,py(equity[0]));equity.forEach(function(v,i){ctx.lineTo(i*dx,py(v));});ctx.lineTo(lW,H-8);ctx.lineTo(0,H-8);ctx.closePath();ctx.fillStyle='rgba(0,200,100,.07)';ctx.fill();
+      ctx.strokeStyle='#00ff88';ctx.lineWidth=1.5;ctx.shadowColor='#00ff88';ctx.shadowBlur=5;ctx.beginPath();equity.forEach(function(v,i){if(i===0)ctx.moveTo(0,py(v));else ctx.lineTo(i*dx,py(v));});ctx.stroke();ctx.shadowBlur=0;
+      ctx.strokeStyle='rgba(255,100,60,.75)';ctx.lineWidth=1;ctx.setLineDash([4,3]);ctx.beginPath();equity.forEach(function(v,i){if(i===0)ctx.moveTo(0,py(v*.93));else ctx.lineTo(i*dx,py(v*.93));});ctx.stroke();ctx.setLineDash([]);
+      ctx.fillStyle='rgba(255,255,255,.2)';ctx.font='bold 8px monospace';ctx.fillText('RISK METRICS',rX+4,14);
+      var mY=22,mSp=(H-mY-8)/5;
+      metrics.forEach(function(m,i){
+        var y=mY+i*mSp;ctx.font='7px monospace';ctx.fillStyle='rgba(255,255,255,.3)';ctx.fillText(m.l,rX+4,y);
+        ctx.fillStyle='rgba(255,255,255,.05)';ctx.fillRect(rX+4,y+3,rW-8,6);
+        ctx.fillStyle=m.c+'bb';ctx.shadowColor=m.c;ctx.shadowBlur=3;ctx.fillRect(rX+4,y+3,(rW-8)*m.b*(1+Math.sin(t*.04+i)*.06),6);ctx.shadowBlur=0;
+        ctx.font='bold 8px monospace';ctx.fillStyle=m.c;ctx.textAlign='right';ctx.fillText(m.v,W-4,y);ctx.textAlign='left';
+      });
+      t++;if(t%14===0){equity.push(Math.max(60,equity[equity.length-1]+rnd(-1.8,2.2)));if(equity.length>80)equity.shift();}
+    },50);
+  }
+
+  /* CV7: Crisis Prediction */
+  function initCV7(){
+    var stress=[],t=0;
+    for(var i=0;i<90;i++){var v=20+Math.sin(i*.08)*15+rnd(-8,8);if(i>=55&&i<=67)v+=rnd(35,55);stress.push(Math.min(95,Math.max(5,v)));}
+    var prob=0.35;
+    return setInterval(function(){
+      var r=syncCanvas('cv7');if(!r||!r.W)return;
+      var ctx=r.ctx,W=r.W,H=r.H,lW=W*.58,rX=lW+8,rW=W-rX;
+      ctx.fillStyle='#060102';ctx.fillRect(0,0,W,H);
+      function spy(v){return H-8-(v/100)*(H-20);}
+      var dx=lW/90;
+      var zones=[[100,70,'rgba(255,30,40,.09)'],[70,45,'rgba(255,120,0,.07)'],[45,20,'rgba(255,200,0,.05)'],[20,0,'rgba(0,200,100,.04)']];
+      zones.forEach(function(z){ctx.fillStyle=z[2];ctx.fillRect(0,spy(z[0]),lW,spy(z[1])-spy(z[0]));});
+      [[70,'rgba(255,30,40,.28)'],[45,'rgba(255,120,0,.22)'],[20,'rgba(255,200,0,.18)']].forEach(function(p){
+        ctx.strokeStyle=p[1];ctx.lineWidth=.5;ctx.setLineDash([3,4]);ctx.beginPath();ctx.moveTo(0,spy(p[0]));ctx.lineTo(lW,spy(p[0]));ctx.stroke();
+      });ctx.setLineDash([]);
+      var grd=ctx.createLinearGradient(0,0,0,H);grd.addColorStop(0,'rgba(255,40,60,.38)');grd.addColorStop(1,'rgba(255,100,0,.02)');ctx.fillStyle=grd;
+      ctx.beginPath();ctx.moveTo(0,spy(stress[0]));stress.forEach(function(v,i){ctx.lineTo(i*dx,spy(v));});ctx.lineTo((stress.length-1)*dx,H-8);ctx.lineTo(0,H-8);ctx.closePath();ctx.fill();
+      stress.forEach(function(v,i){
+        if(i===0)return;var lc=v>70?'#ff3355':v>45?'#ff9900':'#ffdd00';
+        ctx.strokeStyle=lc;ctx.shadowColor=lc;ctx.shadowBlur=v>70?8:4;ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo((i-1)*dx,spy(stress[i-1]));ctx.lineTo(i*dx,spy(v));ctx.stroke();
+      });ctx.shadowBlur=0;
+      var lv=stress[stress.length-1],dc=lv>70?'#ff3355':lv>45?'#ff9900':'#ffdd00';
+      ctx.beginPath();ctx.arc((stress.length-1)*dx,spy(lv),4,0,Math.PI*2);ctx.fillStyle=dc;ctx.shadowColor=dc;ctx.shadowBlur=10;ctx.fill();ctx.shadowBlur=0;
+      var acx=rX+rW/2,acy=44,ar=26;
+      ctx.strokeStyle='rgba(255,255,255,.07)';ctx.lineWidth=7;ctx.lineCap='round';ctx.beginPath();ctx.arc(acx,acy,ar,Math.PI,2*Math.PI);ctx.stroke();
+      var ac=prob>.65?'#ff2244':prob>.40?'#ff8800':prob>.20?'#ffcc00':'#00cc66';
+      ctx.strokeStyle=ac;ctx.shadowColor=ac;ctx.shadowBlur=8;ctx.beginPath();ctx.arc(acx,acy,ar,Math.PI,Math.PI+prob*Math.PI);ctx.stroke();ctx.shadowBlur=0;ctx.lineCap='butt';
+      ctx.fillStyle='#fff';ctx.font='bold 12px monospace';ctx.textAlign='center';ctx.fillText(Math.round(prob*100)+'%',acx,acy+5);
+      ctx.fillStyle='rgba(255,255,255,.3)';ctx.font='7px monospace';ctx.fillText('CRISIS PROB',acx,acy+16);ctx.textAlign='left';
+      t++;if(t%10===0){stress.push(Math.min(95,Math.max(5,stress[stress.length-1]+rnd(-4,4))));if(stress.length>90)stress.shift();prob=Math.min(.92,Math.max(.05,prob+rnd(-.02,.02)));}
+    },48);
+  }
+
+  /* Slider control */
+  function updateDots(){
+    document.querySelectorAll('.fq-dot').forEach(function(d,i){
+      d.classList.toggle('on',i===cur);
+      d.style.background=i===cur?ACC[cur]:'rgba(255,255,255,.18)';
+      d.style.width=i===cur?'22px':'7px';
+    });
+  }
+  function resetPB(){
+    var pb=document.getElementById('fq-pb');if(!pb)return;
+    pb.style.transition='none';pb.style.background=ACC[cur];pb.style.width='0%';
+    void pb.offsetWidth;pb.style.transition='width '+DUR+'ms linear';pb.style.width='100%';
+  }
+  window.fqGoTo=function(n){
+    if(n===cur)return;
+    document.getElementById('fqs'+cur).classList.remove('active');
+    cur=n;
+    document.getElementById('fqs'+cur).classList.add('active');
+    var snum=document.getElementById('fq-snum');if(snum)snum.textContent=String(cur+1).padStart(2,'0')+' / 08';
+    updateDots();resetPB();
+    if(timer)clearInterval(timer);
+    timer=setInterval(function(){window.fqGoTo((cur+1)%TOTAL);},DUR);
+  };
+
+  /* Init */
+  initCV0();initCV1();initCV2();initCV3();initCV4();initCV5();initCV6();initCV7();
+  updateDots();resetPB();
+  timer=setInterval(function(){window.fqGoTo(1);},DUR);
+})();
+/* ══ END FQ HERO SLIDER ══ */
 </script>
 </body>
 </html>
