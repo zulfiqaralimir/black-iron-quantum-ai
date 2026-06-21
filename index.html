@@ -1104,9 +1104,13 @@ footer {
   width: 44%; padding-left: 64px; padding-right: 28px;
   position: relative; z-index: 3; flex-shrink: 0;
 }
-.hs-col-kb {
-  width: 56%; display: flex; flex-direction: column;
-  align-items: center; justify-content: center; position: relative; z-index: 3;
+.hs-col-canvas {
+  width: 56%; display: flex; align-items: center; justify-content: center;
+  position: relative; z-index: 3; padding: 16px 28px;
+}
+.hs-col-canvas canvas {
+  width: 100%; height: 390px; border-radius: 6px;
+  border: 1px solid rgba(255,255,255,0.05); display: block;
 }
 
 .hs-badge, .hs-headline, .hs-subline, .hs-effect-tag {
@@ -1264,20 +1268,7 @@ footer {
         <span class="hs-subline">AI-Driven Alpha &nbsp;·&nbsp; PSX Markets &nbsp;·&nbsp; Institutional Grade</span>
         <span class="hs-effect-tag" style="color:rgba(224,90,0,0.65);">▸ FIRE BURN MODE ACTIVE</span>
       </div>
-      <div class="hs-col-kb">
-        <div class="hs-keyboard-wrap">
-          <div class="hs-keyboard" id="kb0">
-            <div class="hs-kb-row" data-row="0"><div class="hs-key w1" data-col="0">esc</div><div class="hs-key w1" data-col="1">F1</div><div class="hs-key w1" data-col="2">F2</div><div class="hs-key w1" data-col="3">F3</div><div class="hs-key w1" data-col="4">F4</div><div class="hs-key w1" data-col="5">F5</div><div class="hs-key w1" data-col="6">F6</div><div class="hs-key w1" data-col="7">F7</div><div class="hs-key w1" data-col="8">F8</div><div class="hs-key w1" data-col="9">F9</div><div class="hs-key w1" data-col="10">F10</div><div class="hs-key w1" data-col="11">F11</div></div>
-            <div class="hs-kb-row" data-row="1"><div class="hs-key w1" data-col="0">`</div><div class="hs-key w1" data-col="1">1</div><div class="hs-key w1" data-col="2">2</div><div class="hs-key w1" data-col="3">3</div><div class="hs-key w1" data-col="4">4</div><div class="hs-key w1" data-col="5">5</div><div class="hs-key w1" data-col="6">6</div><div class="hs-key w1" data-col="7">7</div><div class="hs-key w1" data-col="8">8</div><div class="hs-key w1" data-col="9">9</div><div class="hs-key w1" data-col="10">0</div><div class="hs-key w2" data-col="11">del</div></div>
-            <div class="hs-kb-row" data-row="2"><div class="hs-key w15" data-col="0">tab</div><div class="hs-key w1" data-col="1">Q</div><div class="hs-key w1" data-col="2">W</div><div class="hs-key w1" data-col="3">E</div><div class="hs-key w1" data-col="4">R</div><div class="hs-key w1" data-col="5">T</div><div class="hs-key w1" data-col="6">Y</div><div class="hs-key w1" data-col="7">U</div><div class="hs-key w1" data-col="8">I</div><div class="hs-key w1" data-col="9">O</div><div class="hs-key w1" data-col="10">P</div><div class="hs-key w15" data-col="11">ret</div></div>
-            <div class="hs-kb-row" data-row="3"><div class="hs-key w2" data-col="0">caps</div><div class="hs-key w1" data-col="1">A</div><div class="hs-key w1" data-col="2">S</div><div class="hs-key w1" data-col="3">D</div><div class="hs-key w1" data-col="4">F</div><div class="hs-key w1" data-col="5">G</div><div class="hs-key w1" data-col="6">H</div><div class="hs-key w1" data-col="7">J</div><div class="hs-key w1" data-col="8">K</div><div class="hs-key w1" data-col="9">L</div><div class="hs-key w1" data-col="10">;</div><div class="hs-key w2" data-col="11">↩</div></div>
-            <div class="hs-kb-row" data-row="4"><div class="hs-key w25" data-col="0">shift</div><div class="hs-key w1" data-col="1">Z</div><div class="hs-key w1" data-col="2">X</div><div class="hs-key w1" data-col="3">C</div><div class="hs-key w1" data-col="4">V</div><div class="hs-key w1" data-col="5">B</div><div class="hs-key w1" data-col="6">N</div><div class="hs-key w1" data-col="7">M</div><div class="hs-key w1" data-col="8">,</div><div class="hs-key w1" data-col="9">.</div><div class="hs-key w1" data-col="10">/</div><div class="hs-key w25" data-col="11">shift</div></div>
-            <div class="hs-kb-row" data-row="5"><div class="hs-key w15" data-col="0">ctrl</div><div class="hs-key w1" data-col="1">opt</div><div class="hs-key w15" data-col="2">cmd</div><div class="hs-key w6" data-col="3">space</div><div class="hs-key w15" data-col="4">cmd</div><div class="hs-key w1" data-col="5">←</div><div class="hs-key w1" data-col="6">↕</div><div class="hs-key w1" data-col="7">→</div></div>
-          </div>
-          <div class="hs-underglow" id="underglow0" style="background:rgba(255,80,0,0.9);"></div>
-          <div class="hs-trackpad"></div>
-        </div>
-      </div>
+        <div class="hs-col-canvas"><canvas id="hsc0"></canvas></div>
     </div>
 
     <!-- ── SLIDE 2: Black Iron Quantum AI ── -->
@@ -1289,20 +1280,7 @@ footer {
         <span class="hs-subline">Multi-Agent Systems &nbsp;·&nbsp; Deep Learning Finance &nbsp;·&nbsp; Agentic AI</span>
         <span class="hs-effect-tag" style="color:rgba(0,204,68,0.65);">▸ MATRIX RAIN MODE ACTIVE</span>
       </div>
-      <div class="hs-col-kb">
-        <div class="hs-keyboard-wrap">
-          <div class="hs-keyboard" id="kb1">
-            <div class="hs-kb-row" data-row="0"><div class="hs-key w1" data-col="0">esc</div><div class="hs-key w1" data-col="1">F1</div><div class="hs-key w1" data-col="2">F2</div><div class="hs-key w1" data-col="3">F3</div><div class="hs-key w1" data-col="4">F4</div><div class="hs-key w1" data-col="5">F5</div><div class="hs-key w1" data-col="6">F6</div><div class="hs-key w1" data-col="7">F7</div><div class="hs-key w1" data-col="8">F8</div><div class="hs-key w1" data-col="9">F9</div><div class="hs-key w1" data-col="10">F10</div><div class="hs-key w1" data-col="11">F11</div></div>
-            <div class="hs-kb-row" data-row="1"><div class="hs-key w1" data-col="0">`</div><div class="hs-key w1" data-col="1">1</div><div class="hs-key w1" data-col="2">2</div><div class="hs-key w1" data-col="3">3</div><div class="hs-key w1" data-col="4">4</div><div class="hs-key w1" data-col="5">5</div><div class="hs-key w1" data-col="6">6</div><div class="hs-key w1" data-col="7">7</div><div class="hs-key w1" data-col="8">8</div><div class="hs-key w1" data-col="9">9</div><div class="hs-key w1" data-col="10">0</div><div class="hs-key w2" data-col="11">del</div></div>
-            <div class="hs-kb-row" data-row="2"><div class="hs-key w15" data-col="0">tab</div><div class="hs-key w1" data-col="1">Q</div><div class="hs-key w1" data-col="2">W</div><div class="hs-key w1" data-col="3">E</div><div class="hs-key w1" data-col="4">R</div><div class="hs-key w1" data-col="5">T</div><div class="hs-key w1" data-col="6">Y</div><div class="hs-key w1" data-col="7">U</div><div class="hs-key w1" data-col="8">I</div><div class="hs-key w1" data-col="9">O</div><div class="hs-key w1" data-col="10">P</div><div class="hs-key w15" data-col="11">ret</div></div>
-            <div class="hs-kb-row" data-row="3"><div class="hs-key w2" data-col="0">caps</div><div class="hs-key w1" data-col="1">A</div><div class="hs-key w1" data-col="2">S</div><div class="hs-key w1" data-col="3">D</div><div class="hs-key w1" data-col="4">F</div><div class="hs-key w1" data-col="5">G</div><div class="hs-key w1" data-col="6">H</div><div class="hs-key w1" data-col="7">J</div><div class="hs-key w1" data-col="8">K</div><div class="hs-key w1" data-col="9">L</div><div class="hs-key w1" data-col="10">;</div><div class="hs-key w2" data-col="11">↩</div></div>
-            <div class="hs-kb-row" data-row="4"><div class="hs-key w25" data-col="0">shift</div><div class="hs-key w1" data-col="1">Z</div><div class="hs-key w1" data-col="2">X</div><div class="hs-key w1" data-col="3">C</div><div class="hs-key w1" data-col="4">V</div><div class="hs-key w1" data-col="5">B</div><div class="hs-key w1" data-col="6">N</div><div class="hs-key w1" data-col="7">M</div><div class="hs-key w1" data-col="8">,</div><div class="hs-key w1" data-col="9">.</div><div class="hs-key w1" data-col="10">/</div><div class="hs-key w25" data-col="11">shift</div></div>
-            <div class="hs-kb-row" data-row="5"><div class="hs-key w15" data-col="0">ctrl</div><div class="hs-key w1" data-col="1">opt</div><div class="hs-key w15" data-col="2">cmd</div><div class="hs-key w6" data-col="3">space</div><div class="hs-key w15" data-col="4">cmd</div><div class="hs-key w1" data-col="5">←</div><div class="hs-key w1" data-col="6">↕</div><div class="hs-key w1" data-col="7">→</div></div>
-          </div>
-          <div class="hs-underglow" id="underglow1" style="background:rgba(0,255,80,0.9);"></div>
-          <div class="hs-trackpad"></div>
-        </div>
-      </div>
+        <div class="hs-col-canvas"><canvas id="hsc1"></canvas></div>
     </div>
 
     <!-- ── SLIDE 3: BlackIronTimes.com ── -->
@@ -1314,20 +1292,7 @@ footer {
         <span class="hs-subline">Financial Journalism &nbsp;·&nbsp; Market Intelligence &nbsp;·&nbsp; Data-First Media</span>
         <span class="hs-effect-tag" style="color:rgba(0,191,255,0.65);">▸ NETWORK WIRE MODE ACTIVE</span>
       </div>
-      <div class="hs-col-kb">
-        <div class="hs-keyboard-wrap">
-          <div class="hs-keyboard" id="kb2">
-            <div class="hs-kb-row" data-row="0"><div class="hs-key w1" data-col="0">esc</div><div class="hs-key w1" data-col="1">F1</div><div class="hs-key w1" data-col="2">F2</div><div class="hs-key w1" data-col="3">F3</div><div class="hs-key w1" data-col="4">F4</div><div class="hs-key w1" data-col="5">F5</div><div class="hs-key w1" data-col="6">F6</div><div class="hs-key w1" data-col="7">F7</div><div class="hs-key w1" data-col="8">F8</div><div class="hs-key w1" data-col="9">F9</div><div class="hs-key w1" data-col="10">F10</div><div class="hs-key w1" data-col="11">F11</div></div>
-            <div class="hs-kb-row" data-row="1"><div class="hs-key w1" data-col="0">`</div><div class="hs-key w1" data-col="1">1</div><div class="hs-key w1" data-col="2">2</div><div class="hs-key w1" data-col="3">3</div><div class="hs-key w1" data-col="4">4</div><div class="hs-key w1" data-col="5">5</div><div class="hs-key w1" data-col="6">6</div><div class="hs-key w1" data-col="7">7</div><div class="hs-key w1" data-col="8">8</div><div class="hs-key w1" data-col="9">9</div><div class="hs-key w1" data-col="10">0</div><div class="hs-key w2" data-col="11">del</div></div>
-            <div class="hs-kb-row" data-row="2"><div class="hs-key w15" data-col="0">tab</div><div class="hs-key w1" data-col="1">Q</div><div class="hs-key w1" data-col="2">W</div><div class="hs-key w1" data-col="3">E</div><div class="hs-key w1" data-col="4">R</div><div class="hs-key w1" data-col="5">T</div><div class="hs-key w1" data-col="6">Y</div><div class="hs-key w1" data-col="7">U</div><div class="hs-key w1" data-col="8">I</div><div class="hs-key w1" data-col="9">O</div><div class="hs-key w1" data-col="10">P</div><div class="hs-key w15" data-col="11">ret</div></div>
-            <div class="hs-kb-row" data-row="3"><div class="hs-key w2" data-col="0">caps</div><div class="hs-key w1" data-col="1">A</div><div class="hs-key w1" data-col="2">S</div><div class="hs-key w1" data-col="3">D</div><div class="hs-key w1" data-col="4">F</div><div class="hs-key w1" data-col="5">G</div><div class="hs-key w1" data-col="6">H</div><div class="hs-key w1" data-col="7">J</div><div class="hs-key w1" data-col="8">K</div><div class="hs-key w1" data-col="9">L</div><div class="hs-key w1" data-col="10">;</div><div class="hs-key w2" data-col="11">↩</div></div>
-            <div class="hs-kb-row" data-row="4"><div class="hs-key w25" data-col="0">shift</div><div class="hs-key w1" data-col="1">Z</div><div class="hs-key w1" data-col="2">X</div><div class="hs-key w1" data-col="3">C</div><div class="hs-key w1" data-col="4">V</div><div class="hs-key w1" data-col="5">B</div><div class="hs-key w1" data-col="6">N</div><div class="hs-key w1" data-col="7">M</div><div class="hs-key w1" data-col="8">,</div><div class="hs-key w1" data-col="9">.</div><div class="hs-key w1" data-col="10">/</div><div class="hs-key w25" data-col="11">shift</div></div>
-            <div class="hs-kb-row" data-row="5"><div class="hs-key w15" data-col="0">ctrl</div><div class="hs-key w1" data-col="1">opt</div><div class="hs-key w15" data-col="2">cmd</div><div class="hs-key w6" data-col="3">space</div><div class="hs-key w15" data-col="4">cmd</div><div class="hs-key w1" data-col="5">←</div><div class="hs-key w1" data-col="6">↕</div><div class="hs-key w1" data-col="7">→</div></div>
-          </div>
-          <div class="hs-underglow" id="underglow2" style="background:rgba(0,191,255,0.9);"></div>
-          <div class="hs-trackpad"></div>
-        </div>
-      </div>
+        <div class="hs-col-canvas"><canvas id="hsc2"></canvas></div>
     </div>
 
     <!-- ── SLIDE 4: Gulf SWF Intelligence ── -->
@@ -1339,20 +1304,7 @@ footer {
         <span class="hs-subline">SWF Filing Intelligence &nbsp;·&nbsp; Gulf Capital Flows &nbsp;·&nbsp; Institutional Data</span>
         <span class="hs-effect-tag" style="color:rgba(212,168,67,0.65);">▸ GOLD STREAM MODE ACTIVE</span>
       </div>
-      <div class="hs-col-kb">
-        <div class="hs-keyboard-wrap">
-          <div class="hs-keyboard" id="kb3">
-            <div class="hs-kb-row" data-row="0"><div class="hs-key w1" data-col="0">esc</div><div class="hs-key w1" data-col="1">F1</div><div class="hs-key w1" data-col="2">F2</div><div class="hs-key w1" data-col="3">F3</div><div class="hs-key w1" data-col="4">F4</div><div class="hs-key w1" data-col="5">F5</div><div class="hs-key w1" data-col="6">F6</div><div class="hs-key w1" data-col="7">F7</div><div class="hs-key w1" data-col="8">F8</div><div class="hs-key w1" data-col="9">F9</div><div class="hs-key w1" data-col="10">F10</div><div class="hs-key w1" data-col="11">F11</div></div>
-            <div class="hs-kb-row" data-row="1"><div class="hs-key w1" data-col="0">`</div><div class="hs-key w1" data-col="1">1</div><div class="hs-key w1" data-col="2">2</div><div class="hs-key w1" data-col="3">3</div><div class="hs-key w1" data-col="4">4</div><div class="hs-key w1" data-col="5">5</div><div class="hs-key w1" data-col="6">6</div><div class="hs-key w1" data-col="7">7</div><div class="hs-key w1" data-col="8">8</div><div class="hs-key w1" data-col="9">9</div><div class="hs-key w1" data-col="10">0</div><div class="hs-key w2" data-col="11">del</div></div>
-            <div class="hs-kb-row" data-row="2"><div class="hs-key w15" data-col="0">tab</div><div class="hs-key w1" data-col="1">Q</div><div class="hs-key w1" data-col="2">W</div><div class="hs-key w1" data-col="3">E</div><div class="hs-key w1" data-col="4">R</div><div class="hs-key w1" data-col="5">T</div><div class="hs-key w1" data-col="6">Y</div><div class="hs-key w1" data-col="7">U</div><div class="hs-key w1" data-col="8">I</div><div class="hs-key w1" data-col="9">O</div><div class="hs-key w1" data-col="10">P</div><div class="hs-key w15" data-col="11">ret</div></div>
-            <div class="hs-kb-row" data-row="3"><div class="hs-key w2" data-col="0">caps</div><div class="hs-key w1" data-col="1">A</div><div class="hs-key w1" data-col="2">S</div><div class="hs-key w1" data-col="3">D</div><div class="hs-key w1" data-col="4">F</div><div class="hs-key w1" data-col="5">G</div><div class="hs-key w1" data-col="6">H</div><div class="hs-key w1" data-col="7">J</div><div class="hs-key w1" data-col="8">K</div><div class="hs-key w1" data-col="9">L</div><div class="hs-key w1" data-col="10">;</div><div class="hs-key w2" data-col="11">↩</div></div>
-            <div class="hs-kb-row" data-row="4"><div class="hs-key w25" data-col="0">shift</div><div class="hs-key w1" data-col="1">Z</div><div class="hs-key w1" data-col="2">X</div><div class="hs-key w1" data-col="3">C</div><div class="hs-key w1" data-col="4">V</div><div class="hs-key w1" data-col="5">B</div><div class="hs-key w1" data-col="6">N</div><div class="hs-key w1" data-col="7">M</div><div class="hs-key w1" data-col="8">,</div><div class="hs-key w1" data-col="9">.</div><div class="hs-key w1" data-col="10">/</div><div class="hs-key w25" data-col="11">shift</div></div>
-            <div class="hs-kb-row" data-row="5"><div class="hs-key w15" data-col="0">ctrl</div><div class="hs-key w1" data-col="1">opt</div><div class="hs-key w15" data-col="2">cmd</div><div class="hs-key w6" data-col="3">space</div><div class="hs-key w15" data-col="4">cmd</div><div class="hs-key w1" data-col="5">←</div><div class="hs-key w1" data-col="6">↕</div><div class="hs-key w1" data-col="7">→</div></div>
-          </div>
-          <div class="hs-underglow" id="underglow3" style="background:rgba(212,168,67,0.9);"></div>
-          <div class="hs-trackpad"></div>
-        </div>
-      </div>
+        <div class="hs-col-canvas"><canvas id="hsc3"></canvas></div>
     </div>
 
     <!-- ── SLIDE 5: LLM Agent Systems ── -->
@@ -1364,20 +1316,7 @@ footer {
         <span class="hs-subline">Multi-Agent Orchestration &nbsp;·&nbsp; LLM Pipelines &nbsp;·&nbsp; Autonomous Systems</span>
         <span class="hs-effect-tag" style="color:rgba(155,89,182,0.65);">▸ NEURAL PULSE MODE ACTIVE</span>
       </div>
-      <div class="hs-col-kb">
-        <div class="hs-keyboard-wrap">
-          <div class="hs-keyboard" id="kb4">
-            <div class="hs-kb-row" data-row="0"><div class="hs-key w1" data-col="0">esc</div><div class="hs-key w1" data-col="1">F1</div><div class="hs-key w1" data-col="2">F2</div><div class="hs-key w1" data-col="3">F3</div><div class="hs-key w1" data-col="4">F4</div><div class="hs-key w1" data-col="5">F5</div><div class="hs-key w1" data-col="6">F6</div><div class="hs-key w1" data-col="7">F7</div><div class="hs-key w1" data-col="8">F8</div><div class="hs-key w1" data-col="9">F9</div><div class="hs-key w1" data-col="10">F10</div><div class="hs-key w1" data-col="11">F11</div></div>
-            <div class="hs-kb-row" data-row="1"><div class="hs-key w1" data-col="0">`</div><div class="hs-key w1" data-col="1">1</div><div class="hs-key w1" data-col="2">2</div><div class="hs-key w1" data-col="3">3</div><div class="hs-key w1" data-col="4">4</div><div class="hs-key w1" data-col="5">5</div><div class="hs-key w1" data-col="6">6</div><div class="hs-key w1" data-col="7">7</div><div class="hs-key w1" data-col="8">8</div><div class="hs-key w1" data-col="9">9</div><div class="hs-key w1" data-col="10">0</div><div class="hs-key w2" data-col="11">del</div></div>
-            <div class="hs-kb-row" data-row="2"><div class="hs-key w15" data-col="0">tab</div><div class="hs-key w1" data-col="1">Q</div><div class="hs-key w1" data-col="2">W</div><div class="hs-key w1" data-col="3">E</div><div class="hs-key w1" data-col="4">R</div><div class="hs-key w1" data-col="5">T</div><div class="hs-key w1" data-col="6">Y</div><div class="hs-key w1" data-col="7">U</div><div class="hs-key w1" data-col="8">I</div><div class="hs-key w1" data-col="9">O</div><div class="hs-key w1" data-col="10">P</div><div class="hs-key w15" data-col="11">ret</div></div>
-            <div class="hs-kb-row" data-row="3"><div class="hs-key w2" data-col="0">caps</div><div class="hs-key w1" data-col="1">A</div><div class="hs-key w1" data-col="2">S</div><div class="hs-key w1" data-col="3">D</div><div class="hs-key w1" data-col="4">F</div><div class="hs-key w1" data-col="5">G</div><div class="hs-key w1" data-col="6">H</div><div class="hs-key w1" data-col="7">J</div><div class="hs-key w1" data-col="8">K</div><div class="hs-key w1" data-col="9">L</div><div class="hs-key w1" data-col="10">;</div><div class="hs-key w2" data-col="11">↩</div></div>
-            <div class="hs-kb-row" data-row="4"><div class="hs-key w25" data-col="0">shift</div><div class="hs-key w1" data-col="1">Z</div><div class="hs-key w1" data-col="2">X</div><div class="hs-key w1" data-col="3">C</div><div class="hs-key w1" data-col="4">V</div><div class="hs-key w1" data-col="5">B</div><div class="hs-key w1" data-col="6">N</div><div class="hs-key w1" data-col="7">M</div><div class="hs-key w1" data-col="8">,</div><div class="hs-key w1" data-col="9">.</div><div class="hs-key w1" data-col="10">/</div><div class="hs-key w25" data-col="11">shift</div></div>
-            <div class="hs-kb-row" data-row="5"><div class="hs-key w15" data-col="0">ctrl</div><div class="hs-key w1" data-col="1">opt</div><div class="hs-key w15" data-col="2">cmd</div><div class="hs-key w6" data-col="3">space</div><div class="hs-key w15" data-col="4">cmd</div><div class="hs-key w1" data-col="5">←</div><div class="hs-key w1" data-col="6">↕</div><div class="hs-key w1" data-col="7">→</div></div>
-          </div>
-          <div class="hs-underglow" id="underglow4" style="background:rgba(155,89,182,0.9);"></div>
-          <div class="hs-trackpad"></div>
-        </div>
-      </div>
+        <div class="hs-col-canvas"><canvas id="hsc4"></canvas></div>
     </div>
 
     <!-- ── SLIDE 6: ZulfiCode ── -->
@@ -1389,20 +1328,7 @@ footer {
         <span class="hs-subline">AI-Assisted Development &nbsp;·&nbsp; Full-Stack Engineering &nbsp;·&nbsp; Production Grade</span>
         <span class="hs-effect-tag" style="color:rgba(220,16,64,0.65);">▸ HEX STREAM MODE ACTIVE</span>
       </div>
-      <div class="hs-col-kb">
-        <div class="hs-keyboard-wrap">
-          <div class="hs-keyboard" id="kb5">
-            <div class="hs-kb-row" data-row="0"><div class="hs-key w1" data-col="0">esc</div><div class="hs-key w1" data-col="1">F1</div><div class="hs-key w1" data-col="2">F2</div><div class="hs-key w1" data-col="3">F3</div><div class="hs-key w1" data-col="4">F4</div><div class="hs-key w1" data-col="5">F5</div><div class="hs-key w1" data-col="6">F6</div><div class="hs-key w1" data-col="7">F7</div><div class="hs-key w1" data-col="8">F8</div><div class="hs-key w1" data-col="9">F9</div><div class="hs-key w1" data-col="10">F10</div><div class="hs-key w1" data-col="11">F11</div></div>
-            <div class="hs-kb-row" data-row="1"><div class="hs-key w1" data-col="0">`</div><div class="hs-key w1" data-col="1">1</div><div class="hs-key w1" data-col="2">2</div><div class="hs-key w1" data-col="3">3</div><div class="hs-key w1" data-col="4">4</div><div class="hs-key w1" data-col="5">5</div><div class="hs-key w1" data-col="6">6</div><div class="hs-key w1" data-col="7">7</div><div class="hs-key w1" data-col="8">8</div><div class="hs-key w1" data-col="9">9</div><div class="hs-key w1" data-col="10">0</div><div class="hs-key w2" data-col="11">del</div></div>
-            <div class="hs-kb-row" data-row="2"><div class="hs-key w15" data-col="0">tab</div><div class="hs-key w1" data-col="1">Q</div><div class="hs-key w1" data-col="2">W</div><div class="hs-key w1" data-col="3">E</div><div class="hs-key w1" data-col="4">R</div><div class="hs-key w1" data-col="5">T</div><div class="hs-key w1" data-col="6">Y</div><div class="hs-key w1" data-col="7">U</div><div class="hs-key w1" data-col="8">I</div><div class="hs-key w1" data-col="9">O</div><div class="hs-key w1" data-col="10">P</div><div class="hs-key w15" data-col="11">ret</div></div>
-            <div class="hs-kb-row" data-row="3"><div class="hs-key w2" data-col="0">caps</div><div class="hs-key w1" data-col="1">A</div><div class="hs-key w1" data-col="2">S</div><div class="hs-key w1" data-col="3">D</div><div class="hs-key w1" data-col="4">F</div><div class="hs-key w1" data-col="5">G</div><div class="hs-key w1" data-col="6">H</div><div class="hs-key w1" data-col="7">J</div><div class="hs-key w1" data-col="8">K</div><div class="hs-key w1" data-col="9">L</div><div class="hs-key w1" data-col="10">;</div><div class="hs-key w2" data-col="11">↩</div></div>
-            <div class="hs-kb-row" data-row="4"><div class="hs-key w25" data-col="0">shift</div><div class="hs-key w1" data-col="1">Z</div><div class="hs-key w1" data-col="2">X</div><div class="hs-key w1" data-col="3">C</div><div class="hs-key w1" data-col="4">V</div><div class="hs-key w1" data-col="5">B</div><div class="hs-key w1" data-col="6">N</div><div class="hs-key w1" data-col="7">M</div><div class="hs-key w1" data-col="8">,</div><div class="hs-key w1" data-col="9">.</div><div class="hs-key w1" data-col="10">/</div><div class="hs-key w25" data-col="11">shift</div></div>
-            <div class="hs-kb-row" data-row="5"><div class="hs-key w15" data-col="0">ctrl</div><div class="hs-key w1" data-col="1">opt</div><div class="hs-key w15" data-col="2">cmd</div><div class="hs-key w6" data-col="3">space</div><div class="hs-key w15" data-col="4">cmd</div><div class="hs-key w1" data-col="5">←</div><div class="hs-key w1" data-col="6">↕</div><div class="hs-key w1" data-col="7">→</div></div>
-          </div>
-          <div class="hs-underglow" id="underglow5" style="background:rgba(220,16,64,0.9);"></div>
-          <div class="hs-trackpad"></div>
-        </div>
-      </div>
+        <div class="hs-col-canvas"><canvas id="hsc5"></canvas></div>
     </div>
 
     <!-- ── SLIDE 7: Policy Analytics ── -->
@@ -1414,20 +1340,7 @@ footer {
         <span class="hs-subline">Geopolitical Intelligence &nbsp;·&nbsp; Regulatory Analysis &nbsp;·&nbsp; Strategic Advisory</span>
         <span class="hs-effect-tag" style="color:rgba(74,144,217,0.65);">▸ RADAR SWEEP MODE ACTIVE</span>
       </div>
-      <div class="hs-col-kb">
-        <div class="hs-keyboard-wrap">
-          <div class="hs-keyboard" id="kb6">
-            <div class="hs-kb-row" data-row="0"><div class="hs-key w1" data-col="0">esc</div><div class="hs-key w1" data-col="1">F1</div><div class="hs-key w1" data-col="2">F2</div><div class="hs-key w1" data-col="3">F3</div><div class="hs-key w1" data-col="4">F4</div><div class="hs-key w1" data-col="5">F5</div><div class="hs-key w1" data-col="6">F6</div><div class="hs-key w1" data-col="7">F7</div><div class="hs-key w1" data-col="8">F8</div><div class="hs-key w1" data-col="9">F9</div><div class="hs-key w1" data-col="10">F10</div><div class="hs-key w1" data-col="11">F11</div></div>
-            <div class="hs-kb-row" data-row="1"><div class="hs-key w1" data-col="0">`</div><div class="hs-key w1" data-col="1">1</div><div class="hs-key w1" data-col="2">2</div><div class="hs-key w1" data-col="3">3</div><div class="hs-key w1" data-col="4">4</div><div class="hs-key w1" data-col="5">5</div><div class="hs-key w1" data-col="6">6</div><div class="hs-key w1" data-col="7">7</div><div class="hs-key w1" data-col="8">8</div><div class="hs-key w1" data-col="9">9</div><div class="hs-key w1" data-col="10">0</div><div class="hs-key w2" data-col="11">del</div></div>
-            <div class="hs-kb-row" data-row="2"><div class="hs-key w15" data-col="0">tab</div><div class="hs-key w1" data-col="1">Q</div><div class="hs-key w1" data-col="2">W</div><div class="hs-key w1" data-col="3">E</div><div class="hs-key w1" data-col="4">R</div><div class="hs-key w1" data-col="5">T</div><div class="hs-key w1" data-col="6">Y</div><div class="hs-key w1" data-col="7">U</div><div class="hs-key w1" data-col="8">I</div><div class="hs-key w1" data-col="9">O</div><div class="hs-key w1" data-col="10">P</div><div class="hs-key w15" data-col="11">ret</div></div>
-            <div class="hs-kb-row" data-row="3"><div class="hs-key w2" data-col="0">caps</div><div class="hs-key w1" data-col="1">A</div><div class="hs-key w1" data-col="2">S</div><div class="hs-key w1" data-col="3">D</div><div class="hs-key w1" data-col="4">F</div><div class="hs-key w1" data-col="5">G</div><div class="hs-key w1" data-col="6">H</div><div class="hs-key w1" data-col="7">J</div><div class="hs-key w1" data-col="8">K</div><div class="hs-key w1" data-col="9">L</div><div class="hs-key w1" data-col="10">;</div><div class="hs-key w2" data-col="11">↩</div></div>
-            <div class="hs-kb-row" data-row="4"><div class="hs-key w25" data-col="0">shift</div><div class="hs-key w1" data-col="1">Z</div><div class="hs-key w1" data-col="2">X</div><div class="hs-key w1" data-col="3">C</div><div class="hs-key w1" data-col="4">V</div><div class="hs-key w1" data-col="5">B</div><div class="hs-key w1" data-col="6">N</div><div class="hs-key w1" data-col="7">M</div><div class="hs-key w1" data-col="8">,</div><div class="hs-key w1" data-col="9">.</div><div class="hs-key w1" data-col="10">/</div><div class="hs-key w25" data-col="11">shift</div></div>
-            <div class="hs-kb-row" data-row="5"><div class="hs-key w15" data-col="0">ctrl</div><div class="hs-key w1" data-col="1">opt</div><div class="hs-key w15" data-col="2">cmd</div><div class="hs-key w6" data-col="3">space</div><div class="hs-key w15" data-col="4">cmd</div><div class="hs-key w1" data-col="5">←</div><div class="hs-key w1" data-col="6">↕</div><div class="hs-key w1" data-col="7">→</div></div>
-          </div>
-          <div class="hs-underglow" id="underglow6" style="background:rgba(74,144,217,0.9);"></div>
-          <div class="hs-trackpad"></div>
-        </div>
-      </div>
+        <div class="hs-col-canvas"><canvas id="hsc6"></canvas></div>
     </div>
 
     <!-- ── SLIDE 8: WellServe ── -->
@@ -1439,20 +1352,7 @@ footer {
         <span class="hs-subline">Healthcare Technology &nbsp;·&nbsp; Patient-First Systems &nbsp;·&nbsp; Digital Health</span>
         <span class="hs-effect-tag" style="color:rgba(0,201,167,0.65);">▸ VITAL SIGNAL MODE ACTIVE</span>
       </div>
-      <div class="hs-col-kb">
-        <div class="hs-keyboard-wrap">
-          <div class="hs-keyboard" id="kb7">
-            <div class="hs-kb-row" data-row="0"><div class="hs-key w1" data-col="0">esc</div><div class="hs-key w1" data-col="1">F1</div><div class="hs-key w1" data-col="2">F2</div><div class="hs-key w1" data-col="3">F3</div><div class="hs-key w1" data-col="4">F4</div><div class="hs-key w1" data-col="5">F5</div><div class="hs-key w1" data-col="6">F6</div><div class="hs-key w1" data-col="7">F7</div><div class="hs-key w1" data-col="8">F8</div><div class="hs-key w1" data-col="9">F9</div><div class="hs-key w1" data-col="10">F10</div><div class="hs-key w1" data-col="11">F11</div></div>
-            <div class="hs-kb-row" data-row="1"><div class="hs-key w1" data-col="0">`</div><div class="hs-key w1" data-col="1">1</div><div class="hs-key w1" data-col="2">2</div><div class="hs-key w1" data-col="3">3</div><div class="hs-key w1" data-col="4">4</div><div class="hs-key w1" data-col="5">5</div><div class="hs-key w1" data-col="6">6</div><div class="hs-key w1" data-col="7">7</div><div class="hs-key w1" data-col="8">8</div><div class="hs-key w1" data-col="9">9</div><div class="hs-key w1" data-col="10">0</div><div class="hs-key w2" data-col="11">del</div></div>
-            <div class="hs-kb-row" data-row="2"><div class="hs-key w15" data-col="0">tab</div><div class="hs-key w1" data-col="1">Q</div><div class="hs-key w1" data-col="2">W</div><div class="hs-key w1" data-col="3">E</div><div class="hs-key w1" data-col="4">R</div><div class="hs-key w1" data-col="5">T</div><div class="hs-key w1" data-col="6">Y</div><div class="hs-key w1" data-col="7">U</div><div class="hs-key w1" data-col="8">I</div><div class="hs-key w1" data-col="9">O</div><div class="hs-key w1" data-col="10">P</div><div class="hs-key w15" data-col="11">ret</div></div>
-            <div class="hs-kb-row" data-row="3"><div class="hs-key w2" data-col="0">caps</div><div class="hs-key w1" data-col="1">A</div><div class="hs-key w1" data-col="2">S</div><div class="hs-key w1" data-col="3">D</div><div class="hs-key w1" data-col="4">F</div><div class="hs-key w1" data-col="5">G</div><div class="hs-key w1" data-col="6">H</div><div class="hs-key w1" data-col="7">J</div><div class="hs-key w1" data-col="8">K</div><div class="hs-key w1" data-col="9">L</div><div class="hs-key w1" data-col="10">;</div><div class="hs-key w2" data-col="11">↩</div></div>
-            <div class="hs-kb-row" data-row="4"><div class="hs-key w25" data-col="0">shift</div><div class="hs-key w1" data-col="1">Z</div><div class="hs-key w1" data-col="2">X</div><div class="hs-key w1" data-col="3">C</div><div class="hs-key w1" data-col="4">V</div><div class="hs-key w1" data-col="5">B</div><div class="hs-key w1" data-col="6">N</div><div class="hs-key w1" data-col="7">M</div><div class="hs-key w1" data-col="8">,</div><div class="hs-key w1" data-col="9">.</div><div class="hs-key w1" data-col="10">/</div><div class="hs-key w25" data-col="11">shift</div></div>
-            <div class="hs-kb-row" data-row="5"><div class="hs-key w15" data-col="0">ctrl</div><div class="hs-key w1" data-col="1">opt</div><div class="hs-key w15" data-col="2">cmd</div><div class="hs-key w6" data-col="3">space</div><div class="hs-key w15" data-col="4">cmd</div><div class="hs-key w1" data-col="5">←</div><div class="hs-key w1" data-col="6">↕</div><div class="hs-key w1" data-col="7">→</div></div>
-          </div>
-          <div class="hs-underglow" id="underglow7" style="background:rgba(0,201,167,0.9);"></div>
-          <div class="hs-trackpad"></div>
-        </div>
-      </div>
+        <div class="hs-col-canvas"><canvas id="hsc7"></canvas></div>
     </div>
 
     <!-- Controls -->
@@ -2219,517 +2119,312 @@ document.addEventListener('DOMContentLoaded', () => {
   var SLIDE_DURATION = 6500;
   var currentSlide = 0;
   var slideTimer = null;
-  var glowIntervals = [null,null,null,null,null,null,null,null];
-  var animFrames   = [null,null,null,null,null,null,null,null];
+  var hsIDs = [null,null,null,null,null,null,null,null];
+  var animFrames = [null,null,null,null,null,null,null,null];
   var accentColors = ['#e05a00','#00cc44','#00bfff','#d4a843','#9b59b6','#e01040','#4a90d9','#00c9a7'];
-
   var slides, bgCanvases, progress, dots;
 
-  /* ── Canvas resize ── */
-  function resizeCanvases() {
-    var wrap = document.getElementById('heroSlider');
-    if (!wrap) return;
-    bgCanvases.forEach(function (c) {
-      c.width  = wrap.offsetWidth;
-      c.height = wrap.offsetHeight;
-    });
+  function rnd(a,b){return a+Math.random()*(b-a);}
+  function syncHSC(id){
+    var cv=document.getElementById(id);if(!cv)return null;
+    var W=cv.offsetWidth,H=cv.offsetHeight;
+    if(W>0&&H>0&&(cv.width!==W||cv.height!==H)){cv.width=W;cv.height=H;}
+    return{cv:cv,W:cv.width,H:cv.height,ctx:cv.getContext('2d')};
+  }
+  function resizeCanvases(){
+    var wrap=document.getElementById('heroSlider');if(!wrap)return;
+    bgCanvases.forEach(function(c){c.width=wrap.offsetWidth;c.height=wrap.offsetHeight;});
   }
 
-  /* ── EMBER PARTICLES (slide 0) ── */
-  var embers = [];
-  function initEmbers() {
-    var c = bgCanvases[0];
-    embers = [];
-    for (var i = 0; i < 58; i++) {
-      embers.push({
-        x: Math.random() * c.width,
-        y: c.height + Math.random() * 80,
-        vx: (Math.random() - 0.5) * 0.55,
-        vy: -(Math.random() * 1.1 + 0.4),
-        r: Math.random() * 2.2 + 0.4,
-        life: Math.random()
+  /* BG: embers */
+  var embers=[];
+  function initEmbers(){var c=bgCanvases[0];embers=[];for(var i=0;i<58;i++)embers.push({x:Math.random()*c.width,y:c.height+Math.random()*80,vx:(Math.random()-0.5)*0.55,vy:-(Math.random()*1.1+0.4),r:Math.random()*2.2+0.4,life:Math.random()});}
+  function drawEmbers(){var c=bgCanvases[0];if(!c)return;var ctx=c.getContext('2d');ctx.clearRect(0,0,c.width,c.height);for(var i=0;i<embers.length;i++){var e=embers[i];e.x+=e.vx+Math.sin(e.life*4.5)*0.25;e.y+=e.vy;e.life+=0.007;if(e.life>=1||e.y<-8){e.x=Math.random()*c.width;e.y=c.height+8;e.life=0;e.vx=(Math.random()-0.5)*0.55;e.vy=-(Math.random()*1.1+0.4);e.r=Math.random()*2.2+0.4;}var alpha=Math.max(0,(1-e.life)*0.82),gv=Math.floor(45+Math.random()*70);ctx.beginPath();ctx.arc(e.x,e.y,e.r,0,Math.PI*2);ctx.fillStyle='rgba(255,'+gv+',0,'+alpha+')';ctx.fill();}animFrames[0]=requestAnimationFrame(drawEmbers);}
+
+  /* BG: matrix */
+  var MC=['0','1','∑','∫','₿','ア','イ','ウ','エ','カ','キ','ク'];var matrixDrops=[];
+  function initMatrix(){var c=bgCanvases[1],cols=Math.floor(c.width/20);matrixDrops=[];for(var i=0;i<cols;i++)matrixDrops.push({y:Math.random()*-c.height,speed:Math.random()*1.8+0.8});}
+  function drawMatrix(){var c=bgCanvases[1];if(!c)return;var ctx=c.getContext('2d');ctx.fillStyle='rgba(6,6,8,0.13)';ctx.fillRect(0,0,c.width,c.height);ctx.font='13px "IBM Plex Mono",monospace';for(var i=0;i<matrixDrops.length;i++){var d=matrixDrops[i];d.y+=d.speed;ctx.fillStyle='rgba(200,255,215,0.88)';ctx.fillText(MC[Math.floor(Math.random()*MC.length)],i*20+3,d.y);for(var t=1;t<=8;t++){var a=Math.max(0,0.65-t*0.085),g=Math.max(30,175-t*18);ctx.fillStyle='rgba(0,'+g+',40,'+a+')';ctx.fillText(MC[Math.floor(Math.random()*MC.length)],i*20+3,d.y-t*13);}if(d.y>c.height+13){d.y=Math.random()*-80;d.speed=Math.random()*1.8+0.8;}}animFrames[1]=requestAnimationFrame(drawMatrix);}
+
+  /* BG: network */
+  var netNodes=[];
+  function initNetwork(){var c=bgCanvases[2];netNodes=[];for(var i=0;i<42;i++)netNodes.push({x:Math.random()*c.width,y:Math.random()*c.height,vx:(Math.random()-0.5)*0.45,vy:(Math.random()-0.5)*0.45,r:Math.random()*2+0.8});}
+  function drawNetwork(){var c=bgCanvases[2];if(!c)return;var ctx=c.getContext('2d');ctx.clearRect(0,0,c.width,c.height);for(var i=0;i<netNodes.length;i++){for(var j=i+1;j<netNodes.length;j++){var dx=netNodes[i].x-netNodes[j].x,dy=netNodes[i].y-netNodes[j].y,d=Math.sqrt(dx*dx+dy*dy);if(d<130){ctx.beginPath();ctx.moveTo(netNodes[i].x,netNodes[i].y);ctx.lineTo(netNodes[j].x,netNodes[j].y);ctx.strokeStyle='rgba(0,191,255,'+(0.22*(1-d/130))+')';ctx.lineWidth=0.8;ctx.stroke();}}}for(var i=0;i<netNodes.length;i++){var n=netNodes[i];n.x+=n.vx;n.y+=n.vy;if(n.x<0||n.x>c.width)n.vx*=-1;if(n.y<0||n.y>c.height)n.vy*=-1;ctx.beginPath();ctx.arc(n.x,n.y,n.r,0,Math.PI*2);ctx.fillStyle='rgba(0,191,255,0.72)';ctx.fill();}animFrames[2]=requestAnimationFrame(drawNetwork);}
+
+  /* BG: gold */
+  var goldPts=[];
+  function initGold(){var c=bgCanvases[3];goldPts=[];for(var i=0;i<58;i++)goldPts.push({x:Math.random()*c.width,y:Math.random()*c.height,vx:Math.random()*0.65+0.15,vy:(Math.random()-0.5)*0.28,r:Math.random()*1.8+0.4,ph:Math.random()*Math.PI*2});}
+  function drawGold(){var c=bgCanvases[3];if(!c)return;var ctx=c.getContext('2d');ctx.clearRect(0,0,c.width,c.height);for(var i=0;i<goldPts.length;i++){var p=goldPts[i];p.x+=p.vx;p.y+=p.vy;p.ph+=0.025;if(p.x>c.width+5){p.x=-5;p.y=Math.random()*c.height;p.ph=Math.random()*Math.PI*2;}var a=Math.abs(Math.sin(p.ph))*0.82;ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle='rgba(212,168,67,'+a+')';ctx.fill();}animFrames[3]=requestAnimationFrame(drawGold);}
+
+  /* BG: neural */
+  var neuralN=[];
+  function initNeural(){var c=bgCanvases[4];neuralN=[];var layers=[5,8,8,5],lx=[0.18,0.38,0.62,0.82];for(var l=0;l<layers.length;l++)for(var n=0;n<layers[l];n++)neuralN.push({x:c.width*lx[l],y:c.height*((n+1)/(layers[l]+1)),layer:l,ph:Math.random()*Math.PI*2});}
+  function drawNeural(){var c=bgCanvases[4];if(!c)return;var ctx=c.getContext('2d');ctx.clearRect(0,0,c.width,c.height);var now=Date.now()*0.001;for(var i=0;i<neuralN.length;i++)for(var j=0;j<neuralN.length;j++){if(neuralN[j].layer===neuralN[i].layer+1){var a=0.05+0.04*Math.sin(now+i*0.3+j*0.2);ctx.beginPath();ctx.moveTo(neuralN[i].x,neuralN[i].y);ctx.lineTo(neuralN[j].x,neuralN[j].y);ctx.strokeStyle='rgba(155,89,182,'+a+')';ctx.lineWidth=0.6;ctx.stroke();}}for(var i=0;i<neuralN.length;i++){var n=neuralN[i];n.ph=(n.ph+0.016)%(Math.PI*2);var p=0.28+0.55*Math.abs(Math.sin(n.ph));ctx.beginPath();ctx.arc(n.x,n.y,4,0,Math.PI*2);ctx.fillStyle='rgba(155,89,182,'+p+')';ctx.fill();ctx.beginPath();ctx.arc(n.x,n.y,9,0,Math.PI*2);ctx.fillStyle='rgba(155,89,182,'+(p*0.18)+')';ctx.fill();}animFrames[4]=requestAnimationFrame(drawNeural);}
+
+  /* BG: hex rain */
+  var HX=['0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'];var hexDrops=[];
+  function initHex(){var c=bgCanvases[5],cols=Math.floor(c.width/20);hexDrops=[];for(var i=0;i<cols;i++)hexDrops.push({y:Math.random()*-c.height,speed:Math.random()*1.6+0.7});}
+  function drawHex(){var c=bgCanvases[5];if(!c)return;var ctx=c.getContext('2d');ctx.fillStyle='rgba(6,6,8,0.13)';ctx.fillRect(0,0,c.width,c.height);ctx.font='13px "IBM Plex Mono",monospace';for(var i=0;i<hexDrops.length;i++){var d=hexDrops[i];d.y+=d.speed;ctx.fillStyle='rgba(255,200,210,0.88)';ctx.fillText(HX[Math.floor(Math.random()*HX.length)],i*20+3,d.y);for(var t=1;t<=8;t++){var a=Math.max(0,0.65-t*0.085),r=Math.max(60,200-t*18);ctx.fillStyle='rgba('+r+',0,22,'+a+')';ctx.fillText(HX[Math.floor(Math.random()*HX.length)],i*20+3,d.y-t*13);}if(d.y>c.height+13){d.y=Math.random()*-80;d.speed=Math.random()*1.6+0.7;}}animFrames[5]=requestAnimationFrame(drawHex);}
+
+  /* BG: radar */
+  var radarAngle=0,radarBlips=[];
+  function initRadar(){var c=bgCanvases[6];radarAngle=0;radarBlips=[];for(var i=0;i<9;i++)radarBlips.push({angle:Math.random()*Math.PI*2,dist:Math.random()*0.38+0.1,alpha:0,decay:Math.random()*0.007+0.003});}
+  function drawRadar(){var c=bgCanvases[6];if(!c)return;var ctx=c.getContext('2d');ctx.clearRect(0,0,c.width,c.height);var cx=c.width*0.62,cy=c.height*0.5,maxR=Math.min(c.width,c.height)*0.42;for(var r=1;r<=4;r++){ctx.beginPath();ctx.arc(cx,cy,maxR*r/4,0,Math.PI*2);ctx.strokeStyle='rgba(74,144,217,0.11)';ctx.lineWidth=1;ctx.stroke();}ctx.beginPath();ctx.moveTo(cx-maxR,cy);ctx.lineTo(cx+maxR,cy);ctx.strokeStyle='rgba(74,144,217,0.09)';ctx.stroke();ctx.beginPath();ctx.moveTo(cx,cy-maxR);ctx.lineTo(cx,cy+maxR);ctx.stroke();radarAngle+=0.022;ctx.save();ctx.translate(cx,cy);ctx.rotate(radarAngle);var sg=ctx.createLinearGradient(0,0,maxR,0);sg.addColorStop(0,'rgba(74,144,217,0.52)');sg.addColorStop(1,'rgba(74,144,217,0)');ctx.beginPath();ctx.moveTo(0,0);ctx.arc(0,0,maxR,-0.28,0.02);ctx.closePath();ctx.fillStyle=sg;ctx.fill();ctx.beginPath();ctx.moveTo(0,0);ctx.lineTo(maxR,0);ctx.strokeStyle='rgba(74,144,217,0.9)';ctx.lineWidth=1.5;ctx.stroke();ctx.restore();radarBlips.forEach(function(b){var diff=((b.angle-radarAngle)%(Math.PI*2)+Math.PI*2)%(Math.PI*2);if(diff<0.09)b.alpha=1;if(b.alpha>0){var bx=cx+Math.cos(b.angle)*maxR*b.dist,by=cy+Math.sin(b.angle)*maxR*b.dist;ctx.beginPath();ctx.arc(bx,by,3,0,Math.PI*2);ctx.fillStyle='rgba(74,144,217,'+b.alpha+')';ctx.fill();b.alpha-=b.decay;}});animFrames[6]=requestAnimationFrame(drawRadar);}
+
+  /* BG: EKG */
+  var ekgPhase=0;
+  function initEKG(){ekgPhase=0;}
+  function drawEKG(){var c=bgCanvases[7];if(!c)return;var ctx=c.getContext('2d');ctx.clearRect(0,0,c.width,c.height);var w=c.width,h=c.height,cy=h*0.5;ekgPhase+=0.9;if(ekgPhase>w+200)ekgPhase=0;for(var pass=0;pass<3;pass++){var la=pass===0?0.11:pass===1?0.34:0.85,lw=pass===0?9:pass===1?3.5:1.5;ctx.beginPath();ctx.strokeStyle='rgba(0,201,167,'+la+')';ctx.lineWidth=lw;ctx.moveTo(0,cy);for(var x=0;x<=w;x+=2){var rel=(x-ekgPhase+w*2)%w,pos=rel,y=cy;if(pos<30)y=cy;else if(pos<40)y=cy-(pos-30)*3.5;else if(pos<50)y=cy+(pos-40)*14;else if(pos<60)y=cy-(pos-50)*9;else if(pos<72)y=cy+(pos-60)*1.5;else if(pos<82)y=cy;else y=cy+Math.sin((pos-82)/118*Math.PI)*7;ctx.lineTo(x,y);}ctx.stroke();}animFrames[7]=requestAnimationFrame(drawEKG);}
+
+  /* ═══ RIGHT-COLUMN CANVAS VISUALIZATIONS ═══ */
+
+  /* hsc0: FerroQuant — Candlestick */
+  function startHSC0(){
+    var candles=[],p=300,t=0;
+    for(var i=0;i<28;i++){var o=p+rnd(-2,2),c=o+rnd(-6,6);candles.push({o:o,c:c,h:Math.max(o,c)+rnd(.5,3),l:Math.min(o,c)-rnd(.5,3)});p=c;}
+    hsIDs[0]=setInterval(function(){
+      var r=syncHSC('hsc0');if(!r||!r.W)return;
+      var ctx=r.ctx,W=r.W,H=r.H;
+      ctx.fillStyle='#0a0400';ctx.fillRect(0,0,W,H);
+      for(var gi=0;gi<5;gi++){ctx.strokeStyle='rgba(224,90,0,.06)';ctx.lineWidth=.5;ctx.beginPath();ctx.moveTo(0,H-20-gi*(H-36)/4);ctx.lineTo(W,H-20-gi*(H-36)/4);ctx.stroke();}
+      var lows=candles.map(function(x){return x.l;}),highs=candles.map(function(x){return x.h;});
+      var mn=Math.min.apply(null,lows)-1,mx=Math.max.apply(null,highs)+1,rg=mx-mn||1;
+      function py(v){return H-20-(v-mn)/rg*(H-36);}
+      var cw=Math.max(4,Math.floor((W-16)/28*.62)),gp=Math.max(2,Math.floor((W-16)/28*.38)),x=8;
+      candles.forEach(function(cd,i){
+        var bull=cd.c>=cd.o,col=bull?'#e05a00':'#ff3355',last=i===candles.length-1;
+        ctx.shadowColor=col;ctx.shadowBlur=last?14:3;
+        ctx.strokeStyle=col;ctx.lineWidth=1.2;ctx.beginPath();ctx.moveTo(x+cw/2,py(cd.h));ctx.lineTo(x+cw/2,py(cd.l));ctx.stroke();
+        ctx.fillStyle=col;var y1=py(Math.max(cd.o,cd.c)),y2=py(Math.min(cd.o,cd.c));ctx.fillRect(x,y1,cw,Math.max(2,y2-y1));
+        var vh=Math.abs(cd.c-cd.o)/rg*H*.08;ctx.fillStyle=bull?'rgba(224,90,0,.18)':'rgba(255,51,85,.18)';ctx.fillRect(x,H-20-vh,cw,vh);
+        x+=cw+gp;
       });
-    }
-  }
-  function drawEmbers() {
-    var c = bgCanvases[0];
-    if (!c) return;
-    var ctx = c.getContext('2d');
-    ctx.clearRect(0, 0, c.width, c.height);
-    for (var i = 0; i < embers.length; i++) {
-      var e = embers[i];
-      e.x += e.vx + Math.sin(e.life * 4.5) * 0.25;
-      e.y += e.vy;
-      e.life += 0.007;
-      if (e.life >= 1 || e.y < -8) {
-        e.x = Math.random() * c.width; e.y = c.height + 8;
-        e.life = 0; e.vx = (Math.random() - 0.5) * 0.55;
-        e.vy = -(Math.random() * 1.1 + 0.4); e.r = Math.random() * 2.2 + 0.4;
-      }
-      var alpha = Math.max(0, (1 - e.life) * 0.82);
-      var gv    = Math.floor(45 + Math.random() * 70);
-      ctx.beginPath();
-      ctx.arc(e.x, e.y, e.r, 0, Math.PI * 2);
-      ctx.fillStyle = 'rgba(255,' + gv + ',0,' + alpha + ')';
-      ctx.fill();
-    }
-    animFrames[0] = requestAnimationFrame(drawEmbers);
-  }
-
-  /* ── MATRIX RAIN (slide 1) ── */
-  var MC = ['0','1','∑','∫','₿','ア','イ','ウ','エ','カ','キ','ク'];
-  var matrixDrops = [];
-  function initMatrix() {
-    var c = bgCanvases[1];
-    var cols = Math.floor(c.width / 20);
-    matrixDrops = [];
-    for (var i = 0; i < cols; i++) {
-      matrixDrops.push({ y: Math.random() * -c.height, speed: Math.random() * 1.8 + 0.8 });
-    }
-  }
-  function drawMatrix() {
-    var c = bgCanvases[1];
-    if (!c) return;
-    var ctx = c.getContext('2d');
-    ctx.fillStyle = 'rgba(6,6,8,0.13)';
-    ctx.fillRect(0, 0, c.width, c.height);
-    ctx.font = '13px "IBM Plex Mono", monospace';
-    for (var i = 0; i < matrixDrops.length; i++) {
-      var d = matrixDrops[i];
-      d.y += d.speed;
-      ctx.fillStyle = 'rgba(200,255,215,0.88)';
-      ctx.fillText(MC[Math.floor(Math.random() * MC.length)], i * 20 + 3, d.y);
-      for (var t = 1; t <= 8; t++) {
-        var a = Math.max(0, 0.65 - t * 0.085);
-        var g = Math.max(30, 175 - t * 18);
-        ctx.fillStyle = 'rgba(0,' + g + ',40,' + a + ')';
-        ctx.fillText(MC[Math.floor(Math.random() * MC.length)], i * 20 + 3, d.y - t * 13);
-      }
-      if (d.y > c.height + 13) { d.y = Math.random() * -80; d.speed = Math.random() * 1.8 + 0.8; }
-    }
-    animFrames[1] = requestAnimationFrame(drawMatrix);
-  }
-
-  /* ── FIRE KEYBOARD GLOW ── */
-  function startFireGlow() {
-    var kb = document.getElementById('kb0');
-    var ug = document.getElementById('underglow0');
-    if (!kb) return;
-    var rows = kb.querySelectorAll('.hs-kb-row');
-    var numR = rows.length;
-    var t = 0;
-    glowIntervals[0] = setInterval(function () {
-      t += 0.05;
-      rows.forEach(function (row, ri) {
-        var heat = Math.pow((numR - 1 - ri) / (numR - 1), 1.6);
-        row.querySelectorAll('.hs-key').forEach(function (key, ki) {
-          var flicker = Math.sin(t + ki * 0.8) * 0.12 + (Math.random() - 0.5) * 0.08;
-          var b = Math.min(1, Math.max(0, heat + flicker));
-          if (b < 0.06) {
-            key.style.background = 'linear-gradient(180deg,#262636 0%,#1e1e2e 100%)'; key.style.boxShadow = '';
-          } else {
-            var r  = Math.round(255 * Math.min(1, b * 1.15));
-            var gv = Math.round(70 * b * b);
-            key.style.background = 'rgba(' + r + ',' + gv + ',0,' + (0.11 + b * 0.22) + ')';
-            key.style.boxShadow  = '0 0 ' + Math.round(b * 9) + 'px rgba(' + r + ',' + gv + ',0,' + (b * 0.68) + ')';
-          }
-        });
-      });
-      if (ug) ug.style.opacity = 0.44 + Math.sin(t * 1.6) * 0.3;
-    }, 45);
-  }
-
-  /* ── MATRIX KEYBOARD EFFECT ── */
-  function startMatrixGlow() {
-    var kb = document.getElementById('kb1');
-    var ug = document.getElementById('underglow1');
-    if (!kb) return;
-    var rows = Array.from(kb.querySelectorAll('.hs-kb-row'));
-    var COLS = 12;
-    var drops = [];
-    for (var c = 0; c < COLS; c++) {
-      drops.push({ head: -Math.random() * rows.length, speed: Math.random() * 0.14 + 0.05 });
-    }
-    var t = 0;
-    glowIntervals[1] = setInterval(function () {
-      t += 0.05;
-      rows.forEach(function (row) {
-        row.querySelectorAll('.hs-key').forEach(function (k) {
-          k.style.background = 'linear-gradient(180deg,#262636 0%,#1e1e2e 100%)'; k.style.boxShadow = ''; k.style.color = 'rgba(255,255,255,0.48)';
-        });
-      });
-      drops.forEach(function (drop, col) {
-        drop.head += drop.speed;
-        if (drop.head > rows.length + 4) { drop.head = -Math.random() * 3; drop.speed = Math.random() * 0.14 + 0.05; }
-        var head = Math.floor(drop.head);
-        for (var trail = 0; trail <= 4; trail++) {
-          var ri = head - trail;
-          if (ri < 0 || ri >= rows.length) continue;
-          var key = rows[ri].querySelector('.hs-key[data-col="' + col + '"]');
-          if (!key) continue;
-          if (trail === 0) {
-            key.style.background = 'rgba(0,255,80,0.22)';
-            key.style.boxShadow  = '0 0 12px rgba(0,255,80,0.85), 0 0 4px rgba(0,255,80,1)';
-            key.style.color      = 'rgba(180,255,200,0.95)';
-          } else if (trail === 1) {
-            key.style.background = 'rgba(0,155,40,0.16)'; key.style.boxShadow = '0 0 7px rgba(0,155,40,0.55)';
-            key.style.color      = 'rgba(0,210,60,0.6)';
-          } else if (trail === 2) {
-            key.style.background = 'rgba(0,90,20,0.10)'; key.style.boxShadow = '0 0 3px rgba(0,90,20,0.35)';
-          } else {
-            key.style.background = 'rgba(0,50,12,0.07)';
-          }
-        }
-      });
-      if (ug) ug.style.opacity = 0.44 + Math.sin(t * 1.3) * 0.3;
-    }, 70);
-  }
-
-  /* ── NETWORK NODES (slide 2) ── */
-  var netNodes = [];
-  function initNetwork() {
-    var c = bgCanvases[2];
-    netNodes = [];
-    for (var i = 0; i < 42; i++) {
-      netNodes.push({ x: Math.random()*c.width, y: Math.random()*c.height,
-        vx:(Math.random()-0.5)*0.45, vy:(Math.random()-0.5)*0.45, r:Math.random()*2+0.8 });
-    }
-  }
-  function drawNetwork() {
-    var c = bgCanvases[2]; if (!c) return;
-    var ctx = c.getContext('2d');
-    ctx.clearRect(0,0,c.width,c.height);
-    for (var i=0;i<netNodes.length;i++) {
-      for (var j=i+1;j<netNodes.length;j++) {
-        var dx=netNodes[i].x-netNodes[j].x, dy=netNodes[i].y-netNodes[j].y;
-        var d=Math.sqrt(dx*dx+dy*dy);
-        if (d<130) { ctx.beginPath(); ctx.moveTo(netNodes[i].x,netNodes[i].y); ctx.lineTo(netNodes[j].x,netNodes[j].y);
-          ctx.strokeStyle='rgba(0,191,255,'+(0.22*(1-d/130))+')'; ctx.lineWidth=0.8; ctx.stroke(); }
-      }
-    }
-    for (var i=0;i<netNodes.length;i++) {
-      var n=netNodes[i]; n.x+=n.vx; n.y+=n.vy;
-      if(n.x<0||n.x>c.width) n.vx*=-1; if(n.y<0||n.y>c.height) n.vy*=-1;
-      ctx.beginPath(); ctx.arc(n.x,n.y,n.r,0,Math.PI*2);
-      ctx.fillStyle='rgba(0,191,255,0.72)'; ctx.fill();
-    }
-    animFrames[2] = requestAnimationFrame(drawNetwork);
-  }
-  function startCyanGlow() {
-    var kb=document.getElementById('kb2'), ug=document.getElementById('underglow2'); if(!kb) return;
-    var rows=Array.from(kb.querySelectorAll('.hs-kb-row')), t=0;
-    glowIntervals[2]=setInterval(function(){
-      t+=0.06;
-      rows.forEach(function(row,ri){ row.querySelectorAll('.hs-key').forEach(function(key,ki){
-        var w=Math.sin(t-Math.sqrt(Math.pow(ri-2.5,2)+Math.pow(ki-5.5,2))*0.5)*0.5+0.5;
-        if(w>0.58){ key.style.background='rgba(0,191,255,'+(w*0.2)+')'; key.style.boxShadow='0 0 '+Math.round(w*9)+'px rgba(0,191,255,'+(w*0.72)+')'; key.style.color='rgba(180,240,255,0.9)'; }
-        else{ key.style.background='linear-gradient(180deg,#262636 0%,#1e1e2e 100%)'; key.style.boxShadow=''; key.style.color='rgba(255,255,255,0.48)'; }
-      }); });
-      if(ug) ug.style.opacity=0.44+Math.sin(t*1.2)*0.3;
-    },60);
-  }
-
-  /* ── GOLD PARTICLES (slide 3) ── */
-  var goldPts = [];
-  function initGold() {
-    var c = bgCanvases[3]; goldPts = [];
-    for (var i=0;i<58;i++) goldPts.push({x:Math.random()*c.width,y:Math.random()*c.height,
-      vx:Math.random()*0.65+0.15,vy:(Math.random()-0.5)*0.28,r:Math.random()*1.8+0.4,ph:Math.random()*Math.PI*2});
-  }
-  function drawGold() {
-    var c=bgCanvases[3]; if(!c) return;
-    var ctx=c.getContext('2d'); ctx.clearRect(0,0,c.width,c.height);
-    for (var i=0;i<goldPts.length;i++) {
-      var p=goldPts[i]; p.x+=p.vx; p.y+=p.vy; p.ph+=0.025;
-      if(p.x>c.width+5){p.x=-5;p.y=Math.random()*c.height;p.ph=Math.random()*Math.PI*2;}
-      var a=Math.abs(Math.sin(p.ph))*0.82;
-      ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-      ctx.fillStyle='rgba(212,168,67,'+a+')'; ctx.fill();
-    }
-    animFrames[3]=requestAnimationFrame(drawGold);
-  }
-  function startGoldGlow() {
-    var kb=document.getElementById('kb3'), ug=document.getElementById('underglow3'); if(!kb) return;
-    var rows=Array.from(kb.querySelectorAll('.hs-kb-row')), t=0;
-    glowIntervals[3]=setInterval(function(){
-      t+=0.06;
-      rows.forEach(function(row,ri){ row.querySelectorAll('.hs-key').forEach(function(key,ki){
-        var w=Math.sin(t-ki*0.38-ri*0.18)*0.5+0.5;
-        if(w>0.55){ key.style.background='rgba(212,168,67,'+(w*0.22)+')'; key.style.boxShadow='0 0 '+Math.round(w*10)+'px rgba(212,168,67,'+(w*0.78)+')'; key.style.color='rgba(255,220,140,0.92)'; }
-        else{ key.style.background='linear-gradient(180deg,#262636 0%,#1e1e2e 100%)'; key.style.boxShadow=''; key.style.color='rgba(255,255,255,0.48)'; }
-      }); });
-      if(ug) ug.style.opacity=0.44+Math.sin(t*1.4)*0.3;
-    },60);
-  }
-
-  /* ── NEURAL NETWORK (slide 4) ── */
-  var neuralN = [];
-  function initNeural() {
-    var c=bgCanvases[4]; neuralN=[];
-    var layers=[5,8,8,5], lx=[0.18,0.38,0.62,0.82];
-    for (var l=0;l<layers.length;l++) for (var n=0;n<layers[l];n++)
-      neuralN.push({x:c.width*lx[l],y:c.height*((n+1)/(layers[l]+1)),layer:l,ph:Math.random()*Math.PI*2});
-  }
-  function drawNeural() {
-    var c=bgCanvases[4]; if(!c) return;
-    var ctx=c.getContext('2d'); ctx.clearRect(0,0,c.width,c.height);
-    var now=Date.now()*0.001;
-    for (var i=0;i<neuralN.length;i++) for (var j=0;j<neuralN.length;j++) {
-      if(neuralN[j].layer===neuralN[i].layer+1) {
-        var a=0.05+0.04*Math.sin(now+i*0.3+j*0.2);
-        ctx.beginPath(); ctx.moveTo(neuralN[i].x,neuralN[i].y); ctx.lineTo(neuralN[j].x,neuralN[j].y);
-        ctx.strokeStyle='rgba(155,89,182,'+a+')'; ctx.lineWidth=0.6; ctx.stroke();
-      }
-    }
-    for (var i=0;i<neuralN.length;i++) {
-      var n=neuralN[i]; n.ph=(n.ph+0.016)%(Math.PI*2);
-      var p=0.28+0.55*Math.abs(Math.sin(n.ph));
-      ctx.beginPath(); ctx.arc(n.x,n.y,4,0,Math.PI*2); ctx.fillStyle='rgba(155,89,182,'+p+')'; ctx.fill();
-      ctx.beginPath(); ctx.arc(n.x,n.y,9,0,Math.PI*2); ctx.fillStyle='rgba(155,89,182,'+(p*0.18)+')'; ctx.fill();
-    }
-    animFrames[4]=requestAnimationFrame(drawNeural);
-  }
-  function startPurpleGlow() {
-    var kb=document.getElementById('kb4'), ug=document.getElementById('underglow4'); if(!kb) return;
-    var rows=Array.from(kb.querySelectorAll('.hs-kb-row')), t=0;
-    glowIntervals[4]=setInterval(function(){
-      t+=0.05;
-      rows.forEach(function(row,ri){ row.querySelectorAll('.hs-key').forEach(function(key,ki){
-        var w=Math.sin(t*1.3+ri*1.1+ki*0.7)*0.5+0.5;
-        if(w>0.68){ key.style.background='rgba(155,89,182,'+(w*0.24)+')'; key.style.boxShadow='0 0 '+Math.round(w*9)+'px rgba(155,89,182,'+(w*0.78)+')'; key.style.color='rgba(210,180,255,0.92)'; }
-        else{ key.style.background='linear-gradient(180deg,#262636 0%,#1e1e2e 100%)'; key.style.boxShadow=''; key.style.color='rgba(255,255,255,0.48)'; }
-      }); });
-      if(ug) ug.style.opacity=0.44+Math.sin(t*1.5)*0.3;
-    },65);
-  }
-
-  /* ── HEX DATA RAIN (slide 5) ── */
-  var HX=['0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'];
-  var hexDrops=[];
-  function initHex() {
-    var c=bgCanvases[5]; var cols=Math.floor(c.width/20); hexDrops=[];
-    for (var i=0;i<cols;i++) hexDrops.push({y:Math.random()*-c.height,speed:Math.random()*1.6+0.7});
-  }
-  function drawHex() {
-    var c=bgCanvases[5]; if(!c) return;
-    var ctx=c.getContext('2d'); ctx.fillStyle='rgba(6,6,8,0.13)'; ctx.fillRect(0,0,c.width,c.height);
-    ctx.font='13px "IBM Plex Mono",monospace';
-    for (var i=0;i<hexDrops.length;i++) {
-      var d=hexDrops[i]; d.y+=d.speed;
-      ctx.fillStyle='rgba(255,200,210,0.88)'; ctx.fillText(HX[Math.floor(Math.random()*HX.length)],i*20+3,d.y);
-      for (var t=1;t<=8;t++) {
-        var a=Math.max(0,0.65-t*0.085), r=Math.max(60,200-t*18);
-        ctx.fillStyle='rgba('+r+',0,22,'+a+')'; ctx.fillText(HX[Math.floor(Math.random()*HX.length)],i*20+3,d.y-t*13);
-      }
-      if(d.y>c.height+13){d.y=Math.random()*-80;d.speed=Math.random()*1.6+0.7;}
-    }
-    animFrames[5]=requestAnimationFrame(drawHex);
-  }
-  function startCrimsonGlow() {
-    var kb=document.getElementById('kb5'), ug=document.getElementById('underglow5'); if(!kb) return;
-    var rows=Array.from(kb.querySelectorAll('.hs-kb-row')), COLS=12;
-    var drops=[]; for(var c=0;c<COLS;c++) drops.push({head:-Math.random()*rows.length,speed:Math.random()*0.14+0.05});
-    var t=0;
-    glowIntervals[5]=setInterval(function(){
-      t+=0.05;
-      rows.forEach(function(row){ row.querySelectorAll('.hs-key').forEach(function(k){
-        k.style.background='linear-gradient(180deg,#262636 0%,#1e1e2e 100%)'; k.style.boxShadow=''; k.style.color='rgba(255,255,255,0.48)';
-      }); });
-      drops.forEach(function(drop,col){
-        drop.head+=drop.speed;
-        if(drop.head>rows.length+4){drop.head=-Math.random()*3;drop.speed=Math.random()*0.14+0.05;}
-        var head=Math.floor(drop.head);
-        for(var trail=0;trail<=4;trail++){
-          var ri=head-trail; if(ri<0||ri>=rows.length) continue;
-          var key=rows[ri].querySelector('.hs-key[data-col="'+col+'"]'); if(!key) continue;
-          if(trail===0){key.style.background='rgba(220,16,64,0.22)';key.style.boxShadow='0 0 12px rgba(220,16,64,0.85),0 0 4px rgba(220,16,64,1)';key.style.color='rgba(255,180,190,0.95)';}
-          else if(trail===1){key.style.background='rgba(160,10,40,0.16)';key.style.boxShadow='0 0 7px rgba(160,10,40,0.55)';key.style.color='rgba(220,60,80,0.6)';}
-          else if(trail===2){key.style.background='rgba(100,5,20,0.10)';key.style.boxShadow='0 0 3px rgba(100,5,20,0.35)';}
-          else{key.style.background='rgba(60,0,12,0.07)';}
-        }
-      });
-      if(ug) ug.style.opacity=0.44+Math.sin(t*1.3)*0.3;
-    },70);
-  }
-
-  /* ── RADAR SWEEP (slide 6) ── */
-  var radarAngle=0, radarBlips=[];
-  function initRadar() {
-    var c=bgCanvases[6]; radarAngle=0; radarBlips=[];
-    for(var i=0;i<9;i++) radarBlips.push({angle:Math.random()*Math.PI*2,dist:Math.random()*0.38+0.1,alpha:0,decay:Math.random()*0.007+0.003});
-  }
-  function drawRadar() {
-    var c=bgCanvases[6]; if(!c) return;
-    var ctx=c.getContext('2d'); ctx.clearRect(0,0,c.width,c.height);
-    var cx=c.width*0.62, cy=c.height*0.5, maxR=Math.min(c.width,c.height)*0.42;
-    for(var r=1;r<=4;r++){ctx.beginPath();ctx.arc(cx,cy,maxR*r/4,0,Math.PI*2);ctx.strokeStyle='rgba(74,144,217,0.11)';ctx.lineWidth=1;ctx.stroke();}
-    ctx.beginPath();ctx.moveTo(cx-maxR,cy);ctx.lineTo(cx+maxR,cy);ctx.strokeStyle='rgba(74,144,217,0.09)';ctx.stroke();
-    ctx.beginPath();ctx.moveTo(cx,cy-maxR);ctx.lineTo(cx,cy+maxR);ctx.stroke();
-    radarAngle+=0.022;
-    ctx.save(); ctx.translate(cx,cy); ctx.rotate(radarAngle);
-    var sg=ctx.createLinearGradient(0,0,maxR,0);
-    sg.addColorStop(0,'rgba(74,144,217,0.52)'); sg.addColorStop(1,'rgba(74,144,217,0)');
-    ctx.beginPath(); ctx.moveTo(0,0); ctx.arc(0,0,maxR,-0.28,0.02); ctx.closePath(); ctx.fillStyle=sg; ctx.fill();
-    ctx.beginPath(); ctx.moveTo(0,0); ctx.lineTo(maxR,0); ctx.strokeStyle='rgba(74,144,217,0.9)'; ctx.lineWidth=1.5; ctx.stroke();
-    ctx.restore();
-    radarBlips.forEach(function(b){
-      var diff=((b.angle-radarAngle)%(Math.PI*2)+Math.PI*2)%(Math.PI*2);
-      if(diff<0.09) b.alpha=1;
-      if(b.alpha>0){
-        var bx=cx+Math.cos(b.angle)*maxR*b.dist, by=cy+Math.sin(b.angle)*maxR*b.dist;
-        ctx.beginPath(); ctx.arc(bx,by,3,0,Math.PI*2); ctx.fillStyle='rgba(74,144,217,'+b.alpha+')'; ctx.fill();
-        b.alpha-=b.decay;
-      }
-    });
-    animFrames[6]=requestAnimationFrame(drawRadar);
-  }
-  function startSteelGlow() {
-    var kb=document.getElementById('kb6'), ug=document.getElementById('underglow6'); if(!kb) return;
-    var rows=Array.from(kb.querySelectorAll('.hs-kb-row')), t=0;
-    glowIntervals[6]=setInterval(function(){
-      t+=0.04;
-      rows.forEach(function(row,ri){ row.querySelectorAll('.hs-key').forEach(function(key){
-        var w=Math.sin(t-ri*0.5)*0.5+0.5;
-        if(w>0.5){ key.style.background='rgba(74,144,217,'+(w*0.2)+')'; key.style.boxShadow='0 0 '+Math.round(w*8)+'px rgba(74,144,217,'+(w*0.72)+')'; key.style.color='rgba(180,220,255,0.88)'; }
-        else{ key.style.background='linear-gradient(180deg,#262636 0%,#1e1e2e 100%)'; key.style.boxShadow=''; key.style.color='rgba(255,255,255,0.48)'; }
-      }); });
-      if(ug) ug.style.opacity=0.44+Math.sin(t*1.6)*0.3;
+      ctx.shadowBlur=0;
+      var lv=candles[candles.length-1].c,ly=py(lv);
+      ctx.strokeStyle='rgba(224,90,0,.35)';ctx.lineWidth=.8;ctx.setLineDash([3,4]);ctx.beginPath();ctx.moveTo(0,ly);ctx.lineTo(W,ly);ctx.stroke();ctx.setLineDash([]);
+      ctx.fillStyle='#e05a00';ctx.shadowColor='#e05a00';ctx.shadowBlur=6;ctx.font='bold 9px monospace';ctx.fillText(lv.toFixed(1),W-54,ly-3);ctx.shadowBlur=0;
+      ctx.fillStyle='rgba(224,90,0,.5)';ctx.font='9px monospace';ctx.fillText('FERROQUANT · PSX ALPHA · LIVE',8,H-5);
+      t++;if(t%16===0){var lc=candles[candles.length-1],no=lc.c+rnd(-2,2),nc=no+rnd(-6,6);candles.push({o:no,c:nc,h:Math.max(no,nc)+rnd(.5,3),l:Math.min(no,nc)-rnd(.5,3)});if(candles.length>28)candles.shift();}
     },55);
   }
 
-  /* ── EKG HEARTBEAT (slide 7) ── */
-  var ekgPhase=0;
-  function initEKG() { ekgPhase=0; }
-  function drawEKG() {
-    var c=bgCanvases[7]; if(!c) return;
-    var ctx=c.getContext('2d'); ctx.clearRect(0,0,c.width,c.height);
-    var w=c.width, h=c.height, cy=h*0.5;
-    ekgPhase+=0.9; if(ekgPhase>w+200) ekgPhase=0;
-    for(var pass=0;pass<3;pass++){
-      var la=pass===0?0.11:pass===1?0.34:0.85, lw=pass===0?9:pass===1?3.5:1.5;
-      ctx.beginPath(); ctx.strokeStyle='rgba(0,201,167,'+la+')'; ctx.lineWidth=lw; ctx.moveTo(0,cy);
-      for(var x=0;x<=w;x+=2){
-        var rel=(x-ekgPhase+w*2)%w, y=cy;
-        var pos=rel%200;
-        if(pos<30) y=cy;
-        else if(pos<40) y=cy-(pos-30)*3.5;
-        else if(pos<50) y=cy+(pos-40)*14;
-        else if(pos<60) y=cy-(pos-50)*9;
-        else if(pos<72) y=cy+(pos-60)*1.5;
-        else if(pos<82) y=cy;
-        else y=cy+Math.sin((pos-82)/118*Math.PI)*7;
-        ctx.lineTo(x,y);
+  /* hsc1: Black Iron Quantum AI — Neural Network */
+  function startHSC1(){
+    var layers=[3,5,7,5,2],nodes=[],t=0;
+    layers.forEach(function(n,li){nodes.push([]);for(var i=0;i<n;i++)nodes[li].push({phase:rnd(0,Math.PI*2)});});
+    hsIDs[1]=setInterval(function(){
+      var r=syncHSC('hsc1');if(!r||!r.W)return;
+      var ctx=r.ctx,W=r.W,H=r.H;
+      ctx.fillStyle='#010a03';ctx.fillRect(0,0,W,H);
+      function lx(li){return W*.08+li*(W*.84/(layers.length-1));}
+      function ny(li,ii){return H/(layers[li]+1)*(ii+1);}
+      for(var li=0;li<layers.length-1;li++){for(var i=0;i<layers[li];i++){for(var j=0;j<layers[li+1];j++){
+        var sig=Math.sin(t*.03+nodes[li][i].phase+nodes[li+1][j].phase);
+        ctx.strokeStyle='rgba(0,204,68,'+(Math.max(0,sig)*.18+.02)+')';ctx.lineWidth=.7;ctx.beginPath();ctx.moveTo(lx(li),ny(li,i));ctx.lineTo(lx(li+1),ny(li+1,j));ctx.stroke();
+        if(sig>.8){var pg=((t*.03+nodes[li][i].phase)%(Math.PI*2))/(Math.PI*2),dx2=lx(li)+(lx(li+1)-lx(li))*pg,dy2=ny(li,i)+(ny(li+1,j)-ny(li,i))*pg;ctx.beginPath();ctx.arc(dx2,dy2,2,0,Math.PI*2);ctx.fillStyle='#00cc44';ctx.shadowColor='#00cc44';ctx.shadowBlur=6;ctx.fill();ctx.shadowBlur=0;}
+      }}}
+      var lbls=['IN','H1','H2','H3','OUT'];
+      layers.forEach(function(n,li){for(var i=0;i<n;i++){var ph=nodes[li][i].phase,pulse=(Math.sin(t*.04+ph)+1)/2,rad=3+pulse*4;
+        ctx.beginPath();ctx.arc(lx(li),ny(li,i),rad,0,Math.PI*2);ctx.fillStyle='rgba(0,'+(150+Math.round(pulse*104))+',68,'+(0.6+pulse*.4)+')';ctx.shadowColor='rgba(0,204,68,.9)';ctx.shadowBlur=7;ctx.fill();ctx.shadowBlur=0;}
+        ctx.fillStyle='rgba(0,204,68,.25)';ctx.font='7px monospace';ctx.textAlign='center';ctx.fillText(lbls[li],lx(li),H-5);ctx.textAlign='left';
+      });
+      ctx.fillStyle='rgba(0,204,68,.5)';ctx.font='bold 9px monospace';ctx.fillText('BLACK IRON QUANTUM AI · DEEP LEARNING',8,13);
+      t++;
+    },38);
+  }
+
+  /* hsc2: BlackIronTimes — Live News Feed */
+  function startHSC2(){
+    var headlines=['AI MODELS SURPASS HUMAN ANALYSTS IN EQUITY PREDICTION','PSX BREAKS RECORD: KSE-100 HITS 50K MILESTONE','GULF SWF FUNDS SHIFT $2T INTO AI INFRASTRUCTURE','FERROQUANT ALPHA STRATEGY RETURNS +34% YTD','LLM AGENTS NOW EXECUTING CROSS-BORDER TRADES','PAKISTAN FINTECH SECTOR GROWS 180% IN 2025','QUANTUM COMPUTING ENTERS PORTFOLIO OPTIMIZATION','BLACK IRON GROUP WINS NATIONAL AI AWARD 2025'];
+    var lines=[],t=0;
+    for(var i=0;i<8;i++)lines.push({text:headlines[i],y:i*36+40,speed:.3+Math.random()*.1,flash:i%3===0});
+    hsIDs[2]=setInterval(function(){
+      var r=syncHSC('hsc2');if(!r||!r.W)return;
+      var ctx=r.ctx,W=r.W,H=r.H;
+      ctx.fillStyle='#000a10';ctx.fillRect(0,0,W,H);
+      ctx.fillStyle='rgba(0,191,255,.07)';ctx.fillRect(0,0,W,24);
+      ctx.fillStyle='#00bfff';ctx.font='bold 9px monospace';ctx.shadowColor='#00bfff';ctx.shadowBlur=4;ctx.fillText('■ BLACKIRONTIMES.COM  LIVE FEED',8,15);ctx.shadowBlur=0;
+      lines.forEach(function(ln){
+        ln.y-=ln.speed;if(ln.y<-14){ln.y=H+10;ln.text=headlines[Math.floor(Math.random()*headlines.length)];ln.flash=Math.random()<.3;}
+        var alpha=Math.min(1,Math.min((ln.y-28)/28,(H-ln.y)/28));if(alpha<0.05)return;
+        if(ln.flash){ctx.fillStyle='rgba(255,80,0,'+(alpha*.14)+')';ctx.fillRect(4,ln.y-12,W-8,14);ctx.fillStyle='rgba(255,136,0,'+alpha+')';ctx.shadowColor='#ff8800';ctx.shadowBlur=3;ctx.font='bold 9px monospace';}
+        else{ctx.fillStyle='rgba(0,191,255,'+(alpha*.78)+')';ctx.shadowBlur=0;ctx.font='9px monospace';}
+        ctx.fillText((ln.flash?'⚡ ':'')+ln.text,8,ln.y);ctx.shadowBlur=0;
+      });
+      ctx.fillStyle='rgba(0,191,255,.45)';ctx.font='bold 9px monospace';ctx.fillText('BLACKIRONTIMES.COM · AI MEDIA INTELLIGENCE',8,H-5);
+      t++;
+    },30);
+  }
+
+  /* hsc3: Gulf SWF Intelligence — Global Fund Map */
+  function startHSC3(){
+    var nodes3=[{x:.15,y:.28,lbl:'AUH',sz:18,v:600},{x:.35,y:.18,lbl:'KWI',sz:14,v:300},{x:.55,y:.32,lbl:'RYD',sz:16,v:450},{x:.78,y:.22,lbl:'DOH',sz:13,v:250},{x:.22,y:.58,lbl:'ISB',sz:11,v:100},{x:.45,y:.65,lbl:'DXB',sz:15,v:380},{x:.68,y:.55,lbl:'MUS',sz:10,v:60},{x:.85,y:.68,lbl:'SIN',sz:12,v:160},{x:.12,y:.78,lbl:'LON',sz:13,v:200},{x:.62,y:.82,lbl:'NYC',sz:14,v:320}];
+    var pulses=[],t=0;
+    hsIDs[3]=setInterval(function(){
+      var r=syncHSC('hsc3');if(!r||!r.W)return;
+      var ctx=r.ctx,W=r.W,H=r.H;
+      ctx.fillStyle='#060400';ctx.fillRect(0,0,W,H);
+      for(var gi=0;gi<8;gi++){ctx.strokeStyle='rgba(212,168,67,.035)';ctx.lineWidth=.5;ctx.beginPath();ctx.arc(W*.5,H*.5,gi*(Math.max(W,H)/7),0,Math.PI*2);ctx.stroke();}
+      nodes3.forEach(function(a,ai){nodes3.forEach(function(b,bi){if(bi<=ai)return;var d=Math.sqrt(Math.pow((a.x-b.x)*W,2)+Math.pow((a.y-b.y)*H,2));if(d<W*.44){ctx.strokeStyle='rgba(212,168,67,'+(0.04*(1-d/(W*.44)))+')';ctx.lineWidth=.6;ctx.beginPath();ctx.moveTo(a.x*W,a.y*H);ctx.lineTo(b.x*W,b.y*H);ctx.stroke();}});});
+      t++;if(t%35===0&&pulses.length<6){var si=Math.floor(Math.random()*nodes3.length),ti=Math.floor(Math.random()*nodes3.length);if(si!==ti)pulses.push({si:si,ti:ti,p:0,sp:rnd(.014,.026)});}
+      pulses=pulses.filter(function(p){p.p+=p.sp;var a=nodes3[p.si],b=nodes3[p.ti];var px=a.x*W+(b.x*W-a.x*W)*p.p,py=a.y*H+(b.y*H-a.y*H)*p.p;ctx.beginPath();ctx.arc(px,py,3,0,Math.PI*2);ctx.fillStyle='rgba(255,215,80,.85)';ctx.shadowColor='#ffd750';ctx.shadowBlur=8;ctx.fill();ctx.shadowBlur=0;return p.p<1;});
+      nodes3.forEach(function(n){var pulse=(Math.sin(t*.04+n.v*.001)+1)/2;ctx.beginPath();ctx.arc(n.x*W,n.y*H,n.sz*(0.8+pulse*.3),0,Math.PI*2);ctx.fillStyle='rgba(212,168,67,'+(0.05+pulse*.07)+')';ctx.fill();ctx.beginPath();ctx.arc(n.x*W,n.y*H,n.sz*.55,0,Math.PI*2);ctx.fillStyle='rgba(212,168,67,'+(0.6+pulse*.3)+')';ctx.shadowColor='rgba(212,168,67,.7)';ctx.shadowBlur=8;ctx.fill();ctx.shadowBlur=0;ctx.fillStyle='rgba(255,235,150,.85)';ctx.font='bold 8px monospace';ctx.textAlign='center';ctx.fillText(n.lbl,n.x*W,n.y*H+n.sz*.55+9);ctx.textAlign='left';});
+      ctx.fillStyle='rgba(212,168,67,.5)';ctx.font='bold 9px monospace';ctx.fillText('GULF SWF INTELLIGENCE · $28T AUM TRACKED',8,H-5);
+    },40);
+  }
+
+  /* hsc4: LLM Agent Systems — Agent Graph */
+  function startHSC4(){
+    var tokens=['<sys>','model=','claude','agent','think','reason','memory','tools','plan(','exec(','fetch(','write(','loop{','if(ok)','return','output','[DONE]','embed','query','chain'],stream=[],t=0;
+    for(var i=0;i<20;i++)stream.push({tok:tokens[Math.floor(Math.random()*tokens.length)],x:rnd(10,260),y:rnd(10,110),vx:rnd(-.3,.3),vy:rnd(-.2,.2),ph:rnd(0,Math.PI*2),alpha:rnd(.3,.9)});
+    var agents=[{x:.2,y:.5,lbl:'AGENT-1'},{x:.5,y:.25,lbl:'PLANNER'},{x:.8,y:.5,lbl:'AGENT-2'},{x:.5,y:.78,lbl:'TOOLS'}];
+    hsIDs[4]=setInterval(function(){
+      var r=syncHSC('hsc4');if(!r||!r.W)return;
+      var ctx=r.ctx,W=r.W,H=r.H;
+      ctx.fillStyle='#050108';ctx.fillRect(0,0,W,H);
+      agents.forEach(function(a,ai){agents.forEach(function(b,bi){if(bi===ai)return;ctx.strokeStyle='rgba(155,89,182,.1)';ctx.lineWidth=.8;ctx.beginPath();ctx.moveTo(a.x*W,a.y*H);ctx.lineTo(b.x*W,b.y*H);ctx.stroke();});});
+      t++;if(t%18===0){var idx=Math.floor(Math.random()*stream.length);stream[idx].tok=tokens[Math.floor(Math.random()*tokens.length)];stream[idx].alpha=.9;}
+      stream.forEach(function(s){s.x+=s.vx;s.y+=s.vy;s.ph+=.022;s.alpha=Math.max(.12,s.alpha-.003);if(s.x<0||s.x>W*.65)s.vx*=-1;if(s.y<0||s.y>H*.55)s.vy*=-1;var glow=(Math.sin(s.ph)+1)/2;ctx.fillStyle='rgba(155,89,182,'+(s.alpha*(0.5+glow*.5))+')';ctx.font='9px monospace';ctx.shadowColor='rgba(155,89,182,.8)';ctx.shadowBlur=glow>.7?5:0;ctx.fillText(s.tok,s.x,s.y);ctx.shadowBlur=0;});
+      agents.forEach(function(a,i){var pulse=(Math.sin(t*.05+i)+1)/2;ctx.beginPath();ctx.arc(a.x*W,a.y*H,20+pulse*6,0,Math.PI*2);ctx.fillStyle='rgba(155,89,182,'+(0.06+pulse*.06)+')';ctx.fill();ctx.beginPath();ctx.arc(a.x*W,a.y*H,10,0,Math.PI*2);ctx.fillStyle='rgba(155,89,182,'+(0.55+pulse*.35)+')';ctx.shadowColor='#9b59b6';ctx.shadowBlur=10;ctx.fill();ctx.shadowBlur=0;ctx.fillStyle='rgba(220,190,255,.8)';ctx.font='bold 7px monospace';ctx.textAlign='center';ctx.fillText(a.lbl,a.x*W,a.y*H+18);ctx.textAlign='left';});
+      ctx.fillStyle='rgba(155,89,182,.5)';ctx.font='bold 9px monospace';ctx.fillText('LLM AGENT SYSTEMS · MULTI-AGENT AI',8,H-5);
+    },42);
+  }
+
+  /* hsc5: ZulfiCode — Code Terminal */
+  function startHSC5(){
+    var codeLines=["const model = new QuantModel({","  alpha: 0.034, beta: 0.78,","  regime: 'BULL', risk: 0.02","});","await model.train(psx_data);","const signal = model.predict();","if (signal.confidence > 0.85) {","  broker.execute({","    symbol: 'OGDC',","    side: 'BUY', qty: 10000","  });","  console.log('Alpha:', signal);","}"];
+    var visLines=[],t=0,addTimer=0;
+    hsIDs[5]=setInterval(function(){
+      var r=syncHSC('hsc5');if(!r||!r.W)return;
+      var ctx=r.ctx,W=r.W,H=r.H;
+      ctx.fillStyle='#080003';ctx.fillRect(0,0,W,H);
+      ctx.fillStyle='rgba(220,16,64,.1)';ctx.fillRect(0,0,W,22);
+      ctx.fillStyle='#e01040';ctx.font='bold 9px monospace';ctx.shadowColor='#e01040';ctx.shadowBlur=4;ctx.fillText('● ZulfiCode  —  quant_strategy.js',8,14);ctx.shadowBlur=0;
+      addTimer++;if(addTimer%9===0&&visLines.length<codeLines.length)visLines.push({text:codeLines[visLines.length%codeLines.length],alpha:0});
+      if(visLines.length>11)visLines.shift();
+      var lineH=Math.floor((H-38)/11);
+      visLines.forEach(function(ln,i){
+        ln.alpha=Math.min(1,ln.alpha+.1);var y=24+i*lineH+lineH*.75;
+        var txt=ln.text,col='rgba(255,255,255,'+ln.alpha*.72+')';
+        if(/const|let|await|if/.test(txt))col='rgba(255,51,102,'+ln.alpha+')';
+        else if(/'[^']*'|\d+\.\d+/.test(txt))col='rgba(255,180,50,'+ln.alpha+')';
+        else if(/\{|\}/.test(txt))col='rgba(160,160,160,'+ln.alpha*.8+')';
+        ctx.fillStyle='rgba(100,0,20,'+ln.alpha*.4+')';ctx.font='8px monospace';ctx.fillText((i+1+'').padStart(2,' ')+'  ',4,y);
+        ctx.fillStyle=col;ctx.fillText(txt,36,y);
+      });
+      if(Math.floor(t/10)%2===0&&visLines.length>0){ctx.fillStyle='rgba(220,16,64,.9)';ctx.fillRect(36,22+visLines.length*lineH,7,1.5);}
+      ctx.fillStyle='rgba(220,16,64,.5)';ctx.font='bold 9px monospace';ctx.fillText('ZULFICODE · QUANTITATIVE ENGINEERING',8,H-5);
+      t++;
+    },100);
+  }
+
+  /* hsc6: Policy Analytics — Macro Dashboard */
+  function startHSC6(){
+    var cats=['GDP','INFLAT','POL RATE','FISCAL','CAD','FX RES','EXPORTS'];
+    var vals=[],targets=[],t=0;
+    for(var i=0;i<7;i++){vals.push(rnd(20,80));targets.push(rnd(40,70));}
+    hsIDs[6]=setInterval(function(){
+      var r=syncHSC('hsc6');if(!r||!r.W)return;
+      var ctx=r.ctx,W=r.W,H=r.H;
+      ctx.fillStyle='#020408';ctx.fillRect(0,0,W,H);
+      ctx.fillStyle='rgba(74,144,217,.07)';ctx.fillRect(0,0,W,20);
+      ctx.fillStyle='#4a90d9';ctx.font='bold 9px monospace';ctx.shadowColor='#4a90d9';ctx.shadowBlur=3;ctx.fillText('POLICY ANALYTICS · MACRO DASHBOARD',8,13);ctx.shadowBlur=0;
+      var bw=Math.floor((W-20)/7),barArea=H-46;
+      cats.forEach(function(cat,i){
+        vals[i]+=( targets[i]-vals[i])*.012+rnd(-.4,.4);vals[i]=Math.min(95,Math.max(5,vals[i]));
+        var x=10+i*bw,bh=Math.floor(vals[i]/100*barArea);
+        var n=vals[i]/100,isCrit=n>.72;
+        ctx.fillStyle=(isCrit?'rgba(255,80,80,':'rgba(74,144,217,')+(0.07+n*.06)+')';ctx.fillRect(x,H-22-barArea,bw-3,barArea);
+        ctx.fillStyle=(isCrit?'rgba(255,80,80,':'rgba(74,144,217,')+(0.55+n*.35)+')';ctx.shadowColor='rgba(74,144,217,.5)';ctx.shadowBlur=4;ctx.fillRect(x,H-22-bh,bw-3,bh);ctx.shadowBlur=0;
+        ctx.strokeStyle=(isCrit?'rgba(255,80,80,':'rgba(74,144,217,')+'0.55)';ctx.lineWidth=1.5;ctx.setLineDash([3,3]);var ty=H-22-Math.floor(targets[i]/100*barArea);ctx.beginPath();ctx.moveTo(x,ty);ctx.lineTo(x+bw-3,ty);ctx.stroke();ctx.setLineDash([]);
+        ctx.fillStyle='rgba(255,255,255,.3)';ctx.font='6px monospace';ctx.textAlign='center';ctx.fillText(cat,x+(bw-3)/2,H-11);
+        ctx.fillStyle=(isCrit?'rgba(255,80,80,':'rgba(74,144,217,')+'.9)';ctx.font='bold 8px monospace';ctx.fillText(Math.round(vals[i]),x+(bw-3)/2,H-22-bh-4);ctx.textAlign='left';
+      });
+      t++;
+    },65);
+  }
+
+  /* hsc7: WellServe — Health Monitor */
+  function startHSC7(){
+    var ekgPh2=0,t=0;
+    var vitals=[{l:'HEART RATE',v:72,u:'BPM',c:'#00c9a7'},{l:'SPO2',v:98,u:'%',c:'#00ddcc'},{l:'SYSTOLIC BP',v:118,u:'mmHg',c:'#00c9a7'},{l:'RESP RATE',v:16,u:'/min',c:'#00bbaa'}];
+    hsIDs[7]=setInterval(function(){
+      var r=syncHSC('hsc7');if(!r||!r.W)return;
+      var ctx=r.ctx,W=r.W,H=r.H,lW=W*.6,rX=lW+8,rW=W-rX;
+      ctx.fillStyle='#000a08';ctx.fillRect(0,0,W,H);
+      for(var gi=0;gi<5;gi++){ctx.strokeStyle='rgba(0,201,167,.05)';ctx.lineWidth=.5;ctx.beginPath();ctx.moveTo(0,H*.18+gi*(H*.64/4));ctx.lineTo(lW,H*.18+gi*(H*.64/4));ctx.stroke();}
+      ekgPh2+=1.1;if(ekgPh2>lW+200)ekgPh2=0;
+      var cy=H*.5;
+      for(var pass=0;pass<3;pass++){
+        var la=pass===0?.12:pass===1?.38:.9,lw2=pass===0?10:pass===1?3.5:1.5;
+        ctx.beginPath();ctx.strokeStyle='rgba(0,201,167,'+la+')';ctx.lineWidth=lw2;ctx.moveTo(0,cy);
+        for(var x=0;x<=lW;x+=2){var rel=(x-ekgPh2+lW*2)%lW,pos=rel,y=cy;if(pos<30)y=cy;else if(pos<40)y=cy-(pos-30)*3.8;else if(pos<50)y=cy+(pos-40)*15;else if(pos<60)y=cy-(pos-50)*9;else if(pos<72)y=cy+(pos-60)*1.5;else if(pos<82)y=cy;else y=cy+Math.sin((pos-82)/118*Math.PI)*8;ctx.lineTo(x,y);}
+        ctx.stroke();
       }
-      ctx.stroke();
-    }
-    animFrames[7]=requestAnimationFrame(drawEKG);
-  }
-  function startTealGlow() {
-    var kb=document.getElementById('kb7'), ug=document.getElementById('underglow7'); if(!kb) return;
-    var rows=Array.from(kb.querySelectorAll('.hs-kb-row')), t=0;
-    glowIntervals[7]=setInterval(function(){
-      t+=0.06;
-      rows.forEach(function(row,ri){ row.querySelectorAll('.hs-key').forEach(function(key){
-        var beat=Math.max(0,Math.sin(t*1.5-ri*0.5)*0.5+0.5);
-        if(beat>0.6){ key.style.background='rgba(0,201,167,'+(beat*0.2)+')'; key.style.boxShadow='0 0 '+Math.round(beat*10)+'px rgba(0,201,167,'+(beat*0.78)+')'; key.style.color='rgba(160,255,235,0.92)'; }
-        else{ key.style.background='linear-gradient(180deg,#262636 0%,#1e1e2e 100%)'; key.style.boxShadow=''; key.style.color='rgba(255,255,255,0.48)'; }
-      }); });
-      if(ug) ug.style.opacity=0.44+Math.sin(t*1.8)*0.3;
-    },60);
+      ctx.strokeStyle='rgba(0,201,167,.18)';ctx.lineWidth=.5;ctx.beginPath();ctx.moveTo(lW,0);ctx.lineTo(lW,H);ctx.stroke();
+      vitals.forEach(function(vt,i){
+        vt.v=Math.min(vt.v*1.008,Math.max(vt.v*.992,vt.v+rnd(-.25,.25)));
+        var y=H*.1+i*(H*.82/4),pulse=(Math.sin(t*.08+i)+1)/2;
+        ctx.fillStyle='rgba(0,201,167,.2)';ctx.font='7px monospace';ctx.fillText(vt.l,rX+4,y+2);
+        ctx.fillStyle=vt.c;ctx.shadowColor=vt.c;ctx.shadowBlur=4;ctx.font='bold 13px monospace';ctx.fillText(Math.round(vt.v)+' '+vt.u,rX+4,y+16);ctx.shadowBlur=0;
+        ctx.fillStyle='rgba(0,201,167,.1)';ctx.fillRect(rX+4,y+19,rW-8,4);ctx.fillStyle=vt.c;ctx.fillRect(rX+4,y+19,(rW-8)*Math.min(1,vt.v/130)*(0.9+pulse*.1),4);
+      });
+      ctx.fillStyle='rgba(0,201,167,.5)';ctx.font='bold 9px monospace';ctx.fillText('WELLSERVE · HEALTH INTELLIGENCE',8,H-5);
+      t++;
+    },48);
   }
 
-  /* ── STOP ALL EFFECTS ── */
-  function stopAllEffects() {
-    glowIntervals.forEach(function (iv, i) { if (iv) { clearInterval(iv); glowIntervals[i] = null; } });
-    animFrames.forEach(function (af, i)   { if (af) { cancelAnimationFrame(af); animFrames[i] = null; } });
-    document.querySelectorAll('.hs-key').forEach(function (k) {
-      k.style.background = 'linear-gradient(180deg,#262636 0%,#1e1e2e 100%)'; k.style.boxShadow = ''; k.style.color = 'rgba(255,255,255,0.48)';
-    });
+  /* ── STOP ALL ── */
+  function stopAllEffects(){
+    hsIDs.forEach(function(id,i){if(id){clearInterval(id);hsIDs[i]=null;}});
+    animFrames.forEach(function(af,i){if(af){cancelAnimationFrame(af);animFrames[i]=null;}});
   }
 
-  /* ── START EFFECTS FOR A SLIDE ── */
-  function startSlideEffects(idx) {
-    if      (idx===0) { initEmbers();  drawEmbers();  startFireGlow(); }
-    else if (idx===1) { initMatrix();  drawMatrix();  startMatrixGlow(); }
-    else if (idx===2) { initNetwork(); drawNetwork(); startCyanGlow(); }
-    else if (idx===3) { initGold();    drawGold();    startGoldGlow(); }
-    else if (idx===4) { initNeural();  drawNeural();  startPurpleGlow(); }
-    else if (idx===5) { initHex();     drawHex();     startCrimsonGlow(); }
-    else if (idx===6) { initRadar();   drawRadar();   startSteelGlow(); }
-    else if (idx===7) { initEKG();     drawEKG();     startTealGlow(); }
+  /* ── START EFFECTS ── */
+  function startSlideEffects(idx){
+    if(idx===0){initEmbers();drawEmbers();startHSC0();}
+    else if(idx===1){initMatrix();drawMatrix();startHSC1();}
+    else if(idx===2){initNetwork();drawNetwork();startHSC2();}
+    else if(idx===3){initGold();drawGold();startHSC3();}
+    else if(idx===4){initNeural();drawNeural();startHSC4();}
+    else if(idx===5){initHex();drawHex();startHSC5();}
+    else if(idx===6){initRadar();drawRadar();startHSC6();}
+    else if(idx===7){initEKG();drawEKG();startHSC7();}
   }
 
   /* ── PROGRESS BAR ── */
-  function resetProgress(color) {
-    if (!progress) return;
-    progress.style.transition  = 'none';
-    progress.style.background  = color;
-    progress.style.width       = '0%';
-    void progress.offsetWidth;
-    progress.style.transition  = 'width ' + SLIDE_DURATION + 'ms linear';
-    progress.style.width       = '100%';
-  }
+  function resetProgress(color){if(!progress)return;progress.style.transition='none';progress.style.background=color;progress.style.width='0%';void progress.offsetWidth;progress.style.transition='width '+SLIDE_DURATION+'ms linear';progress.style.width='100%';}
 
   /* ── SLIDE TRANSITION ── */
-  window.hsGoTo = function (idx) {
-    if (idx === currentSlide) return;
-    stopAllEffects();
-    if (slideTimer) { clearTimeout(slideTimer); slideTimer = null; }
-
-    slides[currentSlide].classList.remove('active');
-    bgCanvases[currentSlide].classList.remove('active');
-    currentSlide = idx;
-    slides[currentSlide].classList.add('active');
-    bgCanvases[currentSlide].classList.add('active');
-
-    dots.forEach(function (dot, i) {
-      var on = i === currentSlide;
-      dot.classList.toggle('active', on);
-      dot.style.background = on ? accentColors[currentSlide] : 'rgba(255,255,255,0.18)';
-    });
-
+  window.hsGoTo=function(idx){
+    if(idx===currentSlide)return;
+    stopAllEffects();if(slideTimer){clearTimeout(slideTimer);slideTimer=null;}
+    slides[currentSlide].classList.remove('active');bgCanvases[currentSlide].classList.remove('active');
+    currentSlide=idx;
+    slides[currentSlide].classList.add('active');bgCanvases[currentSlide].classList.add('active');
+    dots.forEach(function(dot,i){var on=i===currentSlide;dot.classList.toggle('active',on);dot.style.background=on?accentColors[currentSlide]:'rgba(255,255,255,0.18)';});
     resetProgress(accentColors[currentSlide]);
-    setTimeout(function () { startSlideEffects(currentSlide); }, 80);
-    slideTimer = setTimeout(function () { window.hsGoTo((currentSlide + 1) % slides.length); }, SLIDE_DURATION);
+    setTimeout(function(){startSlideEffects(currentSlide);},80);
+    slideTimer=setTimeout(function(){window.hsGoTo((currentSlide+1)%slides.length);},SLIDE_DURATION);
   };
 
-  /* ── PAGE VISIBILITY HOOK (called by showPage) ── */
-  window.hsVisibilityChange = function (pageId) {
-    if (pageId === 'home') {
-      resizeCanvases();
-      startSlideEffects(currentSlide);
-      resetProgress(accentColors[currentSlide]);
-      if (!slideTimer) {
-        slideTimer = setTimeout(function () { window.hsGoTo((currentSlide + 1) % slides.length); }, SLIDE_DURATION);
-      }
-    } else {
-      stopAllEffects();
-      if (slideTimer) { clearTimeout(slideTimer); slideTimer = null; }
-    }
+  /* ── PAGE VISIBILITY ── */
+  window.hsVisibilityChange=function(pageId){
+    if(pageId==='home'){resizeCanvases();startSlideEffects(currentSlide);resetProgress(accentColors[currentSlide]);if(!slideTimer)slideTimer=setTimeout(function(){window.hsGoTo((currentSlide+1)%slides.length);},SLIDE_DURATION);}
+    else{stopAllEffects();if(slideTimer){clearTimeout(slideTimer);slideTimer=null;}}
   };
 
   /* ── INIT ── */
-  function initHeroSlider() {
-    slides     = document.querySelectorAll('.hs-slide');
-    bgCanvases = document.querySelectorAll('.hs-bg-canvas');
-    progress   = document.getElementById('hsProgress');
-    dots       = document.querySelectorAll('.hs-dot');
-    if (!slides.length) return;
-
-    resizeCanvases();
-    dots[0].style.background = accentColors[0];
-    startSlideEffects(0);
-    resetProgress(accentColors[0]);
-    slideTimer = setTimeout(function () { window.hsGoTo(1); }, SLIDE_DURATION);
-
-    window.addEventListener('resize', function () { resizeCanvases(); });
+  function initHeroSlider(){
+    slides=document.querySelectorAll('.hs-slide');bgCanvases=document.querySelectorAll('.hs-bg-canvas');
+    progress=document.getElementById('hsProgress');dots=document.querySelectorAll('.hs-dot');
+    if(!slides.length)return;
+    resizeCanvases();dots[0].style.background=accentColors[0];
+    startSlideEffects(0);resetProgress(accentColors[0]);
+    slideTimer=setTimeout(function(){window.hsGoTo(1);},SLIDE_DURATION);
+    window.addEventListener('resize',function(){resizeCanvases();});
   }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initHeroSlider);
-  } else {
-    initHeroSlider();
-  }
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',initHeroSlider);}else{initHeroSlider();}
 })();
 </script>
 </body>
