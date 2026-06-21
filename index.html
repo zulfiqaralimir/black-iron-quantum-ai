@@ -1176,6 +1176,147 @@ footer {
   transition: width 0.3s ease, background-color 0.3s ease;
 }
 .hs-dot.active { width: 44px; }
+
+/* ════ SOLAR SYSTEM HERO ════ */
+#hero {
+  width: 100%;
+  height: 640px;
+  position: relative;
+  overflow: hidden;
+}
+#bgc {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.hi {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+  pointer-events: none;
+}
+.eye {
+  font-size: 13px;
+  letter-spacing: 5px;
+  color: rgba(255,255,255,0.55);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  font-family: monospace;
+  animation: fadeUp 0.6s ease both;
+}
+.htitle {
+  font-size: 62px;
+  font-weight: 900;
+  color: white;
+  text-align: center;
+  line-height: 1.02;
+  letter-spacing: -2px;
+  margin-bottom: 10px;
+  animation: zoomIn 0.7s cubic-bezier(0.22,1,0.36,1) 0.1s both;
+}
+.hacc {
+  color: #f0a830;
+}
+.hsub {
+  font-size: 15px;
+  color: rgba(255,255,255,0.52);
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  text-align: center;
+  animation: fadeUp 0.6s ease 0.2s both;
+}
+.ow {
+  width: 660px;
+  height: 320px;
+  pointer-events: all;
+  flex-shrink: 0;
+  animation: zoomIn 0.7s cubic-bezier(0.22,1,0.36,1) 0.25s both;
+  cursor: pointer;
+}
+#oc {
+  width: 100%;
+  height: 100%;
+}
+@keyframes zoomIn {
+  from { opacity: 0; transform: scale(0.7); }
+  to   { opacity: 1; transform: scale(1); }
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.cards {
+  position: absolute;
+  bottom: 22px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 0 28px;
+  z-index: 10;
+  animation: fadeUp 0.6s ease 0.4s both;
+}
+.card {
+  padding: 7px 16px;
+  border-radius: 6px;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  border: 1px solid rgba(255,255,255,0.22);
+  background: rgba(255,255,255,0.07);
+  color: rgba(255,255,255,0.65);
+  cursor: pointer;
+  transition: all 0.12s cubic-bezier(0.34,1.56,0.64,1);
+  white-space: nowrap;
+  font-family: monospace;
+  font-weight: 600;
+  position: relative;
+  transform-origin: center bottom;
+}
+.card:hover {
+  color: white;
+  background: rgba(255,255,255,0.15);
+  border-color: rgba(255,255,255,0.5);
+  transform: scale(1.25) translateY(-4px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+  z-index: 20;
+}
+.card.act {
+  transform: scale(1.18) translateY(-3px);
+  z-index: 15;
+}
+.tip {
+  position: absolute;
+  bottom: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%) scale(0.88);
+  background: rgba(20,18,32,0.97);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 7px;
+  padding: 9px 14px;
+  font-size: 12px;
+  color: rgba(255,255,255,0.88);
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: all 0.1s cubic-bezier(0.34,1.56,0.64,1);
+  z-index: 50;
+  font-family: monospace;
+  letter-spacing: 0.8px;
+}
+.card:hover .tip {
+  opacity: 1;
+  transform: translateX(-50%) scale(1);
+}
 </style>
 </head>
 <body>
@@ -1243,132 +1384,19 @@ footer {
 <!-- ══════════ HOME / GROUP PAGE ══════════ -->
 <div id="home" class="page active">
 
-  <!-- HERO SLIDER ════════════════════════════════════════════════════════ -->
-  <div class="hs-wrap" id="heroSlider">
 
-    <!-- Background canvas layers -->
-    <canvas id="bgCanvas0" class="hs-bg-canvas active"></canvas>
-    <canvas id="bgCanvas1" class="hs-bg-canvas"></canvas>
-    <canvas id="bgCanvas2" class="hs-bg-canvas"></canvas>
-    <canvas id="bgCanvas3" class="hs-bg-canvas"></canvas>
-    <canvas id="bgCanvas4" class="hs-bg-canvas"></canvas>
-    <canvas id="bgCanvas5" class="hs-bg-canvas"></canvas>
-    <canvas id="bgCanvas6" class="hs-bg-canvas"></canvas>
-    <canvas id="bgCanvas7" class="hs-bg-canvas"></canvas>
-
-    <!-- Left text vignette -->
-    <div class="hs-text-fade"></div>
-
-    <!-- ── SLIDE 1: FERROQUANT Capital ── -->
-    <div class="hs-slide active" data-slide="0">
-      <div class="hs-glow hs-glow-fire"></div>
-      <div class="hs-col-text">
-        <span class="hs-badge" style="color:#e05a00; background:rgba(224,90,0,0.12); border:1px solid rgba(224,90,0,0.35);">FERROQUANT Capital</span>
-        <span class="hs-headline" style="text-shadow:0 0 80px rgba(255,100,0,0.28), 0 2px 6px rgba(0,0,0,0.6);">QUANTIFY.<br>DOMINATE.<br>OUTPERFORM.</span>
-        <span class="hs-subline">AI-Driven Alpha &nbsp;·&nbsp; PSX Markets &nbsp;·&nbsp; Institutional Grade</span>
-        <span class="hs-effect-tag" style="color:rgba(224,90,0,0.65);">▸ AI-Powered Quant Trading on Pakistan Stock Exchange</span>
-      </div>
-        <div class="hs-col-canvas"><canvas id="hsc0"></canvas></div>
+  <!-- SOLAR SYSTEM HERO ══════════════════════════════════════════════════ -->
+  <section id="hero">
+    <canvas id="bgc"></canvas>
+    <div class="hi">
+      <p class="eye">Black Iron Quantum AI Group</p>
+      <h1 class="htitle">Eight Companies.<br><span class="hacc">One Vision.</span></h1>
+      <p class="hsub">AI &nbsp;&middot;&nbsp; Finance &nbsp;&middot;&nbsp; Intelligence &nbsp;&middot;&nbsp; Technology</p>
+      <div class="ow"><canvas id="oc"></canvas></div>
     </div>
-
-    <!-- ── SLIDE 2: Black Iron Quantum AI ── -->
-    <div class="hs-slide" data-slide="1">
-      <div class="hs-glow hs-glow-matrix"></div>
-      <div class="hs-col-text">
-        <span class="hs-badge" style="color:#00cc44; background:rgba(0,204,68,0.10); border:1px solid rgba(0,204,68,0.32);">Black Iron Quantum AI</span>
-        <span class="hs-headline" style="text-shadow:0 0 80px rgba(0,220,68,0.24), 0 2px 6px rgba(0,0,0,0.6);">ENGINEER THE EDGE.<br>OWN THE<br>FUTURE.</span>
-        <span class="hs-subline">Multi-Agent Systems &nbsp;·&nbsp; Deep Learning Finance &nbsp;·&nbsp; Agentic AI</span>
-        <span class="hs-effect-tag" style="color:rgba(0,204,68,0.65);">▸ Deep Learning & Agentic AI for Financial Intelligence</span>
-      </div>
-        <div class="hs-col-canvas"><canvas id="hsc1"></canvas></div>
-    </div>
-
-    <!-- ── SLIDE 3: BlackIronTimes.com ── -->
-    <div class="hs-slide" data-slide="2">
-      <div class="hs-glow hs-glow-cyan"></div>
-      <div class="hs-col-text">
-        <span class="hs-badge" style="color:#00bfff; background:rgba(0,191,255,0.10); border:1px solid rgba(0,191,255,0.32);">BlackIronTimes.com</span>
-        <span class="hs-headline" style="text-shadow:0 0 80px rgba(0,191,255,0.24), 0 2px 6px rgba(0,0,0,0.6);">INTELLIGENCE.<br>REPORTED.<br>FIRST.</span>
-        <span class="hs-subline">Financial Journalism &nbsp;·&nbsp; Market Intelligence &nbsp;·&nbsp; Data-First Media</span>
-        <span class="hs-effect-tag" style="color:rgba(0,191,255,0.65);">▸ AI-First Financial Journalism & Market Intelligence</span>
-      </div>
-        <div class="hs-col-canvas"><canvas id="hsc2"></canvas></div>
-    </div>
-
-    <!-- ── SLIDE 4: Gulf SWF Intelligence ── -->
-    <div class="hs-slide" data-slide="3">
-      <div class="hs-glow hs-glow-gold"></div>
-      <div class="hs-col-text">
-        <span class="hs-badge" style="color:#d4a843; background:rgba(212,168,67,0.10); border:1px solid rgba(212,168,67,0.32);">Gulf SWF Intelligence</span>
-        <span class="hs-headline" style="text-shadow:0 0 80px rgba(212,168,67,0.28), 0 2px 6px rgba(0,0,0,0.6);">SOVEREIGN.<br>STRATEGIC.<br>DECISIVE.</span>
-        <span class="hs-subline">SWF Filing Intelligence &nbsp;·&nbsp; Gulf Capital Flows &nbsp;·&nbsp; Institutional Data</span>
-        <span class="hs-effect-tag" style="color:rgba(212,168,67,0.65);">▸ Tracking $28T in Sovereign Wealth Fund Flows & Filings</span>
-      </div>
-        <div class="hs-col-canvas"><canvas id="hsc3"></canvas></div>
-    </div>
-
-    <!-- ── SLIDE 5: LLM Agent Systems ── -->
-    <div class="hs-slide" data-slide="4">
-      <div class="hs-glow hs-glow-purple"></div>
-      <div class="hs-col-text">
-        <span class="hs-badge" style="color:#9b59b6; background:rgba(155,89,182,0.10); border:1px solid rgba(155,89,182,0.32);">LLM Agent Systems</span>
-        <span class="hs-headline" style="text-shadow:0 0 80px rgba(155,89,182,0.26), 0 2px 6px rgba(0,0,0,0.6);">DEPLOY.<br>REASON.<br>EXECUTE.</span>
-        <span class="hs-subline">Multi-Agent Orchestration &nbsp;·&nbsp; LLM Pipelines &nbsp;·&nbsp; Autonomous Systems</span>
-        <span class="hs-effect-tag" style="color:rgba(155,89,182,0.65);">▸ Building Autonomous Multi-Agent AI Pipelines & Systems</span>
-      </div>
-        <div class="hs-col-canvas"><canvas id="hsc4"></canvas></div>
-    </div>
-
-    <!-- ── SLIDE 6: ZulfiCode ── -->
-    <div class="hs-slide" data-slide="5">
-      <div class="hs-glow hs-glow-crimson"></div>
-      <div class="hs-col-text">
-        <span class="hs-badge" style="color:#e01040; background:rgba(220,16,64,0.10); border:1px solid rgba(220,16,64,0.32);">ZulfiCode</span>
-        <span class="hs-headline" style="text-shadow:0 0 80px rgba(220,16,64,0.26), 0 2px 6px rgba(0,0,0,0.6);">COMPILE.<br>CONQUER.<br>SHIP.</span>
-        <span class="hs-subline">AI-Assisted Development &nbsp;·&nbsp; Full-Stack Engineering &nbsp;·&nbsp; Production Grade</span>
-        <span class="hs-effect-tag" style="color:rgba(220,16,64,0.65);">▸ Full-Stack Engineering & AI-Assisted Software Development</span>
-      </div>
-        <div class="hs-col-canvas"><canvas id="hsc5"></canvas></div>
-    </div>
-
-    <!-- ── SLIDE 7: Policy Analytics ── -->
-    <div class="hs-slide" data-slide="6">
-      <div class="hs-glow hs-glow-steel"></div>
-      <div class="hs-col-text">
-        <span class="hs-badge" style="color:#4a90d9; background:rgba(74,144,217,0.10); border:1px solid rgba(74,144,217,0.32);">Policy Analytics</span>
-        <span class="hs-headline" style="text-shadow:0 0 80px rgba(74,144,217,0.24), 0 2px 6px rgba(0,0,0,0.6);">ANALYZE.<br>ADVISE.<br>INFLUENCE.</span>
-        <span class="hs-subline">Geopolitical Intelligence &nbsp;·&nbsp; Regulatory Analysis &nbsp;·&nbsp; Strategic Advisory</span>
-        <span class="hs-effect-tag" style="color:rgba(74,144,217,0.65);">▸ Geopolitical & Regulatory Intelligence for Decision-Makers</span>
-      </div>
-        <div class="hs-col-canvas"><canvas id="hsc6"></canvas></div>
-    </div>
-
-    <!-- ── SLIDE 8: WellServe ── -->
-    <div class="hs-slide" data-slide="7">
-      <div class="hs-glow hs-glow-teal"></div>
-      <div class="hs-col-text">
-        <span class="hs-badge" style="color:#00c9a7; background:rgba(0,201,167,0.10); border:1px solid rgba(0,201,167,0.32);">WellServe</span>
-        <span class="hs-headline" style="text-shadow:0 0 80px rgba(0,201,167,0.24), 0 2px 6px rgba(0,0,0,0.6);">SERVE.<br>HEAL.<br>SCALE.</span>
-        <span class="hs-subline">Healthcare Technology &nbsp;·&nbsp; Patient-First Systems &nbsp;·&nbsp; Digital Health</span>
-        <span class="hs-effect-tag" style="color:rgba(0,201,167,0.65);">▸ Digital Health Technology & Patient-First Care Systems</span>
-      </div>
-        <div class="hs-col-canvas"><canvas id="hsc7"></canvas></div>
-    </div>
-
-    <!-- Controls -->
-    <div class="hs-progress" id="hsProgress"></div>
-    <div class="hs-dots">
-      <button class="hs-dot active" data-dot="0" onclick="hsGoTo(0)"></button>
-      <button class="hs-dot" data-dot="1" onclick="hsGoTo(1)"></button>
-      <button class="hs-dot" data-dot="2" onclick="hsGoTo(2)"></button>
-      <button class="hs-dot" data-dot="3" onclick="hsGoTo(3)"></button>
-      <button class="hs-dot" data-dot="4" onclick="hsGoTo(4)"></button>
-      <button class="hs-dot" data-dot="5" onclick="hsGoTo(5)"></button>
-      <button class="hs-dot" data-dot="6" onclick="hsGoTo(6)"></button>
-      <button class="hs-dot" data-dot="7" onclick="hsGoTo(7)"></button>
-    </div>
-  </div>
-  <!-- END HERO SLIDER ══════════════════════════════════════════════════ -->
+    <div class="cards" id="cards"></div>
+  </section>
+  <!-- END SOLAR SYSTEM HERO ════════════════════════════════════════════════ -->
 
   <!-- GROUP HERO -->
   <div class="group-hero">
@@ -2410,6 +2438,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* ── PAGE VISIBILITY ── */
   window.hsVisibilityChange=function(pageId){
+    if(!slides||!slides.length)return;
     if(pageId==='home'){resizeCanvases();startSlideEffects(currentSlide);resetProgress(accentColors[currentSlide]);if(!slideTimer)slideTimer=setTimeout(function(){window.hsGoTo((currentSlide+1)%slides.length);},SLIDE_DURATION);}
     else{stopAllEffects();if(slideTimer){clearTimeout(slideTimer);slideTimer=null;}}
   };
@@ -2425,6 +2454,550 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('resize',function(){resizeCanvases();});
   }
   if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',initHeroSlider);}else{initHeroSlider();}
+})();
+</script>
+
+<!-- ══════════ SOLAR SYSTEM HERO ══════════ -->
+<script>
+(function(){
+
+  /* Subsidiary data — BITimes (index 2) has saturn:true */
+  const S = [
+    { name: 'FerroQuant Capital',    short: 'FerroQuant', tag: 'AI Quant Trading · PSX Markets',       col: '#ff7722', r: 255, g: 119, b: 34,  saturn: false },
+    { name: 'Black Iron Quantum AI', short: 'BIQAI Core', tag: 'Deep Learning & Agentic AI',            col: '#33ee66', r: 51,  g: 238, b: 102, saturn: false },
+    { name: 'BlackIronTimes.com',    short: 'BITimes',    tag: 'AI Financial Journalism',               col: '#22ccff', r: 34,  g: 204, b: 255, saturn: true  },
+    { name: 'Gulf SWF Intelligence', short: 'Gulf SWF',   tag: 'Sovereign Wealth Fund Data',            col: '#f0c040', r: 240, g: 192, b: 64,  saturn: false },
+    { name: 'LLM Agent Systems',     short: 'LLM Agents', tag: 'Multi-Agent AI Pipelines',              col: '#cc88ff', r: 204, g: 136, b: 255, saturn: false },
+    { name: 'ZulfiCode',             short: 'ZulfiCode',  tag: 'Software Engineering',                  col: '#ff4466', r: 255, g: 68,  b: 102, saturn: false },
+    { name: 'Policy Analytics',      short: 'Policy',     tag: 'Geopolitical Advisory',                 col: '#66aaff', r: 102, g: 170, b: 255, saturn: false },
+    { name: 'WellServe',             short: 'WellServe',  tag: 'Digital Health Technology',             col: '#00eebb', r: 0,   g: 238, b: 187, saturn: false },
+  ];
+
+  const ns = S.map(() => ({ s: 1, v: 0, target: 1, locked: false }));
+  let mx = -999, my = -999, hovNode = -1, lockedIdx = -1, t = 0;
+  const STIFF = 0.45, DAMP = 0.48;
+
+  function spring(n) {
+    const f = (n.target - n.s) * STIFF;
+    n.v = (n.v + f) * DAMP;
+    n.s = Math.max(0.5, Math.min(n.s + n.v, 3.2));
+  }
+
+  function setLocked(i) {
+    if (lockedIdx >= 0 && lockedIdx !== i) {
+      ns[lockedIdx].locked = false;
+      ns[lockedIdx].target = 1;
+      ns[lockedIdx].v = -0.05;
+      const cd = document.querySelectorAll('.card');
+      cd[lockedIdx].classList.remove('act');
+      cd[lockedIdx].style.cssText = 'border-color:rgba(255,255,255,0.22);background:rgba(255,255,255,0.07);color:rgba(255,255,255,0.65)';
+    }
+    if (lockedIdx === i) {
+      ns[i].locked = false;
+      ns[i].target = 1;
+      ns[i].v = -0.05;
+      lockedIdx = -1;
+      const cd = document.querySelectorAll('.card');
+      cd[i].classList.remove('act');
+      cd[i].style.cssText = 'border-color:rgba(255,255,255,0.22);background:rgba(255,255,255,0.07);color:rgba(255,255,255,0.65)';
+    } else {
+      ns[i].locked = true;
+      ns[i].target = 2.7;
+      ns[i].v = 0.5;
+      lockedIdx = i;
+      const cd = document.querySelectorAll('.card');
+      cd[i].classList.add('act');
+      cd[i].style.borderColor = S[i].col + 'cc';
+      cd[i].style.background = `rgba(${S[i].r},${S[i].g},${S[i].b},0.2)`;
+      cd[i].style.color = S[i].col;
+    }
+  }
+
+  /* Build subsidiary cards */
+  const ce = document.getElementById('cards');
+  S.forEach((s, i) => {
+    const c = document.createElement('div');
+    c.className = 'card';
+    c.textContent = s.short;
+    const tp = document.createElement('div');
+    tp.className = 'tip';
+    tp.textContent = s.tag;
+    tp.style.borderColor = s.col + '99';
+    c.appendChild(tp);
+    c.addEventListener('mouseenter', () => {
+      if (!ns[i].locked) { ns[i].target = 2.2; ns[i].v = 0.3; }
+    });
+    c.addEventListener('mouseleave', () => {
+      if (!ns[i].locked) { ns[i].target = 1; ns[i].v = -0.05; }
+    });
+    c.addEventListener('click', () => setLocked(i));
+    ce.appendChild(c);
+  });
+
+  /* Background canvas — star field */
+  const bc = document.getElementById('bgc'), bx = bc.getContext('2d');
+  let pts = [];
+  function initBg() {
+    bc.width = bc.offsetWidth || 900;
+    bc.height = bc.offsetHeight || 640;
+    pts = [];
+    for (let i = 0; i < 200; i++) {
+      const s = S[i % 8];
+      pts.push({
+        x: Math.random() * bc.width,
+        y: Math.random() * bc.height,
+        vx: (Math.random() - 0.5) * 0.2,
+        vy: (Math.random() - 0.5) * 0.2,
+        r: Math.random() * 1.8 + 0.4,
+        cr: s.r, cg: s.g, cb: s.b,
+        a: Math.random() * 0.55 + 0.2,
+        ph: Math.random() * Math.PI * 2
+      });
+    }
+  }
+
+  function drawBg() {
+    const W = bc.width, H = bc.height;
+    const g = bx.createRadialGradient(W * 0.5, H * 0.35, 40, W * 0.5, H * 0.55, W * 0.8);
+    g.addColorStop(0, '#1e1c38');
+    g.addColorStop(0.5, '#161428');
+    g.addColorStop(1, '#0c0b1c');
+    bx.fillStyle = g;
+    bx.fillRect(0, 0, W, H);
+
+    /* Corner color washes */
+    [{ x: 0, y: 0, s: S[0] }, { x: W, y: 0, s: S[2] }, { x: 0, y: H, s: S[4] }, { x: W, y: H, s: S[6] }].forEach(c => {
+      const g2 = bx.createRadialGradient(c.x, c.y, 0, c.x, c.y, W * 0.5);
+      g2.addColorStop(0, c.s.col + '1e');
+      g2.addColorStop(1, 'transparent');
+      bx.fillStyle = g2;
+      bx.fillRect(0, 0, W, H);
+    });
+
+    /* Stars */
+    pts.forEach(p => {
+      p.x += p.vx;
+      p.y += p.vy;
+      p.ph += 0.014;
+      if (p.x < 0) p.x = W;
+      if (p.x > W) p.x = 0;
+      if (p.y < 0) p.y = H;
+      if (p.y > H) p.y = 0;
+      const b = p.a * (0.65 + Math.sin(p.ph) * 0.35);
+      bx.beginPath();
+      bx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      bx.fillStyle = `rgba(${p.cr},${p.cg},${p.cb},${b.toFixed(3)})`;
+      bx.fill();
+    });
+
+    /* Connection lines */
+    for (let i = 0; i < pts.length; i++) {
+      for (let j = i + 1; j < pts.length; j++) {
+        const dx = pts[i].x - pts[j].x, dy = pts[i].y - pts[j].y, d = Math.sqrt(dx * dx + dy * dy);
+        if (d < 80) {
+          bx.strokeStyle = `rgba(255,255,255,${(0.1 * (1 - d / 80)).toFixed(3)})`;
+          bx.lineWidth = 0.4;
+          bx.beginPath();
+          bx.moveTo(pts[i].x, pts[i].y);
+          bx.lineTo(pts[j].x, pts[j].y);
+          bx.stroke();
+        }
+      }
+    }
+  }
+
+  /* Orb canvas */
+  const oc = document.getElementById('oc'), ctx = oc.getContext('2d');
+  const CW = 660, CH = 320;
+  oc.width = CW;
+  oc.height = CH;
+  const CX = CW / 2, CY = CH / 2;
+  const RX = 295, RY = 118, NR = 22;
+
+  function nodePos(i, time) {
+    const angle = time * 0.007 + i * (Math.PI * 2 / 8);
+    return {
+      x: CX + Math.cos(angle) * RX,
+      y: CY + Math.sin(angle) * RY,
+      depth: 0.62 + 0.38 * ((Math.sin(angle) + 1) / 2),
+      angle: angle
+    };
+  }
+
+  oc.addEventListener('mousemove', e => {
+    const r = oc.getBoundingClientRect();
+    mx = (e.clientX - r.left) * (CW / r.width);
+    my = (e.clientY - r.top) * (CH / r.height);
+  });
+
+  oc.addEventListener('mouseleave', () => {
+    mx = -999;
+    my = -999;
+    S.forEach((_, i) => {
+      if (!ns[i].locked) { ns[i].target = 1; }
+    });
+  });
+
+  oc.addEventListener('click', e => {
+    const r = oc.getBoundingClientRect();
+    const cx = (e.clientX - r.left) * (CW / r.width);
+    const cy = (e.clientY - r.top) * (CH / r.height);
+    S.forEach((_, i) => {
+      const { x: nx, y: ny } = nodePos(i, t);
+      if (Math.hypot(cx - nx, cy - ny) < NR * Math.max(ns[i].s, 1) * 1.4) {
+        setLocked(i);
+      }
+    });
+  });
+
+  /* Draw Sun (BIQAI) — radiating energy */
+  function drawSun(cr, cg, cb, cc) {
+    /* Corona rays */
+    const rayCount = 24;
+    for (let ri = 0; ri < rayCount; ri++) {
+      const angle = (ri / rayCount) * Math.PI * 2 + t * 0.008;
+      const len = 48 + Math.sin(t * 0.06 + ri * 0.7) * 18;
+      const wid = 2 + Math.sin(t * 0.04 + ri * 1.2) * 1.5;
+      ctx.beginPath();
+      ctx.moveTo(CX + Math.cos(angle) * 28, CY + Math.sin(angle) * 28);
+      ctx.lineTo(CX + Math.cos(angle) * (28 + len), CY + Math.sin(angle) * (28 + len));
+      const grad = ctx.createLinearGradient(
+        CX + Math.cos(angle) * 28, CY + Math.sin(angle) * 28,
+        CX + Math.cos(angle) * (28 + len), CY + Math.sin(angle) * (28 + len)
+      );
+      grad.addColorStop(0, `rgba(${cr},${cg},${cb},0.55)`);
+      grad.addColorStop(1, `rgba(${cr},${cg},${cb},0)`);
+      ctx.strokeStyle = grad;
+      ctx.lineWidth = wid;
+      ctx.stroke();
+    }
+
+    /* Outer corona glow layers */
+    for (let layer = 6; layer >= 1; layer--) {
+      const rad = 28 + layer * 14 + Math.sin(t * 0.03 + layer) * (layer * 2);
+      const alpha = (0.06 / layer) * (1 + Math.sin(t * 0.04) * 0.3);
+      ctx.beginPath();
+      ctx.arc(CX, CY, rad, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(${cr},${cg},${cb},${alpha.toFixed(3)})`;
+      ctx.fill();
+    }
+
+    /* Solar flares */
+    for (let fl = 0; fl < 4; fl++) {
+      const fa = t * 0.012 + fl * (Math.PI / 2) + Math.sin(t * 0.02 + fl) * 0.8;
+      const flen = 36 + Math.sin(t * 0.08 + fl * 2.1) * 22;
+      const fa2 = fa + Math.sin(t * 0.05 + fl) * 0.35;
+      ctx.beginPath();
+      ctx.moveTo(CX + Math.cos(fa) * 22, CY + Math.sin(fa) * 22);
+      ctx.quadraticCurveTo(
+        CX + Math.cos(fa + 0.2) * (22 + flen * 0.6), CY + Math.sin(fa + 0.2) * (22 + flen * 0.6),
+        CX + Math.cos(fa2) * (22 + flen), CY + Math.sin(fa2) * (22 + flen)
+      );
+      const flAlpha = 0.2 + Math.sin(t * 0.07 + fl * 1.8) * 0.15;
+      ctx.strokeStyle = `rgba(${cr},${cg},${cb},${flAlpha.toFixed(3)})`;
+      ctx.lineWidth = 2.5;
+      ctx.stroke();
+    }
+
+    /* Sun body gradient */
+    const sunG = ctx.createRadialGradient(CX - 6, CY - 6, 2, CX, CY, 28);
+    sunG.addColorStop(0, 'rgba(255,255,220,0.98)');
+    sunG.addColorStop(0.3, `rgba(${cr + 20},${cg + 10},${Math.min(cb + 20, 255)},0.95)`);
+    sunG.addColorStop(0.7, `rgba(${cr},${cg},${cb},0.9)`);
+    sunG.addColorStop(1, `rgba(${Math.round(cr * 0.7)},${Math.round(cg * 0.7)},${Math.round(cb * 0.7)},0.85)`);
+    ctx.beginPath();
+    ctx.arc(CX, CY, 28, 0, Math.PI * 2);
+    ctx.fillStyle = sunG;
+    ctx.fill();
+
+    /* Surface shimmer */
+    for (let sp = 0; sp < 6; sp++) {
+      const sa = t * 0.02 + sp * (Math.PI / 3);
+      const sr = 8 + Math.sin(t * 0.05 + sp) * 5;
+      const sx = CX + Math.cos(sa) * sr, sy = CY + Math.sin(sa) * sr;
+      ctx.beginPath();
+      ctx.arc(sx, sy, 3 + Math.sin(t * 0.06 + sp) * 1.5, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(255,255,180,${(0.15 + Math.sin(t * 0.04 + sp) * 0.08).toFixed(3)})`;
+      ctx.fill();
+    }
+
+    /* Label */
+    ctx.fillStyle = 'rgba(10,8,24,0.85)';
+    ctx.font = 'bold 13px monospace';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText('BIQAI', CX, CY - 5);
+    ctx.fillStyle = 'rgba(10,8,24,0.7)';
+    ctx.font = '9px monospace';
+    ctx.fillText('GROUP', CX, CY + 7);
+  }
+
+  /* Draw Saturn (planet with rings) */
+  function drawSaturn(nx, ny, baseR, s, sc) {
+    ctx.save();
+    ctx.translate(nx, ny);
+    ctx.scale(sc, sc);
+    ctx.translate(-nx, -ny);
+
+    /* Back ring */
+    ctx.save();
+    ctx.translate(nx, ny);
+    ctx.scale(1, 0.32);
+    ctx.beginPath();
+    ctx.arc(0, 0, baseR * 2.4, Math.PI, 0);
+    const ringG = ctx.createLinearGradient(-baseR * 2.4, 0, baseR * 2.4, 0);
+    ringG.addColorStop(0, `rgba(${s.r},${s.g},${s.b},0.08)`);
+    ringG.addColorStop(0.3, `rgba(${s.r},${s.g},${s.b},0.45)`);
+    ringG.addColorStop(0.5, `rgba(${s.r},${s.g},${s.b},0.6)`);
+    ringG.addColorStop(0.7, `rgba(${s.r},${s.g},${s.b},0.45)`);
+    ringG.addColorStop(1, `rgba(${s.r},${s.g},${s.b},0.08)`);
+    ctx.strokeStyle = ringG;
+    ctx.lineWidth = baseR * 1.4 / 0.32;
+    ctx.globalAlpha = 0.45;
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.arc(0, 0, baseR * 1.65, Math.PI, 0);
+    ctx.strokeStyle = 'rgba(10,8,24,0.6)';
+    ctx.lineWidth = baseR * 0.7 / 0.32;
+    ctx.globalAlpha = 1;
+    ctx.stroke();
+    ctx.restore();
+
+    /* Planet body */
+    const pg = ctx.createRadialGradient(nx - baseR * 0.3, ny - baseR * 0.3, baseR * 0.1, nx, ny, baseR);
+    pg.addColorStop(0, `rgba(${Math.min(s.r + 60, 255)},${Math.min(s.g + 60, 255)},${Math.min(s.b + 60, 255)},0.95)`);
+    pg.addColorStop(0.5, `rgba(${s.r},${s.g},${s.b},0.88)`);
+    pg.addColorStop(1, `rgba(${Math.round(s.r * 0.5)},${Math.round(s.g * 0.5)},${Math.round(s.b * 0.5)},0.85)`);
+    ctx.beginPath();
+    ctx.arc(nx, ny, baseR, 0, Math.PI * 2);
+    ctx.fillStyle = pg;
+    ctx.fill();
+    ctx.strokeStyle = s.col + 'cc';
+    ctx.lineWidth = 1.8;
+    ctx.stroke();
+
+    /* Surface bands */
+    for (let band = 0; band < 3; band++) {
+      const by = ny - baseR * 0.3 + band * baseR * 0.3;
+      ctx.save();
+      ctx.beginPath();
+      ctx.arc(nx, ny, baseR, 0, Math.PI * 2);
+      ctx.clip();
+      ctx.beginPath();
+      ctx.ellipse(nx, by, baseR, baseR * 0.08, 0, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(${s.r},${s.g},${s.b},0.12)`;
+      ctx.fill();
+      ctx.restore();
+    }
+
+    /* Front ring */
+    ctx.save();
+    ctx.translate(nx, ny);
+    ctx.scale(1, 0.32);
+    ctx.beginPath();
+    ctx.arc(0, 0, baseR * 2.4, 0, Math.PI);
+    const ringG2 = ctx.createLinearGradient(-baseR * 2.4, 0, baseR * 2.4, 0);
+    ringG2.addColorStop(0, `rgba(${s.r},${s.g},${s.b},0.08)`);
+    ringG2.addColorStop(0.3, `rgba(${s.r},${s.g},${s.b},0.55)`);
+    ringG2.addColorStop(0.5, `rgba(${s.r},${s.g},${s.b},0.7)`);
+    ringG2.addColorStop(0.7, `rgba(${s.r},${s.g},${s.b},0.55)`);
+    ringG2.addColorStop(1, `rgba(${s.r},${s.g},${s.b},0.08)`);
+    ctx.strokeStyle = ringG2;
+    ctx.lineWidth = baseR * 1.4 / 0.32;
+    ctx.globalAlpha = 0.6;
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.arc(0, 0, baseR * 1.65, 0, Math.PI);
+    ctx.strokeStyle = 'rgba(10,8,24,0.5)';
+    ctx.lineWidth = baseR * 0.7 / 0.32;
+    ctx.globalAlpha = 1;
+    ctx.stroke();
+    ctx.restore();
+
+    /* Label */
+    ctx.fillStyle = 'white';
+    ctx.font = 'bold 11px monospace';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(s.short.length > 7 ? s.short.slice(0, 7) : s.short, nx, ny);
+    ctx.restore();
+  }
+
+  /* Draw regular planet */
+  function drawPlanet(nx, ny, baseR, s, sc, isL, isH, depth, p2) {
+    ctx.save();
+    ctx.translate(nx, ny);
+    ctx.scale(sc, sc);
+    ctx.translate(-nx, -ny);
+
+    /* Burst rings */
+    if (isL || isH) {
+      for (let rr = 1; rr <= 4; rr++) {
+        const rp = 0.4 + Math.sin(t * 0.1 + rr * 1.5) * 0.35;
+        ctx.beginPath();
+        ctx.arc(nx, ny, baseR + rr * 14 + rp * 8, 0, Math.PI * 2);
+        ctx.strokeStyle = `rgba(${s.r},${s.g},${s.b},${(0.2 / rr * rp).toFixed(3)})`;
+        ctx.lineWidth = 1.8;
+        ctx.stroke();
+      }
+    }
+
+    /* Glow halo */
+    const hR = baseR * (isL ? 4.5 : isH ? 3.8 : 2.5);
+    const hg = ctx.createRadialGradient(nx, ny, 0, nx, ny, hR);
+    hg.addColorStop(0, `rgba(${s.r},${s.g},${s.b},${(p2 * 0.52).toFixed(3)})`);
+    hg.addColorStop(0.4, `rgba(${s.r},${s.g},${s.b},${(p2 * 0.14).toFixed(3)})`);
+    hg.addColorStop(1, 'transparent');
+    ctx.fillStyle = hg;
+    ctx.fillRect(nx - hR, ny - hR, hR * 2, hR * 2);
+
+    /* Planet body */
+    const pg = ctx.createRadialGradient(nx - baseR * 0.3, ny - baseR * 0.35, baseR * 0.05, nx, ny, baseR);
+    pg.addColorStop(0, `rgba(${Math.min(s.r + 80, 255)},${Math.min(s.g + 80, 255)},${Math.min(s.b + 80, 255)},0.95)`);
+    pg.addColorStop(0.45, `rgba(${s.r},${s.g},${s.b},${(p2 * 0.45).toFixed(3)})`);
+    pg.addColorStop(1, `rgba(${Math.round(s.r * 0.4)},${Math.round(s.g * 0.4)},${Math.round(s.b * 0.4)},0.88)`);
+    ctx.beginPath();
+    ctx.arc(nx, ny, baseR, 0, Math.PI * 2);
+    ctx.fillStyle = pg;
+    ctx.fill();
+    const strokeA = isL ? 'ff' : isH ? 'ff' : Math.round(Math.min(depth * 1.2, 1) * 220).toString(16).padStart(2, '0');
+    ctx.strokeStyle = s.col + strokeA;
+    ctx.lineWidth = isL ? 3.2 : isH ? 2.6 : 1.4 * depth;
+    ctx.stroke();
+
+    /* Atmosphere */
+    const atm = ctx.createRadialGradient(nx, ny, baseR * 0.7, nx, ny, baseR * 1.3);
+    atm.addColorStop(0, 'transparent');
+    atm.addColorStop(1, `rgba(${s.r},${s.g},${s.b},${(p2 * 0.1).toFixed(3)})`);
+    ctx.beginPath();
+    ctx.arc(nx, ny, baseR * 1.3, 0, Math.PI * 2);
+    ctx.fillStyle = atm;
+    ctx.fill();
+
+    /* Locked indicator */
+    if (isL) {
+      ctx.beginPath();
+      ctx.arc(nx, ny, baseR + 5, 0, Math.PI * 2);
+      ctx.strokeStyle = s.col + '55';
+      ctx.lineWidth = 2;
+      ctx.setLineDash([5, 5]);
+      ctx.stroke();
+      ctx.setLineDash([]);
+    }
+
+    /* Label */
+    const fSize = Math.max(Math.round((isL || isH ? 13 : 10) * Math.max(depth, 0.7)), 9);
+    ctx.fillStyle = isL || isH ? 'white' : 'rgba(255,255,255,0.9)';
+    ctx.font = `${isL || isH ? 'bold ' : ''} ${fSize}px monospace`;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(s.short.length > 7 ? s.short.slice(0, 7) : s.short, nx, ny);
+    ctx.restore();
+  }
+
+  function drawOrb() {
+    ctx.clearRect(0, 0, CW, CH);
+
+    /* Theme color */
+    const themed = lockedIdx >= 0 ? lockedIdx : hovNode >= 0 ? hovNode : -1;
+    const cr = themed >= 0 ? S[themed].r : 255;
+    const cg = themed >= 0 ? S[themed].g : 180;
+    const cb = themed >= 0 ? S[themed].b : 50;
+    const cc = themed >= 0 ? S[themed].col : '#f0a830';
+
+    /* Hover detection */
+    hovNode = -1;
+    S.forEach((_, i) => {
+      if (ns[i].locked) return;
+      const { x: nx, y: ny } = nodePos(i, t);
+      if (Math.hypot(mx - nx, my - ny) < NR * Math.max(ns[i].s, 1) + 18) hovNode = i;
+    });
+
+    /* Spring update */
+    S.forEach((_, i) => {
+      if (!ns[i].locked) ns[i].target = hovNode === i ? 2.2 : 1;
+      spring(ns[i]);
+    });
+
+    /* Orbit track (ellipse) */
+    ctx.beginPath();
+    ctx.ellipse(CX, CY, RX, RY, 0, 0, Math.PI * 2);
+    ctx.strokeStyle = 'rgba(255,255,255,0.1)';
+    ctx.lineWidth = 1;
+    ctx.setLineDash([5, 14]);
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    /* Draw sun at center */
+    drawSun(cr, cg, cb, cc);
+
+    /* Sort nodes back-to-front */
+    const order = [...S.map((_, i) => i)].sort((a, b) => {
+      const da = ns[a].locked ? 10 : nodePos(a, t).depth + (hovNode === a ? 0.5 : 0);
+      const db = ns[b].locked ? 10 : nodePos(b, t).depth + (hovNode === b ? 0.5 : 0);
+      return da - db;
+    });
+
+    order.forEach(i => {
+      const s = S[i];
+      const { x: nx, y: ny, depth } = nodePos(i, t);
+      const isL = ns[i].locked, isH = hovNode === i;
+      const sc = ns[i].s;
+      const baseR = NR * depth;
+      const p2 = isL ? 1 : isH ? 0.9 : depth * 0.5 + Math.sin(t * 0.05 + i * 0.9) * 0.12;
+
+      /* Spoke (orbit line) */
+      const sa = isL ? 0.7 : isH ? 0.45 : themed >= 0 ? 0.04 : 0.12 + Math.sin(t * 0.04 + i) * 0.04;
+      ctx.beginPath();
+      ctx.moveTo(CX, CY);
+      ctx.lineTo(nx, ny);
+      ctx.strokeStyle = `rgba(${s.r},${s.g},${s.b},${sa.toFixed(3)})`;
+      ctx.lineWidth = (isL ? 1.8 : isH ? 1.4 : 0.5) * depth;
+      ctx.stroke();
+
+      if (s.saturn) {
+        drawSaturn(nx, ny, baseR, s, sc);
+      } else {
+        drawPlanet(nx, ny, baseR, s, sc, isL, isH, depth, p2);
+      }
+    });
+
+    /* Info display below sun */
+    if (lockedIdx >= 0) {
+      const fs = S[lockedIdx];
+      ctx.fillStyle = fs.col;
+      ctx.font = 'bold 14px monospace';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(fs.name, CX, CY + 68);
+      ctx.fillStyle = 'rgba(255,255,255,0.55)';
+      ctx.font = '11px monospace';
+      ctx.fillText(fs.tag, CX, CY + 86);
+    } else if (hovNode >= 0) {
+      const fs = S[hovNode];
+      ctx.fillStyle = fs.col + 'bb';
+      ctx.font = '13px monospace';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(fs.name, CX, CY + 68);
+      ctx.fillStyle = 'rgba(255,255,255,0.42)';
+      ctx.font = '11px monospace';
+      ctx.fillText(fs.tag, CX, CY + 84);
+    }
+
+    t++;
+  }
+
+  function loop() {
+    drawBg();
+    drawOrb();
+    requestAnimationFrame(loop);
+  }
+
+  initBg();
+  loop();
+  window.addEventListener('resize', initBg);
+
 })();
 </script>
 </body>
