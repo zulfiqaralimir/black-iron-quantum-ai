@@ -1197,7 +1197,8 @@ footer {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
+  padding-top: 36px;
   z-index: 5;
   pointer-events: none;
 }
@@ -1233,11 +1234,12 @@ footer {
   animation: fadeUp 0.6s ease 0.2s both;
 }
 .ow {
-  width: 660px;
-  height: 320px;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
   pointer-events: all;
-  flex-shrink: 0;
-  animation: zoomIn 0.7s cubic-bezier(0.22,1,0.36,1) 0.25s both;
+  z-index: 3;
   cursor: pointer;
 }
 #oc {
@@ -2608,11 +2610,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* Orb canvas */
   const oc = document.getElementById('oc'), ctx = oc.getContext('2d');
-  const CW = 660, CH = 320;
-  oc.width = CW;
-  oc.height = CH;
-  const CX = CW / 2, CY = CH / 2;
-  const RX = 295, RY = 118, NR = 22;
+  let CW, CH, CX, CY, RX, RY;
+  const NR = 28;
+
+  function resizeOrb() {
+    CW = oc.offsetWidth || 900;
+    CH = oc.offsetHeight || 640;
+    oc.width = CW;
+    oc.height = CH;
+    CX = CW / 2;
+    CY = CH * 0.56;
+    RX = CW * 0.44;
+    RY = CH * 0.31;
+  }
+  resizeOrb();
 
   function nodePos(i, time) {
     const angle = time * 0.007 + i * (Math.PI * 2 / 8);
@@ -2996,7 +3007,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   initBg();
   loop();
-  window.addEventListener('resize', initBg);
+  window.addEventListener('resize', () => { initBg(); resizeOrb(); });
 
 })();
 </script>
