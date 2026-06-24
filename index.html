@@ -1319,6 +1319,13 @@ footer {
   opacity: 1;
   transform: translateX(-50%) scale(1);
 }
+@media(max-width: 600px) {
+  #hero { height: 480px; }
+  .htitle { font-size: 36px; letter-spacing: -1px; }
+  .eye { font-size: 10px; letter-spacing: 3px; }
+  .hsub { font-size: 11px; letter-spacing: 3px; }
+}
+
 #moon3d {
   position: absolute;
   top: 20px;
@@ -1328,6 +1335,10 @@ footer {
   z-index: 7;
   pointer-events: auto;
   clip-path: circle(48% at 50% 50%);
+}
+
+@media(max-width: 600px) {
+  #moon3d { width: 80px; height: 80px; top: 10px; left: 10px; }
 }
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
@@ -2740,8 +2751,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* Orb canvas */
   const oc = document.getElementById('oc'), ctx = oc.getContext('2d');
-  let CW, CH, CX, CY, RX, RY;
-  const NR = 42;
+  let CW, CH, CX, CY, RX, RY, orbScale;
+  let NR = 42;
 
   function resizeOrb() {
     CW = oc.offsetWidth || 900;
@@ -2751,7 +2762,9 @@ document.addEventListener('DOMContentLoaded', () => {
     CX = CW / 2;
     CY = CH * 0.56;
     RX = CW * 0.44;
-    RY = CH * 0.31;
+    RY = Math.min(CH * 0.31, RX * 0.42);
+    orbScale = Math.min(1, Math.max(0.38, CW / 1000));
+    NR = Math.max(18, Math.round(42 * orbScale));
   }
   resizeOrb();
 
@@ -2794,7 +2807,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* Draw Sun (BIQAI) — radiating energy */
   function drawSun(cr, cg, cb, cc) {
-    const SR = 52; /* sun body radius */
+    const SR = Math.max(24, Math.round(52 * orbScale)); /* sun body radius, scales with viewport */
 
     /* Corona rays — 36 rays, long animated beams */
     const rayCount = 36;
