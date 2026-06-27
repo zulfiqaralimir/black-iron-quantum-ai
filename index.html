@@ -278,6 +278,7 @@ nav {
 .sub-card[data-entity="quant"] { --card-accent: #4ade80; }
 .sub-card[data-entity="ferro"]   { --card-accent: #4ade80; }
 .sub-card[data-entity="fintech"] { --card-accent: #8b5cf6; }
+.sub-card[data-entity="dataviz"] { --card-accent: #e8a030; }
 
 .sub-card-bg-num {
   position: absolute; right: 1.5rem; top: 1rem;
@@ -299,6 +300,7 @@ nav {
 .sub-card[data-entity="quant"]  .sub-card-type { color: #4ade80; border-color: rgba(74,222,128,0.3); }
 .sub-card[data-entity="ferro"]   .sub-card-type { color: #4ade80; border-color: rgba(74,222,128,0.3); }
 .sub-card[data-entity="fintech"] .sub-card-type { color: #a78bfa; border-color: rgba(139,92,246,0.3); }
+.sub-card[data-entity="dataviz"] .sub-card-type { color: #e8a030; border-color: rgba(232,160,48,0.35); }
 
 .sub-card-name {
   font-family: var(--display); font-size: clamp(1.6rem, 3vw, 2.6rem);
@@ -336,6 +338,7 @@ nav {
 .sub-card[data-entity="quant"]  .sub-card-link { color: #4ade80; }
 .sub-card[data-entity="ferro"]   .sub-card-link { color: #4ade80; }
 .sub-card[data-entity="fintech"] .sub-card-link { color: #a78bfa; }
+.sub-card[data-entity="dataviz"] .sub-card-link { color: #e8a030; }
 .sub-card-link:hover { gap: 1rem; }
 
 /* ── PARENT PROFILE SECTION ── */
@@ -1661,6 +1664,23 @@ footer {
           <span class="stack-chip">Enterprise Finance</span>
         </div>
         <a class="sub-card-link" href="#" onclick="showPage('contact')" style="color:#a78bfa;">Request Early Access →</a>
+      </div>
+
+      <!-- DataViz Intelligence -->
+      <div class="sub-card" data-entity="dataviz">
+        <span class="sub-card-bg-num">07</span>
+        <div class="sub-card-type">★ Flagship · Data Visualization Platform</div>
+        <div class="sub-card-name">DATAVIZ INTELLIGENCE</div>
+        <div class="sub-card-tagline">Interactive data visualization for product teams and commercial companies</div>
+        <p class="sub-card-desc">Interactive data visualization platform built for product teams and commercial companies. Features live dashboards, OHLC candlestick charts with RSI/MACD, global bull &amp; bear market heatmaps, geospatial maps, and force-directed network graphs.</p>
+        <div class="sub-card-stack">
+          <span class="stack-chip">Next.js</span>
+          <span class="stack-chip">D3.js</span>
+          <span class="stack-chip">Recharts</span>
+          <span class="stack-chip">Framer Motion</span>
+          <span class="stack-chip">Vercel</span>
+        </div>
+        <a class="sub-card-link" href="https://dataviz-portfolio-pi.vercel.app/" target="_blank">View Platform →</a>
       </div>
 
     </div>
