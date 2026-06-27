@@ -1484,7 +1484,7 @@ footer {
   <!-- SUBSIDIARIES -->
   <div class="subs-section" id="subsidiaries">
     <p class="sec-eyebrow">Group Structure</p>
-    <h2 class="sec-title">Seven <em>Engines</em><br>One Group</h2>
+    <h2 class="sec-title">Eight <em>Engines</em><br>One Group</h2>
     <p class="sec-lead">Each entity operates with distinct focus and market positioning under the Black Iron Quantum AI parent, sharing research infrastructure, talent, and proprietary data assets.</p>
 
     <div class="sub-cards">
@@ -2561,6 +2561,7 @@ document.addEventListener('DOMContentLoaded', () => {
     { name: 'ZulfiCode',             short: 'ZulfiCode',  tag: 'Software Engineering',                  col: '#ff4466', r: 255, g: 68,  b: 102, saturn: false },
     { name: 'Policy Analytics',      short: 'Policy',     tag: 'Geopolitical Advisory',                 col: '#66aaff', r: 102, g: 170, b: 255, saturn: false },
     { name: 'WellServe',             short: 'WellServe',  tag: 'Digital Health Technology',             col: '#00eebb', r: 0,   g: 238, b: 187, saturn: false },
+    { name: 'DataViz Intelligence',  short: 'DataViz',    tag: 'Interactive Data Visualization',         col: '#e8a030', r: 232, g: 160, b: 48,  saturn: false },
   ];
 
   const ns = S.map(() => ({ s: 1, v: 0, target: 1, locked: false }));
@@ -2632,7 +2633,7 @@ document.addEventListener('DOMContentLoaded', () => {
     bc.height = bc.offsetHeight || 640;
     pts = [];
     for (let i = 0; i < 200; i++) {
-      const s = S[i % 8];
+      const s = S[i % S.length];
       pts.push({
         x: Math.random() * bc.width,
         y: Math.random() * bc.height,
@@ -2789,7 +2790,7 @@ document.addEventListener('DOMContentLoaded', () => {
   resizeOrb();
 
   function nodePos(i, time) {
-    const angle = time * 0.007 + i * (Math.PI * 2 / 8);
+    const angle = time * 0.007 + i * (Math.PI * 2 / S.length);
     return {
       x: CX + Math.cos(angle) * RX,
       y: CY + Math.sin(angle) * RY,
