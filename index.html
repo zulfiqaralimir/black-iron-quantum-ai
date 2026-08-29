@@ -974,6 +974,36 @@ footer {
     .bod-strip { padding-left: 1.5rem; padding-right: 1.5rem; }
   }
 
+  /* ── RECOGNITION / IN THE NEWS ── */
+  .recog-section {
+    max-width: 1200px; margin: 0 auto;
+    padding: 5rem 3.5rem 6rem;
+  }
+  .recog-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5px;
+    background: rgba(176,125,16,0.12);
+    margin-top: 3rem;
+  }
+  .recog-card { background: var(--iron-card); overflow: hidden; }
+  .recog-img { width: 100%; aspect-ratio: 16/10; overflow: hidden; }
+  .recog-img img {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+    filter: grayscale(15%); transition: filter 0.3s;
+  }
+  .recog-card:hover .recog-img img { filter: grayscale(0%); }
+  .recog-caption {
+    padding: 1.2rem 1.5rem;
+    font-family: var(--mono); font-size: 0.62rem;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--white-dim);
+  }
+  @media(max-width:900px) {
+    .recog-grid { grid-template-columns: 1fr; }
+    .recog-section { padding-left: 1.5rem; padding-right: 1.5rem; }
+  }
+
 
 /* ── ANIMATION SYSTEM ── */
 .reveal {
@@ -1744,6 +1774,22 @@ footer {
   <div class="bod-strip">
     <div class="bod-strip-inner">
       <span>Board of Directors</span> &nbsp;·&nbsp; Zulfiqar Ali Mir &nbsp;·&nbsp; Khairunnissa Batool &nbsp;·&nbsp; Muhammad Faizan &nbsp;·&nbsp; Shahmir Haider &nbsp;·&nbsp; Islamabad, Pakistan &nbsp;·&nbsp; Riyadh, Saudi Arabia &nbsp;·&nbsp; Black Iron Quantum AI (Pvt) Ltd
+    </div>
+  </div>
+
+  <!-- RECOGNITION -->
+  <div class="recog-section">
+    <p class="sec-eyebrow">Community &amp; Recognition</p>
+    <h2 class="sec-title">In the <em>Public Eye</em></h2>
+    <div class="recog-grid">
+      <div class="recog-card">
+        <div class="recog-img"><img src="media/icap-toastmasters-10th-anniversary-group.jpeg" alt="ICAP Toastmasters Club 10th Anniversary group photo, Islamabad" loading="lazy"></div>
+        <p class="recog-caption">ICAP Toastmasters Club — 10th Anniversary, Islamabad</p>
+      </div>
+      <div class="recog-card">
+        <div class="recog-img"><img src="media/icap-toastmasters-mr-mateen-trainer.jpeg" alt="Zulfiqar Ali Mir with Mr. Mateen, Trainer, at ICAP Toastmasters 10th Anniversary" loading="lazy"></div>
+        <p class="recog-caption">Zulfiqar Ali Mir with Mr. Mateen, Trainer — ICAP Toastmasters</p>
+      </div>
     </div>
   </div>
 
