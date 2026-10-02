@@ -1000,19 +1000,38 @@ footer {
     color: var(--white-dim);
   }
   .recog-banner {
-    display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;
-    margin-top: 2.5rem; padding: 1.1rem 1.5rem;
-    border: 1px solid rgba(176,125,16,0.35); background: var(--iron-card);
-    text-decoration: none; color: var(--white); transition: background 0.3s, border-color 0.3s;
+    position: relative; overflow: hidden;
+    display: flex; align-items: center; gap: 1.6rem; flex-wrap: wrap;
+    margin-top: 2.5rem; padding: 2.2rem 2.4rem;
+    background: linear-gradient(110deg, #1a1208 0%, #3a2606 55%, #b07d10 140%);
+    border: 2px solid #f0a830; color: #fff; text-decoration: none;
+    box-shadow: 0 0 0 0 rgba(240,168,48,0.55), 0 14px 40px rgba(176,125,16,0.35);
+    animation: bannerGlow 2.4s ease-in-out infinite;
+    transition: transform 0.3s;
   }
-  .recog-banner:hover { background: var(--amber-glow); border-color: var(--amber); }
+  .recog-banner::after {
+    content: ""; position: absolute; top: 0; left: -60%; width: 40%; height: 100%;
+    background: linear-gradient(100deg, transparent, rgba(255,255,255,0.28), transparent);
+    transform: skewX(-20deg); animation: bannerShine 3.4s ease-in-out infinite; pointer-events: none;
+  }
+  .recog-banner:hover { transform: translateY(-3px) scale(1.01); }
   .recog-banner-tag {
-    font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase;
-    background: var(--amber); color: #fff; padding: 0.25rem 0.6rem;
+    font-family: var(--mono); font-size: 0.85rem; font-weight: 500; letter-spacing: 0.3em; text-transform: uppercase;
+    background: #f0a830; color: #1a1208; padding: 0.5rem 1.1rem;
+    animation: tagPulse 1.2s ease-in-out infinite;
   }
-  .recog-banner-text { flex: 1; min-width: 220px; font-size: 1.05rem; }
-  .recog-banner-text em { color: var(--amber-dim); }
-  .recog-banner-arrow { font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--amber); }
+  .recog-banner-text { flex: 1; min-width: 240px; font-family: var(--serif); font-size: clamp(1.4rem, 3vw, 2.2rem); line-height: 1.2; }
+  .recog-banner-text em { color: #f0a830; font-style: italic; display: block; font-size: 0.7em; margin-top: 0.3rem; }
+  .recog-banner-arrow {
+    font-family: var(--mono); font-size: 0.8rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: #1a1208; background: #fff; padding: 0.9rem 1.5rem; font-weight: 500; transition: background 0.2s;
+  }
+  .recog-banner:hover .recog-banner-arrow { background: #f0a830; }
+  @keyframes bannerGlow { 50% { box-shadow: 0 0 0 10px rgba(240,168,48,0), 0 14px 50px rgba(240,168,48,0.6); } }
+  @keyframes bannerShine { 0%, 55% { left: -60%; } 100% { left: 140%; } }
+  @keyframes tagPulse { 50% { transform: scale(1.08); } }
+  @media (prefers-reduced-motion: reduce) { .recog-banner, .recog-banner::after, .recog-banner-tag { animation: none; } }
+  @media(max-width:600px) { .recog-banner { padding: 1.5rem 1.3rem; } .recog-banner-arrow { width: 100%; text-align: center; } }
   .recog-banner + .recog-grid { margin-top: 1.5rem; }
   @media(max-width:900px) {
     .recog-grid { grid-template-columns: 1fr; }
@@ -1388,6 +1407,45 @@ footer {
 @media(max-width: 600px) {
   #moon3d { display: none; }
 }
+
+/* ════ ANNOUNCEMENT SLIDER (newest first — add new slides at the TOP of .ann-track) ════ */
+.ann { position: relative; background: #0c0b10; border-bottom: 1px solid rgba(240,168,48,0.25); overflow: hidden; }
+.ann-viewport { overflow: hidden; }
+.ann-track { display: flex; transition: transform 0.7s cubic-bezier(0.22,1,0.36,1); will-change: transform; }
+.ann-slide {
+  flex: 0 0 100%; display: flex; align-items: center; gap: 2rem;
+  min-height: 150px; padding: 1.4rem 5rem; color: #fff; text-decoration: none;
+  background: linear-gradient(100deg, rgba(240,168,48,0.10), transparent 60%);
+}
+.ann-slide.has-img { padding-right: 5rem; }
+.ann-tag {
+  flex: none; font-family: monospace; font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
+  padding: 6px 12px; border: 1px solid #f0a830; color: #f0a830;
+}
+.ann-tag.product { border-color: #4fb3d4; color: #4fb3d4; }
+.ann-body { flex: 1; min-width: 0; }
+.ann-title { font-size: 26px; font-weight: 700; line-height: 1.2; letter-spacing: -0.5px; }
+.ann-title em { color: #f0a830; font-style: normal; }
+.ann-desc { margin-top: 6px; font-size: 14px; color: rgba(255,255,255,0.62); max-width: 70ch; }
+.ann-cta { flex: none; font-family: monospace; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: #f0a830; white-space: nowrap; }
+a.ann-slide:hover .ann-cta { text-decoration: underline; }
+.ann-img { flex: none; width: 150px; height: 100px; object-fit: cover; object-position: center 30%; border: 1px solid rgba(255,255,255,0.2); }
+.ann-btn {
+  position: absolute; top: 50%; transform: translateY(-50%); width: 38px; height: 38px;
+  background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.25); color: #fff;
+  font-size: 16px; cursor: pointer; z-index: 2;
+}
+.ann-btn:hover { background: rgba(240,168,48,0.25); }
+.ann-prev { left: 14px; } .ann-next { right: 14px; }
+.ann-dots { position: absolute; bottom: 8px; left: 0; right: 0; display: flex; justify-content: center; gap: 8px; }
+.ann-dot { width: 22px; height: 3px; border: 0; padding: 0; background: rgba(255,255,255,0.25); cursor: pointer; }
+.ann-dot.on { background: #f0a830; width: 40px; }
+@media(max-width: 700px) {
+  .ann-slide, .ann-slide.has-img { flex-wrap: wrap; gap: 0.8rem; padding: 1.2rem 1.2rem 2rem; }
+  .ann-title { font-size: 19px; }
+  .ann-img { width: 100%; height: 130px; order: 3; }
+  .ann-btn { display: none; }
+}
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
 </head>
@@ -1456,6 +1514,54 @@ footer {
 <!-- ══════════ HOME / GROUP PAGE ══════════ -->
 <div id="home" class="page active">
 
+
+  <!-- ANNOUNCEMENT SLIDER — newest first: add new slides at the TOP -->
+  <div class="ann" id="ann" aria-roledescription="carousel" aria-label="Latest announcements">
+    <div class="ann-viewport"><div class="ann-track">
+      <a class="ann-slide" href="/claude-partner-network/">
+        <span class="ann-tag">Achievement</span>
+        <div class="ann-body">
+          <div class="ann-title">Black Iron Quantum AI joins the <em>Claude Partner Network</em></div>
+          <div class="ann-desc">Expanding our engagement with the Claude ecosystem — AI applications, agentic systems and production-oriented AI. Status: Registered.</div>
+        </div>
+        <span class="ann-cta">Read more →</span>
+      </a>
+      <div class="ann-slide has-img">
+        <span class="ann-tag">Event</span>
+        <div class="ann-body">
+          <div class="ann-title">Huawei Cloud AI Technology Session at <em>NIC Islamabad</em></div>
+          <div class="ann-desc">AI-focused session connected with the NIC Ignite ecosystem — Wednesday, 30 September 2026.</div>
+        </div>
+        <img class="ann-img" src="media/huawei-cloud-nic-ignite-ai-session.jpeg" alt="Huawei Cloud AI session at NIC Islamabad" loading="lazy">
+      </div>
+      <a class="ann-slide" href="https://dataviz-portfolio-pi.vercel.app/" target="_blank" rel="noopener">
+        <span class="ann-tag product">Product</span>
+        <div class="ann-body">
+          <div class="ann-title"><em>DataViz Intelligence</em></div>
+          <div class="ann-desc">Our data visualisation and analytics platform — the Group's 8th subsidiary.</div>
+        </div>
+        <span class="ann-cta">View platform →</span>
+      </a>
+      <a class="ann-slide" href="/ferroquant">
+        <span class="ann-tag product">Platform</span>
+        <div class="ann-body">
+          <div class="ann-title"><em>FERROQUANT</em> Capital</div>
+          <div class="ann-desc">Systematic trading strategies and quantitative finance for PSX, Gulf and global markets.</div>
+        </div>
+        <span class="ann-cta">Explore →</span>
+      </a>
+      <div class="ann-slide">
+        <span class="ann-tag">Achievement</span>
+        <div class="ann-body">
+          <div class="ann-title"><em>National AI FinTech</em> Winner 2025</div>
+          <div class="ann-desc">Recognised for AI-driven financial technology innovation.</div>
+        </div>
+      </div>
+    </div></div>
+    <button class="ann-btn ann-prev" aria-label="Previous announcement">‹</button>
+    <button class="ann-btn ann-next" aria-label="Next announcement">›</button>
+    <div class="ann-dots"></div>
+  </div>
 
   <!-- SOLAR SYSTEM HERO ══════════════════════════════════════════════════ -->
   <section id="hero">
@@ -3363,6 +3469,22 @@ document.addEventListener('DOMContentLoaded', () => {
   loop();
   window.addEventListener('resize', () => { initBg(); resizeOrb(); });
 
+})();
+</script>
+<script>
+(function(){
+  var box=document.getElementById('ann'); if(!box) return;
+  var track=box.querySelector('.ann-track'), n=track.children.length, i=0, timer=null, dots=box.querySelector('.ann-dots');
+  for(var k=0;k<n;k++){(function(k){var b=document.createElement('button');b.className='ann-dot';b.setAttribute('aria-label','Go to announcement '+(k+1));b.onclick=function(){go(k);};dots.appendChild(b);})(k);}
+  function go(x){i=(x+n)%n;track.style.transform='translateX(-'+(i*100)+'%)';[].forEach.call(dots.children,function(d,j){d.classList.toggle('on',j===i);});}
+  function start(){stop();if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;timer=setInterval(function(){go(i+1);},6000);}
+  function stop(){if(timer){clearInterval(timer);timer=null;}}
+  box.querySelector('.ann-prev').onclick=function(){go(i-1);start();};
+  box.querySelector('.ann-next').onclick=function(){go(i+1);start();};
+  box.addEventListener('mouseenter',stop);box.addEventListener('mouseleave',start);
+  var x0=null;box.addEventListener('touchstart',function(e){x0=e.touches[0].clientX;stop();},{passive:true});
+  box.addEventListener('touchend',function(e){if(x0!==null){var d=e.changedTouches[0].clientX-x0;if(Math.abs(d)>40)go(i+(d<0?1:-1));x0=null;}start();});
+  go(0);start();
 })();
 </script>
 </body>
