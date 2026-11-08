@@ -3639,24 +3639,24 @@ em { font-family: var(--serif); font-style: italic; }
 </style>
 <style>
 .hero-old,#hero{display:none!important}
-.sph-title{position:absolute;top:1.6rem;left:0;right:0;text-align:center;pointer-events:none;z-index:3;text-shadow:0 2px 20px #000}
-.sph-title .htitle{color:#fff;font-size:clamp(2rem,4.5vw,3.6rem)}
-.sph-title .eye{color:#f0a830;font-size:.7rem}
+.sph-title{position:absolute;top:1.6rem;left:0;right:0;text-align:center;pointer-events:none;z-index:3;text-shadow:0 2px 18px rgba(255,255,255,.8)}
+.sph-title .htitle{color:#1a1714;font-size:clamp(2rem,4.5vw,3.6rem)}
+.sph-title .eye{color:#b07d10;font-size:.7rem}
 .sph-sec{max-width:none;margin:0;padding:0;text-align:center}
 .sph-head h2{font-size:clamp(2rem,4vw,3rem);margin-top:.5rem}
-.sph-box{position:relative;height:640px;margin-top:0;background:#07060b;overflow:hidden}
+.sph-box{position:relative;height:640px;margin-top:0;background:radial-gradient(circle at 50% 45%,#fffaf0,#f5f2ec 55%,#e9dfc6);overflow:hidden}
 #sph-cv{width:100%;height:100%;display:block;cursor:grab}#sph-cv:active{cursor:grabbing}
-.sph-hint{position:absolute;bottom:12px;left:0;right:0;font-family:var(--mono);font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.55);pointer-events:none}
+.sph-hint{position:absolute;bottom:12px;left:0;right:0;font-family:var(--mono);font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(26,23,20,.55);pointer-events:none}
 @media(max-width:700px){.sph-box{height:380px}}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/three@0.134.0/examples/js/controls/OrbitControls.js"></script>
 <script>
 (function(){
   var cv=document.getElementById('sph-cv'),box=document.getElementById('sph-box'); if(!window.THREE||!cv) return;
-  var r=new THREE.WebGLRenderer({canvas:cv,antialias:true}); r.setPixelRatio(Math.min(devicePixelRatio||1,2)); r.setClearColor(0x07060b,1);
+  var r=new THREE.WebGLRenderer({canvas:cv,antialias:true,alpha:true}); r.setPixelRatio(Math.min(devicePixelRatio||1,2)); r.setClearColor(0x000000,0);
   var sc=new THREE.Scene(), cam=new THREE.PerspectiveCamera(50,1,1,2000); cam.position.set(0,0,110);
-  sc.add(new THREE.AmbientLight(0xffffff,0.3));
-  var cols=[0xe8bb55,0x4fb3d4,0xd4452a], lights=[];
+  sc.add(new THREE.AmbientLight(0xffffff,0.9));
+  var cols=[0xd9a42a,0x2a8fb0,0xd4452a], lights=[];
   cols.forEach(function(c){var l=new THREE.PointLight(c,3,500);sc.add(l);lights.push(l);});
   var N=90,mesh=new THREE.InstancedMesh(new THREE.SphereGeometry(3,48,24),new THREE.MeshStandardMaterial({metalness:0.4,roughness:0.3}),N),
       m=new THREE.Matrix4(),q=new THREE.Quaternion(),e=new THREE.Euler(),p=new THREE.Vector3(),v=new THREE.Vector3(),c=new THREE.Color();
