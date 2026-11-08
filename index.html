@@ -1556,7 +1556,6 @@ a.ann-slide:hover .ann-cta { text-decoration: underline; }
   <!-- SOLAR SYSTEM HERO ══════════════════════════════════════════════════ -->
   <section id="hero">
     <canvas id="bgc"></canvas>
-  <canvas id="spheres3d"></canvas>
   <canvas id="moon3d"></canvas>
     <div class="hi">
       <p class="eye">Black Iron Quantum AI Group</p>
@@ -3631,42 +3630,5 @@ h1, h2, h3, .sec-title, .htitle { font-family: var(--serif); font-weight: 800; l
 .ann-desc { font-weight: 400; }
 em { font-family: var(--serif); font-style: italic; }
 </style>
-<style>#spheres3d{position:absolute;inset:0;width:100%;height:100%;z-index:2;pointer-events:none;opacity:0.85}@media(prefers-reduced-motion:reduce){#spheres3d{display:none}}</style>
-<script>
-(function(){
-  if(!window.THREE||window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  var cv=document.getElementById('spheres3d'); if(!cv) return;
-  var hero=document.getElementById('hero');
-  var r=new THREE.WebGLRenderer({canvas:cv,antialias:true,alpha:true});
-  r.setPixelRatio(Math.min(window.devicePixelRatio||1,2));
-  var sc=new THREE.Scene(), cam=new THREE.PerspectiveCamera(50,1,1,2000); cam.position.z=140;
-  sc.add(new THREE.AmbientLight(0xffffff,0.25));
-  var cols=[0xe8bb55,0x4fb3d4,0xb07d10], lights=[];
-  cols.forEach(function(c,i){var l=new THREE.PointLight(c,2.2,400);l.position.set((i-1)*70,(i%2?40:-40),60);sc.add(l);lights.push(l);});
-  var N=120, geo=new THREE.SphereGeometry(3,32,16), mat=new THREE.MeshStandardMaterial({metalness:0.55,roughness:0.25});
-  var mesh=new THREE.InstancedMesh(geo,mat,N), m=new THREE.Matrix4(), q=new THREE.Quaternion(), e=new THREE.Euler(), p=new THREE.Vector3(), sv=new THREE.Vector3(), col=new THREE.Color();
-  for(var i=0;i<N;i++){
-    p.set((Math.random()-0.5)*220,(Math.random()-0.5)*90,(Math.random()-0.5)*80);
-    e.set(Math.random()*6,Math.random()*6,Math.random()*6); q.setFromEuler(e);
-    var k=0.5+Math.random()*1.1; sv.set(k,k,k); m.compose(p,q,sv); mesh.setMatrixAt(i,m);
-    col.set(cols[i%3]); col.offsetHSL(0,0,(Math.random()-0.5)*0.15); mesh.setColorAt(i,col);
-  }
-  sc.add(mesh);
-  function size(){var w=hero.clientWidth,h=hero.clientHeight;if(!w||!h)return;r.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix();}
-  size(); window.addEventListener('resize',size);
-  var t=0, mx=0, my=0;
-  hero.addEventListener('mousemove',function(ev){var b=hero.getBoundingClientRect();mx=(ev.clientX-b.left)/b.width-0.5;my=(ev.clientY-b.top)/b.height-0.5;});
-  function loop(){
-    requestAnimationFrame(loop);
-    if(document.hidden||!hero.offsetParent) return;
-    t+=0.004; mesh.rotation.y=t*0.6; mesh.rotation.x=Math.sin(t)*0.12;
-    lights.forEach(function(l,i){l.position.x=Math.sin(t*2+i*2.1)*90;l.position.y=Math.cos(t*1.7+i*2.1)*50;});
-    cam.position.x+=(mx*30-cam.position.x)*0.04; cam.position.y+=(-my*20-cam.position.y)*0.04; cam.lookAt(0,0,0);
-    if(!cv.width||cv.width!==hero.clientWidth*r.getPixelRatio()) size();
-    r.render(sc,cam);
-  }
-  loop();
-})();
-</script>
 </body>
 </html>
