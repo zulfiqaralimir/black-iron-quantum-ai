@@ -3745,5 +3745,17 @@ em { font-family: var(--serif); font-style: italic; }
 #team .team-card{padding:2rem 2rem 1.6rem}
 #team .team-photo{width:110px;height:110px;margin-bottom:1rem}
 </style>
+<style>
+#team .about-hero{padding:1.4rem 2rem 0}
+#team .about-hero h1{font-size:clamp(1.6rem,3vw,2.4rem);margin-bottom:0}
+#team .sec-eyebrow{margin-bottom:.3rem;font-size:.7rem}
+#team .team-wrap{padding:.8rem 2rem 2rem}
+#team .team-card{width:min(820px,94vw);display:grid;grid-template-columns:200px 1fr;grid-template-areas:"photo role" "photo name" "photo title" "photo line" "photo desc";column-gap:2rem;align-items:center;text-align:left;padding:1.6rem 2rem}
+#team .team-photo{grid-area:photo;margin:0 auto;width:150px;height:150px}
+#team .team-role{grid-area:role;justify-self:start;margin-bottom:.6rem}
+#team .team-name{grid-area:name}#team .team-title{grid-area:title}
+#team .team-line{grid-area:line;margin:.8rem 0}#team .team-desc{grid-area:desc}
+@media(max-width:700px){#team .team-card{grid-template-columns:1fr;grid-template-areas:"role" "photo" "name" "title" "line" "desc";text-align:center}#team .team-role{justify-self:center}#team .team-line{margin:.8rem auto}}
+</style>
 </body>
 </html>
