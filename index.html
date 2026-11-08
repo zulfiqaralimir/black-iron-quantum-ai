@@ -3581,5 +3581,39 @@ footer a, .about-hero a { transition: color 0.25s, letter-spacing 0.3s; }
   scan(); setTimeout(scan,300);
 })();
 </script>
+<style>
+/* ═══ STUNNING LAYER ═══ */
+body::before { content:''; position: fixed; inset: -20%; z-index: -1; pointer-events: none;
+  background: radial-gradient(circle at 20% 30%, rgba(176,125,16,0.13), transparent 35%),
+              radial-gradient(circle at 80% 20%, rgba(26,107,138,0.12), transparent 35%),
+              radial-gradient(circle at 60% 85%, rgba(232,187,85,0.12), transparent 35%);
+  animation: stDrift 22s ease-in-out infinite alternate; }
+@keyframes stDrift { to { transform: translate(4%, -3%) scale(1.12) rotate(3deg); } }
+.page h1 em, .sec-title em, .htitle .hacc { background: linear-gradient(90deg, #b07d10, #e8bb55, #1a6b8a, #b07d10); background-size: 250% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; animation: stFlow 6s linear infinite; }
+@keyframes stFlow { to { background-position: 250% 0; } }
+nav { box-shadow: 0 6px 30px rgba(26,23,20,0.08); }
+.nav-links a { padding: 0.35rem 0; }
+.nav-pill { position: relative; overflow: hidden; border-radius: 2px; }
+.nav-pill::before, .ann-cta::before { content:''; position:absolute; top:0; left:-120%; width:60%; height:100%; background: linear-gradient(100deg, transparent, rgba(255,255,255,0.55), transparent); transform: skewX(-20deg); animation: stShine 3.2s infinite; }
+.ann-cta { position: relative; overflow: hidden; }
+@keyframes stShine { 0%,60% { left:-120%; } 100% { left:160%; } }
+.sub-card, .svc-card, .pillar-card, .client-card, .bod-card { position: relative; border-radius: 6px; }
+.sub-card::after, .svc-card::after, .pillar-card::after, .client-card::after { content:''; position:absolute; inset:0; border-radius:inherit; padding:1.5px; pointer-events:none; opacity:0; transition: opacity 0.4s;
+  background: conic-gradient(from var(--st-a, 0deg), #b07d10, #e8bb55, #1a6b8a, #b07d10);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; animation: stSpin 4s linear infinite; }
+.sub-card:hover::after, .svc-card:hover::after, .pillar-card:hover::after, .client-card:hover::after { opacity: 1; }
+@property --st-a { syntax: '<angle>'; inherits: false; initial-value: 0deg; }
+@keyframes stSpin { to { --st-a: 360deg; } }
+.pillar-n, .bod-card .bod-name { transition: transform 0.4s, color 0.3s; }
+.pillar-card:hover .pillar-n { transform: scale(1.25) translateX(6px); color: var(--amber); }
+.ann { box-shadow: 0 14px 40px rgba(12,11,16,0.28), 0 0 0 1px rgba(240,168,48,0.2); border-radius: 8px; }
+.ann-slide { background: linear-gradient(100deg, rgba(240,168,48,0.16), transparent 60%), radial-gradient(circle at 90% 50%, rgba(79,179,212,0.12), transparent 40%); }
+.ann-dot.on { box-shadow: 0 0 10px #f0a830; }
+.ticker-band { background: linear-gradient(90deg, var(--iron-mid), #f3e6c4, var(--iron-mid)); }
+.tick-item b { color: var(--amber); }
+::selection { background: var(--amber); color: #fff; }
+::-webkit-scrollbar { width: 10px; } ::-webkit-scrollbar-track { background: var(--iron); } ::-webkit-scrollbar-thumb { background: linear-gradient(var(--amber), var(--cold)); border-radius: 6px; }
+@media (prefers-reduced-motion: reduce) { body::before, .page h1 em, .sec-title em, .nav-pill::before, .ann-cta::before { animation: none; } }
+</style>
 </body>
 </html>
