@@ -6,7 +6,7 @@
 <link rel="icon" href="media/logo/BlackIronQuantumAI_Logo_Final.png">
 <title>Black Iron Quantum AI Group</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=IBM+Plex+Mono:wght@300;400;500&family=Spectral:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,800;1,500&family=Manrope:wght@300;400;500;600;700&family=Cinzel:wght@500;700&family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=IBM+Plex+Mono:wght@300;400;500&family=Spectral:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
 <style>
 :root {
   --iron: #f5f2ec;
@@ -23,8 +23,8 @@
   --white-dim: #5a5550;
   --mono: 'IBM Plex Mono', monospace;
   --display: 'Bebas Neue', sans-serif;
-  --serif: 'DM Serif Display', serif;
-  --body: 'Spectral', serif;
+  --serif: 'Playfair Display', 'DM Serif Display', serif;
+  --body: 'Manrope', 'Spectral', sans-serif;
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -3614,6 +3614,21 @@ nav { box-shadow: 0 6px 30px rgba(26,23,20,0.08); }
 ::selection { background: var(--amber); color: #fff; }
 ::-webkit-scrollbar { width: 10px; } ::-webkit-scrollbar-track { background: var(--iron); } ::-webkit-scrollbar-thumb { background: linear-gradient(var(--amber), var(--cold)); border-radius: 6px; }
 @media (prefers-reduced-motion: reduce) { body::before, .page h1 em, .sec-title em, .nav-pill::before, .ann-cta::before { animation: none; } }
+</style>
+<style>
+/* ═══ TYPOGRAPHY ═══ */
+body { font-weight: 400; line-height: 1.7; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+h1, h2, h3, .sec-title, .htitle { font-family: var(--serif); font-weight: 800; letter-spacing: -0.01em; line-height: 1.12; }
+.page h1 { font-size: clamp(2.4rem, 5.5vw, 4.4rem); }
+.sec-eyebrow, .eye { font-family: 'Cinzel', var(--serif); font-weight: 700; letter-spacing: 0.35em; text-transform: uppercase; color: var(--amber); }
+.about-hero p, .sec-lead, .pillar-p, .bod-desc, .team-desc { font-size: 1.05rem; line-height: 1.8; font-weight: 400; }
+.about-hero > p:not(.sec-eyebrow)::first-letter { font-family: var(--serif); font-size: 3.2rem; font-weight: 800; float: left; line-height: 0.9; padding: 0.3rem 0.5rem 0 0; color: var(--amber); }
+.pillar-h, .svc-card h3, .bod-name, .team-name { font-family: var(--serif); font-weight: 700; }
+.nav-links a, .nav-pill { font-weight: 500; }
+.hsub { letter-spacing: 0.28em; font-weight: 600; }
+.ann-title { font-family: var(--serif); font-weight: 800; letter-spacing: -0.3px; }
+.ann-desc { font-weight: 400; }
+em { font-family: var(--serif); font-style: italic; }
 </style>
 </body>
 </html>
