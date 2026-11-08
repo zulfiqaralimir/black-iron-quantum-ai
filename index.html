@@ -1554,8 +1554,9 @@ a.ann-slide:hover .ann-cta { text-decoration: underline; }
 
 
   <!-- SOLAR SYSTEM HERO ══════════════════════════════════════════════════ -->
-  <!-- INTERACTIVE 3D HERO (three.js). Old solar-system hero is kept below, hidden: remove the .hero-old rule to bring it back; also saved as git tag hero-solar-system-backup -->
-  <section class="sph-sec">
+  <!-- 3D HERO: Curved Spacetime (MIT, Guilherme Zeni) in /spacetime. Earlier hero versions: sphere hero (.sph-sec, hidden below) and solar-system hero (#hero, hidden); git tag hero-solar-system-backup -->
+  <section class="st-hero"><iframe src="spacetime/index.html" title="Interactive curved spacetime" loading="eager"></iframe></section>
+  <section class="sph-sec" style="display:none">
     <div class="sph-box" id="sph-box"><canvas id="sph-cv"></canvas>
       <div class="sph-title"><p class="eye">Black Iron Quantum AI Group</p><h1 class="htitle">Eight Companies.<br><span class="hacc">One Vision.</span></h1></div>
       <span class="sph-hint">Drag to rotate &middot; Scroll to zoom</span></div>
@@ -3638,6 +3639,7 @@ h1, h2, h3, .sec-title, .htitle { font-family: var(--serif); font-weight: 800; l
 em { font-family: var(--serif); font-style: italic; }
 </style>
 <style>
+.st-hero{height:640px;background:#02030a}.st-hero iframe{width:100%;height:100%;border:0;display:block}@media(max-width:700px){.st-hero{height:520px}}
 .hero-old,#hero{display:none!important}
 .sph-title{position:absolute;top:1.6rem;left:0;right:0;text-align:center;pointer-events:none;z-index:3;text-shadow:0 2px 18px rgba(255,255,255,.8)}
 .sph-title .htitle{color:#1a1714;font-size:clamp(2rem,4.5vw,3.6rem)}
