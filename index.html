@@ -1414,7 +1414,7 @@ footer {
 }
 
 /* ════ ANNOUNCEMENT SLIDER (newest first — add new slides at the TOP of .ann-track) ════ */
-.ann { position: relative; background: #0c0b10; border: 1px solid rgba(240,168,48,0.35); margin: 1.2rem 1.5rem 1.5rem; overflow: hidden; }
+.ann { position: relative; background: #0c0b10; border: 1px solid rgba(240,168,48,0.35); margin: 1.5rem 1.5rem 0; overflow: hidden; }
 .ann-viewport { overflow: hidden; }
 .ann-track { display: flex; transition: transform 0.3s cubic-bezier(0.22,1,0.36,1); will-change: transform; }
 .ann-slide {
@@ -1508,6 +1508,19 @@ a.ann-slide:hover .ann-cta { text-decoration: underline; }
 <div id="home" class="page active">
 
 
+  <!-- SOLAR SYSTEM HERO ══════════════════════════════════════════════════ -->
+  <section id="hero">
+    <canvas id="bgc"></canvas>
+  <canvas id="moon3d"></canvas>
+    <div class="hi">
+      <p class="eye">Black Iron Quantum AI Group</p>
+      <h1 class="htitle">Eight Companies.<br><span class="hacc">One Vision.</span></h1>
+      <p class="hsub">AI &nbsp;&middot;&nbsp; Finance &nbsp;&middot;&nbsp; Intelligence &nbsp;&middot;&nbsp; Technology</p>
+      <div class="ow"><canvas id="oc"></canvas></div>
+    </div>
+    <div class="cards" id="cards"></div>
+  </section>
+
   <!-- ANNOUNCEMENT SLIDER — newest first: add new slides at the TOP -->
   <div class="ann" id="ann" aria-roledescription="carousel" aria-label="Latest announcements">
     <div class="ann-viewport"><div class="ann-track">
@@ -1557,18 +1570,6 @@ a.ann-slide:hover .ann-cta { text-decoration: underline; }
     <div class="ann-dots"></div>
   </div>
 
-  <!-- SOLAR SYSTEM HERO ══════════════════════════════════════════════════ -->
-  <section id="hero">
-    <canvas id="bgc"></canvas>
-  <canvas id="moon3d"></canvas>
-    <div class="hi">
-      <p class="eye">Black Iron Quantum AI Group</p>
-      <h1 class="htitle">Eight Companies.<br><span class="hacc">One Vision.</span></h1>
-      <p class="hsub">AI &nbsp;&middot;&nbsp; Finance &nbsp;&middot;&nbsp; Intelligence &nbsp;&middot;&nbsp; Technology</p>
-      <div class="ow"><canvas id="oc"></canvas></div>
-    </div>
-    <div class="cards" id="cards"></div>
-  </section>
   <!-- END SOLAR SYSTEM HERO ════════════════════════════════════════════════ -->
 
   <!-- GROUP HERO -->
