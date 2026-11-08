@@ -1,6 +1,23 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Curved Spacetime</title><link rel="stylesheet" href="./styles.css"><script src="./script.js" defer></script></head>
+<title>Curved Spacetime</title><link rel="stylesheet" href="./styles.css"><style>
+.caption{top:2.2rem;left:2.5rem;max-width:44rem;animation:capFloat 7s ease-in-out infinite}
+.caption h1{font-family:'Playfair Display',Georgia,serif;font-size:clamp(1.8rem,4.6vw,3.6rem);font-weight:800;letter-spacing:.02em;text-transform:none;line-height:1.1;margin:0 0 .8rem;
+ background:linear-gradient(90deg,#7fd8ff,#fff,#ff9ad5,#ffb36b,#7fd8ff);background-size:300% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;
+ animation:capFlow 7s linear infinite,capIn 1.2s cubic-bezier(.22,1,.36,1) both;filter:drop-shadow(0 0 18px rgba(127,216,255,.35))}
+.caption .lede{font-size:clamp(1rem,2.2vw,1.6rem);letter-spacing:.38em;text-transform:uppercase;color:#e4e9ff;font-weight:600;overflow:hidden;white-space:nowrap;width:0;border-right:2px solid #7fd8ff;
+ animation:capType 2.6s steps(26,end) .8s forwards,capCaret .8s step-end 6,capCaretOff 0s 5.2s forwards}
+@keyframes capFlow{to{background-position:300% 0}}
+@keyframes capIn{from{opacity:0;transform:translateY(30px) scale(.96);letter-spacing:.2em}to{opacity:1;transform:none}}
+@keyframes capType{to{width:27ch}}
+@keyframes capCaret{50%{border-color:transparent}}
+@keyframes capCaretOff{to{border-right-color:transparent}}
+@keyframes capFloat{50%{transform:translateY(-8px)}}
+@media(max-width:40rem){.caption{left:1.2rem;right:1rem;top:1.4rem}.caption .lede{letter-spacing:.2em;white-space:normal;width:auto;border:0;animation:none}}
+@media(prefers-reduced-motion:reduce){.caption,.caption h1,.caption .lede{animation:none;width:auto}}
+</style>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@800&display=swap" rel="stylesheet">
+<script src="./script.js" defer></script></head>
 <body>
 <canvas id="scene" class="scene" role="img" aria-label="A glowing grid of spacetime bending around stars, planets and black holes"></canvas>
 <header class="caption"><h1>Black Iron Quantum AI Group</h1><p class="lede">Eight companies. One vision.</p><p id="fallback" class="fallback" hidden>This needs a browser with WebGL 2.</p></header>
