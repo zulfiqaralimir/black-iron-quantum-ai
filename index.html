@@ -3545,5 +3545,41 @@ document.addEventListener('DOMContentLoaded', () => {
   go(0);start();
 })();
 </script>
+<style>
+/* ═══ SITE-WIDE ANIMATION ═══ */
+#fx-progress { position: fixed; top: 0; left: 0; height: 3px; width: 0; z-index: 1000; background: linear-gradient(90deg, var(--amber), #e8bb55, var(--cold)); transition: width 0.1s; }
+.fx { opacity: 0; transform: translateY(34px); transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1); }
+.fx.fx-left { transform: translateX(-40px); } .fx.fx-right { transform: translateX(40px); }
+.fx.fx-in { opacity: 1; transform: none; }
+.nav-logo-img { transition: transform 0.4s; } .nav-logo:hover .nav-logo-img { transform: scale(1.05); }
+.nav-pill { transition: background 0.25s, transform 0.25s, box-shadow 0.25s; }
+.nav-pill:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(176,125,16,0.35); }
+.sub-card, .svc-card, .pillar-card, .client-card, .bod-card { transition: transform 0.4s cubic-bezier(0.22,1,0.36,1), box-shadow 0.4s, background 0.3s; }
+.sub-card:hover, .svc-card:hover, .pillar-card:hover, .client-card:hover { transform: translateY(-6px); box-shadow: 0 16px 36px rgba(176,125,16,0.18); }
+.bod-card:hover { transform: translateY(-5px); box-shadow: 0 14px 32px rgba(176,125,16,0.16); }
+img { transition: transform 0.6s, filter 0.4s; }
+.ann-img:hover, .recog-section img:hover { transform: scale(1.04); }
+.ann-slide { animation: none; } .ann-tag { animation: fxPulse 2.8s ease-in-out infinite; }
+@keyframes fxPulse { 0%,100% { box-shadow: 0 0 0 0 rgba(240,168,48,0); } 50% { box-shadow: 0 0 0 5px rgba(240,168,48,0.18); } }
+footer a, .about-hero a { transition: color 0.25s, letter-spacing 0.3s; }
+@media (prefers-reduced-motion: reduce) { .fx { opacity: 1; transform: none; transition: none; } .ann-tag { animation: none; } }
+</style>
+<div id="fx-progress"></div>
+<script>
+(function(){
+  var bar=document.getElementById('fx-progress');
+  window.addEventListener('scroll',function(){var h=document.documentElement;var m=h.scrollHeight-h.clientHeight;bar.style.width=(m>0?h.scrollTop/m*100:0)+'%';},{passive:true});
+  var sel='.page h1, .page h2, .about-hero p, .sec-eyebrow, .recog-section, .bod-strip, .ann, #hero .cards, .founder-card, .affiliations, .contact-form, .svc-card, .pillar-card, .sub-card, .client-card, footer';
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('fx-in');io.unobserve(e.target);}});},{threshold:0.12});
+  function scan(){
+    document.querySelectorAll(sel).forEach(function(el,i){
+      if(el.classList.contains('fx')||el.classList.contains('reveal')||el.closest('.reveal')) return;
+      el.classList.add('fx'); if(el.matches('h2,.sec-eyebrow')) el.classList.add('fx-left');
+      io.observe(el);
+    });
+  }
+  scan(); setTimeout(scan,300);
+})();
+</script>
 </body>
 </html>
