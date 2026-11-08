@@ -6,10 +6,10 @@
  background:linear-gradient(90deg,#7fd8ff,#fff,#ff9ad5,#ffb36b,#7fd8ff);background-size:300% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;
  animation:capFlow 7s linear infinite,capIn 1.2s cubic-bezier(.22,1,.36,1) both;filter:drop-shadow(0 0 18px rgba(127,216,255,.35))}
 .caption .lede{font-size:clamp(1rem,2.2vw,1.6rem);letter-spacing:.38em;text-transform:uppercase;color:#e4e9ff;font-weight:600;overflow:hidden;white-space:nowrap;width:0;border-right:2px solid #7fd8ff;
- animation:capType 2.6s steps(26,end) .8s forwards,capCaret .8s step-end 6,capCaretOff 0s 5.2s forwards}
+ animation:capType 2.6s steps(31,end) .8s forwards,capCaret .8s step-end 6,capCaretOff 0s 5.2s forwards}
 @keyframes capFlow{to{background-position:300% 0}}
 @keyframes capIn{from{opacity:0;transform:translateY(30px) scale(.96);letter-spacing:.2em}to{opacity:1;transform:none}}
-@keyframes capType{to{width:27ch}}
+@keyframes capType{to{width:32ch}}
 @keyframes capCaret{50%{border-color:transparent}}
 @keyframes capCaretOff{to{border-right-color:transparent}}
 @keyframes capFloat{50%{transform:translateY(-8px)}}
@@ -20,7 +20,7 @@
 <script src="./script.js" defer></script></head>
 <body>
 <canvas id="scene" class="scene" role="img" aria-label="A glowing grid of spacetime bending around stars, planets and black holes"></canvas>
-<header class="caption"><h1>Black Iron Quantum AI Group</h1><p class="lede">Eight companies. One vision.</p><p id="fallback" class="fallback" hidden>This needs a browser with WebGL 2.</p></header>
+<header class="caption"><h1>Black Iron Quantum AI Group</h1><p class="lede">Group of Companies. One Vision.</p><p id="fallback" class="fallback" hidden>This needs a browser with WebGL 2.</p></header>
 <footer id="hints" class="hints">
 <span class="for-mouse"><b>Drag</b> a body to move or throw it</span><span class="for-touch"><b>Drag</b> a body to move it</span>
 <span class="for-mouse"><b>Scroll</b> to change mass</span><span class="for-mouse"><b>Double-click</b> to add or remove a planet</span>
